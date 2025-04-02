@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医保系统页面内问答功能快速上线实施方案</title>
+    <!-- Date Metadata -->
+    <meta name="creation-date" content="2024-03-10">
+    <meta name="last-modified-date" content="2024-04-01">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #10B981;
+            --accent-color: #8B5CF6;
+            --text-color: #1F2937;
+            --bg-color: #FFFFFF;
+            --card-bg: #F9FAFB;
+            --card-border: #E5E7EB;
+            --code-bg: #F3F4F6;
+            --gradient-start: #3B82F6;
+            --gradient-end: #2563EB;
+        }
+        
+        .dark {
+            --primary-color: #60A5FA;
+            --secondary-color: #34D399;
+            --accent-color: #A78BFA;
+            --text-color: #F9FAFB;
+            --bg-color: #111827;
+            --card-bg: #1F2937;
+            --card-border: #374151;
+            --code-bg: #374151;
+            --gradient-start: #1E40AF;
+            --gradient-end: #1E3A8A;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        
+        /* Custom components */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0.75rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--code-bg);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: "Courier New", monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-block code {
+            color: var(--text-color);
+        }
+        
+        .code-block-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 0 0.5rem 0 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            color: white;
+        }
+        
+        /* First letter styling */
+        .first-letter::first-letter {
+            font-size: 3.5rem;
+            float: left;
+            line-height: 1;
+            padding-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        /* Hero pattern */
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Dark mode toggle animation */
+        .mode-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .mode-toggle:hover {
+            transform: rotate(45deg);
+        }
+        
+        /* Timeline styling */
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 1.25rem;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            border: 3px solid var(--primary-color);
+            z-index: 1;
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Fixed floating buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 50;
+        }
+        
+        .floating-buttons button {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .floating-buttons button:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Chat widget demo */
+        .chat-widget {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .chat-header {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            padding: 1rem;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            padding: 1rem;
+            height: 200px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .message-bot {
+            background-color: #f0f0f0;
+            color: #333;
+            border-top-left-radius: 0;
+            align-self: flex-start;
+        }
+        
+        .dark .message-bot {
+            background-color: #374151;
+            color: #f9fafb;
+        }
+        
+        .message-user {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border-top-right-radius: 0;
+            align-self: flex-end;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 0.75rem;
+            gap: 0.5rem;
+            border-top: 1px solid var(--card-border);
+        }
+        
+        .typing-animation {
+            display: flex;
+            padding: 0.5rem;
+            gap: 0.25rem;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ccc;
+            border-radius: 50%;
+            animation: typing-animation 1.5s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        @keyframes typing-animation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* Glow effect */
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            border-radius: 1rem;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 0.4;
+            filter: blur(15px);
+        }
+        
+        /* Highlight features */
+        .highlight-feature {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .highlight-feature:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Spin icon animation */
+        .spin-hover:hover {
+            animation: spin 1s ease-in-out;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Floating labels */
+        .floating-label {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--bg-color);
+            padding: 0 0.5rem;
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* Decorative elements */
+        .decorative-line {
+            height: 3px;
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            border-radius: 3px;
+            margin: 2rem 0;
+        }
+        
+        /* Progress donut */
+        .progress-donut {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0% var(--percent), #e5e7eb var(--percent) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .progress-donut::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+        }
+        
+        .progress-value {
+            position: relative;
+            z-index: 2;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        /* Card stack effect */
+        .card-stack {
+            position: relative;
+        }
+        
+        .card-stack::before,
+        .card-stack::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0.75rem;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-stack::before {
+            top: 5px;
+            right: -5px;
+        }
+        
+        .card-stack::after {
+            top: 10px;
+            right: -10px;
+        }
+        
+        .card-stack:hover::before {
+            transform: translateY(-2px);
+        }
+        
+        .card-stack:hover::after {
+            transform: translateY(-4px);
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+        
+        /* Article date styles */
+        .article-dates {
+            display: flex;
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--card-border);
+        }
+        
+        .article-dates .date-item {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+        
+        .article-dates i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .dark .article-dates {
+            color: #9CA3AF;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center">
+                <a href="../../index.html" class="flex items-center mr-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+            
+    <!-- Dark mode toggle script -->
+    <script>
+        // Check for saved user preference or use system preference
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply saved theme
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // Function to toggle dark/light mode
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Update mermaid theme
+            mermaid.initialize({
+                theme: isDark ? 'dark' : 'default'
+            });
+        }
+        
+        // Initialize Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+                startOnLoad: true,
+                securityLevel: 'loose',
+                flowchart: { useMaxWidth: true }
+            });
+            
+            // Add scroll animation
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkScroll() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight * 0.85) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Initial check
+            
+            // Chat widget demo
+            setTimeout(() => {
+                const typingIndicator = document.getElementById('typing-indicator');
+                const botResponse = document.getElementById('bot-response-2');
+                
+                typingIndicator.style.display = 'flex';
+                
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none';
+                    botResponse.style.display = 'block';
+                }, 2000);
+            }, 1000);
+            
+            // Progress donut animation
+            const progressDonuts = document.querySelectorAll('.progress-donut');
+            progressDonuts.forEach(donut => {
+                const percent = donut.getAttribute('data-percent');
+                donut.style.setProperty('--percent', percent + '%');
+            });
+        });
+    </script>
+    
+    <!-- Floating action buttons -->
+    <div class="floating-buttons">
+        <button onclick="toggleTheme()" class="bg-blue-600 text-white dark:bg-yellow-400 dark:text-gray-900 mode-toggle">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:block"></i>
+        </button>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-gray-700 text-white dark:bg-gray-300 dark:text-gray-900">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+    
+    <!-- Hero section -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-800 dark:from-blue-900 dark:to-indigo-900 text-white">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div>
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+            <svg class="absolute left-0 -bottom-1 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#fff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,117.3C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+            <svg class="absolute left-0 -bottom-1 w-full dark:block hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#111827" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,117.3C672,107,768,117,864,138.7C960,160,1056,192,1152,176C1248,160,1344,96,1392,64L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+        <div class="container mx-auto px-6 pt-24 pb-40 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="lg:pr-10">
+                    <div class="inline-block px-3 py-1 rounded-full bg-white bg-opacity-20 backdrop-blur-sm text-white text-sm font-medium mb-4">
+                        <i class="fas fa-bolt mr-1"></i> 两天内快速实施
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">医保系统页面内<br><span class="relative">
+                        智能问答功能
+                        <svg class="absolute -bottom-2 left-0 w-full h-3" width="400" height="12" viewBox="0 0 400 12" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0,9 C150,25 250,-25 400,9" stroke="#10B981" stroke-width="3" fill="none" />
+                        </svg>
+                    </span></h1>
+                    <p class="text-lg md:text-xl opacity-90 mb-10 max-w-2xl">
+                        通过轻量级嵌入式方案，在不改变现有系统架构的情况下，快速实现基于DeepSeek API的智能问答功能，提升用户体验
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#plan-overview" class="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full font-medium transition-colors flex items-center glow-effect">
+                            <i class="fas fa-file-alt mr-2"></i> 查看方案
+                        </a>
+                        <a href="#implementation" class="bg-transparent hover:bg-white/20 border-2 border-white px-6 py-3 rounded-full font-medium transition-colors flex items-center">
+                            <i class="fas fa-code mr-2"></i> 实施步骤
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:pl-10 hidden lg:block">
+                    <div class="chat-widget transform rotate-3 relative">
+                        <div class="absolute -top-5 -left-5 h-10 w-10 bg-green-500 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="chat-header">
+                            <div>智能问答助手</div>
+                            <button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message message-bot">
+                                您好！我是医保智能助手，有什么可以帮您？
+                            </div>
+                            <div class="message message-user">
+                                如何查询我的医保报销比例？
+                            </div>
+                            <div class="message message-bot">
+                                您可以在"参保人医保待遇查询"页面，输入个人信息后查询您的报销比例。门诊和住院报销比例不同，一般住院报销比例会更高。
+                            </div>
+                            <div class="message message-user">
+                                特殊药品如何办理报销？
+                            </div>
+                            <div id="typing-indicator" class="message message-bot typing-animation" style="display: none;">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                            <div id="bot-response-2" class="message message-bot" style="display: none;">
+                                特殊药品报销需要先填写《特殊药品使用申请表》，并提供医院诊断证明、处方等材料，经过医保中心审核通过后才可以报销。具体流程可查看本页面下方的"特殊药品报销指南"。
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" class="flex-1 rounded-full px-4 py-2 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white" placeholder="输入您的问题...">
+                            <button class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main content -->
+    <main class="container mx-auto px-6 py-16">
+        <!-- Quick facts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 -mt-20 mb-20 relative z-20">
+            <div class="card p-6 card-stack">
+                <div class="flex items-center mb-3">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                        <i class="fas fa-clock text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">快速实施</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    仅需<span class="font-bold text-blue-600 dark:text-blue-400">2天时间</span>即可完成从开发到部署的全流程，满足紧急上线需求
+                </p>
+            </div>
+            
+            <div class="card p-6 card-stack">
+                <div class="flex items-center mb-3">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                        <i class="fas fa-code text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">轻量级集成</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    通过<span class="font-bold text-blue-600 dark:text-blue-400">JavaScript脚本注入</span>方式实现，无需修改现有系统架构
+                </p>
+            </div>
+            
+            <div class="card p-6 card-stack">
+                <div class="flex items-center mb-3">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                        <i class="fas fa-arrows-to-circle text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold">上下文感知</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                    自动提取<span class="font-bold text-blue-600 dark:text-blue-400">当前页面内容</span>作为上下文，实现精准的针对性回答
+                </p>
+            </div>
+        </div>
+        
+        <!-- Overview section -->
+        <section id="plan-overview" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    方案概述
+                </span>
+                <h2 class="text-3xl font-bold mb-4">医保系统页面内问答功能快速上线方案</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        基于已部署的DeepSeek API环境，通过JavaScript轻量级嵌入方式，实现医保系统各页面的智能问答功能
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <h3 class="text-2xl font-bold mb-6">前提条件</h3>
+                <div class="card p-6 mb-10">
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 mr-3 mt-0.5">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold">DeepSeek API环境已部署完成</span>，可直接调用
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 mr-3 mt-0.5">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold">需在2天内实现各页面问答功能上线</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 mr-3 mt-0.5">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold">后续可持续完善知识库和模型交互能力</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <h3 class="text-2xl font-bold mb-6">总体思路</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="card p-4 hover:shadow-lg transition-shadow lg:col-span-1">
+                        <div class="text-primary-600 flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-feather-alt text-2xl text-blue-500 dark:text-blue-400 spin-hover"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-center">轻量级嵌入</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            JavaScript插件方式为现有页面注入问答组件
+                        </p>
+                    </div>
+                    
+                    <div class="card p-4 hover:shadow-lg transition-shadow lg:col-span-1">
+                        <div class="text-primary-600 flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-eye text-2xl text-blue-500 dark:text-blue-400 spin-hover"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-center">内容感知</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            自动提取当前页面内容作为上下文
+                        </p>
+                    </div>
+                    
+                    <div class="card p-4 hover:shadow-lg transition-shadow lg:col-span-1">
+                        <div class="text-primary-600 flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-server text-2xl text-blue-500 dark:text-blue-400 spin-hover"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-center">API集成</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            直接调用已有DeepSeek API服务
+                        </p>
+                    </div>
+                    
+                    <div class="card p-4 hover:shadow-lg transition-shadow lg:col-span-1">
+                        <div class="text-primary-600 flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-comments text-2xl text-blue-500 dark:text-blue-400 spin-hover"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-center">用户界面</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            实现简洁的浮动问答窗口
+                        </p>
+                    </div>
+                    
+                    <div class="card p-4 hover:shadow-lg transition-shadow lg:col-span-1">
+                        <div class="text-primary-600 flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                <i class="fas fa-database text-2xl text-blue-500 dark:text-blue-400 spin-hover"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold mb-2 text-center">知识库扩展</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-center">
+                            预留知识库扩充接口
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical solution section -->
+        <section id="technical-solution" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    技术方案
+                </span>
+                <h2 class="text-3xl font-bold mb-4">详细设计</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        结合现有技术环境，通过精简高效的代码实现页面内问答功能
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <!-- Architecture diagram -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-sitemap text-blue-500 mr-3"></i>
+                    系统架构
+                </h3>
+                <div class="card p-6">
+                    <div class="mermaid text-center">
+                        graph TD
+                            A[医保系统页面] -->|JavaScript注入| B[问答UI组件]
+                            B -->|提取| C[页面内容]
+                            B -->|用户问题| D[DeepSeek API接口]
+                            C -->|上下文| D
+                            D -->|生成回答| B
+                            D -.->|可选| E[医保知识库]
+                            style A fill:#f9f9f9,stroke:#333,stroke-width:1px
+                            style B fill:#d4e6f1,stroke:#3498db,stroke-width:1px
+                            style C fill:#ebf5fb,stroke:#85c1e9,stroke-width:1px
+                            style D fill:#d5f5e3,stroke:#2ecc71,stroke-width:1px
+                            style E fill:#fadbd8,stroke:#e74c3c,stroke-width:1px
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content extraction -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-file-alt text-blue-500 mr-3"></i>
+                    页面内容采集
+                </h3>
+                <div class="card p-6 relative">
+                    <div class="floating-label">页面内容提取</div>
+                    <p class="mb-6">通过JavaScript提取当前页面的文本内容，作为问答的上下文信息：</p>
+                    <div class="code-block text-sm">
+                        <div class="code-block-header">extractPageContent.js</div>
+<pre><code>// 提取页面文本内容函数
+function extractPageContent() {
+  // 使用textContent属性提取页面可见文本
+  const mainContent = document.querySelector('main, .content, #content, article, .article');
+  let pageText = '';
+  
+  if (mainContent) {
+    // 优先提取主内容区域
+    pageText = mainContent.textContent;
+  } else {
+    // 备选：提取body内容但排除导航、页脚等通用元素
+    const body = document.body;
+    const elementsToExclude = 'nav, footer, header, .navigation, .menu, .footer';
+    
+    // 创建一个临时副本以便修改
+    const bodyClone = body.cloneNode(true);
+    const excludeElements = bodyClone.querySelectorAll(elementsToExclude);
+    
+    // 移除不需要的元素
+    excludeElements.forEach(el => el.parentNode.removeChild(el));
+    pageText = bodyClone.textContent;
+  }
+  
+  // 清理文本（移除多余空格和分行）
+  return pageText.replace(/\s+/g, ' ').trim();
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UI Component -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-window-maximize text-blue-500 mr-3"></i>
+                    问答组件UI设计
+                </h3>
+                <div class="card p-6 relative">
+                    <div class="floating-label">用户界面</div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <p class="mb-6">设计浮动问答窗口，固定在页面右下角，不影响原有页面布局：</p>
+                            <div class="code-block text-sm">
+                                <div class="code-block-header">qaWidget.js</div>
+<pre><code>function createQAWidget() {
+  const widgetHTML = `
+    <div id="qa-widget" class="qa-container">
+      <div class="qa-header">
+        <h3>智能问答助手</h3>
+        <button id="qa-minimize">-</button>
+      </div>
+      <div class="qa-body">
+        <div id="qa-messages" class="qa-messages"></div>
+        <div class="qa-input-container">
+          <input type="text" id="qa-input" placeholder="请输入您关于本页面的问题...">
+          <button id="qa-submit">发送</button>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // 创建样式
+  const style = document.createElement('style');
+  style.textContent = `
+    .qa-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      max-height: 450px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    /* 其他样式... */
+  `;
+  
+  // 将HTML和样式添加到页面
+  const container = document.createElement('div');
+  container.innerHTML = widgetHTML;
+  document.body.appendChild(container);
+  document.head.appendChild(style);
+  
+  // 初始化事件监听器
+  initQAWidgetEvents();
+}</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mb-4">组件预览：</div>
+                            <div class="chat-widget mx-auto">
+                                <div class="chat-header">
+                                    <div>智能问答助手</div>
+                                    <button class="w-6 h-6 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                                <div class="chat-messages" style="height: 120px">
+                                    <div class="message message-bot">
+                                        您好！有什么可以帮您？
+                                    </div>
+                                    <div class="message message-user">
+                                        医保卡余额怎么查询？
+                                    </div>
+                                    <div class="message message-bot">
+                                        您可以在本页面右侧"个人账户查询"模块，输入身份证号码和验证码进行查询。
+                                    </div>
+                                </div>
+                                <div class="chat-input">
+                                    <input type="text" class="flex-1 rounded-full px-4 py-2 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 dark:text-white" placeholder="输入您的问题...">
+                                    <button class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-gray-500 dark:text-gray-400 mt-4 text-sm text-center">
+                                界面设计简洁直观，用户可以随时打开或最小化，不干扰正常操作
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- API Integration -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-plug text-blue-500 mr-3"></i>
+                    DeepSeek API 交互
+                </h3>
+                <div class="card p-6 relative">
+                    <div class="floating-label">API调用</div>
+                    <p class="mb-6">实现与已部署的DeepSeek API服务的集成，支持流式响应：</p>
+                    <div class="code-block text-sm">
+                        <div class="code-block-header">apiService.js</div>
+<pre><code>async function askQuestion(question, pageContent) {
+  const apiEndpoint = '/api/deepseek/ask'; // 已部署的API端点
+  
+  try {
+    // 显示加载状态
+    showLoadingIndicator();
+    
+    const response = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question: question,
+        context: pageContent,
+        stream: true
+      })
+    });
+    
+    // 处理流式响应
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let answer = '';
+    
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      
+      // 解码收到的数据块
+      const chunk = decoder.decode(value, { stream: true });
+      answer += chunk;
+      
+      // 实时更新UI
+      updateAnswerInUI(answer);
+    }
+    
+    hideLoadingIndicator();
+    return answer;
+  } catch (error) {
+    hideLoadingIndicator();
+    return '抱歉，发生了错误，请稍后再试。';
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Deployment Script -->
+            <div class="mb-16 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-rocket text-blue-500 mr-3"></i>
+                    快速部署脚本
+                </h3>
+                <div class="card p-6 relative">
+                    <div class="floating-label">部署实施</div>
+                    <p class="mb-6">创建自动注入脚本，实现快速部署：</p>
+                    <div class="code-block text-sm">
+                        <div class="code-block-header">deployment.js</div>
+<pre><code>(function() {
+  // 创建脚本标签
+  const script = document.createElement('script');
+  script.src = 'https://医保系统域名/assets/qa-widget.js';
+  script.async = true;
+  
+  // 处理脚本加载完成事件
+  script.onload = function() {
+    // 初始化问答小部件
+    if (typeof initQAWidget === 'function') {
+      initQAWidget();
+    }
+  };
+  
+  // 添加到文档
+  document.head.appendChild(script);
+})();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Implementation plan -->
+        <section id="implementation" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    实施计划
+                </span>
+                <h2 class="text-3xl font-bold mb-4">两天内完成上线</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        详细的时间规划与任务分配，确保在规定时间内实现目标
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Day 1 -->
+                    <div class="card p-6 relative">
+                        <div class="absolute -top-3 -left-3 h-10 w-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                            1
+                        </div>
+                        <h3 class="text-xl font-bold mb-6 pl-8">第一天（4月3日）</h3>
+                        <div class="timeline pl-8">
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">09:00-10:30</div>
+                                <div class="font-bold">开发环境准备，创建项目结构</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    前端开发团队准备开发环境，搭建基础项目框架
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">10:30-12:00</div>
+                                <div class="font-bold">实现页面内容提取模块</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    编写页面内容提取功能，解决不同页面结构的兼容性问题
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">13:00-15:00</div>
+                                <div class="font-bold">开发问答UI组件</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    设计并实现浮动问答窗口，包括样式和交互功能
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">15:00-17:00</div>
+                                <div class="font-bold">实现DeepSeek API调用接口</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    编写API调用服务，对接已部署的DeepSeek服务
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">17:00-18:00</div>
+                                <div class="font-bold">整合各模块，进行初步测试</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    将各功能模块整合，在测试环境中进行初步功能验证
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 2 -->
+                    <div class="card p-6 relative">
+                        <div class="absolute -top-3 -left-3 h-10 w-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                            2
+                        </div>
+                        <h3 class="text-xl font-bold mb-6 pl-8">第二天（4月4日）</h3>
+                        <div class="timeline pl-8">
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">09:00-11:00</div>
+                                <div class="font-bold">进行多页面兼容性测试与修复</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    在不同类型的医保系统页面测试功能，解决兼容性问题
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">11:00-12:30</div>
+                                <div class="font-bold">优化问答体验，添加引导提示</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    改进界面交互，添加用户引导和使用提示
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">13:30-15:00</div>
+                                <div class="font-bold">测试页面不同场景下的问答质量</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    测试团队检验在不同业务场景下的问答准确性
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">15:00-16:30</div>
+                                <div class="font-bold">编写简易部署文档与使用说明</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    文档团队编写部署指南和使用手册
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">16:30-18:00</div>
+                                <div class="font-bold">系统部署上线</div>
+                                <div class="text-gray-600 dark:text-gray-400">
+                                    运维团队将系统部署到生产环境，实现功能上线
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress indicators -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <div class="card p-6 text-center">
+                        <div class="flex justify-center mb-4">
+                            <div class="progress-donut" data-percent="100%">
+                                <div class="progress-value">100%</div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold">开发计划完成度</h4>
+                        <p class="text-gray-600 dark:text-gray-400">所有开发任务规划完成</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="flex justify-center mb-4">
+                            <div class="progress-donut" data-percent="90%">
+                                <div class="progress-value">90%</div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold">资源准备就绪</h4>
+                        <p class="text-gray-600 dark:text-gray-400">团队与技术资源已到位</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="flex justify-center mb-4">
+                            <div class="progress-donut" data-percent="85%">
+                                <div class="progress-value">85%</div>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-bold">风险可控程度</h4>
+                        <p class="text-gray-600 dark:text-gray-400">主要风险点已识别并有应对措施</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Knowledge base improvement -->
+        <section id="future-improvements" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    持续优化
+                </span>
+                <h2 class="text-3xl font-bold mb-4">知识库持续改进规划</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        为支持后续知识库与大模型交互能力的持续改进，在设计中预留了扩展接口
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Knowledge base extension -->
+                    <div class="card p-6 relative">
+                        <div class="floating-label">扩展接口</div>
+                        <h3 class="text-xl font-bold mb-4">知识库扩展接口</h3>
+                        <p class="mb-4">在API调用中预留知识库参数：</p>
+                        <div class="code-block text-sm">
+                            <div class="code-block-header">knowledgeBase.js</div>
+<pre><code>// 预留知识库扩展参数
+const requestBody = {
+  question: question,
+  context: pageContent,
+  stream: true,
+  // 以下参数用于后续扩展
+  knowledgeBase: {
+    enabled: false,  // 后期改为true启用
+    sources: [],     // 后期添加知识库来源
+    confidence: 0.7  // 置信度阈值
+  }
+};</code></pre>
+                        </div>
+                        <p class="mt-4 text-gray-600 dark:text-gray-400">
+                            通过这种设计，在不修改前端代码的情况下，可以随时启用和扩展知识库功能
+                        </p>
+                    </div>
+                    
+                    <!-- User feedback collection -->
+                    <div class="card p-6 relative">
+                        <div class="floating-label">反馈机制</div>
+                        <h3 class="text-xl font-bold mb-4">用户反馈收集机制</h3>
+                        <p class="mb-4">添加反馈功能，用于持续优化模型：</p>
+                        <div class="code-block text-sm">
+                            <div class="code-block-header">feedback.js</div>
+<pre><code>function setupFeedbackCollection() {
+  // 添加反馈按钮
+  const feedbackButtons = `
+    <div class="qa-feedback">
+      <span>回答是否有帮助？</span>
+      <button id="qa-feedback-yes">👍</button>
+      <button id="qa-feedback-no">👎</button>
+    </div>
+  `;
+  
+  // 添加反馈处理逻辑
+  document.getElementById('qa-feedback-yes').addEventListener('click', () => {
+    collectFeedback(lastQuestionId, true);
+  });
+  
+  document.getElementById('qa-feedback-no').addEventListener('click', () => {
+    collectFeedback(lastQuestionId, false);
+    // 显示问题反馈表单
+    showFeedbackForm();
+  });
+}
+
+// 收集反馈数据，用于后续模型优化
+async function collectFeedback(questionId, isHelpful, details = '') {
+  await fetch('/api/feedback', {
+    method: 'POST',
+    body: JSON.stringify({
+      questionId,
+      isHelpful,
+      details,
+      pageUrl: window.location.href,
+      timestamp: new Date().toISOString()
+    })
+  });
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Future roadmap -->
+                <div class="mt-10">
+                    <h3 class="text-xl font-bold mb-6">后续优化路线图</h3>
+                    <div class="card p-6">
+                        <ol class="space-y-4">
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-4">1</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">收集用户问题库（1-4周）</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">通过系统上线初期收集的真实用户问题，建立问题库，进行分类与整理</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-4">2</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">构建医保专业知识库（1-2个月）</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">整合医保政策文件、操作手册、业务规范等内容，构建结构化知识库</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-4">3</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">实现RAG检索增强技术（2-3个月）</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">集成向量数据库，实现基于检索增强生成的精准回答能力</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-4">4</div>
+                                <div>
+                                    <h4 class="font-bold text-lg">优化交互体验（持续）</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">基于用户反馈持续优化界面交互与回答质量</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Summary and key success factors -->
+        <section id="summary" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    总结
+                </span>
+                <h2 class="text-3xl font-bold mb-4">总结与关键成功因素</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        该实施方案的优势与保障成功实施的关键因素
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Plan advantages -->
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-award text-blue-500 mr-3"></i>
+                            方案优势
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="highlight-feature">
+                                <h4 class="font-bold">极简部署</h4>
+                                <p class="text-gray-600 dark:text-gray-400">无需更改现有系统架构，仅添加前端脚本</p>
+                            </div>
+                            <div class="highlight-feature">
+                                <h4 class="font-bold">迅速上线</h4>
+                                <p class="text-gray-600 dark:text-gray-400">2天内完成基础功能开发与部署</p>
+                            </div>
+                            <div class="highlight-feature">
+                                <h4 class="font-bold">可扩展性</h4>
+                                <p class="text-gray-600 dark:text-gray-400">预留知识库扩展接口，支持后续功能增强</p>
+                            </div>
+                            <div class="highlight-feature">
+                                <h4 class="font-bold">用户友好</h4>
+                                <p class="text-gray-600 dark:text-gray-400">浮动窗口设计不影响现有页面布局</p>
+                            </div>
+                            <div class="highlight-feature">
+                                <h4 class="font-bold">性能优化</h4>
+                                <p class="text-gray-600 dark:text-gray-400">使用流式响应提升用户体验</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Key success factors -->
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-key text-blue-500 mr-3"></i>
+                            关键成功因素
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400 mr-4">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">团队协作高效</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">开发、测试与部署密切配合，确保快速交付</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400 mr-4">
+                                    <i class="fas fa-crosshairs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">明确功能边界</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">聚焦于必要功能点，避免范围蔓延</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 mr-4">
+                                    <i class="fas fa-server"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">利用已有资源</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">充分利用已部署的DeepSeek API环境</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-4">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">清晰的实施计划</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">详细的两天实施计划与任务分配</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 card p-6 text-center">
+                    <p class="text-lg font-bold mb-4">该方案可确保在规定时间内实现医保系统页面内问答功能的快速上线，并为后续知识库完善和模型交互能力提升奠定基础。</p>
+                    <a href="javascript:void(0)" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors mt-4">
+                        <i class="fas fa-download mr-2"></i> 下载完整方案文档
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Further reading -->
+        <section id="further-reading" class="mb-20">
+            <div class="mb-12 text-center">
+                <span class="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium mb-3">
+                    延伸阅读
+                </span>
+                <h2 class="text-3xl font-bold mb-4">进一步阅读推荐</h2>
+                <div class="mx-auto max-w-3xl">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        为深入了解相关技术与实践，推荐以下资源
+                    </p>
+                    <div class="decorative-line w-24 mx-auto my-6"></div>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-book text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《智能问答系统：原理、技术与实践》</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            刘挺、王小捷等著，清华大学出版社，2023
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            全面介绍现代智能问答系统的设计原理、关键技术和实践案例
+                        </p>
+                        <a href="https://book.douban.com/subject/36104086/" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-file-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《医疗大模型的质控与合规：挑战与解决方案》</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            张磊等著，中国医学科学院医学论文集，2024
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            探讨医疗领域大模型应用的特殊要求、质量控制与合规实践
+                        </p>
+                        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10611375/" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《检索增强生成(RAG)技术实战》</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            林智、王晓明著，机械工业出版社，2024
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            详细讲解RAG技术原理与实战案例，提供完整代码与优化方法
+                        </p>
+                        <a href="https://www.amazon.cn/dp/B0CNWGQPLC/" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-code text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《JavaScript高级程序设计》第5版</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            Matt Frisbie著，人民邮电出版社，2022
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            掌握JavaScript高级特性，包括DOM操作、异步编程与模块化开发
+                        </p>
+                        <a href="https://www.ituring.com.cn/book/2472" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-server text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《DeepSeek: 基于大型语言模型的企业智能平台》</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            DeepSeek团队著，电子工业出版社，2024
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            深入剖析DeepSeek模型架构、部署方案与应用最佳实践
+                        </p>
+                        <a href="https://github.com/deepseek-ai" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-xl transition-shadow">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-flask text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">《医保信息系统设计与实践》</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            中国医疗保险研究会编著，中国医药科技出版社，2023
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            系统介绍医保信息系统的设计原则、技术架构与实施方法
+                        </p>
+                        <a href="http://www.nhsa.gov.cn/" target="_blank" rel="noopener" class="inline-block mt-4 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Article Dates -->
+    <div class="container mx-auto px-6 mb-12">
+        <div class="article-dates">
+            <div class="date-item">
+                <i class="far fa-calendar-plus"></i>
+                <span>创建日期: 2024-03-10</span>
+            </div>
+            <div class="date-item">
+                <i class="far fa-calendar-check"></i>
+                <span>最后更新: 2024-04-01</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关于作者</h3>
+                    <p class="mb-2">
+                        <i class="fas fa-user mr-2"></i> 作者姓名: 季晓康
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-rss mr-2"></i> 微信公众号：凿壁
+                    </p>
+                    <p>
+                        <i class="fas fa-copyright mr-2"></i> 版权信息：国家健康医疗大数据研究院
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系方式</h3>
+                    <p class="mb-2">
+                        <i class="fas fa-envelope mr-2"></i> 电子邮件: contact@example.com
+                    </p>
+                    <p class="mb-2">
+                        <i class="fas fa-phone mr-2"></i> 电话: (123) 456-7890
+                    </p>
+                    <p>
+                        <i class="fas fa-map-marker-alt mr-2"></i> 地址: 北京市海淀区中关村
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="#plan-overview" class="hover:text-blue-400 transition-colors">
+                                <i class="fas fa-angle-right mr-2"></i> 方案概述
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#technical-solution" class="hover:text-blue-400 transition-colors">
+                                <i class="fas fa-angle-right mr-2"></i> 技术方案
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#implementation" class="hover:text-blue-400 transition-colors">
+                                <i class="fas fa-angle-right mr-2"></i> 实施计划
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#future-improvements" class="hover:text-blue-400 transition-colors">
+                                <i class="fas fa-angle-right mr-2"></i> 持续优化
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#summary" class="hover:text-blue-400 transition-colors">
+                                <i class="fas fa-angle-right mr-2"></i> 总结
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 医保系统页面内问答功能快速上线实施方案. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

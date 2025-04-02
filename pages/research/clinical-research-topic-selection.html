@@ -421,9 +421,6 @@
             <div class="mt-2 text-xs text-gray-500">
               <p><strong>输出</strong>：列出3-5个最需临床突破的问题清单，附上初步的流行病学数据及文献引用。</p>
             </div>
-            <button id="open-workspace-btn" class="mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm transition-all">
-              <i class="fas fa-external-link-alt mr-1"></i> 打开AI工作区
-            </button>
           </div>
           
           <!-- Scientific Issues -->
@@ -844,12 +841,12 @@
       <p class="mb-4">以下是一个用于指导AI助手生成完整临床研究选题报告的提示词模板。您可以将特定医学领域替换"{{医学领域}}"，然后复制此模板与AI助手交流，获取定制化研究选题分析。</p>
       
       <div class="relative">
-        <pre class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-auto text-sm max-h-96"><code>你现在需要扮演一位资深的医学科研助理，请根据以下要求，围绕"**{{医学领域}}**"为主题，生成一份**临床研究选题的完整报告**。报告分为三大部分：**全面调研、设计备选选题、创新性评分与优先决策**。其中，**评分与优先决策**部分需针对 12 个变量在 3 个不同维度（填补空白、颠覆共识、终结争议）分别赋予不同权重，并在计算中**单独打分**。请严格按照本 Prompt 的结构、内容和篇幅要求进行撰写。
+        <pre class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-auto text-sm max-h-96"><code>你现在需要扮演一位资深的医学科研助理，请根据以下要求，围绕“**{{医学领域}}**”为主题，生成一份**临床研究选题的完整报告**。报告分为三大部分：**全面调研、设计备选选题、创新性评分与优先决策**。其中，**评分与优先决策**部分需针对 12 个变量在 3 个不同维度（填补空白、颠覆共识、终结争议）分别赋予不同权重，并在计算中**单独打分**。请严格按照本 Prompt 的结构、内容和篇幅要求进行撰写。
 ---
 
 #### 1. 全面调研报告
 
-**目标**：针对"{{医学领域}}"的临床研究现状和趋势进行系统性调研，并输出一份详细的分析报告。请分成**12个小节**，每小节不少于**300字**，并提供必要的示例或数据说明。具体小节要求如下：
+**目标**：针对“{{医学领域}}”的临床研究现状和趋势进行系统性调研，并输出一份详细的分析报告。请分成**12个小节**，每小节不少于**300字**，并提供必要的示例或数据说明。具体小节要求如下：
 
 1. **重要的临床问题（a）**
 2. **重要的科学问题（b）**
@@ -882,7 +879,7 @@
 
 > **输出要求（第二部分）**：
 
--   为每个选题提供简短的"初步项目建议书"，包括：背景、研究思路、潜在创新点、预期临床或学术价值、可行性简析。
+-   为每个选题提供简短的“初步项目建议书”，包括：背景、研究思路、潜在创新点、预期临床或学术价值、可行性简析。
 
 -   每个选题 2000~~3000 字，总字数不少于 24000~~36000 字。
 
@@ -907,11 +904,11 @@
     - l. 国家政策支持度
 2. **三大维度，分别打分**
     - **填补空白**：请列出 12 个变量在该维度下各自的权重（例如 w_a=0.2, w_b=0.1, …），并说明为什么这样分配。
-    - **颠覆共识**：重新设定 12 个变量的权重，可能与"填补空白"不同（例如 w_a=0.1, w_b=0.15, …），给出理由。
+    - **颠覆共识**：重新设定 12 个变量的权重，可能与“填补空白”不同（例如 w_a=0.1, w_b=0.15, …），给出理由。
     - **终结争议**：再次设定 12 个变量的独立权重，并说明分配依据（例如更注重方法学先进性和伦理合规等）。
 3. **打分方式**
     - 为每个选题在每个维度下，对 12 个变量分别给出 1~10 分的分数，然后乘以对应的权重，最后求和得到该选题在该维度上的总分；
-    - 最后汇总"填补空白总分""颠覆共识总分""终结争议总分"，并可视需要给出**三项平均或加权综合**的"创新总分"。
+    - 最后汇总“填补空白总分”“颠覆共识总分”“终结争议总分”，并可视需要给出**三项平均或加权综合**的“创新总分”。
     - 请以表格或简明清单的形式呈现每个选题在三维度下的评分结果，并简要说明评分依据。
 4. **优先立项与后续规划建议**
     - 对综合评分较高的 1~2 个选题，提出正式立项建议；
@@ -926,14 +923,14 @@
 
 -   必须列出每个选题的三维度评分，并简要说明打分原因；
 
--   明确写出"推荐立项选题"以及具体的后续推进路径。
+-   明确写出“推荐立项选题”以及具体的后续推进路径。
 
 ---
 
 ### 整体写作要求
 
 1. **文档标题**
-    - 如"《{{医学领域}}临床研究选题报告：调研、方案与创新性多维评估》"
+    - 如“《{{医学领域}}临床研究选题报告：调研、方案与创新性多维评估》”
 2. **语言风格**
     - 使用简明准确、专业严谨的语言；
     - 保持结构清晰、条理性强，同时提供适度文献或实践例证。
@@ -946,7 +943,7 @@
 
 ---
 
-**现在请你根据以上所有具体要求，撰写并输出一份完整且详尽的"{{医学领域}}临床研究选题报告"。请严格按照本Prompt中的结构顺序、篇幅规定和评分方式进行撰写，并确保覆盖每个规定内容。**</code></pre>
+**现在请你根据以上所有具体要求，撰写并输出一份完整且详尽的“{{医学领域}}临床研究选题报告”。请严格按照本Prompt中的结构顺序、篇幅规定和评分方式进行撰写，并确保覆盖每个规定内容。**</code></pre>
         <button id="copy-prompt" class="absolute top-4 right-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded text-sm transition duration-300">
           <i class="fas fa-copy mr-1"></i> 复制模板
         </button>
@@ -993,65 +990,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Add AI Workspace Modal (at the end of the body, before closing body tag) -->
-  <div id="ai-workspace-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white dark:bg-gray-800 rounded-lg w-full max-w-4xl max-h-[90vh] flex flex-col">
-      <!-- Modal Header -->
-      <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-        <h3 class="text-xl font-bold">临床问题AI研究工作区</h3>
-        <button id="close-workspace-btn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-          <i class="fas fa-times text-xl"></i>
-        </button>
-      </div>
-      
-      <!-- Modal Body -->
-      <div class="flex-1 overflow-hidden flex flex-col md:flex-row">
-        <!-- Left Panel - Conversation -->
-        <div class="flex-1 flex flex-col min-h-0 border-r border-gray-200 dark:border-gray-700">
-          <!-- Chat History -->
-          <div id="conversation-container" class="flex-1 overflow-y-auto p-4 space-y-4">
-            <div class="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
-              <p class="text-sm text-blue-800 dark:text-blue-100">
-                <i class="fas fa-robot mr-2"></i>欢迎使用临床问题研究助手。请描述您想探讨的临床问题领域，我会帮您分析现状、确定研究空白和可能的突破点。
-              </p>
-            </div>
-          </div>
-          
-          <!-- Input Area -->
-          <div class="p-4 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex items-start">
-              <textarea id="user-input" rows="3" class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg p-2 text-sm dark:bg-gray-700 resize-none" placeholder="描述您需要解决的临床问题或研究方向..."></textarea>
-              <button id="send-message-btn" class="ml-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-all">
-                <i class="fas fa-paper-plane mr-1"></i> 发送
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Right Panel - Research Output -->
-        <div class="md:w-2/5 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
-          <h4 class="font-bold text-lg mb-3">研究输出</h4>
-          <div id="research-output" class="space-y-4">
-            <div class="empty-state text-center py-8">
-              <i class="fas fa-file-medical text-gray-300 dark:text-gray-600 text-4xl mb-2"></i>
-              <p class="text-sm text-gray-500 dark:text-gray-400">与AI助手对话后，有价值的临床问题和研究方向将在此显示</p>
-            </div>
-          </div>
-          
-          <!-- Export Actions -->
-          <div class="mt-6 space-y-2">
-            <button id="save-output-btn" class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm transition-all">
-              <i class="fas fa-save mr-1"></i> 保存研究输出
-            </button>
-            <button id="clear-conversation-btn" class="w-full px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg text-sm transition-all">
-              <i class="fas fa-trash mr-1"></i> 清空对话
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     // Theme toggle functionality
@@ -1176,152 +1114,6 @@
           observer.observe(element);
         });
       }
-    });
-
-    // AI Workspace Modal Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const openWorkspaceBtn = document.getElementById('open-workspace-btn');
-      const closeWorkspaceBtn = document.getElementById('close-workspace-btn');
-      const aiWorkspaceModal = document.getElementById('ai-workspace-modal');
-      const sendMessageBtn = document.getElementById('send-message-btn');
-      const userInput = document.getElementById('user-input');
-      const conversationContainer = document.getElementById('conversation-container');
-      const researchOutput = document.getElementById('research-output');
-      const saveOutputBtn = document.getElementById('save-output-btn');
-      const clearConversationBtn = document.getElementById('clear-conversation-btn');
-      
-      // Open modal
-      openWorkspaceBtn.addEventListener('click', function() {
-        aiWorkspaceModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
-      });
-      
-      // Close modal
-      closeWorkspaceBtn.addEventListener('click', function() {
-        aiWorkspaceModal.classList.add('hidden');
-        document.body.style.overflow = '';
-      });
-      
-      // Close modal if clicked outside
-      aiWorkspaceModal.addEventListener('click', function(e) {
-        if (e.target === aiWorkspaceModal) {
-          aiWorkspaceModal.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-      
-      // Send message
-      sendMessageBtn.addEventListener('click', sendMessage);
-      userInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage();
-        }
-      });
-      
-      function sendMessage() {
-        const message = userInput.value.trim();
-        if (!message) return;
-        
-        // Add user message to conversation
-        addMessageToConversation('user', message);
-        userInput.value = '';
-        
-        // Simulate AI response (replace with actual API call in production)
-        setTimeout(() => {
-          simulateAIResponse(message);
-        }, 1000);
-      }
-      
-      function addMessageToConversation(sender, text) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = sender === 'user' ? 
-          'bg-gray-100 dark:bg-gray-700 p-3 rounded-lg ml-12' : 
-          'bg-blue-50 dark:bg-blue-900 p-3 rounded-lg mr-12';
-        
-        messageDiv.innerHTML = `
-          <p class="text-sm ${sender === 'user' ? 'text-gray-800 dark:text-gray-200' : 'text-blue-800 dark:text-blue-100'}">
-            ${sender === 'user' ? '<i class="fas fa-user mr-2"></i>' : '<i class="fas fa-robot mr-2"></i>'}
-            ${text}
-          </p>
-        `;
-        
-        conversationContainer.appendChild(messageDiv);
-        conversationContainer.scrollTop = conversationContainer.scrollHeight;
-      }
-      
-      function simulateAIResponse(userMessage) {
-        // This is a placeholder - in production, you would call your LLM API here
-        let aiResponse = "这是一个模拟的AI回复。在实际应用中，您需要接入真实的大语言模型API来提供临床研究相关的专业回答。";
-        
-        // For demo purposes - basic response logic based on keywords
-        if (userMessage.includes("心血管") || userMessage.includes("cardiovascular")) {
-          aiResponse = "心血管疾病是全球主要死亡原因之一。根据最新研究，有几个值得关注的临床问题：\n\n1. 新型抗血小板药物在特定人群中的安全性和有效性\n2. 心衰患者的精准治疗策略\n3. 人工智能辅助心血管疾病早期筛查的临床验证";
-          
-          // Update research output with structured findings
-          updateResearchOutput("心血管疾病研究方向", [
-            "新型抗血小板药物在特定人群中的安全性和有效性研究",
-            "心衰患者的精准治疗策略研究",
-            "人工智能辅助心血管疾病早期筛查的临床验证"
-          ]);
-        }
-        
-        addMessageToConversation('ai', aiResponse);
-      }
-      
-      function updateResearchOutput(title, findings) {
-        researchOutput.innerHTML = `
-          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h5 class="font-bold mb-2">${title}</h5>
-            <ul class="list-disc pl-5 space-y-2">
-              ${findings.map(finding => `<li class="text-sm">${finding}</li>`).join('')}
-            </ul>
-            <div class="mt-3 text-xs text-gray-500 dark:text-gray-400">
-              <p>生成时间：${new Date().toLocaleString()}</p>
-            </div>
-          </div>
-        `;
-      }
-      
-      // Save research output
-      saveOutputBtn.addEventListener('click', function() {
-        if (researchOutput.querySelector('.empty-state')) {
-          alert('没有可导出的研究内容。请先与AI助手对话。');
-          return;
-        }
-        
-        // In a real application, you would implement proper export functionality
-        // This is a simplified version for demo purposes
-        const outputText = researchOutput.innerText;
-        const blob = new Blob([outputText], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `临床研究问题_${new Date().toISOString().slice(0,10)}.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      });
-      
-      // Clear conversation
-      clearConversationBtn.addEventListener('click', function() {
-        if (confirm('确定要清空当前对话吗？')) {
-          conversationContainer.innerHTML = `
-            <div class="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
-              <p class="text-sm text-blue-800 dark:text-blue-100">
-                <i class="fas fa-robot mr-2"></i>欢迎使用临床问题研究助手。请描述您想探讨的临床问题领域，我会帮您分析现状、确定研究空白和可能的突破点。
-              </p>
-            </div>
-          `;
-          researchOutput.innerHTML = `
-            <div class="empty-state text-center py-8">
-              <i class="fas fa-file-medical text-gray-300 dark:text-gray-600 text-4xl mb-2"></i>
-              <p class="text-sm text-gray-500 dark:text-gray-400">与AI助手对话后，有价值的临床问题和研究方向将在此显示</p>
-            </div>
-          `;
-        }
-      });
     });
   </script>
 </body>

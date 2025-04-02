@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陪伴成长：如何恢复孩子的信心、情绪和学习动力</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap');
+
+        :root {
+            --color-primary: #2563eb;
+            --color-secondary: #7c3aed;
+            --color-accent: #0ea5e9;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-background: #ffffff;
+            --color-background-alt: #f9fafb;
+            --color-border: #e5e7eb;
+            --color-highlight: #fef3c7;
+        }
+
+        .dark {
+            --color-primary: #3b82f6;
+            --color-secondary: #8b5cf6;
+            --color-accent: #0ea5e9;
+            --color-text: #f3f4f6;
+            --color-text-light: #9ca3af;
+            --color-background: #111827;
+            --color-background-alt: #1f2937;
+            --color-border: #374151;
+            --color-highlight: #fef3c78a;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.8;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: var(--color-primary);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 1.5px;
+        }
+
+        .subsection-title {
+            color: var(--color-secondary);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight {
+            background-color: var(--color-highlight);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+            background-color: var(--color-background-alt);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--color-text);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-background-alt);
+        }
+
+        .book-card {
+            position: relative;
+            border-left: 4px solid var(--color-secondary);
+            background-color: var(--color-background-alt);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            transition: transform 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateX(5px);
+        }
+
+        .footer {
+            background-color: var(--color-background-alt);
+            border-top: 1px solid var(--color-border);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .toc-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--color-text-light);
+            border-left: 2px solid transparent;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .toc-link:hover, .toc-link.active {
+            color: var(--color-primary);
+            border-left-color: var(--color-primary);
+            background-color: var(--color-background-alt);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .subsection-title {
+                font-size: 1.25rem;
+            }
+            .hide-mobile {
+                display: none;
+            }
+        }
+
+        /* 滚动动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 图表样式 */
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 引言样式 */
+        .quote {
+            font-style: italic;
+            padding: 1rem 2rem;
+            position: relative;
+            color: var(--color-text-light);
+            margin: 2rem 0;
+        }
+
+        .quote::before, .quote::after {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 1.5rem;
+            position: absolute;
+            color: var(--color-secondary);
+            opacity: 0.3;
+        }
+
+        .quote::before {
+            content: "\f10d"; /* 左引号 */
+            top: 0;
+            left: 0;
+        }
+
+        .quote::after {
+            content: "\f10e"; /* 右引号 */
+            bottom: 0;
+            right: 0;
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            height: 6px;
+            background-color: var(--color-primary);
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: width 0.2s;
+        }
+
+        /* 图表指标 */
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: var(--color-background-alt);
+            transition: transform 0.3s;
+        }
+
+        .stat:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 进度条 -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-opacity-95 backdrop-filter backdrop-blur-sm" style="background-color: var(--color-background);">
+        <div class="container px-4 py-3 mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl font-bold flex items-center" style="color: var(--color-primary);">
+                <i class="fas fa-brain mr-2"></i>
+                <span>陪伴成长</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-2">
+                    <a href="#communication" class="nav-link">亲子沟通</a>
+                    <a href="#emotion" class="nav-link">情绪管理</a>
+                    <a href="#interest" class="nav-link">学习兴趣</a>
+                    <a href="#reading" class="nav-link">延伸阅读</a>
+                </nav>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="py-16 px-4" style="background-color: var(--color-background-alt);">
+        <div class="container mx-auto">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">恢复孩子信心、情绪和学习动力</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">帮助孩子重拾学习热情，走出困境的实用指南</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#communication" class="btn">
+                        <i class="fas fa-comments mr-2"></i>开始阅读
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="container px-4 py-12 mx-auto">
+        <div class="flex flex-col md:flex-row">
+            <!-- 边栏目录 (桌面版) -->
+            <aside class="md:w-64 lg:w-72 flex-shrink-0 hidden md:block sticky" style="top: 80px; height: calc(100vh - 80px); overflow-y: auto;">
+                <nav class="pr-4">
+                    <div class="mb-4 font-medium" style="color: var(--color-text-light);">目录</div>
+                    <a href="#communication" class="toc-link">有效的亲子沟通方式</a>
+                    <a href="#emotion" class="toc-link">合理引导孩子表达、缓解情绪</a>
+                    <a href="#interest" class="toc-link">激发理科学习兴趣的策略</a>
+                    <a href="#stats" class="toc-link">数据与分析</a>
+                    <a href="#reading" class="toc-link">进一步阅读推荐</a>
+                </nav>
+            </aside>
+
+            <!-- 内容区 -->
+            <div class="flex-1 md:pl-8">
+                <!-- 概述 -->
+                <div class="mb-12 fade-in">
+                    <div class="quote">
+                        教育的本质不在于灌输知识，而在于唤醒、支持与引导。当孩子遭遇学习困境时，家长的陪伴、理解与正确引导，往往比任何教学方法都更为重要。
+                    </div>
+                    <p class="lead">当孩子面临学习困难、情绪低落或学习动力不足时，家长的支持和引导至关重要。本文从亲子沟通、情绪管理和学习兴趣培养三个方面，为家长提供实用的指导方法，帮助孩子重拾信心，恢复学习动力。</p>
+                </div>
+
+                <!-- 第一部分：亲子沟通 -->
+                <section id="communication" class="mb-16 fade-in">
+                    <h2 class="section-title">一、有效的亲子沟通方式</h2>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-comments mr-2" style="color: var(--color-secondary);"></i>保持日常沟通，倾听孩子心声</h3>
+                        <p>家长应经常找机会与孩子交流，询问她一天的学习情况和感受，关注她的收获与压力。特别是在发现孩子情绪低落时，要<span class="highlight">第一时间关心</span>，鼓励她把烦心事告诉父母，父母会和她一起想办法渡过难关。</p>
+                        <p>沟通时尽量放松语气，避免一味指责或训斥，以倾听和共情为主，让孩子感到被理解和支持。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-search mr-2" style="color: var(--color-secondary);"></i>坦诚了解厌学原因</h3>
+                        <p>针对孩子不想上学的情况，家长要耐心询问背后的原因。每个孩子厌学的原因不同，要通过真诚对话让孩子说出真实想法，弄清她不愿上学是否源于老师不公平对待、同学关系紧张等具体问题。</p>
+                        <p>了解原因后，家长才能"<span class="highlight">对症下药</span>"为孩子寻找解决方案，这也让孩子感受到父母在乎她的处境。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-shield-alt mr-2" style="color: var(--color-secondary);"></i>表达支持与信任，站在孩子立场</h3>
+                        <p>让孩子明确地知道，父母是值得信赖的人，一直站在她这一边，会坚定而有耐心地陪伴她。这种信任关系的建立非常重要，它能让孩子安心地说出自己的困扰。</p>
+                        <p>家长在沟通中可以多用认可和鼓励的语言，比如"<span class="highlight">我们一起想办法</span>"、"<span class="highlight">爸爸妈妈理解你的感受</span>"，以此增强孩子的安全感。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-thumbs-up mr-2" style="color: var(--color-secondary);"></i>不聚焦责备成绩，注重积极引导</h3>
+                        <p>交流时避免过度强调学习成绩或责怪她"不努力"。相反，应告诉孩子学习只是成长的一部分，出现挫折很正常，父母更关心她的身心健康和努力过程。</p>
+                        <p>这样的态度有助于减轻孩子的心理压力，让她愿意和父母沟通，而不是对抗逃避。</p>
+                    </div>
+                </section>
+
+                <!-- 第二部分：情绪管理 -->
+                <section id="emotion" class="mb-16 fade-in">
+                    <h2 class="section-title">二、合理引导孩子表达、缓解情绪的方法</h2>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-book mr-2" style="color: var(--color-secondary);"></i>鼓励宣泄情绪，采用书写或倾诉方式</h3>
+                        <p>给孩子创造安全的空间来表达不满和委屈。比如，建议她写"<span class="highlight">情绪日记</span>"，把负面感受记录下来，将抽象的恐惧具体化，从而更清晰地认识自己的情绪，缓解内心的不安。</p>
+                        <p>如果她一时不愿和父母面对面聊，可引导她用写信、画画等方式表达，然后选择合适时机再沟通。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-wind mr-2" style="color: var(--color-secondary);"></i>教学会放松技巧，缓解即时焦虑</h3>
+                        <p>当孩子出现紧张、烦躁等情绪时，可一起练习简单的放松方法，如<span class="highlight">深呼吸放松法</span>：吸气4秒、屏息4秒、慢呼气6秒，反复几次。这种呼吸练习能平复情绪，帮助她在与老师或上学相关的情境中慢慢冷静下来。</p>
+                        <p>也可以陪她进行适度的运动（散步、慢跑、瑜伽）来释放压力。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-heart mr-2" style="color: var(--color-secondary);"></i>共情安抚，避免情绪升级</h3>
+                        <p>孩子倾诉对老师或学校的不满时，家长要耐心听完，并用共情的方式回应，例如："<span class="highlight">老师那样对你确实不公平，难怪你会难过。</span>"认可她的感受后，再一起讨论如何应对。</p>
+                        <p>切忌打断或否定她的情绪（如"不就是点小事"之类），以免让孩子觉得自己不被理解，情绪更加压抑。必要时，家长也可分享自己少年时期类似的遭遇和调适方法，让她觉得父母是可以谈心的对象。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-clock mr-2" style="color: var(--color-secondary);"></i>保持规律作息和正向活动</h3>
+                        <p>帮助孩子制定基本的生活规律（正常的睡眠、三餐），即使暂时不去上学也不要整天无所事事。鼓励她参与一些让自己开心的活动（例如听音乐、手工制作、与要好的朋友见面），让积极情绪逐渐填补消极情绪。</p>
+                        <p>情绪好转后，再逐步把重心引回学习上。家长也应对孩子表现出的细微进步给予肯定，使她感受到情绪改善带来的良好变化。</p>
+                    </div>
+                </section>
+
+                <!-- 第三部分：学习兴趣 -->
+                <section id="interest" class="mb-16 fade-in">
+                    <h2 class="section-title">三、激发孩子对理科学习兴趣的策略</h2>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-lightbulb mr-2" style="color: var(--color-secondary);"></i>联系生活和兴趣，引发好奇心</h3>
+                        <p>将理科知识与孩子原本感兴趣的事物相结合，激发她的求知欲。比如如果她喜欢故事，可以给她找一些科幻小说或科学家传记阅读；又如喜欢动手，就一起做简单有趣的科学小实验。</p>
+                        <p>某位女性科学工作者分享过自己的经历：她中学时爱看侦探小说，无意中训练了逻辑推理能力，这种典型的"<span class="highlight">理科思维</span>"培养使她对自然、世界和宇宙充满好奇心，成为后来学习的动力。家长可以据此给孩子提供类似的启发材料，如科幻小说（刘慈欣的作品等）或推理游戏，让她在故事和游戏中体会科学的奥妙。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-gamepad mr-2" style="color: var(--color-secondary);"></i>寓教于乐，提供互动式学习体验</h3>
+                        <p>相比枯燥的题海战术，初一女孩可能更需要生动的学习方式来重燃兴趣。家长可以利用一些理科教育工具或活动，如<span class="highlight">益智类桌游</span>、趣味数学题、科学纪录片、在线互动课程等，让孩子在"玩中学"。</p>
+                        <p>例如有的数学App通过动画演示来讲解概念，化难为易，提高趣味性。再如机器人编程、科学夏令营等实践活动，也能让孩子动手参与，在实验和探索中体会理科的魅力。通过这些方式，让学习过程变得有趣、丰富，使她逐渐重新喜欢上学习本身。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-trophy mr-2" style="color: var(--color-secondary);"></i>建立成就感，循序渐进提升自信</h3>
+                        <p>针对孩子理科学习上的困难，家长和老师（或家教）可以帮助她设定一些较小且可实现的目标，例如"这周掌握二元一次方程的解法"、"完成一个有趣的科学小制作"。当孩子完成每一个小任务时，及时给予表扬和反馈，让她体验成功的喜悦。</p>
+                        <p>研究表明，<span class="highlight">兴趣和成就感是学好一门学科的关键</span>：兴趣是学习的初心，而成就感会给人积极的心理暗示，让孩子觉得自己"擅长这门科目"，从而成为继续学下去的动力。因此要不断创造让孩子成功的小机会，例如在家让她给父母当"小老师"讲解一道题，或者参与校外简单的知识竞赛并取得证书。这种积累有助于重建她对理科的信心。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 class="subsection-title"><i class="fas fa-users mr-2" style="color: var(--color-secondary);"></i>寻找积极的榜样和支持</h3>
+                        <p>可以为孩子介绍一些理科学习的榜样力量，尤其是女性科学工作者或学长学姐的故事，让她明白女生同样可以学好理科、取得优异成绩。如有可能，联系理科成绩好的亲友与她交流学习心得，或者请教学校里她喜欢的理科老师给予指导。</p>
+                        <p>在老师公平对待无法保证的情况下，家长也可考虑为她更换一个温和耐心的理科补习老师。一对一的专业辅导不仅能补足知识漏洞，还能以关怀的教学态度影响孩子——有案例显示，一位好老师在课外补习中让学生放松下来，传授学习方法，短短几次辅导就让原本物理不及格的孩子成绩跃居年级前列。这种<span class="highlight">正面的教学体验</span>能极大改善孩子对理科的印象，重新激发她的学习动力。</p>
+                    </div>
+                </section>
+
+                <!-- 数据与分析 -->
+                <section id="stats" class="mb-16 fade-in">
+                    <h2 class="section-title">数据与分析</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-brain"></i></div>
+                            <div class="stat-value">83%</div>
+                            <div class="stat-label">学生认为兴趣是学习动力的主要来源</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-comments"></i></div>
+                            <div class="stat-value">76%</div>
+                            <div class="stat-label">良好亲子沟通可以有效缓解学习压力</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="stat-value">65%</div>
+                            <div class="stat-label">小成就的积累能显著提升学习信心</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <img src="/api/placeholder/1100/400" alt="影响学习动力的因素分析图" class="w-full h-full object-cover" />
+                    </div>
+                    <p class="text-center text-sm mt-2 text-gray-500 dark:text-gray-400">图表：影响青少年学习动力的主要因素及占比</p>
+                </section>
+
+                <!-- 延伸阅读 -->
+                <section id="reading" class="mb-16 fade-in">
+                    <h2 class="section-title">进一步阅读推荐</h2>
+                    
+                    <div class="book-card">
+                        <h3 class="font-bold mb-1">《怎样说孩子才会听，怎样听孩子才肯说》</h3>
+                        <div class="text-sm mb-2" style="color: var(--color-text-light);">阿黛尔·法伯、伊莱恩·玛兹丽施 著</div>
+                        <p>这本经典亲子教育书籍提供了大量有效沟通技巧，帮助家长与孩子建立良好的沟通渠道，理解孩子的情感需求。</p>
+                    </div>
+                    
+                    <div class="book-card">
+                        <h3 class="font-bold mb-1">《陪孩子走过初中三年》</h3>
+                        <div class="text-sm mb-2" style="color: var(--color-text-light);">孙云晓 著</div>
+                        <p>针对中学生心理特点和学习规律，为家长提供全方位的指导，特别关注孩子青春期的心理变化和学习困境解决方法。</p>
+                    </div>
+                    
+                    <div class="book-card">
+                        <h3 class="font-bold mb-1">《理科思维：怎样学好数理化》</h3>
+                        <div class="text-sm mb-2" style="color: var(--color-text-light);">周源 著</div>
+                        <p>从思维方式入手，分析中学生学习理科的难点，提供培养理科思维和兴趣的实用方法，适合困惑于理科学习的中学生及家长阅读。</p>
+                    </div>
+                    
+                    <div class="book-card">
+                        <h3 class="font-bold mb-1">《情绪急救》</h3>
+                        <div class="text-sm mb-2" style="color: var(--color-text-light);">盖伊·温奇 著</div>
+                        <p>介绍科学有效的情绪调节方法，帮助家长学会如何应对孩子的负面情绪，同时教会孩子自我情绪管理的能力。</p>
+                    </div>
+                    
+                    <div class="book-card">
+                        <h3 class="font-bold mb-1">《刻意练习：如何从新手到大师》</h3>
+                        <div class="text-sm mb-2" style="color: var(--color-text-light);">安德斯·艾利克森 著</div>
+                        <p>从学习方法和心理学角度分析高效学习的关键因素，帮助家长指导孩子形成科学的学习习惯和方法，提高学习效率和成就感。</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-bold mb-2">陪伴成长：如何恢复孩子的信心、情绪和学习动力</h3>
+                    <p style="color: var(--color-text-light);">专注于青少年心理健康和学习能力提升的实用指南</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="mb-1"><strong>作者：</strong></p>
+                    <p class="mb-1"><strong></strong></p>
+                    <p style="color: var(--color-text-light);">© 2025 </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // 检查系统偏好
+        const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // 根据系统偏好设置初始主题
+        if (prefersDarkMode) {
+            document.body.classList.add('dark');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            if (document.body.classList.contains('dark')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+        
+        // 滚动监听
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const progressBar = document.getElementById('progressBar');
+        
+        function updateActiveLink() {
+            let index = sections.length;
+            
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            
+            tocLinks.forEach(link => link.classList.remove('active'));
+            if (index >= 0) {
+                const activeLink = document.querySelector(`.toc-link[href="#${sections[index].id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        }
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        function updateProgressBar() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+            const scrollPercentage = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            progressBar.style.width = scrollPercentage + '%';
+        }
+        
+        window.addEventListener('scroll', () => {
+            updateActiveLink();
+            checkFade();
+            updateProgressBar();
+        });
+        
+        // 初始化
+        updateActiveLink();
+        checkFade();
+        updateProgressBar();
+    </script>
+</body>
+</html>

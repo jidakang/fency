@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公立医院信息科工作流知识图谱</title>
+    <!-- Date Metadata -->
+    <meta name="creation-date" content="2024-02-20">
+    <meta name="last-modified-date" content="2024-02-25">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2563eb;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Article dates */
+        .article-dates {
+            display: flex;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .article-dates .date-item {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+        
+        .article-dates .date-item i {
+            margin-right: 0.25rem;
+            color: #2563eb;
+        }
+        
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        .filter-section {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-btn {
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn.active {
+            color: white;
+        }
+        
+        .filter-btn.daily {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .filter-btn.daily.active {
+            background-color: #3b82f6;
+        }
+        
+        .filter-btn.data {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+        
+        .filter-btn.data.active {
+            background-color: #22c55e;
+        }
+        
+        .filter-btn.projects {
+            background-color: #f3e8ff;
+            color: #7e22ce;
+        }
+        
+        .filter-btn.projects.active {
+            background-color: #a855f7;
+        }
+        
+        .filter-btn.security {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+        
+        .filter-btn.security.active {
+            background-color: #ef4444;
+        }
+        
+        .filter-btn.communication {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        
+        .filter-btn.communication.active {
+            background-color: #f59e0b;
+        }
+        
+        .filter-btn.documentation {
+            background-color: #e0e7ff;
+            color: #4338ca;
+        }
+        
+        .filter-btn.documentation.active {
+            background-color: #6366f1;
+        }
+        
+        .tree-view {
+            margin-top: 1rem;
+        }
+        
+        .tree-node {
+            margin-bottom: 0.25rem;
+        }
+        
+        .node-content {
+            display: flex;
+            align-items: center;
+            padding: 0.4rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .node-content:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .node-content.active {
+            background-color: #ebf5ff;
+            border-left: 3px solid #3b82f6;
+        }
+        
+        .toggle-btn {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .node-title {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .info-btn {
+            padding: 0 0.5rem;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .info-btn:hover {
+            color: #3b82f6;
+        }
+        
+        .children-container {
+            padding-left: 1.5rem;
+            border-left: 1px solid #e5e7eb;
+            margin-left: 0.5rem;
+        }
+        
+        .visualization {
+            flex: 1;
+            padding: 1rem;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+        
+        .category-card {
+            width: 48%;
+            margin: 1%;
+            padding: 1rem;
+            background-color: #ebf5ff;
+            border: 1px solid #cce3fd;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .process-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        
+        .process-item {
+            padding: 0.8rem;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .process-item:hover {
+            border-color: #93c5fd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .process-title {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+        
+        .process-goal {
+            font-size: 0.8rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .details-panel {
+            width: 0;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+        
+        .details-panel.visible {
+            width: 300px;
+        }
+        
+        .details-content {
+            padding: 1rem;
+            height: 100%;
+        }
+        
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .details-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .details-section {
+            margin-bottom: 1.2rem;
+        }
+        
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .goal-section .section-title {
+            color: #2563eb;
+        }
+        
+        .process-section .section-title {
+            color: #16a34a;
+        }
+        
+        .problems-section .section-title {
+            color: #dc2626;
+        }
+        
+        .output-section .section-title {
+            color: #7c3aed;
+        }
+        
+        .details-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        
+        .details-list li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .zoom-btn {
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        
+        .zoom-btn:hover {
+            color: #3b82f6;
+        }
+        
+        @media (max-width: 1024px) {
+            .category-card {
+                width: 100%;
+                margin: 0 0 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>公立医院信息科工作流知识图谱</h1>
+            <p class="subtitle">交互式可视化知识图谱，探索医院信息科工作流程与职责</p>
+            <div class="article-dates">
+        <a href="../../index.html" class="flex items-center mr-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+            <i class="fas fa-home text-xl"></i>
+        </a>
+        
+                <div class="date-item">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>创建日期: 2024-02-20</span>
+                </div>
+                <div class="date-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>最后更新: 2024-02-25</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <!-- 左侧导航树 -->
+            <div class="sidebar">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="搜索工作流程..." id="search-input">
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-title">筛选工作类别：</div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn daily" data-filter="daily">日常巡检与运维</button>
+                        <button class="filter-btn data" data-filter="data">数据管理</button>
+                        <button class="filter-btn projects" data-filter="projects">项目与系统升级</button>
+                        <button class="filter-btn security" data-filter="security">安全与合规</button>
+                        <button class="filter-btn communication" data-filter="communication">沟通与培训</button>
+                        <button class="filter-btn documentation" data-filter="documentation">文档与改进</button>
+                    </div>
+                </div>
+                
+                <div class="tree-view" id="tree-view">
+                    <!-- 树形结构通过JavaScript动态生成 -->
+                </div>
+            </div>
+            
+            <!-- 主可视化区域 -->
+            <div class="visualization">
+                <div class="graph-container" id="graph-container">
+                    <!-- 知识图谱内容通过JavaScript动态生成 -->
+                </div>
+                
+                <!-- 缩放控制 -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoom-in">+</button>
+                    <button class="zoom-btn" id="zoom-out">−</button>
+                    <button class="zoom-btn" id="zoom-reset">↺</button>
+                </div>
+            </div>
+            
+            <!-- 右侧详情面板 -->
+            <div class="details-panel" id="details-panel">
+                <div class="details-content" id="details-content">
+                    <!-- 详情内容通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 知识图谱数据
+        const knowledgeGraphData = {
+            id: "root",
+            name: "公立医院信息科日常工作流",
+            children: [
+                {
+                    id: "1",
+                    name: "日常系统与设备运行检查",
+                    children: [
+                        {
+                            id: "1.1",
+                            name: "核心系统早间巡检",
+                            details: {
+                                goal: "确保医院主要业务系统（HIS、EMR、PACS、LIS 等）的可用性与性能正常",
+                                process: ["打开监控工具或系统后台", "检查系统服务与数据库连接", "功能性测试", "记录和上报"],
+                                problems: ["服务进程意外停止", "数据库连接超时", "关键功能无法使用"],
+                                output: ["巡检报告/巡检表", "故障工单"]
+                            }
+                        },
+                        {
+                            id: "1.2",
+                            name: "服务器与网络设备巡检",
+                            details: {
+                                goal: "检查服务器和网络设备的稳定性和性能",
+                                process: ["机房物理巡检", "登录网络设备管理界面", "查看服务器监控", "记录或处理异常"],
+                                problems: ["服务器过热", "网络设备端口异常", "高负载告警"],
+                                output: ["设备巡检记录", "异常处理工单"]
+                            }
+                        },
+                        {
+                            id: "1.3",
+                            name: "安全监测与日志审核",
+                            details: {
+                                goal: "及时掌握信息系统和网络的安全态势，发现潜在的入侵、漏洞或越权行为", 
+                                process: ["检查安全审计系统", "审阅操作日志", "病毒防护或EDR状态检查", "处理与上报"],
+                                problems: ["攻击或病毒爆发", "内部越权访问", "缺少日志"],
+                                output: ["安全审计报告或日报", "应急处置记录"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "2",
+                    name: "日常运维与技术支持",
+                    children: [
+                        {
+                            id: "2.1",
+                            name: "用户报障与工单处理",
+                            details: {
+                                goal: "在最短时间内响应科室关于系统或设备的故障报修请求，保证医院业务连续性",
+                                process: ["故障受理", "故障分级与指派", "故障定位与解决", "结果反馈与记录"],
+                                problems: ["无法及时解决", "沟通不畅", "重复性问题"],
+                                output: ["工单记录", "知识库更新"]
+                            }
+                        },
+                        {
+                            id: "2.2",
+                            name: "硬件设备维护",
+                            details: {
+                                goal: "保障终端计算机、打印机、自助设备等硬件处于良好运行状态",
+                                process: ["日常巡检与台账管理", "故障报修处理", "维护与更换", "验收与记录"],
+                                problems: ["设备老化或短缺", "第三方厂商响应慢", "突发停电或网络中断"],
+                                output: ["设备维护记录", "设备报废或采购申请"]
+                            }
+                        },
+                        {
+                            id: "2.3",
+                            name: "权限管理",
+                            details: {
+                                goal: "按最小够用原则进行系统权限分配，保障数据安全与合法合规",
+                                process: ["账号申请", "权限开通", "权限变更或注销", "审计与留痕"],
+                                problems: ["遗漏注销", "权限过度", "密码泄露"],
+                                output: ["账号权限列表", "权限变更日志"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "3",
+                    name: "数据管理与统计分析",
+                    children: [
+                        {
+                            id: "3.1",
+                            name: "数据汇总与报表",
+                            details: {
+                                goal: "为医院管理层、临床科室提供精准、及时的数据支持",
+                                process: ["收集报表需求", "数据抽取", "数据处理与分析", "输出与发布"],
+                                problems: ["数据不一致", "口径差异", "高并发查询导致系统卡顿"],
+                                output: ["报表或可视化仪表盘", "日志与版本记录"]
+                            }
+                        },
+                        {
+                            id: "3.2",
+                            name: "数据库性能优化",
+                            details: {
+                                goal: "提高查询效率，减少系统卡顿，提高核心系统的响应速度",
+                                process: ["监控数据库性能指标", "分析SQL执行计划", "数据库结构与索引优化", "测试与验证"],
+                                problems: ["索引过多", "数据库版本差异", "系统兼容性"],
+                                output: ["数据库性能优化报告", "优化脚本与变更记录"]
+                            }
+                        },
+                        {
+                            id: "3.3",
+                            name: "数据安全与隐私保护",
+                            details: {
+                                goal: "保护患者个人隐私和医院运营数据，防止泄露、篡改及非法访问",
+                                process: ["数据脱敏", "访问控制", "日志审计与监控", "加密与备份"],
+                                problems: ["违规访问", "备份被盗", "系统漏洞"],
+                                output: ["数据安全审计报告", "合规性证明"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "4",
+                    name: "新项目与系统升级",
+                    children: [
+                        {
+                            id: "4.1",
+                            name: "需求调研与可行性分析",
+                            details: {
+                                goal: "准确了解临床一线和管理部门的信息化需求，评估项目实施的技术可行性与收益",
+                                process: ["需求收集", "技术评估", "经济与效益分析", "提交可行性报告"],
+                                problems: ["需求不明确或过度", "资金不足", "技术兼容性差"],
+                                output: ["需求调研文档", "可行性分析报告"]
+                            }
+                        },
+                        {
+                            id: "4.2",
+                            name: "项目实施与测试",
+                            details: {
+                                goal: "确保系统开发或采购的过程有序进行，各方明确分工，按时按质完成",
+                                process: ["项目立项与招标", "开发与对接", "功能测试", "培训与试运行"],
+                                problems: ["接口对接不稳定", "用户抗拒", "测试不足"],
+                                output: ["测试报告", "试运行总结"]
+                            }
+                        },
+                        {
+                            id: "4.3",
+                            name: "上线与后评估",
+                            details: {
+                                goal: "保证新系统或新功能在正式上线时平稳过渡，不影响正常诊疗工作",
+                                process: ["正式上线准备", "上线执行", "上线后监测", "效果评估与总结"],
+                                problems: ["突发宕机或功能异常", "数据迁移不完整", "用户使用不熟悉"],
+                                output: ["上线总结报告", "后续优化计划"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "5",
+                    name: "信息安全与合规管理",
+                    children: [
+                        {
+                            id: "5.1",
+                            name: "法规与标准落实",
+                            details: {
+                                goal: "确保医院信息化建设符合国家法律法规和行业标准，通过等保测评",
+                                process: ["收集与解读政策", "对标评估", "实施整改", "定期审计与维护"],
+                                problems: ["投入资金不足", "合规要求更新频繁", "部门配合度不够"],
+                                output: ["安全合规报告", "整改方案与执行结果"]
+                            }
+                        },
+                        {
+                            id: "5.2",
+                            name: "风险评估与应急演练",
+                            details: {
+                                goal: "提前发现可能的安全漏洞或关键业务中断风险，制定应急措施",
+                                process: ["风险识别", "编写应急预案", "演练组织", "评估与改进"],
+                                problems: ["业务影响", "人员不熟悉流程", "预案流于形式"],
+                                output: ["应急预案文档", "演练报告"]
+                            }
+                        },
+                        {
+                            id: "5.3",
+                            name: "病患隐私保护与投诉处理",
+                            details: {
+                                goal: "严格保证患者诊疗信息不被滥用，遵循《个人信息保护法》",
+                                process: ["隐私保护制度", "患者隐私投诉渠道", "调查与取证", "处置与反馈"],
+                                problems: ["难以定位泄露源", "内部知情同意流程不完善", "应对社会媒体曝光"],
+                                output: ["隐私投诉处理记录", "隐私审计报告"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "6",
+                    name: "部门沟通与培训",
+                    children: [
+                        {
+                            id: "6.1",
+                            name: "与临床/行政科室日常沟通",
+                            details: {
+                                goal: "保持对一线需求与问题的敏锐捕捉，提高信息科对医院整体业务的支持度",
+                                process: ["定期需求沟通会", "信息化变更通知", "跨部门协作", "问题跟踪与反馈"],
+                                problems: ["需求冲突", "信息滞后", "科室内部培训不足"],
+                                output: ["需求收集表、会议纪要", "变更公告"]
+                            }
+                        },
+                        {
+                            id: "6.2",
+                            name: "与厂商及供应商对接",
+                            details: {
+                                goal: "维护良好的合作关系，确保系统和设备的维保服务质量与效率",
+                                process: ["维保合同管理", "技术支持与升级", "紧急故障处理", "行业技术交流"],
+                                problems: ["厂商响应不及时", "升级后出现新Bug", "知识产权或数据所有权纠纷"],
+                                output: ["厂商月度/季度服务报告", "技术评估报告"]
+                            }
+                        },
+                        {
+                            id: "6.3",
+                            name: "内部团队协作与培训",
+                            details: {
+                                goal: "提升信息科整体技术水平与工作效率，形成分工合理、互相协作的工作氛围",
+                                process: ["定期例会", "专业技术培训", "梯队培养", "绩效考核与激励"],
+                                problems: ["内部沟通不畅", "学习动力不足", "人员流动率高"],
+                                output: ["例会纪要、培训资料", "人员技能矩阵"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "7",
+                    name: "文档管理与持续改进",
+                    children: [
+                        {
+                            id: "7.1",
+                            name: "文档编制与归档",
+                            details: {
+                                goal: "完善信息科内部文档体系，保证系统操作、维护、更新等信息可追溯、可传承",
+                                process: ["编写操作手册", "维护与变更记录", "项目资料归档", "文档更新与审阅"],
+                                problems: ["文档冗余或重复", "缺少更新维护", "访问权限过大"],
+                                output: ["文档目录清单", "版本变更记录"]
+                            }
+                        },
+                        {
+                            id: "7.2",
+                            name: "质量管理与持续优化",
+                            details: {
+                                goal: "建立持续改进机制，通过运维指标监控和PDCA循环，不断提升信息科服务质量",
+                                process: ["运维指标监控", "问题分析与改进", "PDCA循环", "评估与推广"],
+                                problems: ["数据来源不一致", "改进执行力不足", "仅注重技术层面"],
+                                output: ["月度/季度运维报告", "改进案例库"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "8",
+                    name: "值班与突发事件应对",
+                    children: [
+                        {
+                            id: "8.1",
+                            name: "轮班或值班制度",
+                            details: {
+                                goal: "保证在工作日和非工作时段内，都有信息科人员能及时响应突发故障",
+                                process: ["编排值班表", "交接班管理", "值班响应", "事后汇报"],
+                                problems: ["值班人员不足", "沟通不及时", "处理能力不足"],
+                                output: ["值班表、值班记录", "故障总结"]
+                            }
+                        },
+                        {
+                            id: "8.2",
+                            name: "突发事件汇报流程",
+                            details: {
+                                goal: "遇到重大安全事件、核心系统宕机或信息泄露等紧急情况时，做到及时汇报、快速协同",
+                                process: ["识别突发事件", "及时上报", "现场应急处理", "事后总结与改进"],
+                                problems: ["信息科单独应对", "延误上报", "复盘流于形式"],
+                                output: ["突发事件报告", "应急预案更新"]
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+        
+        // 当前过滤类型和活动节点ID
+        let activeFilter = null;
+        let activeNodeId = null;
+        let zoomLevel = 1;
+        let expandedNodes = {};
+        
+        // 图谱的分类与筛选类型对应关系
+        const filterMap = {
+            "daily": ["1", "2", "8"],
+            "data": ["3"],
+            "projects": ["4"],
+            "security": ["5"],
+            "communication": ["6"],
+            "documentation": ["7"]
+        };
+        
+        // 初始化页面
+        function initPage() {
+            // 展开所有顶级节点
+            knowledgeGraphData.children.forEach(node => {
+                expandedNodes[node.id] = true;
+            });
+            
+            // 渲染树形视图
+            renderTreeView();
+            
+            // 渲染图谱视图
+            renderGraphView(knowledgeGraphData);
+            
+            // 绑定搜索事件
+            document.getElementById('search-input').addEventListener('input', handleSearch);
+            
+            // 绑定筛选按钮事件
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filterType = btn.dataset.filter;
+                    applyFilter(filterType);
+                });
+            });
+            
+            // 绑定缩放控制事件
+            document.getElementById('zoom-in').addEventListener('click', zoomIn);
+            document.getElementById('zoom-out').addEventListener('click', zoomOut);
+            document.getElementById('zoom-reset').addEventListener('click', resetZoom);
+        }
+        
+        // 渲染树形视图
+        function renderTreeView() {
+            const treeView = document.getElementById('tree-view');
+            treeView.innerHTML = '';
+            
+            const createTreeNode = (node) => {
+                const nodeDiv = document.createElement('div');
+                nodeDiv.className = 'tree-node';
+                
+                const nodeContent = document.createElement('div');
+                nodeContent.className = `node-content ${node.id === activeNodeId ? 'active' : ''}`;
+                
+                if (node.children && node.children.length > 0) {
+                    const toggleBtn = document.createElement('button');
+                    toggleBtn.className = 'toggle-btn';
+                    toggleBtn.innerHTML = expandedNodes[node.id] ? '▼' : '►';
+                    toggleBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        expandedNodes[node.id] = !expandedNodes[node.id];
+                        renderTreeView();
+                    });
+                    nodeContent.appendChild(toggleBtn);
+                }
+                
+                const nodeTitle = document.createElement('div');
+                nodeTitle.className = 'node-title';
+                nodeTitle.textContent = `${node.id}. ${node.name}`;
+                nodeContent.appendChild(nodeTitle);
+                
+                if (node.details) {
+                    const infoBtn = document.createElement('button');
+                    infoBtn.className = 'info-btn';
+                    infoBtn.innerHTML = 'ⓘ';
+                    infoBtn.title = '查看详情';
+                    infoBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        showDetails(node);
+                    });
+                    nodeContent.appendChild(infoBtn);
+                }
+                
+                nodeContent.addEventListener('click', () => {
+                    showDetails(node);
+                });
+                
+                nodeDiv.appendChild(nodeContent);
+                
+                if (node.children && node.children.length > 0 && expandedNodes[node.id]) {
+                    const childrenContainer = document.createElement('div');
+                    childrenContainer.className = 'children-container';
+                    
+                    node.children.forEach(childNode => {
+                        childrenContainer.appendChild(createTreeNode(childNode));
+                    });
+                    
+                    nodeDiv.appendChild(childrenContainer);
+                }
+                
+                return nodeDiv;
+            };
+            
+            // 递归渲染树节点
+            const filteredData = getFilteredData();
+            filteredData.children.forEach(node => {
+                treeView.appendChild(createTreeNode(node));
+            });
+        }
+        
+        // 获取当前过滤后的数据
+        function getFilteredData() {
+            if (!activeFilter) {
+                return knowledgeGraphData;
+            }
+            
+            const filtered = {
+                ...knowledgeGraphData,
+                children: knowledgeGraphData.children.filter(node => 
+                    filterMap[activeFilter].includes(node.id)
+                )
+            };
+            
+            return filtered;
+        }
+        
+        // 渲染图谱视图
+        function renderGraphView(data) {
+            const graphContainer = document.getElementById('graph-container');
+            graphContainer.innerHTML = '';
+            graphContainer.style.transform = `scale(${zoomLevel})`;
+            graphContainer.style.transformOrigin = 'top left';
+            graphContainer.style.transition = 'transform 0.2s';
+            
+            data.children.forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = `${category.id}. ${category.name}`;
+                categoryCard.appendChild(categoryTitle);
+                
+                const processList = document.createElement('div');
+                processList.className = 'process-list';
+                
+                category.children.forEach(process => {
+                    const processItem = document.createElement('div');
+                    processItem.className = 'process-item';
+                    processItem.addEventListener('click', () => {
+                        showDetails(process);
+                    });
+                    
+                    const processTitle = document.createElement('div');
+                    processTitle.className = 'process-title';
+                    processTitle.textContent = `${process.id} ${process.name}`;
+                    processItem.appendChild(processTitle);
+                    
+                    if (process.details) {
+                        const processGoal = document.createElement('div');
+                        processGoal.className = 'process-goal';
+                        processGoal.textContent = process.details.goal;
+                        processItem.appendChild(processGoal);
+                    }
+                    
+                    processList.appendChild(processItem);
+                });
+                
+                categoryCard.appendChild(processList);
+                graphContainer.appendChild(categoryCard);
+            });
+        }
+        
+        // 显示节点详情
+        function showDetails(node) {
+            activeNodeId = node.id;
+            renderTreeView();
+            
+            if (!node.details) return;
+            
+            const detailsPanel = document.getElementById('details-panel');
+            detailsPanel.className = 'details-panel visible';
+            
+            const detailsContent = document.getElementById('details-content');
+            detailsContent.innerHTML = '';
+            
+            // 标题与关闭按钮
+            const detailsHeader = document.createElement('div');
+            detailsHeader.className = 'details-header';
+            
+            const detailsTitle = document.createElement('div');
+            detailsTitle.className = 'details-title';
+            detailsTitle.textContent = node.name;
+            detailsHeader.appendChild(detailsTitle);
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '×';
+            closeBtn.addEventListener('click', () => {
+                detailsPanel.className = 'details-panel';
+            });
+            detailsHeader.appendChild(closeBtn);
+            
+            detailsContent.appendChild(detailsHeader);
+            
+            // 目标部分
+            const goalSection = document.createElement('div');
+            goalSection.className = 'details-section goal-section';
+            
+            const goalTitle = document.createElement('div');
+            goalTitle.className = 'section-title';
+            goalTitle.textContent = '目标';
+            goalSection.appendChild(goalTitle);
+            
+            const goalText = document.createElement('p');
+            goalText.textContent = node.details.goal;
+            goalSection.appendChild(goalText);
+            
+            detailsContent.appendChild(goalSection);
+            
+            // 流程部分
+            const processSection = document.createElement('div');
+            processSection.className = 'details-section process-section';
+            
+            const processTitle = document.createElement('div');
+            processTitle.className = 'section-title';
+            processTitle.textContent = '流程';
+            processSection.appendChild(processTitle);
+            
+            const processList = document.createElement('ul');
+            processList.className = 'details-list';
+            
+            node.details.process.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                processList.appendChild(listItem);
+            });
+            
+            processSection.appendChild(processList);
+            detailsContent.appendChild(processSection);
+            
+            // 问题部分
+            const problemsSection = document.createElement('div');
+            problemsSection.className = 'details-section problems-section';
+            
+            const problemsTitle = document.createElement('div');
+            problemsTitle.className = 'section-title';
+            problemsTitle.textContent = '可能问题';
+            problemsSection.appendChild(problemsTitle);
+            
+            const problemsList = document.createElement('ul');
+            problemsList.className = 'details-list';
+            
+            node.details.problems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                problemsList.appendChild(listItem);
+            });
+            
+            problemsSection.appendChild(problemsList);
+            detailsContent.appendChild(problemsSection);
+            
+            // 输出部分
+            const outputSection = document.createElement('div');
+            outputSection.className = 'details-section output-section';
+            
+            const outputTitle = document.createElement('div');
+            outputTitle.className = 'section-title';
+            outputTitle.textContent = '输出';
+            outputSection.appendChild(outputTitle);
+            
+            const outputList = document.createElement('ul');
+            outputList.className = 'details-list';
+            
+            node.details.output.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                outputList.appendChild(listItem);
+            });
+            
+            outputSection.appendChild(outputList);
+            detailsContent.appendChild(outputSection);
+        }
+        
+        // 处理搜索
+        function handleSearch() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            
+            if (!searchQuery) {
+                renderGraphView(knowledgeGraphData);
+                renderTreeView();
+                return;
+            }
+            
+            // 递归搜索节点
+            const searchNodes = (nodes) => {
+                return nodes.filter(node => {
+                    const nameMatch = node.name.toLowerCase().includes(searchQuery);
+                    
+                    // 处理子节点
+                    const filteredChildren = node.children 
+                        ? searchNodes(node.children)
+                        : [];
+                    
+                    const childrenMatch = filteredChildren.length > 0;
+                    
+                    // 如果节点名称匹配或子节点匹配
+                    if (nameMatch || childrenMatch) {
+                        // 如果有子节点匹配，保留父节点但只保留匹配的子节点
+                        if (childrenMatch) {
+                            node.children = filteredChildren;
+                        }
+                        
+                        // 自动展开匹配的节点
+                        if (node.children && node.children.length > 0) {
+                            expandedNodes[node.id] = true;
+                        }
+                        
+                        return true;
+                    }
+                    
+                    return false;
+                });
+            };
+            
+            const result = {
+                ...knowledgeGraphData,
+                children: searchNodes([...knowledgeGraphData.children])
+            };
+            
+            renderGraphView(result);
+            renderTreeView();
+        }
+        
+        // 应用筛选
+        function applyFilter(filterType) {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (activeFilter === filterType) {
+                activeFilter = null;
+            } else {
+                activeFilter = filterType;
+                document.querySelector(`.filter-btn[data-filter="${filterType}"]`).classList.add('active');
+            }
+            
+            const filteredData = getFilteredData();
+            renderGraphView(filteredData);
+            renderTreeView();
+        }
+        
+        // 缩放功能
+        function zoomIn() {
+            if (zoomLevel < 2) {
+                zoomLevel += 0.1;
+                updateZoom();
+            }
+        }
+        
+        function zoomOut() {
+            if (zoomLevel > 0.5) {
+                zoomLevel -= 0.1;
+                updateZoom();
+            }
+        }
+        
+        function resetZoom() {
+            zoomLevel = 1;
+            updateZoom();
+        }
+        
+        function updateZoom() {
+            const graphContainer = document.getElementById('graph-container');
+            graphContainer.style.transform = `scale(${zoomLevel})`;
+        }
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

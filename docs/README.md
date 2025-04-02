@@ -51,24 +51,41 @@
 │
 ├── pages/                        # 主要内容页面目录
 │   ├── info-upgrade/             # 信息化升级相关页面
-│   │   └── dataasset.html        # 健康医疗数据资产化研究
+│   │   ├── dataasset.html        # 健康医疗数据资产化研究
+│   │   ├── hospital-it-workflow.html  # 公立医院信息科工作流知识图谱
+│   │   ├── medical-insurance-qa.html  # 医保系统页面内问答功能快速上线实施方案
+│   │   ├── medical-dispute-prevention.html # 利用大模型技术全面提升医院医疗纠纷预防能力报告
+│   │   ├── hospital-it-upgrade-service-model.html # 中国医院信息化升级第三方服务商业模式报告
+│   │   └── hospital-it-team-training.html # 医院信息化升级团队能力模型与培训计划
 │   │
 │   ├── research/                 # 科研辅助相关页面
-│   │   └── ages.html             # 年龄与认知能力研究专题
+│   │   ├── ai-essential-papers.html   # 人工智能学习必读论文书单
+│   │   ├── llm-medical-research-workflow.html # 大模型辅助医学科研工作流程
+│   │   └── clinical-research-topic-selection.html # 临床研究选题工作流程
 │   │
 │   ├── ai-tech/                  # AI技术与生态相关页面
 │   │   ├── cursor_project_rules.html  # Cursor项目开发规范指南
 │   │   ├── gemini-canvas.html    # Gemini Canvas创意画布使用指南
+│   │   ├── gemini25pro-coding.html # AI驱动的健康追踪工具分析 
 │   │   ├── gemini2.5pro.html     # Gemini 2.5 Pro模型能力全面测评
 │   │   ├── gpt-4o.html           # GPT-4o多模态智能分析报告
+│   │   ├── medical-ai-insights.html # 医疗数据与AI认知共同体的五大洞见
+│   │   ├── n8n-workflow-automation-analysis.html  # N8N 深度评测
+│   │   ├── qwen-multimodal-ai-analysis.html # 阿里最新AI技术分析
 │   │   ├── rag-vibe-coding.html  # RAG架构开发实践指南
-│   │   └── vibecoding.html       # Vibe Coding风格编程实践
+│   │   ├── ai-model-capability-analysis.html  # 人工智能模型能力分析
+│   │   ├── vibe-coding-report.html  # Vibe Coding 深度研究报告 | 氛围编程的未来
+│   │   └── vibe-coder-guide.html    # 成为一名优秀的"Vibe Coder"：创造情感共鸣的用户体验
 │   │
 │   └── knowledge/                # 知识报告相关页面
 │       ├── autoregressive.html   # 自回归模型技术深度解析
+│       ├── cognitive-aging-research.html  # 年龄与认知能力研究专题
 │       ├── creative.html         # AI创意思维研究与应用
+│       ├── lecun-autoregressive.html # Yann LeCun批评自回归大型语言模型
 │       ├── meaning.html          # 语言模型与意义理解研究
-│       └── researchtopics.html   # AI研究主题全景图谱
+│       ├── pantone-2025.html     # 潘通2025年度流行色：摩卡慕斯
+│       ├── researchtopics.html   # AI研究主题全景图谱
+│       └── child-confidence-recovery.html # 陪伴成长：如何恢复孩子的信心、情绪和学习动力
 │
 ├── models/                       # AI模型相关页面
 │   └── comparisons/              # 模型对比评测
@@ -94,27 +111,52 @@
     └── README.md                 # 详细文档
 ```
 
+## 废弃页面
+
+为避免内容重复，以下页面已被移至`deprecated_pages`文件夹：
+
+- `pages/knowledge/lecun-critique-autoregressive-models.html` - 与`pages/knowledge/lecun-autoregressive.html`内容相同
+- `pages/knowledge/abundance-creativity-theory.html` - 与`pages/knowledge/creative.html`内容相同
+- `pages/ai-tech/vibecoding.html` - 空文件，相关内容请参考`pages/ai-tech/rag-vibe-coding.html`
+
 ## 主要内容文件说明
 
 ### 信息化升级
 - `pages/info-upgrade/dataasset.html` - 健康医疗数据资产化研究
+- `pages/info-upgrade/hospital-it-workflow.html` - 公立医院信息科工作流知识图谱
+- `pages/info-upgrade/medical-insurance-qa.html` - 医保系统页面内问答功能快速上线实施方案
+- `pages/info-upgrade/medical-dispute-prevention.html` - 利用大模型技术全面提升医院医疗纠纷预防能力报告
+- `pages/info-upgrade/hospital-it-upgrade-service-model.html` - 中国医院信息化升级第三方服务商业模式报告
+- `pages/info-upgrade/hospital-it-team-training.html` - 医院信息化升级团队能力模型与培训计划
 
 ### 科研辅助
-- `pages/research/ages.html` - 年龄与认知能力研究专题
+- `pages/research/ai-essential-papers.html` - 人工智能学习必读论文书单
+- `pages/research/llm-medical-research-workflow.html` - 大模型辅助医学科研工作流程
+- `pages/research/clinical-research-topic-selection.html` - 临床研究选题工作流程
 
 ### AI技术与生态
 - `pages/ai-tech/gemini2.5pro.html` - Gemini 2.5 Pro模型能力全面测评
 - `pages/ai-tech/gemini-canvas.html` - Gemini Canvas创意画布使用指南
+- `pages/ai-tech/gemini25pro-coding.html` - AI驱动的健康追踪工具分析
 - `pages/ai-tech/gpt-4o.html` - GPT-4o多模态智能分析报告
+- `pages/ai-tech/medical-ai-insights.html` - 医疗数据与AI认知共同体的五大洞见
 - `pages/ai-tech/cursor_project_rules.html` - Cursor项目开发规范指南
 - `pages/ai-tech/rag-vibe-coding.html` - RAG架构开发实践指南
-- `pages/ai-tech/vibecoding.html` - Vibe Coding风格编程实践
+- `pages/ai-tech/ai-model-capability-analysis.html` - 人工智能模型能力分析
+- `pages/ai-tech/n8n-workflow-automation-analysis.html` - N8N深度评测：开源工作流自动化的新浪潮
+- `pages/ai-tech/qwen-multimodal-ai-analysis.html` - 阿里最新AI技术分析：Qwen多模态系列产品
+- `pages/ai-tech/vibe-coding-report.html` - Vibe Coding深度研究报告：氛围编程的未来
+- `pages/ai-tech/vibe-coder-guide.html` - 成为一名优秀的"Vibe Coder"：创造情感共鸣的用户体验
 
 ### 知识报告
 - `pages/knowledge/autoregressive.html` - 自回归模型技术深度解析
+- `pages/knowledge/cognitive-aging-research.html` - 年龄与认知能力研究专题
 - `pages/knowledge/meaning.html` - 语言模型与意义理解研究
 - `pages/knowledge/creative.html` - AI创意思维研究与应用
+- `pages/knowledge/pantone-2025.html` - 潘通2025年度流行色：摩卡慕斯
 - `pages/knowledge/researchtopics.html` - AI研究主题全景图谱
+- `pages/knowledge/lecun-autoregressive.html` - Yann LeCun批评自回归大型语言模型分析
+- `pages/knowledge/child-confidence-recovery.html` - 陪伴成长：如何恢复孩子的信心、情绪和学习动力
 
 ### AI模型解析系列
 - `models/comparisons/ali-new-modes-claude.html` - Claude AI模型新模式解析

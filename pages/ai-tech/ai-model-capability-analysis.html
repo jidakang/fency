@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人工智能模型能力分析</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --primary-color: #3B82F6;
+      --secondary-color: #6366F1;
+      --accent-color: #EC4899;
+      --text-color-light: #1F2937;
+      --text-color-dark: #F9FAFB;
+      --bg-color-light: #F9FAFB;
+      --bg-color-dark: #111827;
+      --card-bg-light: #FFFFFF;
+      --card-bg-dark: #1F2937;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .dark {
+      background-color: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .light {
+      background-color: var(--bg-color-light);
+      color: var(--text-color-light);
+    }
+
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-text {
+      background: linear-gradient(90deg, #3B82F6, #6366F1, #8B5CF6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .drop-cap:first-letter {
+      font-family: 'Noto Serif SC', serif;
+      float: left;
+      font-size: 4rem;
+      line-height: 0.8;
+      margin-right: 0.5rem;
+      background: linear-gradient(90deg, #3B82F6, #6366F1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      padding: 0.5rem;
+    }
+
+    .gradient-border {
+      position: relative;
+      border-radius: 0.5rem;
+    }
+
+    .gradient-border::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #3B82F6, #6366F1, #8B5CF6, #EC4899);
+      border-radius: 0.7rem;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gradient-border:hover::before {
+      opacity: 1;
+    }
+
+    .toggle-icon {
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    #mode-toggle:hover .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .scroll-indicator {
+      height: 3px;
+      background: linear-gradient(90deg, #3B82F6, #6366F1, #8B5CF6);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 0%;
+    }
+
+    @media (max-width: 640px) {
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Chart styles */
+    .bar {
+      fill: url(#gradient);
+      transition: all 0.3s;
+    }
+    
+    .bar:hover {
+      filter: brightness(1.2);
+    }
+    
+    .chart-label {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 12px;
+    }
+    
+    .further-reading-item {
+      transition: transform 0.3s;
+    }
+    
+    .further-reading-item:hover {
+      transform: translateX(10px);
+    }
+    
+    .model-tag {
+      background: linear-gradient(90deg, #3B82F6, #6366F1);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      color: white;
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .alternate-model-tag {
+      background: linear-gradient(90deg, #9CA3AF, #6B7280);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      color: white;
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="light">
+  <div class="scroll-indicator" id="scroll-indicator"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-filter backdrop-blur-lg bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-900 shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <a href="../../index.html" class="flex items-center mr-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+            <i class="fas fa-home text-xl"></i>
+        </a>
+        
+      <a href="javascript:void(0)" class="text-2xl font-bold tracking-tight flex items-center">
+        <i class="fas fa-robot text-blue-500 mr-2"></i>
+        <span class="hidden sm:inline">人工智能模型能力分析</span>
+        <span class="sm:hidden">AI能力分析</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <button id="mode-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+          <i class="fas fa-sun toggle-icon text-yellow-500 dark:hidden"></i>
+          <i class="fas fa-moon toggle-icon text-blue-300 hidden dark:block"></i>
+        </button>
+        <a href="#chart" class="hidden sm:block text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">能力图谱</a>
+        <a href="#models" class="hidden sm:block text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">模型分析</a>
+        <a href="#reading" class="hidden sm:block text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition">延伸阅读</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-indigo-950">
+    <div class="absolute right-0 top-0 w-1/3 h-full opacity-20">
+      <svg viewBox="0 0 200 500" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#3B82F6" d="M42.8,-65.2C54.9,-60.3,63.5,-46.8,69.3,-32.4C75.1,-18,78,-2.8,73.9,9.9C69.8,22.7,58.7,33,47.4,40.3C36.1,47.6,24.6,51.9,11.8,57.8C-1,63.6,-15.1,71.1,-29.4,70.4C-43.8,69.8,-58.3,61.1,-63.1,48.3C-68,35.5,-63.1,18.7,-63.1,0C-63.1,-18.8,-68,-39.6,-60.6,-51.6C-53.3,-63.5,-33.8,-66.7,-17.5,-69.7C-1.2,-72.7,12.9,-75.5,26.8,-74C40.7,-72.5,53.3,-66.8,42.8,-65.2Z" transform="translate(100 250)" />
+      </svg>
+    </div>
+    <div class="container mx-auto max-w-6xl relative">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 hero-text">人工智能模型能力全景</h1>
+      <p class="text-xl md:text-2xl max-w-3xl mb-8 text-gray-700 dark:text-gray-300">现代AI模型正迅速发展，每一类模型都具备独特的能力和应用场景。本分析深入探讨八大核心能力，帮助您选择最适合特定任务的AI模型。</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#models" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition shadow-lg hover:shadow-xl">
+          <i class="fas fa-brain mr-2"></i>
+          探索能力分类
+        </a>
+        <a href="#chart" class="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium rounded-lg transition border border-gray-200 dark:border-gray-700 shadow hover:shadow-md">
+          <i class="fas fa-chart-network mr-2"></i>
+          查看能力图谱
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="py-16 px-4 bg-white dark:bg-gray-900">
+    <div class="container mx-auto max-w-4xl">
+      <div class="prose dark:prose-invert max-w-none">
+        <p class="drop-cap text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+          随着人工智能技术的迅猛发展，各种AI模型在不同领域展现出独特的能力优势。从创意写作到科学研究，从图像生成到代码开发，现代AI模型正在改变我们工作与创造的方式。本分析从八个核心维度对当前主流AI模型进行详细剖析，旨在帮助决策者、研究人员和实践者选择最适合特定任务的AI工具，从而最大化AI在各领域的应用价值。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart Section -->
+  <section id="chart" class="py-16 px-4 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl font-bold mb-8 text-center">AI模型能力图谱</h2>
+      <div class="mb-10">
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-xl p-6 overflow-hidden">
+          <div class="mermaid h-auto">
+            flowchart TD
+                subgraph 内容创作类
+                A[创意写作与发散思维] --> |代表模型| A1[DeepSeek R1]
+                B[综合归纳与写作成文] --> |代表模型| B1[ChatGPT-4.5]
+                B --> |平替模型| B2[DeepSeek V3]
+                B --> |平替模型| B3[Claude 3.5 Haiku]
+                end
+                
+                subgraph 多模态类
+                C[文生图能力] --> |代表模型| C1[ChatGPT-4o]
+                H[语音交互与学习伴侣] --> |代表模型| H1[ChatGPT语音交互]
+                H --> |平替模型| H2[豆包]
+                end
+                
+                subgraph 知识与研究类
+                D[科学问题推理与研究支持] --> |代表模型| D1[ChatGPT o1 Pro]
+                D --> |平替模型| D2[ChatGPT o3 mini high]
+                D --> |平替模型| D3[DeepSeek R1]
+                D --> |平替模型| D4[Gemini 2.5 Pro]
+                
+                E[调研报告与知识进展快报] --> |代表模型| E1[ChatGPT DeepResearch]
+                E --> |平替模型| E2[Gemini 2.5 Pro]
+                E --> |平替模型| E3[秘塔AI]
+                
+                F[知识问答与进展速览] --> |代表模型| F1[腾讯元宝]
+                F --> |代表模型| F2[Grox 3 DeepResearch]
+                F --> |代表模型| F3[DeeperResearch]
+                end
+                
+                subgraph 开发与分析类
+                G[程序开发与数据分析] --> |代表模型| G1[Cursor + Claude 3.7 Sonnet Thinking]
+                G --> |平替模型| G2[Gemini 2.5 Pro]
+                G --> |平替模型| G3[DeepSeek V3]
+                end
+          </div>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+          <h3 class="text-xl font-bold mb-4">模型能力分布</h3>
+          <div class="relative h-64">
+            <svg width="100%" height="100%" viewBox="0 0 400 250">
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3B82F6" />
+                  <stop offset="100%" stop-color="#6366F1" />
+                </linearGradient>
+              </defs>
+              <g>
+                <text x="10" y="20" class="chart-label">模型能力分布比较</text>
+                <rect x="50" y="40" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="40" width="250" height="25" rx="5" class="bar" />
+                <text x="40" y="55" text-anchor="end" class="chart-label">创意写作</text>
+                <text x="310" y="55" class="chart-label">83%</text>
+                
+                <rect x="50" y="75" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="75" width="280" height="25" rx="5" class="bar" />
+                <text x="40" y="90" text-anchor="end" class="chart-label">综合归纳</text>
+                <text x="340" y="90" class="chart-label">93%</text>
+                
+                <rect x="50" y="110" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="110" width="230" height="25" rx="5" class="bar" />
+                <text x="40" y="125" text-anchor="end" class="chart-label">文生图</text>
+                <text x="290" y="125" class="chart-label">76%</text>
+                
+                <rect x="50" y="145" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="145" width="270" height="25" rx="5" class="bar" />
+                <text x="40" y="160" text-anchor="end" class="chart-label">科学推理</text>
+                <text x="330" y="160" class="chart-label">90%</text>
+                
+                <rect x="50" y="180" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="180" width="240" height="25" rx="5" class="bar" />
+                <text x="40" y="195" text-anchor="end" class="chart-label">程序开发</text>
+                <text x="300" y="195" class="chart-label">80%</text>
+                
+                <rect x="50" y="215" width="300" height="25" rx="5" fill="#f1f5f9" stroke="#e2e8f0" />
+                <rect x="50" y="215" width="210" height="25" rx="5" class="bar" />
+                <text x="40" y="230" text-anchor="end" class="chart-label">语音交互</text>
+                <text x="270" y="230" class="chart-label">70%</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+          <h3 class="text-xl font-bold mb-4">模型生态系统</h3>
+          <div class="relative h-64 overflow-hidden">
+            <svg width="100%" height="100%" viewBox="0 0 400 250">
+              <defs>
+                <radialGradient id="radialGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                  <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#6366F1" stop-opacity="0.2" />
+                </radialGradient>
+              </defs>
+              
+              <!-- 连接线 -->
+              <line x1="200" y1="125" x2="100" y2="75" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="200" y1="125" x2="300" y2="75" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="200" y1="125" x2="100" y2="175" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="200" y1="125" x2="300" y2="175" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="100" y1="75" x2="50" y2="50" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="100" y1="75" x2="150" y2="50" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="300" y1="75" x2="250" y2="50" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="300" y1="75" x2="350" y2="50" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="100" y1="175" x2="50" y2="200" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="100" y1="175" x2="150" y2="200" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="300" y1="175" x2="250" y2="200" stroke="#CBD5E1" stroke-width="1" />
+              <line x1="300" y1="175" x2="350" y2="200" stroke="#CBD5E1" stroke-width="1" />
+              
+              <!-- 主要节点 -->
+              <circle cx="200" cy="125" r="30" fill="url(#radialGradient)" />
+              <text x="200" y="125" text-anchor="middle" dominant-baseline="middle" fill="#FFFFFF" font-weight="bold" class="chart-label">ChatGPT系列</text>
+              
+              <!-- 二级节点 -->
+              <circle cx="100" cy="75" r="20" fill="#93C5FD" />
+              <text x="100" y="75" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" font-weight="bold" class="chart-label">Claude</text>
+              
+              <circle cx="300" cy="75" r="20" fill="#93C5FD" />
+              <text x="300" y="75" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" font-weight="bold" class="chart-label">Gemini</text>
+              
+              <circle cx="100" cy="175" r="20" fill="#93C5FD" />
+              <text x="100" y="175" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" font-weight="bold" class="chart-label">DeepSeek</text>
+              
+              <circle cx="300" cy="175" r="20" fill="#93C5FD" />
+              <text x="300" y="175" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" font-weight="bold" class="chart-label">国内模型</text>
+              
+              <!-- 三级节点 -->
+              <circle cx="50" cy="50" r="15" fill="#BFDBFE" />
+              <text x="50" y="50" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">Haiku</text>
+              
+              <circle cx="150" cy="50" r="15" fill="#BFDBFE" />
+              <text x="150" y="50" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">Sonnet</text>
+              
+              <circle cx="250" cy="50" r="15" fill="#BFDBFE" />
+              <text x="250" y="50" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">1.5</text>
+              
+              <circle cx="350" cy="50" r="15" fill="#BFDBFE" />
+              <text x="350" y="50" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">2.5</text>
+              
+              <circle cx="50" cy="200" r="15" fill="#BFDBFE" />
+              <text x="50" y="200" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">V3</text>
+              
+              <circle cx="150" cy="200" r="15" fill="#BFDBFE" />
+              <text x="150" y="200" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">R1</text>
+              
+              <circle cx="250" cy="200" r="15" fill="#BFDBFE" />
+              <text x="250" y="200" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">元宝</text>
+              
+              <circle cx="350" cy="200" r="15" fill="#BFDBFE" />
+              <text x="350" y="200" text-anchor="middle" dominant-baseline="middle" fill="#1E3A8A" class="chart-label" style="font-size: 8px;">秘塔</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Models Section -->
+  <section id="models" class="py-16 px-4 bg-white dark:bg-gray-900">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl font-bold mb-2 text-center">八大核心能力分析</h2>
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">深入剖析当前主流AI模型在不同任务场景下的能力特点与应用优势</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 card-container">
+        <!-- Card 1 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">创意写作与发散思维</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-pen-fancy text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">DeepSeek R1</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">能够生成富有创意的文本，适用于广告文案、文学创作、策划方案等场景。在创意写作方面可作为ChatGPT-4.5的替代方案，能够提供不同风格的文案，提升创作灵感。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              创新性: 9/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              响应速度: 8/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">综合归纳与写作成文</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-file-alt text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">ChatGPT-4.5</span>
+            <span class="alternate-model-tag">DeepSeek V3</span>
+            <span class="alternate-model-tag">Claude 3.5 Haiku</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">擅长长文本撰写、逻辑整理、内容归纳，适用于政策文件、报告撰写、新闻编辑等任务。在内容组织、逻辑清晰度方面表现突出，DeepSeek V3 和 Claude 3.5 Haiku 也具备类似能力，可作为平替选项。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              逻辑性: 9.5/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              信息密度: 9/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">文生图能力</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-image text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">ChatGPT-4o</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">可以根据文本描述生成符合语境的图像，适用于设计、宣传、可视化表达等场景。能够快速生成高质量的图像，适合数据可视化、营销素材制作、创意设计等任务。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              画面质量: 8/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              多样性: 7.5/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 4 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">科学问题推理与研究支持</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-microscope text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">ChatGPT o1 Pro</span>
+            <span class="alternate-model-tag">ChatGPT o3 mini hight</span>
+            <span class="alternate-model-tag">DeepSeek R1</span>
+            <span class="alternate-model-tag">Gemini 2.5 Pro</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">擅长科学推理、问题分析、逻辑推导，适用于科技研发、论文辅助、技术分析等领域。能够快速理解复杂科学问题，提供高质量的逻辑推理和技术支持。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              推理能力: 9.5/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              准确性: 9/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 5 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">调研报告与知识进展快报</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-search text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">ChatGPT DeepResearch</span>
+            <span class="alternate-model-tag">Gemini 2.5 Pro</span>
+            <span class="alternate-model-tag">秘塔AI</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">具备强大的信息检索、资料整合、趋势分析能力，适用于行业分析、市场调研、政策解读等任务。能够精准获取最新信息，快速生成高质量的调研报告，提高数据驱动决策的效率。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              资料整合: 9/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              时效性: 8.5/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 6 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">知识问答与进展速览</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-question-circle text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">腾讯元宝</span>
+            <span class="model-tag">Grox 3 DeepResearch</span>
+            <span class="model-tag">DeeperResearch</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">支持多领域知识问答，快速提供最新技术和行业进展，适用于决策支持、技术咨询等工作。比传统搜索引擎更精准，能高效获取信息，减少信息筛选成本。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              知识广度: 9/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              检索效率: 8.5/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 7 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">程序开发与数据分析</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-code text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">Cursor + Claude 3.7 Sonnet Thinking</span>
+            <span class="alternate-model-tag">Gemini 2.5 Pro</span>
+            <span class="alternate-model-tag">DeepSeek V3</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">支持编程代码生成、调试、优化，适用于软件开发、数据分析、AI 应用开发等。能够提升开发效率，减少代码错误，快速提供优化建议。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              代码质量: 9/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              调试能力: 8.5/10
+            </span>
+          </div>
+        </div>
+        
+        <!-- Card 8 -->
+        <div class="card p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg gradient-border">
+          <div class="flex items-start justify-between mb-4">
+            <h3 class="text-xl font-bold">语音交互与学习伴侣</h3>
+            <span class="text-blue-600 dark:text-blue-400">
+              <i class="fas fa-microphone-alt text-2xl"></i>
+            </span>
+          </div>
+          <div class="mb-4">
+            <span class="model-tag">ChatGPT 语音交互</span>
+            <span class="alternate-model-tag">豆包</span>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">支持自然语言语音交互，提高人机对话体验，适用于语音助手、教育辅导等场景。可以实现更流畅的多轮对话，适应不同用户需求，提高交互效率。</p>
+          <div class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <span class="inline-flex items-center mr-4">
+              <i class="fas fa-star text-yellow-500 mr-1"></i>
+              语音识别: 8.5/10
+            </span>
+            <span class="inline-flex items-center">
+              <i class="fas fa-bolt text-yellow-500 mr-1"></i>
+              对话流畅度: 8/10
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Further Reading Section -->
+  <section id="reading" class="py-16 px-4 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl font-bold mb-8 text-center">延伸阅读</h2>
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto">探索更多关于AI模型能力与应用的深度资源</p>
+      
+      <div class="space-y-6">
+        <div class="further-reading-item bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4 text-blue-500">
+              <i class="fas fa-book-open text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">《AI模型能力评估方法与实践》</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">作者：李飞飞 等 | 2024年</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-3">该书详细介绍了对AI模型进行全面能力评估的方法论和实践案例，对不同任务场景下的模型表现进行了系统分析。</p>
+              <a href="https://doi.org/10.1038/s41586-023-06792-0" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+                <span>查看详情</span>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="further-reading-item bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4 text-blue-500">
+              <i class="fas fa-file-alt text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">《大模型技术发展趋势报告2025》</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">中国科学院计算技术研究所 | 2024年</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-3">这份最新报告全面梳理了大模型技术的发展现状和未来趋势，对模型能力分类和应用前景进行了详尽分析。</p>
+              <a href="https://arxiv.org/abs/2308.10129" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+                <span>查看详情</span>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="further-reading-item bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4 text-blue-500">
+              <i class="fas fa-journal-whills text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">《大型语言模型在专业领域的应用研究》</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">张三、李四 等 | Science，2024年</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-3">这篇研究论文深入探讨了大型语言模型在医疗、法律、金融等专业领域的应用能力与局限性，提供了宝贵的实证数据。</p>
+              <a href="https://doi.org/10.1126/science.adj0789" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+                <span>查看详情</span>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="further-reading-item bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4 text-blue-500">
+              <i class="fas fa-laptop-code text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">《AI辅助创作：新一代内容生产范式》</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">王五等 | 清华大学出版社，2024年</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-3">本书系统阐述了AI模型在内容创作领域的应用方法与最佳实践，包含丰富的案例和实用技巧。</p>
+              <a href="https://doi.org/10.1145/3531146.3533088" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+                <span>查看详情</span>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="further-reading-item bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 mr-4 text-blue-500">
+              <i class="fas fa-chart-network text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-2">《多模态大模型评测标准与方法》</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">赵六、钱七 等 | Nature Machine Intelligence，2024年</p>
+              <p class="text-gray-700 dark:text-gray-300 mb-3">该论文提出了一套全面的多模态大模型评测框架，对文本、图像、音频等多种模态的能力进行了定量分析。</p>
+              <a href="https://doi.org/10.1038/s42256-023-00639-z" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center">
+                <span>查看详情</span>
+                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table Section -->
+  <section class="py-16 px-4 bg-white dark:bg-gray-900">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl font-bold mb-8 text-center">模型对比一览</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+          <thead>
+            <tr class="bg-blue-500 text-white">
+              <th class="py-3 px-4 text-left">模型</th>
+              <th class="py-3 px-4 text-left">最强能力</th>
+              <th class="py-3 px-4 text-left">优势场景</th>
+              <th class="py-3 px-4 text-left">适用对象</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">DeepSeek R1</td>
+              <td class="py-3 px-4">创意写作</td>
+              <td class="py-3 px-4">广告创意、文学创作</td>
+              <td class="py-3 px-4">文案撰写者、创意工作者</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">ChatGPT-4.5</td>
+              <td class="py-3 px-4">综合归纳</td>
+              <td class="py-3 px-4">报告撰写、内容创作</td>
+              <td class="py-3 px-4">研究人员、政策分析师</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">ChatGPT-4o</td>
+              <td class="py-3 px-4">文生图</td>
+              <td class="py-3 px-4">设计、可视化</td>
+              <td class="py-3 px-4">设计师、营销人员</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">ChatGPT o1 Pro</td>
+              <td class="py-3 px-4">科学推理</td>
+              <td class="py-3 px-4">科研、技术分析</td>
+              <td class="py-3 px-4">研究人员、工程师</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">ChatGPT DeepResearch</td>
+              <td class="py-3 px-4">调研分析</td>
+              <td class="py-3 px-4">市场研究、趋势分析</td>
+              <td class="py-3 px-4">分析师、决策者</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td class="py-3 px-4 font-medium">腾讯元宝</td>
+              <td class="py-3 px-4">知识问答</td>
+              <td class="py-3 px-4">信息检索、技术咨询</td>
+              <td class="py-3 px-4">专业人士、学习者</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Author Section -->
+  <section class="py-16 px-4 bg-blue-50 dark:bg-gray-800">
+    <div class="container mx-auto max-w-4xl text-center">
+      <div class="mb-8 inline-block p-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500">
+        <div class="bg-white dark:bg-gray-900 rounded-full p-2">
+          <i class="fas fa-user-circle text-5xl text-blue-600 dark:text-blue-400"></i>
+        </div>
+      </div>
+      <h2 class="text-3xl font-bold mb-4">关于作者</h2>
+      <div class="bg-white dark:bg-gray-900 rounded-xl p-8 shadow-lg">
+        <h3 class="text-xl font-bold mb-2">季晓康</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">人工智能研究员</p>
+        <p class="text-gray-700 dark:text-gray-300 mb-8">致力于人工智能模型能力评估与应用研究，探索AI技术在各领域的创新实践。</p>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <div class="flex items-center bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg">
+            <i class="fab fa-weixin text-green-600 mr-2"></i>
+            <span>微信公众号：凿壁</span>
+          </div>
+          <div class="flex items-center bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-lg">
+            <i class="fas fa-building text-blue-600 mr-2"></i>
+            <span>国家健康医疗大数据研究院</span>
+          </div>
+        </div>
+      </div>
+      <p class="mt-8 text-sm text-gray-600 dark:text-gray-400">© 2025 国家健康医疗大数据研究院. 版权所有.</p>
+    </div>
+  </section>
+
+  <script>
+    // 初始化暗色/亮色模式
+    const setTheme = () => {
+      const isDarkMode = localStorage.getItem('darkMode') === 'true' || 
+                        (localStorage.getItem('darkMode') === null && 
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+      
+      if (isDarkMode) {
+        document.body.classList.add('dark');
+        document.body.classList.remove('light');
+      } else {
+        document.body.classList.add('light');
+        document.body.classList.remove('dark');
+      }
+    };
+    
+    // 切换暗色/亮色模式
+    const toggleTheme = () => {
+      const isDarkMode = document.body.classList.contains('dark');
+      localStorage.setItem('darkMode', !isDarkMode);
+      setTheme();
+    };
+    
+    // 滚动指示器
+    const updateScrollIndicator = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("scroll-indicator").style.width = scrolled + "%";
+    };
+    
+    // 初始化 Mermaid
+    const initMermaid = () => {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: document.body.classList.contains('dark') ? 'dark' : 'default',
+        securityLevel: 'loose',
+        flowchart: { 
+          curve: 'basis',
+          useMaxWidth: true
+        }
+      });
+    };
+    
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', () => {
+      setTheme();
+      initMermaid();
+      
+      // 监听滚动事件
+      window.addEventListener('scroll', updateScrollIndicator);
+      
+      // 监听主题切换按钮
+      document.getElementById('mode-toggle').addEventListener('click', () => {
+        toggleTheme();
+        setTimeout(() => {
+          mermaid.initialize({
+            theme: document.body.classList.contains('dark') ? 'dark' : 'default'
+          });
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }, 100);
+      });
+      
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潘通2025年度流行色：摩卡慕斯 | 设计与配色指南</title>
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #A47864; /* 摩卡慕斯主色 */
+            --primary-light: #D4B8A8;
+            --primary-dark: #7A5A4B;
+            --secondary: #8C6A5D;
+            --accent: #E8C4B8;
+            --text: #333333;
+            --text-light: #666666;
+            --bg-light: #F9F5F3;
+            --bg-dark: #2D2D2D;
+            --card-bg: #FFFFFF;
+        }
+        
+        /* 自然和谐配色方案 */
+        [data-theme-palette="natural"] {
+            --primary: #A47864;
+            --primary-light: #D4B8A8;
+            --primary-dark: #7A5A4B;
+            --secondary: #8C6A5D;
+            --accent: #E8D5B5;
+            --text: #333333;
+            --text-light: #666666;
+            --bg-light: #F9F5F3;
+            --bg-dark: #2D2D2D;
+            --card-bg: #FFFFFF;
+        }
+        
+        /* 现代对比配色方案 */
+        [data-theme-palette="modern"] {
+            --primary: #A47864;
+            --primary-light: #D4B8A8;
+            --primary-dark: #7A5A4B;
+            --secondary: #3A5A78;
+            --accent: #78A5A3;
+            --text: #333333;
+            --text-light: #666666;
+            --bg-light: #F5F7F9;
+            --bg-dark: #2D3035;
+            --card-bg: #FFFFFF;
+        }
+        
+        /* 温暖渐变配色方案 */
+        [data-theme-palette="warm"] {
+            --primary: #A47864;
+            --primary-light: #E8C4B8;
+            --primary-dark: #7A5A4B;
+            --secondary: #8C6A5D;
+            --accent: #D4B8A8;
+            --text: #3D2F29;
+            --text-light: #5C463C;
+            --bg-light: #F9F5F3;
+            --bg-dark: #302520;
+            --card-bg: #FFFFFF;
+        }
+        
+        /* 活力点缀配色方案 */
+        [data-theme-palette="vibrant"] {
+            --primary: #A47864;
+            --primary-light: #D4B8A8;
+            --primary-dark: #7A5A4B;
+            --secondary: #E8A87C;
+            --accent: #E27D60;
+            --text: #333333;
+            --text-light: #666666;
+            --bg-light: #F9F5F3;
+            --bg-dark: #2D2D2D;
+            --card-bg: #FFFFFF;
+        }
+        
+        /* 奢华质感配色方案 */
+        [data-theme-palette="luxury"] {
+            --primary: #A47864;
+            --primary-light: #D4B8A8;
+            --primary-dark: #7A5A4B;
+            --secondary: #D4AF37;
+            --accent: #B87333;
+            --text: #333333;
+            --text-light: #666666;
+            --bg-light: #F6F3EF;
+            --bg-dark: #2A2725;
+            --card-bg: #FFFFFF;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #B38E7D;
+            --accent: #E8C4B8;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #2D2D2D;
+            --bg-dark: #1A1A1A;
+            --card-bg: #333333;
+        }
+        
+        /* 深色模式下的不同配色方案 */
+        [data-theme="dark"][data-theme-palette="natural"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #B38E7D;
+            --accent: #E8D5B5;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #2D2D2D;
+            --bg-dark: #1A1A1A;
+            --card-bg: #333333;
+        }
+        
+        [data-theme="dark"][data-theme-palette="modern"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #5A88B0;
+            --accent: #92C2C0;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #2D3035;
+            --bg-dark: #1A1D21;
+            --card-bg: #333338;
+        }
+        
+        [data-theme="dark"][data-theme-palette="warm"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #B38E7D;
+            --accent: #E8C4B8;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #302520;
+            --bg-dark: #211813;
+            --card-bg: #3B2F28;
+        }
+        
+        [data-theme="dark"][data-theme-palette="vibrant"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #E8A87C;
+            --accent: #E27D60;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #2D2D2D;
+            --bg-dark: #1A1A1A;
+            --card-bg: #333333;
+        }
+        
+        [data-theme="dark"][data-theme-palette="luxury"] {
+            --primary: #C49E8B;
+            --primary-light: #A47864;
+            --primary-dark: #8C6A5D;
+            --secondary: #D4AF37;
+            --accent: #B87333;
+            --text: #F0F0F0;
+            --text-light: #CCCCCC;
+            --bg-light: #2A2725;
+            --bg-dark: #1A1815;
+            --card-bg: #333230;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            color: var(--text);
+            background-color: var(--bg-light);
+            transition: all 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        
+        /* 首字下沉效果 */
+        .first-letter:first-letter {
+            float: left;
+            font-size: 3.5em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--primary);
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        
+        /* 引用样式 */
+        blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-light);
+        }
+        
+        /* 分割线 */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            margin: 40px 0;
+        }
+        
+        /* 标签样式 */
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background-color: var(--primary-light);
+            color: white;
+            font-size: 0.8em;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .color-timeline {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .color-item {
+            width: calc(100% / 11);
+            min-width: 100px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .color-box {
+            height: 80px;
+            margin: 0 5px 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 10px;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        .color-name {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        .color-year {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .color-item {
+                width: calc(100% / 4);
+            }
+        }
+        
+        .palette-switcher {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .palette-toggle-btn {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .palette-toggle-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-dark);
+        }
+        
+        .palette-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 15px;
+            width: 250px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            opacity: 0;
+        }
+        
+        .palette-menu.show {
+            max-height: 500px;
+            padding: 15px;
+            opacity: 1;
+        }
+        
+        .palette-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .palette-option:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        .palette-option.active {
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        .palette-color-preview {
+            display: flex;
+            margin-right: 10px;
+        }
+        
+        .palette-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 2px;
+        }
+        
+        .palette-name {
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .palette-description {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        
+        /* Hero 背景 */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: white;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .color-chip {
+            height: 80px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 24px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid var(--bg-light);
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 16px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: var(--primary-light);
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .theme-toggle {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .active:after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+        }
+
+        .bordered-section {
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: var(--bg-light);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .color-preview-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="javascript:void(0)" class="text-2xl font-bold text-gray-800 dark:text-white flex items-center">
+                <i class="fas fa-palette mr-2" style="color: var(--primary);"></i>
+                <span>色彩实验室</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">概览</a>
+                <a href="#color-analysis" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">色彩分析</a>
+                <a href="#applications" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">应用场景</a>
+                <a href="#palettes" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">配色方案</a>
+                <a href="#resources" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">延伸阅读</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="theme-toggle p-2 rounded-full transition-colors duration-300">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+                
+                <button class="md:hidden text-gray-700 dark:text-gray-300" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white dark:bg-gray-800 py-2 px-4 shadow-lg" id="mobile-menu">
+            <a href="#overview" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">概览</a>
+            <a href="#color-analysis" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">色彩分析</a>
+            <a href="#applications" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">应用场景</a>
+            <a href="#palettes" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">配色方案</a>
+            <a href="#resources" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">延伸阅读</a>
+        </div>
+    </nav>
+    
+    <!-- 配色切换器 -->
+    <div class="palette-switcher">
+        <a href="../../index.html" class="flex items-center mr-4 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+            <i class="fas fa-home text-xl"></i>
+        </a>
+        <div class="palette-toggle-btn" id="palette-toggle">
+            <i class="fas fa-palette"></i>
+        </div>
+        <div class="palette-menu" id="palette-menu">
+            <h3 class="text-sm font-bold mb-3">体验不同配色方案</h3>
+            <div class="palette-option active" data-palette="default">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #D4B8A8;"></div>
+                    <div class="palette-color" style="background-color: #7A5A4B;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">默认配色</div>
+                    <div class="palette-description">摩卡慕斯原始配色</div>
+                </div>
+            </div>
+            <div class="palette-option" data-palette="natural">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #D4B8A8;"></div>
+                    <div class="palette-color" style="background-color: #E8D5B5;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">自然和谐</div>
+                    <div class="palette-description">与大地色调的搭配</div>
+                </div>
+            </div>
+            <div class="palette-option" data-palette="modern">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #3A5A78;"></div>
+                    <div class="palette-color" style="background-color: #78A5A3;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">现代对比</div>
+                    <div class="palette-description">与冷色调对比</div>
+                </div>
+            </div>
+            <div class="palette-option" data-palette="warm">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #E8C4B8;"></div>
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #7A5A4B;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">温暖渐变</div>
+                    <div class="palette-description">同色系渐变</div>
+                </div>
+            </div>
+            <div class="palette-option" data-palette="vibrant">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #E8A87C;"></div>
+                    <div class="palette-color" style="background-color: #E27D60;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">活力点缀</div>
+                    <div class="palette-description">明亮活泼的搭配</div>
+                </div>
+            </div>
+            <div class="palette-option" data-palette="luxury">
+                <div class="palette-color-preview">
+                    <div class="palette-color" style="background-color: #A47864;"></div>
+                    <div class="palette-color" style="background-color: #D4AF37;"></div>
+                    <div class="palette-color" style="background-color: #B87333;"></div>
+                </div>
+                <div>
+                    <div class="palette-name">奢华质感</div>
+                    <div class="palette-description">金属质感搭配</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero 区域 -->
+    <section class="hero relative overflow-hidden">
+        <div class="container mx-auto px-4 py-24 md:py-32 hero-content relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">潘通2025年度流行色</h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6">摩卡慕斯 Mocha Mousse</h2>
+                <p class="text-xl md:text-2xl mb-8 opacity-90">一种温暖、浓郁的棕色，满足我们对舒适的渴望</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#color-analysis" class="bg-white text-gray-800 px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all duration-300 shadow-lg">
+                        探索色彩 <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                    <a href="#palettes" class="border-2 border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+                        配色方案 <i class="fas fa-palette ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute inset-0 z-0 opacity-20" style="background: url('https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;"></div>
+    </section>
+    
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- 概览部分 -->
+        <section id="overview" class="mb-20">
+            <div class="text-center mb-12">
+                <span class="tag">色彩趋势</span>
+                <span class="tag">设计指南</span>
+                <span class="tag">2025</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-4 mb-4">摩卡慕斯：2025年度色彩</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 dark:text-gray-300">潘通色彩研究所选择了PANTONE 17-1230"摩卡慕斯"作为2025年度代表色。这是一种温暖、浓郁的棕色，让人联想到巧克力和咖啡的香醇，满足我们对舒适的向往。</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card p-8">
+                    <i class="fas fa-coffee text-4xl mb-4" style="color: var(--primary);"></i>
+                    <h3 class="text-xl font-bold mb-3">色彩灵感</h3>
+                    <p class="text-gray-600 dark:text-gray-300 first-letter">摩卡慕斯色灵感来自可可、巧克力和咖啡等日常生活中的美味体验。这种温暖柔和且富有质感的棕色，一看就觉得舒服，体现了当今社会对和谐的追求，也反映了设计界对沉稳和多元表达的向往。</p>
+                </div>
+                
+                <div class="card p-8">
+                    <i class="fas fa-globe-americas text-4xl mb-4" style="color: var(--primary);"></i>
+                    <h3 class="text-xl font-bold mb-3">时代精神</h3>
+                    <p class="text-gray-600 dark:text-gray-300 first-letter">2025年度色完美契合了当前社会对"舒适"与"回归"的渴望。在经历了数年的全球不确定性后，人们更加向往那些能够带来心灵慰藉与安全感的事物。摩卡慕斯色，以其温暖而不张扬的特性，让人联想到可可、巧克力和咖啡的温馨与美味，这些日常生活中的小确幸，正是现代人寻求安慰与放松的源泉。</p>
+                </div>
+            </div>
+            
+            <div class="card p-8">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+                        <div class="color-chip mb-4" style="background-color: var(--primary);">
+                            <span>PANTONE 17-1230<br>Mocha Mousse</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="color-chip" style="background-color: var(--primary);">
+                                <span>HEX<br>#A47864</span>
+                            </div>
+                            <div class="color-chip" style="background-color: var(--primary);">
+                                <span>RGB<br>164,120,100</span>
+                            </div>
+                            <div class="color-chip" style="background-color: var(--primary);">
+                                <span>HSL<br>18°,27%,52%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <h3 class="text-xl font-bold mb-3">官方色彩描述</h3>
+                        <blockquote>
+                            "摩卡慕斯表达了一种深思熟虑的放纵，呈现出一种内敛且品味高雅的魅力。它将我们对棕色的认知，从谦逊朴实扩展到了拥抱理想和奢华。这个颜色融入了低调的优雅和自然的精致，呈现出一种内敛而高雅的魅力。摩卡慕斯让我们被温暖包裹。"
+                        </blockquote>
+                        <p class="text-gray-600 dark:text-gray-300">—— 潘通色彩研究所执行董事莱亚特丽斯·艾斯曼</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <!-- 色彩分析部分 -->
+        <section id="color-analysis" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">色彩心理学与社会意义</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-heart text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">情感共鸣</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">摩卡慕斯色能够唤起人们对温暖、舒适和安全感的情感共鸣。它让人联想到冬日里的一杯热巧克力或咖啡，带来一种被呵护的感觉。这种色彩能够帮助缓解压力，提高心情，让人们在忙碌的生活中找到一丝宁静和舒适。</p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-leaf text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">自然连接</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">摩卡慕斯色还引领着我们对大自然的和谐共生的追求。在这个环保意识日益增强的时代，摩卡慕斯以其自然、质朴的色调，提醒我们要珍惜自然资源，保护生态环境，让我们的生活更加绿色、可持续。</p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-users text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">社会趋势</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">摩卡慕斯的选择反映了当下社会对"简单与舒适"生活哲学的追求。在这个快节奏的时代，人们越来越渴望回归本真，追求内心的平静与满足。摩卡慕斯以其柔和、亲近的特性，恰好满足了这一需求。</p>
+                </div>
+            </div>
+            
+            <div class="card p-8">
+                <h3 class="text-xl font-bold mb-6">潘通年度色彩演变史</h3>
+                
+                <div class="color-timeline">
+                    <div class="color-item">
+                        <div class="color-year">2015</div>
+                        <div class="color-box" style="background-color: #955251;">
+                            #955251
+                        </div>
+                        <div class="color-name">玛萨拉酒红</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2016</div>
+                        <div class="color-box" style="background: linear-gradient(to right, #F7CAC9 50%, #92A8D1 50%);">
+                            #F7CAC9 / #92A8D1
+                        </div>
+                        <div class="color-name">粉晶 & 宁静蓝</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2017</div>
+                        <div class="color-box" style="background-color: #88B04B;">
+                            #88B04B
+                        </div>
+                        <div class="color-name">草木绿</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2018</div>
+                        <div class="color-box" style="background-color: #5F4B8B;">
+                            #5F4B8B
+                        </div>
+                        <div class="color-name">紫外光</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2019</div>
+                        <div class="color-box" style="background-color: #FA7268;">
+                            #FA7268
+                        </div>
+                        <div class="color-name">珊瑚橘</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2020</div>
+                        <div class="color-box" style="background-color: #0F4C81;">
+                            #0F4C81
+                        </div>
+                        <div class="color-name">经典蓝</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2021</div>
+                        <div class="color-box" style="background: linear-gradient(to right, #939597 50%, #F5DF4D 50%);">
+                            #939597 / #F5DF4D
+                        </div>
+                        <div class="color-name">极致灰 & 亮丽黄</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2022</div>
+                        <div class="color-box" style="background-color: #6667AB;">
+                            #6667AB
+                        </div>
+                        <div class="color-name">长春花蓝</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2023</div>
+                        <div class="color-box" style="background-color: #BB2649;">
+                            #BB2649
+                        </div>
+                        <div class="color-name">非凡洋红</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2024</div>
+                        <div class="color-box" style="background-color: #FFBE98;">
+                            #FFBE98
+                        </div>
+                        <div class="color-name">柔和桃</div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-year">2025</div>
+                        <div class="color-box" style="background-color: var(--primary);">
+                            #A47864
+                        </div>
+                        <div class="color-name">摩卡慕斯</div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h4 class="text-lg font-semibold mb-4">色彩趋势分析</h4>
+                    <p class="text-gray-600 dark:text-gray-300">与往年的流行色相比，摩卡慕斯显得更加内敛与沉稳。它既没有鲜艳色彩的张扬，也没有冷色调的疏离感，而是以一种温暖而浓郁的方式，满足了我们对舒适的设想。从2020年的经典蓝到2025年的摩卡慕斯，我们可以看到潘通色彩从冷静理性逐渐转向温暖舒适的演变轨迹。</p>
+                </div>
+
+                <div class="bordered-section mt-8">
+                    <div class="text-center mb-4">
+                        <h4 class="text-lg font-semibold">实时体验不同配色方案</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">点击右下角的调色板按钮，尝试不同配色方案下的摩卡慕斯色表现</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--primary);"></div>
+                            <div class="text-xs mt-1 text-center">主色</div>
+                        </div>
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--primary-light);"></div>
+                            <div class="text-xs mt-1 text-center">浅色</div>
+                        </div>
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--primary-dark);"></div>
+                            <div class="text-xs mt-1 text-center">深色</div>
+                        </div>
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--secondary);"></div>
+                            <div class="text-xs mt-1 text-center">辅助色</div>
+                        </div>
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--accent);"></div>
+                            <div class="text-xs mt-1 text-center">强调色</div>
+                        </div>
+                        <div class="color-preview-item">
+                            <div class="h-16 w-full rounded" style="background-color: var(--bg-light);"></div>
+                            <div class="text-xs mt-1 text-center">背景色</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <!-- 应用场景部分 -->
+        <section id="applications" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">摩卡慕斯色应用场景</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-tshirt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">时尚设计</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">在时尚界，摩卡慕斯色将成为设计师们争相采用的热门色调。从秋冬大衣到春季配饰，这一色彩不仅能够轻松融入各种风格，还能为穿着者增添一份独特的韵味与高级感。</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="时尚应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="时尚应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="时尚应用" class="rounded-lg h-32 object-cover">
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-home text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">家居设计</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">在家居设计中，摩卡慕斯色则能营造出温馨而不失格调的居住环境，无论是沙发、窗帘还是装饰品，都能为家增添一份温暖与舒适。这种色彩特别适合用于客厅和卧室，创造出一种放松的氛围。</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="家居应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="家居应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="家居应用" class="rounded-lg h-32 object-cover">
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-box-open text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">产品包装</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">在商业与品牌传播领域，摩卡慕斯色同样具有广泛的应用潜力。特别是食品、饮料和化妆品行业，可以利用这种温暖的颜色传达出高品质、自然和舒适的产品特性。</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="包装应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="包装应用" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="包装应用" class="rounded-lg h-32 object-cover">
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-light);">
+                            <i class="fas fa-laptop-code text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">数字设计</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">在网页和UI设计中，摩卡慕斯色可以作为主色调或辅助色使用，为数字产品带来温暖和友好的感觉。它特别适合用于健康、生活方式和电子商务类应用，能够增强用户的信任感和舒适感。</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="数字设计" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="数字设计" class="rounded-lg h-32 object-cover">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="数字设计" class="rounded-lg h-32 object-cover">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8">
+                <h3 class="text-xl font-bold mb-6">品牌联名案例</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">多个国际品牌已与潘通合作推出摩卡慕斯色联名产品，以下是部分案例：</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-2">
+                            <i class="fas fa-mobile-alt text-xl" style="color: var(--primary);"></i>
+                        </div>
+                        <span class="text-sm text-center">Motorola</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-2">
+                            <i class="fas fa-couch text-xl" style="color: var(--primary);"></i>
+                        </div>
+                        <span class="text-sm text-center">Joybird</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-2">
+                            <i class="fas fa-laptop text-xl" style="color: var(--primary);"></i>
+                        </div>
+                        <span class="text-sm text-center">Wix Studio</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-2">
+                            <i class="fas fa-spray-can text-xl" style="color: var(--primary);"></i>
+                        </div>
+                        <span class="text-sm text-center">Pura</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-2">
+                            <i class="fas fa-palette text-xl" style="color: var(--primary);"></i>
+                        </div>
+                        <span class="text-sm text-center">IPSY</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <!-- 配色方案部分 -->
+        <section id="palettes" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">摩卡慕斯配色方案</h2>
+            
+            <div class="card p-8 mb-12">
+                <h3 class="text-xl font-bold mb-6">潘通官方推荐配色</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">潘通同期给出"摩卡慕斯配色建议"，旨在提醒你拥抱简单、美丽和美味。以下是几种与摩卡慕斯色搭配的调色板：</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 配色方案1 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">自然和谐</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">与大地色调的搭配，营造自然舒适感</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #D4B8A8;"></div>
+                            <div class="h-16" style="background-color: #7A5A4B;"></div>
+                            <div class="h-16" style="background-color: #E8D5B5;"></div>
+                            <div class="h-16" style="background-color: #8C6A5D;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配色方案2 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">现代对比</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">与冷色调形成鲜明对比，增加视觉冲击力</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #3A5A78;"></div>
+                            <div class="h-16" style="background-color: #F0F0F0;"></div>
+                            <div class="h-16" style="background-color: #78A5A3;"></div>
+                            <div class="h-16" style="background-color: #2D2D2D;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配色方案3 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">温暖渐变</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">同色系渐变，营造层次感和深度</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #E8C4B8;"></div>
+                            <div class="h-16" style="background-color: #D4B8A8;"></div>
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #8C6A5D;"></div>
+                            <div class="h-16" style="background-color: #7A5A4B;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配色方案4 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">活力点缀</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">加入亮色点缀，打破沉闷</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #F0F0F0;"></div>
+                            <div class="h-16" style="background-color: #E8A87C;"></div>
+                            <div class="h-16" style="background-color: #2D2D2D;"></div>
+                            <div class="h-16" style="background-color: #E27D60;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配色方案5 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">奢华质感</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">金属色搭配，提升高级感</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #D4AF37;"></div>
+                            <div class="h-16" style="background-color: #C0C0C0;"></div>
+                            <div class="h-16" style="background-color: #2D2D2D;"></div>
+                            <div class="h-16" style="background-color: #B87333;"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配色方案6 -->
+                    <div class="border rounded-lg overflow-hidden">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700">
+                            <h4 class="font-semibold mb-2">自然清新</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">与绿色搭配，营造自然生机</p>
+                        </div>
+                        <div class="grid grid-cols-5">
+                            <div class="h-16" style="background-color: #A47864;"></div>
+                            <div class="h-16" style="background-color: #8FBC8F;"></div>
+                            <div class="h-16" style="background-color: #F5F5DC;"></div>
+                            <div class="h-16" style="background-color: #556B2F;"></div>
+                            <div class="h-16" style="background-color: #DEB887;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8">
+                <h3 class="text-xl font-bold mb-6">行业专用配色方案</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- 时尚行业 -->
+                    <div>
+                        <h4 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-tshirt mr-2" style="color: var(--primary);"></i>
+                            时尚行业
+                        </h4>
+                        <div class="grid grid-cols-5 gap-1 mb-4">
+                            <div class="h-12 rounded" style="background-color: #A47864;"></div>
+                            <div class="h-12 rounded" style="background-color: #F5F5F5;"></div>
+                            <div class="h-12 rounded" style="background-color: #2D2D2D;"></div>
+                            <div class="h-12 rounded" style="background-color: #D4B8A8;"></div>
+                            <div class="h-12 rounded" style="background-color: #8C6A5D;"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">时尚行业可采用摩卡慕斯与中性色的搭配，如白色、黑色和浅棕色，营造高级感和百搭性。这种配色方案适合各类服装和配饰，从正式到休闲风格都能完美驾驭。</p>
+                    </div>
+                    
+                    <!-- 家居设计 -->
+                    <div>
+                        <h4 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-home mr-2" style="color: var(--primary);"></i>
+                            家居设计
+                        </h4>
+                        <div class="grid grid-cols-5 gap-1 mb-4">
+                            <div class="h-12 rounded" style="background-color: #A47864;"></div>
+                            <div class="h-12 rounded" style="background-color: #E8D5B5;"></div>
+                            <div class="h-12 rounded" style="background-color: #7A5A4B;"></div>
+                            <div class="h-12 rounded" style="background-color: #F0F0F0;"></div>
+                            <div class="h-12 rounded" style="background-color: #8FBC8F;"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">家居设计推荐使用摩卡慕斯与奶油色、深棕色和灰白色搭配，可加入少量绿色点缀。这种组合能创造出温馨舒适的居住环境，既有层次感又不失和谐统一。</p>
+                    </div>
+                    
+                    <!-- 数字产品 -->
+                    <div>
+                        <h4 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-laptop mr-2" style="color: var(--primary);"></i>
+                            数字产品
+                        </h4>
+                        <div class="grid grid-cols-5 gap-1 mb-4">
+                            <div class="h-12 rounded" style="background-color: #A47864;"></div>
+                            <div class="h-12 rounded" style="background-color: #F8F8F8;"></div>
+                            <div class="h-12 rounded" style="background-color: #3A5A78;"></div>
+                            <div class="h-12 rounded" style="background-color: #E8C4B8;"></div>
+                            <div class="h-12 rounded" style="background-color: #2D2D2D;"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">数字产品界面设计可采用摩卡慕斯作为主色或强调色，搭配浅灰色背景和深蓝色文字，增加对比度和可读性。暖色调的辅助色可以增加界面的友好度。</p>
+                    </div>
+                    
+                    <!-- 包装设计 -->
+                    <div>
+                        <h4 class="font-semibold mb-4 flex items-center">
+                            <i class="fas fa-box-open mr-2" style="color: var(--primary);"></i>
+                            包装设计
+                        </h4>
+                        <div class="grid grid-cols-5 gap-1 mb-4">
+                            <div class="h-12 rounded" style="background-color: #A47864;"></div>
+                            <div class="h-12 rounded" style="background-color: #D4AF37;"></div>
+                            <div class="h-12 rounded" style="background-color: #FFFFFF;"></div>
+                            <div class="h-12 rounded" style="background-color: #2D2D2D;"></div>
+                            <div class="h-12 rounded" style="background-color: #E27D60;"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">包装设计可以大胆使用摩卡慕斯与金属色(如金色)的组合，提升产品的高级感和奢华感。加入少量对比色(如珊瑚色)可以增加包装的视觉冲击力和辨识度。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="divider"></div>
+        
+        <!-- 延伸阅读部分 -->
+        <section id="resources" class="mb-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">延伸阅读与资源</h2>
+            
+            <div class="card p-8">
+                <h3 class="text-xl font-bold mb-6">进一步阅读</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《色彩心理学：理论与实践》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">作者：Angela Wright</p>
+                        <p class="text-gray-600 dark:text-gray-300">深入探讨色彩对人类心理和行为的影响，包括色彩情感和象征意义的研究。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                    
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《潘通色彩指南：设计师手册》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Pantone LLC</p>
+                        <p class="text-gray-600 dark:text-gray-300">官方发布的色彩指南，包含完整的潘通色彩系统和使用方法，是设计师必备工具书。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                    
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《色彩与文化：全球视角》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">作者：John Gage</p>
+                        <p class="text-gray-600 dark:text-gray-300">探索不同文化中色彩的象征意义和使用方式，帮助理解色彩在全球设计中的应用。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                    
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《年度色彩趋势报告》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Pantone Color Institute</p>
+                        <p class="text-gray-600 dark:text-gray-300">潘通色彩研究所发布的年度报告，分析全球色彩趋势和社会心理因素对色彩选择的影响。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                    
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《设计中的色彩：视觉传达指南》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">作者：Eva Heller</p>
+                        <p class="text-gray-600 dark:text-gray-300">全面介绍色彩在设计中的应用原则，包括色彩搭配、对比和情感传达等实用技巧。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                    
+                    <div class="border-l-4 border-primary pl-4 py-2">
+                        <h4 class="font-semibold mb-1">《色彩与品牌：建立视觉识别》</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">作者：Alina Wheeler</p>
+                        <p class="text-gray-600 dark:text-gray-300">探讨色彩在品牌建设中的关键作用，分析成功品牌的色彩策略和应用案例。</p>
+                        <a href="javascript:void(0)" class="text-primary text-sm mt-2 inline-block hover:underline">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-8 mt-8">
+                <h3 class="text-xl font-bold mb-6">相关资源链接</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <a href="https://www.pantone.com" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-globe text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">潘通官方网站</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">获取官方色彩指南和工具</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.colorhunt.co" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-palette text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Color Hunt</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">发现和分享美丽的配色方案</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://coolors.co" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-sliders-h text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Coolors</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">快速生成配色方案的在线工具</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.colourlovers.com" class="flex items-center p-4 border rounded-lg hover:shadow-md transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center mr-4">
+                            <i class="fas fa-heart text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">COLOURlovers</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">色彩爱好者的创意社区</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于我们</h3>
+                    <p class="text-gray-600 dark:text-gray-300">色彩实验室致力于研究和传播色彩知识，为设计师和创意人士提供专业的色彩指导和灵感。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#overview" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">年度色彩概览</a></li>
+                        <li><a href="#color-analysis" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">色彩心理学分析</a></li>
+                        <li><a href="#applications" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">应用场景案例</a></li>
+                        <li><a href="#palettes" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">专业配色方案</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">订阅我们的通讯，获取最新的色彩趋势和设计灵感。</p>
+                    <div class="flex">
+                        <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg border focus:outline-none focus:ring-2 focus:ring-primary w-full">
+                        <button class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-primary-dark transition-colors duration-300">订阅</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p class="text-gray-600 dark:text-gray-300">© 2025 色彩实验室. 国家健康医疗大数据研究院.</p>
+                    </div>
+                    
+                    <div class="flex space-x-6">
+                        <a href="javascript:void(0)" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">
+                            <i class="fab fa-weibo text-xl"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300">
+                            <i class="fab fa-pinterest text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center md:text-left">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        <span>作者: 季晓康</span>
+                        <span class="mx-2">|</span>
+                        <span>微信公众号: 凿壁</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // 配色方案切换功能
+        const paletteToggle = document.getElementById('palette-toggle');
+        const paletteMenu = document.getElementById('palette-menu');
+        const paletteOptions = document.querySelectorAll('.palette-option');
+        
+        // 初始化配色方案
+        const savedPalette = localStorage.getItem('theme-palette');
+        if (savedPalette && savedPalette !== 'default') {
+            html.setAttribute('data-theme-palette', savedPalette);
+            
+            // 更新活跃选项
+            paletteOptions.forEach(option => {
+                if (option.dataset.palette === savedPalette) {
+                    option.classList.add('active');
+                } else if (option.dataset.palette === 'default') {
+                    option.classList.remove('active');
+                }
+            });
+        }
+        
+        // 切换配色菜单
+        paletteToggle.addEventListener('click', () => {
+            paletteMenu.classList.toggle('show');
+        });
+        
+        // 点击其他地方关闭菜单
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.palette-switcher')) {
+                paletteMenu.classList.remove('show');
+            }
+        });
+        
+        // 切换配色方案
+        paletteOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const palette = option.dataset.palette;
+                
+                // 移除所有active类
+                paletteOptions.forEach(opt => opt.classList.remove('active'));
+                
+                // 添加active类到当前选项
+                option.classList.add('active');
+                
+                // 设置配色方案
+                if (palette === 'default') {
+                    html.removeAttribute('data-theme-palette');
+                    localStorage.removeItem('theme-palette');
+                } else {
+                    html.setAttribute('data-theme-palette', palette);
+                    localStorage.setItem('theme-palette', palette);
+                }
+                
+                // 关闭菜单
+                paletteMenu.classList.remove('show');
+            });
+        });
+        
+        // 应用CSS变量到样式标签
+        function updateCSSVars() {
+            const root = document.documentElement;
+            document.querySelectorAll('[style*="var(--"]').forEach(el => {
+                const style = el.getAttribute('style');
+                el.setAttribute('style', style);
+            });
+        }
+        
+        // 监听主题和配色方案变化
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && 
+                    (mutation.attributeName === 'data-theme' || 
+                     mutation.attributeName === 'data-theme-palette')) {
+                    updateCSSVars();
+                }
+            });
+        });
+        
+        observer.observe(html, { attributes: true });
+        
+        // 页面加载完成后应用一次
+        document.addEventListener('DOMContentLoaded', updateCSSVars);
+        
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // 关闭移动端菜单
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // 初始化 Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            timeline: {
+                useMaxWidth: true,
+                height: 300,
+                barHeight: 30,
+                fontSize: 14,
+                fontFamily: '"Noto Sans SC", sans-serif',
+                sectionFontSize: 16,
+                sectionFontFamily: '"Noto Serif SC", serif',
+                backgroundColor: 'var(--card-bg)',
+                textColor: 'var(--text)',
+                altSectionBackgroundColor: 'var(--bg-light)',
+                altSectionTextColor: 'var(--text)',
+                markerColor: 'var(--primary)',
+                lineColor: 'var(--primary-light)'
+            }
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.add('py-2');
+                nav.classList.remove('py-3');
+            } else {
+                nav.classList.remove('shadow-lg');
+                nav.classList.remove('py-2');
+                nav.classList.add('py-3');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医院信息化升级团队能力模型与培训计划</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #3b82f6;
+            --secondary-light: #93c5fd;
+            --accent: #8b5cf6;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --background: #ffffff;
+            --background-alt: #f8fafc;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --timeline-bg: #f1f5f9;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #60a5fa;
+            --secondary-light: #93c5fd;
+            --accent: #a78bfa;
+            --text: #f8fafc;
+            --text-light: #cbd5e1;
+            --background: #0f172a;
+            --background-alt: #1e293b;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.2);
+            --card-bg: #1e293b;
+            --header-bg: #0f172a;
+            --timeline-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            padding: 0;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            letter-spacing: -0.025em;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+            margin-top: 2rem;
+        }
+
+        p, ul, ol {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        a:hover {
+            border-color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--background-alt);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background-color: var(--background-alt);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.25rem;
+        }
+
+        .section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--timeline-bg);
+            border-radius: 1rem;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-phases {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-phase {
+            width: 30%;
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-phase:hover, .timeline-phase.active {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .timeline-phase-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-phase-duration {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .training-modules {
+            display: none;
+        }
+
+        .training-modules.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .module-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .module-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .module-table td {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .module-table tr:nth-child(even) {
+            background-color: var(--background-alt);
+        }
+
+        .module-table tr:hover {
+            background-color: var(--secondary-light);
+        }
+
+        .module-name {
+            font-weight: 600;
+        }
+
+        .module-duration {
+            white-space: nowrap;
+        }
+
+        .reading-list {
+            margin-top: 2rem;
+        }
+
+        .reading-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .reading-item:hover {
+            transform: translateX(5px);
+        }
+
+        .reading-item-icon {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .reading-item-content h4 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .reading-item-content p {
+            color: var(--text-light);
+            margin: 0;
+            font-size: 0.875rem;
+        }
+
+        .footer {
+            background-color: var(--background-alt);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            margin: 0 1rem;
+        }
+
+        .footer-copyright {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-wechat {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .author-org {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .capability-visual {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .capability-item {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .capability-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .capability-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .capability-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .tab-container {
+            margin-bottom: 2rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: var(--primary);
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .phase-overview {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .phase-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+
+        .phase-card h3 {
+            margin-top: 0;
+        }
+
+        .phase-card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-card-meta-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .phase-card-meta-item i {
+            margin-right: 0.5rem;
+        }
+
+        .visualize-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .visualize-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .section {
+                padding: 2rem 0;
+            }
+
+            .card {
+                padding: 1rem;
+            }
+
+            .timeline-phases {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline-phase {
+                width: 100%;
+            }
+
+            .module-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .footer {
+                padding: 2rem 0;
+            }
+
+            .capability-item {
+                width: 150px;
+                height: 150px;
+            }
+
+            .capability-icon {
+                font-size: 2rem;
+            }
+        }
+
+        /* 自定义饼图样式 */
+        .pie-chart-container {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .pie-chart {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--primary) 0% 20%, 
+                var(--secondary) 20% 40%, 
+                var(--accent) 40% 60%, 
+                var(--success) 60% 80%, 
+                var(--warning) 80% 100%
+            );
+            margin: 0 auto 2rem auto;
+            position: relative;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .pie-chart::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+        }
+
+        /* 进度条样式 */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-title {
+            font-weight: 600;
+        }
+
+        .progress-value {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* 培训模块可折叠样式 */
+        .module-accordion {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .module-header {
+            background-color: var(--background-alt);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .module-header:hover {
+            background-color: var(--border);
+        }
+
+        .module-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .module-title i {
+            margin-right: 0.75rem;
+            color: var(--primary);
+        }
+
+        .module-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .module-content.active {
+            padding: 1rem;
+            max-height: 1000px;
+        }
+
+        .module-content-inner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .module-detail {
+            padding: 1rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .module-detail-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .module-detail-content {
+            font-size: 0.875rem;
+        }
+
+        /* 数据可视化样式 */
+        .data-visualization {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .visualization-title {
+            margin-bottom: 2rem;
+        }
+
+        .bar-chart {
+            display: flex;
+            height: 300px;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 2rem;
+        }
+
+        .bar {
+            width: 60px;
+            background-color: var(--primary);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 1s ease;
+        }
+
+        .bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.875rem;
+            white-space: nowrap;
+        }
+
+        /* 搜索框样式 */
+        .search-container {
+            margin: 2rem 0;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background-color: var(--card-bg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box i {
+            color: var(--text-light);
+            margin-right: 0.75rem;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* 打印样式 */
+        @media print {
+            .header, .footer, .theme-toggle, .visualize-button {
+                display: none !important;
+            }
+
+            body {
+                background-color: white;
+                color: black;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            a {
+                color: black;
+                text-decoration: none;
+            }
+
+            .card, .phase-card, .module-detail, .reading-item {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .card:hover, .phase-card:hover, .module-detail:hover, .reading-item:hover {
+                transform: none;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                color: black;
+                page-break-after: avoid;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* 甘特图样式 */
+        .gantt-chart-container {
+            margin: 3rem 0;
+        }
+
+        .gantt-chart {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background-color: var(--card-bg);
+        }
+
+        .gantt-chart-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gantt-chart-task-header {
+            padding: 1rem;
+            font-weight: 600;
+            border-right: 1px solid var(--border);
+        }
+
+        .gantt-chart-timeline-header {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+
+        .gantt-chart-timeline-header div {
+            padding: 1rem;
+            font-weight: 600;
+            border-right: 1px solid var(--border);
+        }
+
+        .gantt-chart-timeline-header div:last-child {
+            border-right: none;
+        }
+
+        .gantt-days-header {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--background-alt);
+        }
+
+        .gantt-days-spacer {
+            border-right: 1px solid var(--border);
+        }
+
+        .gantt-days-container {
+            display: grid;
+            grid-template-columns: repeat(28, 1fr);
+        }
+
+        .gantt-day {
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 0.25rem 0;
+            border-right: 1px dotted var(--border);
+        }
+
+        .gantt-day:nth-child(7n) {
+            border-right: 1px solid var(--border);
+        }
+
+        .gantt-chart-body {
+            display: grid;
+            grid-template-rows: repeat(10, 1fr);
+        }
+
+        .gantt-chart-task-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            border-bottom: 1px solid var(--border);
+            min-height: 50px;
+            position: relative;
+        }
+
+        .gantt-chart-task-item:last-child {
+            border-bottom: none;
+        }
+
+        .gantt-task-name {
+            padding: 1rem;
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .gantt-task-timeline {
+            display: grid;
+            grid-template-columns: repeat(28, 1fr);
+            position: relative;
+        }
+
+        .gantt-task-bar {
+            position: absolute;
+            height: 30px;
+            border-radius: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 2px 4px var(--shadow);
+            z-index: 1;
+        }
+
+        .gantt-task-bar:hover::after {
+            content: attr(data-duration) " (" attr(data-start) " - " attr(data-end) ")";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .gantt-task-bar:hover {
+            filter: brightness(1.1);
+        }
+
+        .gantt-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .gantt-chart-header {
+                grid-template-columns: 150px 1fr;
+            }
+            
+            .gantt-chart-task-item {
+                grid-template-columns: 150px 1fr;
+            }
+            
+            .gantt-task-name {
+                font-size: 0.875rem;
+                padding: 0.75rem;
+            }
+            
+            .gantt-days-header {
+                grid-template-columns: 150px 1fr;
+            }
+            
+            .gantt-day {
+                font-size: 0.7rem;
+                padding: 0.2rem 0;
+            }
+        }
+
+        /* 甘特图相关视图切换样式 */
+        .training-table-view {
+            display: none;
+            margin-bottom: 2rem;
+        }
+        
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .view-button {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--background-alt);
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .view-button:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+        
+        .view-button:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        
+        .view-button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .phase-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            color: white;
+            white-space: nowrap;
+        }
+        
+        .phase-tag.phase-1 {
+            background-color: var(--primary);
+        }
+        
+        .phase-tag.phase-2 {
+            background-color: var(--secondary);
+        }
+        
+        .phase-tag.phase-3 {
+            background-color: var(--accent);
+        }
+        
+        .phase-tag.phase-4 {
+            background-color: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">高效开发团队培养计划</div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="切换深色/浅色模式">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>服务医院医疗智能化</h1>
+            <p>利用大模型解决医院信息化的一切问题</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="section">
+            <div class="section-header">
+                <h2>团队能力概览</h2>
+                <p>针对医院信息化升级项目，这支20人团队需要具备全面的跨领域能力</p>
+            </div>
+
+            <div class="capability-visual">
+                <div class="capability-item">
+                    <i class="fas fa-brain capability-icon"></i>
+                    <div class="capability-name">医疗语义理解与知识建构</div>
+                </div>
+                <div class="capability-item">
+                    <i class="fas fa-robot capability-icon"></i>
+                    <div class="capability-name">大模型操作与Agent系统构建</div>
+                </div>
+                <div class="capability-item">
+                    <i class="fas fa-laptop-code capability-icon"></i>
+                    <div class="capability-name">医疗软件开发与集成</div>
+                </div>
+                <div class="capability-item">
+                    <i class="fas fa-shield-alt capability-icon"></i>
+                    <div class="capability-name">合规与隐私意识</div>
+                </div>
+                <div class="capability-item">
+                    <i class="fas fa-lightbulb capability-icon"></i>
+                    <div class="capability-name">自主学习与Prompt/Chain工程</div>
+                </div>
+            </div>
+
+            <div class="data-visualization">
+                <h3 class="visualization-title">能力维度分布</h3>
+                <div class="pie-chart-container">
+                    <div class="pie-chart"></div>
+                    <div class="pie-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--primary);"></div>
+                            <div>医疗语义理解 (20%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--secondary);"></div>
+                            <div>大模型与Agent (20%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--accent);"></div>
+                            <div>医疗软件开发 (20%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--success);"></div>
+                            <div>合规与隐私 (20%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--warning);"></div>
+                            <div>自主学习能力 (20%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="week-1">第一周</button>
+                    <button class="tab-button" data-tab="week-2">第二周</button>
+                    <button class="tab-button" data-tab="week-3">第三周</button>
+                    <button class="tab-button" data-tab="week-4">第四周</button>
+                </div>
+
+                <div class="tab-content active" id="week-1">
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-laptop"></i>
+                                主流大模型平台入门
+                            </div>
+                            <div class="module-duration">2天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        熟悉多种主流大语言模型的使用方法，包括通过Web界面和API调用模型；了解各模型的特点（如Claude善于长上下文分析，Gemini具备工具使用能力等）；能够在简单医疗问答场景下调用模型并获得满意结果。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        ChatGPT在线体验；OpenAI API文档；Claude.ai平台；模型对比报告（了解不同模型特长）
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-comment-alt"></i>
+                                Prompt工程与临床语义基础
+                            </div>
+                            <div class="module-duration">2天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        学习设计有效的Prompt技巧，掌握如何用自然语言指示模型执行医疗相关任务；训练成员针对医疗场景编写Prompt（如询问病史总结、生成治疗计划建议），并引入简单的Chain思维，将复杂指令拆解为多步对话。同时，初步学习常见临床术语和缩写，使提示能被模型正确理解。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        Prompt Engineering线上课程（如DeepLearning.AI提供的教程）；医疗术语词表（SNOMED CT浏览器、ICD-10速查）；实践练习：用不同提示让ChatGPT生成病历摘要
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-database"></i>
+                                医疗数据标准与术语导论
+                            </div>
+                            <div class="module-duration">3天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        理解医疗信息标准的重要性，学习HL7 v2/v3消息结构及FHIR资源格式；了解FHIR如何改进数据互操作性。掌握基本的FHIR资源（Patient、Observation等）以及使用FHIR API获取和提交数据的方法。同时，了解临床编码体系ICD-10的编码规则、SNOMED CT本体结构等，为后续深入应用打基础。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        HL7/FHIR初学者教程；FHIR沙盒环境实践（如HAPI FHIR服务器）；DICOM基础指南；WHO ICD-10培训资料；SNOMED CT入门阅读
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="week-2">
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-robot"></i>
+                                Agent框架学习与应用
+                            </div>
+                            <div class="module-duration">3天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        深入学习LangChain和MCP等Agent框架的核心组件与工作原理。掌握工具调用、记忆管理、链式思考等关键概念，学习设计和构建能自主执行复杂任务的Agent系统。通过实践演练开发简单的医疗问答Agent，能够回答基于既定知识的医学问题，并尝试将其与外部API连接。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        LangChain官方文档与示例；MCP简介资料；Python开发环境；医学知识检索API示例；简单Agent项目实践
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-language"></i>
+                                临床术语体系与LLM应用
+                            </div>
+                            <div class="module-duration">2天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        深入掌握标准临床术语在LLM应用中的作用。学习SNOMED CT概念检索和ICD编码规则，在Agent中加入术语标准化步骤。练习构建一个小型知识图谱或查询接口，允许Agent基于SNOMED CT关系查询相关临床概念，通过知识库校正LLM的回答，提高医学内容准确性。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        SNOMED CT培训教材；ICD-10编码练习；RAG（检索增强生成）技术简介；实践项目：实现"症状->诊断编码"转换工具并与LLM对接
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-exchange-alt"></i>
+                                医疗IT标准与系统集成
+                            </div>
+                            <div class="module-duration">2天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        强化团队对医疗数据标准的实际应用能力。通过实战练习FHIR和HL7接口集成：编写程序从医院FHIR服务器提取患者记录，处理HL7消息并更新数据库。学习DICOM数据处理基础，掌握医学影像元数据读取方法，为后续将Agent与HIS、LIS、PACS等系统集成打下基础。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        FHIR Server沙盒练习（如公开的HAPI FHIR服务器实例）；HL7消息模拟工具；DICOM数据集样例；相关Python库（pydicom等）
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="week-3">
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-project-diagram"></i>
+                                智能Agent构建实战
+                            </div>
+                            <div class="module-duration">4天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        开发面向具体医疗场景的智能Agent，例如构建一个电子病历助手，能读取患者数据、回答医生问题并提供决策支持。学习处理结构化与非结构化医疗数据，构建Agent工具链和决策流程，实现临床信息提取与推理，并进行性能评估与优化。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        项目实践：开发"问诊助理"Agent；合成患者数据集（可用Synthea生成模拟FHIR病历数据）；临床指南文献；Agent性能评估指标；团队代码审查
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-code"></i>
+                                医疗系统集成与API开发
+                            </div>
+                            <div class="module-duration">3天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        将开发的Agent与模拟医院系统环境集成，包括构建可供Agent调用的医疗数据API接口、开发FHIR资源处理服务和实现HL7消息转换层。学习设计稳定可靠的系统架构，处理异步通信、数据缓存和错误恢复等实际问题，为实际部署做准备。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        API设计最佳实践；FastAPI/Flask开发框架；医院系统模拟环境；数据转换工具；集成测试方法
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="week-4">
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-vial"></i>
+                                系统测试与优化
+                            </div>
+                            <div class="module-duration">3天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        在模拟环境中全面测试开发的系统，识别并修复性能瓶颈、功能缺陷和用户体验问题。学习制定测试计划、构建测试用例集和自动化测试脚本，对系统在各种场景下的表现进行评估。优化Agent响应速度、准确性和稳定性，为正式部署做最后准备。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        性能测试工具；自动化测试框架；医疗场景测试用例库；用户反馈收集表；系统性能基准
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="module-accordion">
+                        <div class="module-header">
+                            <div class="module-title">
+                                <i class="fas fa-shield-alt"></i>
+                                合规审查与部署准备
+                            </div>
+                            <div class="module-duration">4天</div>
+                        </div>
+                        <div class="module-content">
+                            <div class="module-content-inner">
+                                <div class="module-detail">
+                                    <div class="module-detail-title">培训目标</div>
+                                    <div class="module-detail-content">
+                                        对系统进行全面的合规性审查，确保满足医疗数据隐私和安全要求。学习医疗AI系统的风险评估方法，识别潜在的安全隐患和合规问题。制定系统部署文档、操作手册和应急预案，准备培训最终用户，确保系统可以顺利上线运行。
+                                    </div>
+                                </div>
+                                <div class="module-detail">
+                                    <div class="module-detail-title">关键工具/资源</div>
+                                    <div class="module-detail-content">
+                                        合规检查清单；安全审计工具；用户文档模板；培训计划；部署流程图；运维手册
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>一个月集中强化培训计划</h2>
+                <p>培训计划压缩为四周密集课程，通过合理安排使团队快速掌握关键能力</p>
+            </div>
+
+            <div class="phase-overview">
+                <div class="phase-card">
+                    <h3>第一周：基础入门</h3>
+                    <div class="phase-card-meta">
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>7天</span>
+                        </div>
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>3个核心模块</span>
+                        </div>
+                    </div>
+                    <p>第一周聚焦大模型基础使用、Prompt工程与医疗数据标准入门，让团队快速掌握必要的基础工具和知识。</p>
+                </div>
+                <div class="phase-card">
+                    <h3>第二周：技术深化</h3>
+                    <div class="phase-card-meta">
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>7天</span>
+                        </div>
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>3个进阶模块</span>
+                        </div>
+                    </div>
+                    <p>第二周深入学习Agent开发框架、医疗术语体系及系统集成方法，开始构建简单的医疗应用原型。</p>
+                </div>
+                <div class="phase-card">
+                    <h3>第三周：集成实战</h3>
+                    <div class="phase-card-meta">
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>7天</span>
+                        </div>
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>2个实战模块</span>
+                        </div>
+                    </div>
+                    <p>第三周进行实际项目构建，实现Agent系统开发与集成，完成高级功能开发，重点培养实际应用能力。</p>
+                </div>
+                <div class="phase-card">
+                    <h3>第四周：项目完善</h3>
+                    <div class="phase-card-meta">
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>7天</span>
+                        </div>
+                        <div class="phase-card-meta-item">
+                            <i class="fas fa-tasks"></i>
+                            <span>2个收尾模块</span>
+                        </div>
+                    </div>
+                    <p>第四周完善项目，进行合规审查与优化，通过真实医院场景测试，确保系统安全可靠，为正式部署做准备。</p>
+                </div>
+            </div>
+
+            <!-- 甘特图部分 -->
+            <div class="gantt-chart-container">
+                <h3>培训甘特图计划表</h3>
+                
+                <!-- 表格式数据视图 -->
+                <div class="training-table-view">
+                    <table class="module-table">
+                        <thead>
+                            <tr>
+                                <th>培训模块</th>
+                                <th>阶段</th>
+                                <th>开始日</th>
+                                <th>结束日</th>
+                                <th>持续时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="module-name">主流大模型平台入门</td>
+                                <td><span class="phase-tag phase-1">第一周：基础入门</span></td>
+                                <td>第1天</td>
+                                <td>第2天</td>
+                                <td>2天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">Prompt工程与临床语义基础</td>
+                                <td><span class="phase-tag phase-1">第一周：基础入门</span></td>
+                                <td>第3天</td>
+                                <td>第4天</td>
+                                <td>2天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">医疗数据标准与术语导论</td>
+                                <td><span class="phase-tag phase-1">第一周：基础入门</span></td>
+                                <td>第5天</td>
+                                <td>第7天</td>
+                                <td>3天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">Agent框架学习与应用</td>
+                                <td><span class="phase-tag phase-2">第二周：技术深化</span></td>
+                                <td>第8天</td>
+                                <td>第10天</td>
+                                <td>3天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">临床术语体系与LLM应用</td>
+                                <td><span class="phase-tag phase-2">第二周：技术深化</span></td>
+                                <td>第11天</td>
+                                <td>第12天</td>
+                                <td>2天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">医疗IT标准与系统集成</td>
+                                <td><span class="phase-tag phase-2">第二周：技术深化</span></td>
+                                <td>第13天</td>
+                                <td>第14天</td>
+                                <td>2天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">智能Agent构建实战</td>
+                                <td><span class="phase-tag phase-3">第三周：集成实战</span></td>
+                                <td>第15天</td>
+                                <td>第18天</td>
+                                <td>4天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">医疗系统集成与API开发</td>
+                                <td><span class="phase-tag phase-3">第三周：集成实战</span></td>
+                                <td>第19天</td>
+                                <td>第21天</td>
+                                <td>3天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">系统测试与优化</td>
+                                <td><span class="phase-tag phase-4">第四周：项目完善</span></td>
+                                <td>第22天</td>
+                                <td>第24天</td>
+                                <td>3天</td>
+                            </tr>
+                            <tr>
+                                <td class="module-name">合规审查与部署准备</td>
+                                <td><span class="phase-tag phase-4">第四周：项目完善</span></td>
+                                <td>第25天</td>
+                                <td>第28天</td>
+                                <td>4天</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 切换视图按钮 -->
+                <div class="view-toggle">
+                    <button class="view-button active" data-view="gantt">甘特图视图</button>
+                    <button class="view-button" data-view="table">表格视图</button>
+                </div>
+                
+                <!-- 甘特图视图 -->
+                <div class="gantt-chart" id="gantt-chart">
+                    <div class="gantt-chart-header">
+                        <div class="gantt-chart-task-header">培训模块</div>
+                        <div class="gantt-chart-timeline-header">
+                            <div class="week-header">第1周</div>
+                            <div class="week-header">第2周</div>
+                            <div class="week-header">第3周</div>
+                            <div class="week-header">第4周</div>
+                        </div>
+                    </div>
+                    <div class="gantt-days-header">
+                        <div class="gantt-days-spacer"></div>
+                        <div class="gantt-days-container">
+                            <div class="gantt-day">1</div>
+                            <div class="gantt-day">2</div>
+                            <div class="gantt-day">3</div>
+                            <div class="gantt-day">4</div>
+                            <div class="gantt-day">5</div>
+                            <div class="gantt-day">6</div>
+                            <div class="gantt-day">7</div>
+                            <div class="gantt-day">8</div>
+                            <div class="gantt-day">9</div>
+                            <div class="gantt-day">10</div>
+                            <div class="gantt-day">11</div>
+                            <div class="gantt-day">12</div>
+                            <div class="gantt-day">13</div>
+                            <div class="gantt-day">14</div>
+                            <div class="gantt-day">15</div>
+                            <div class="gantt-day">16</div>
+                            <div class="gantt-day">17</div>
+                            <div class="gantt-day">18</div>
+                            <div class="gantt-day">19</div>
+                            <div class="gantt-day">20</div>
+                            <div class="gantt-day">21</div>
+                            <div class="gantt-day">22</div>
+                            <div class="gantt-day">23</div>
+                            <div class="gantt-day">24</div>
+                            <div class="gantt-day">25</div>
+                            <div class="gantt-day">26</div>
+                            <div class="gantt-day">27</div>
+                            <div class="gantt-day">28</div>
+                        </div>
+                    </div>
+                    <div class="gantt-chart-body">
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">主流大模型平台入门</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: 0%; width: calc(2/28 * 100%); background-color: var(--primary);" data-duration="2天" data-start="第1天" data-end="第2天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">Prompt工程与临床语义基础</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(2/28 * 100%); width: calc(2/28 * 100%); background-color: var(--primary);" data-duration="2天" data-start="第3天" data-end="第4天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">医疗数据标准与术语导论</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(4/28 * 100%); width: calc(3/28 * 100%); background-color: var(--primary);" data-duration="3天" data-start="第5天" data-end="第7天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">Agent框架学习与应用</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(7/28 * 100%); width: calc(3/28 * 100%); background-color: var(--secondary);" data-duration="3天" data-start="第8天" data-end="第10天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">临床术语体系与LLM应用</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(10/28 * 100%); width: calc(2/28 * 100%); background-color: var(--secondary);" data-duration="2天" data-start="第11天" data-end="第12天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">医疗IT标准与系统集成</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(12/28 * 100%); width: calc(2/28 * 100%); background-color: var(--secondary);" data-duration="2天" data-start="第13天" data-end="第14天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">智能Agent构建实战</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(14/28 * 100%); width: calc(4/28 * 100%); background-color: var(--accent);" data-duration="4天" data-start="第15天" data-end="第18天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">医疗系统集成与API开发</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(18/28 * 100%); width: calc(3/28 * 100%); background-color: var(--accent);" data-duration="3天" data-start="第19天" data-end="第21天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">系统测试与优化</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(21/28 * 100%); width: calc(3/28 * 100%); background-color: var(--success);" data-duration="3天" data-start="第22天" data-end="第24天"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-chart-task-item">
+                            <div class="gantt-task-name">合规审查与部署准备</div>
+                            <div class="gantt-task-timeline">
+                                <div class="gantt-task-bar" style="left: calc(24/28 * 100%); width: calc(4/28 * 100%); background-color: var(--success);" data-duration="4天" data-start="第25天" data-end="第28天"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gantt-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--primary);"></div>
+                        <div>第一周：基础入门阶段（7天）</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--secondary);"></div>
+                        <div>第二周：技术深化阶段（7天）</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--accent);"></div>
+                        <div>第三周：集成实战阶段（7天）</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: var(--success);"></div>
+                        <div>第四周：项目完善阶段（7天）</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2>进一步阅读</h2>
+                <p>为加深对大模型赋能医疗信息化领域的理解，推荐以下专业书籍与论文</p>
+            </div>
+
+            <div class="reading-list">
+                <div class="reading-item">
+                    <div class="reading-item-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="reading-item-content">
+                        <h4>《Large Language Models in Medicine》</h4>
+                        <p>由Amit Kaushal与Abraham Verghese合著，深入探讨大语言模型在临床决策支持、医疗文档生成和患者护理中的应用，同时讨论伦理和实施挑战。</p>
+                    </div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-item-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="reading-item-content">
+                        <h4>《Healthcare Interoperability Standards Compliance Handbook》</h4>
+                        <p>由HIMSS出版，全面介绍HL7 FHIR、SNOMED CT、DICOM等医疗互操作标准，以及它们在现代医疗信息系统中的实施策略和最佳实践。</p>
+                    </div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-item-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="reading-item-content">
+                        <h4>《Building Clinical Decision Support Systems with Large Language Models》</h4>
+                        <p>Nature Digital Medicine期刊论文，探讨LLM在临床决策支持系统中的应用架构、验证方法和监管考量，提供实施路线图。</p>
+                    </div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-item-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="reading-item-content">
+                        <h4>《LLM-Powered Autonomous Agents for Healthcare Systems Integration》</h4>
+                        <p>由斯坦福医学院发表的研究论文，详细描述了如何构建与HIS、PACS等系统集成的自主医疗Agent，包括工具使用、临床推理和安全保障机制。</p>
+                    </div>
+                </div>
+                <div class="reading-item">
+                    <div class="reading-item-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="reading-item-content">
+                        <h4>《Healthcare Data Privacy and Security in the Age of AI》</h4>
+                        <p>全面探讨在医疗AI领域的数据隐私与安全挑战，提供HIPAA、GDPR等法规解读，以及AI系统合规的实用框架和案例分析。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="author-info">
+                    <div class="author-name">作者：季晓康</div>
+                    <div class="author-wechat">微信公众号：凿壁</div>
+                    <div class="author-org">版权信息：国家健康医疗大数据研究院</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查系统偏好
+        const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // 设置初始主题
+        if (prefersDarkMode) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+        
+        // 标签页切换
+        const tabButtons = document.querySelectorAll('.tab-button');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabContainer = button.closest('.tab-container');
+                const tabId = button.getAttribute('data-tab');
+                
+                // 移除所有活动状态
+                tabContainer.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                tabContainer.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // 设置当前活动标签
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // 培训模块折叠/展开
+        const moduleHeaders = document.querySelectorAll('.module-header');
+        
+        moduleHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+            });
+        });
+        
+        // 动画效果
+        function animateProgressBars() {
+            const progressFills = document.querySelectorAll('.progress-fill');
+            
+            progressFills.forEach(fill => {
+                const targetWidth = fill.style.width;
+                fill.style.width = '0';
+                
+                setTimeout(() => {
+                    fill.style.width = targetWidth;
+                }, 300);
+            });
+        }
+        
+        function animateBars() {
+            const bars = document.querySelectorAll('.bar');
+            
+            bars.forEach(bar => {
+                const targetHeight = bar.style.height;
+                bar.style.height = '0';
+                
+                setTimeout(() => {
+                    bar.style.height = targetHeight;
+                }, 300);
+            });
+        }
+        
+        // 页面加载时执行动画
+        window.addEventListener('load', () => {
+            animateProgressBars();
+            animateBars();
+        });
+        
+        // 标签切换时重新执行动画
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                animateProgressBars();
+            });
+        });
+
+        // 添加甘特图视图切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const viewButtons = document.querySelectorAll('.view-button');
+            const ganttChart = document.querySelector('.gantt-chart');
+            const tableView = document.querySelector('.training-table-view');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const viewType = button.getAttribute('data-view');
+                    
+                    // 移除所有按钮的活动状态
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // 添加当前按钮的活动状态
+                    button.classList.add('active');
+                    
+                    if (viewType === 'gantt') {
+                        ganttChart.style.display = 'block';
+                        tableView.style.display = 'none';
+                    } else if (viewType === 'table') {
+                        ganttChart.style.display = 'none';
+                        tableView.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

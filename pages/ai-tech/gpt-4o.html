@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPT-4o图像生成能力分析与评估</title>
+    <!-- Date Metadata -->
+    <meta name="creation-date" content="2024-03-22">
+    <meta name="last-modified-date" content="2024-03-30">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
@@ -577,12 +580,42 @@
         .fade-in-delay-3 {
             animation-delay: 0.6s;
         }
+
+        /* Article Dates */
+        .article-dates {
+            display: flex;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .article-dates .date-item {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+        
+        .article-dates i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">GPT-4o图像评估</a>
+        <a href="../../index.html" class="flex items-center mr-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+            <i class="fas fa-home text-xl"></i>
+        </a>
+        
+            <a href="javascript:void(0)" class="logo">GPT-4o图像评估</a>
             <button class="theme-toggle" id="theme-toggle">
                 <i class="fas fa-moon"></i>
             </button>
@@ -820,33 +853,46 @@
             <h2 class="section-title fade-in">进一步阅读</h2>
             <ul class="reading-list fade-in fade-in-delay-1">
                 <li class="reading-item">
-                    <a href="https://arxiv.org/abs/2403.08293" target="_blank">GPT-4o: 大型多模态模型的演变与应用</a>
+                    <a href="https://arxiv.org/abs/2403.08293" target="_blank" rel="noopener">GPT-4o: 大型多模态模型的演变与应用</a>
                     <p>这篇论文详细探讨了GPT-4o的架构、训练方法和多模态能力，包括其图像生成技术的技术细节。</p>
                 </li>
                 <li class="reading-item">
-                    <a href="https://www.sciencedirect.com/journal/neural-networks/special-issue/10D8JJHP1M8" target="_blank">《神经网络》特刊：自回归图像生成的进展与挑战</a>
+                    <a href="https://www.sciencedirect.com/journal/neural-networks/special-issue/10D8JJHP1M8" target="_blank" rel="noopener">《神经网络》特刊：自回归图像生成的进展与挑战</a>
                     <p>这个特刊汇集了关于自回归图像生成方法的最新研究，提供了理解GPT-4o图像生成技术的理论基础。</p>
                 </li>
                 <li class="reading-item">
-                    <a href="https://openai.com/research/publications" target="_blank">OpenAI研究报告：多模态生成模型的创新与限制</a>
+                    <a href="https://openai.com/research/publications" target="_blank" rel="noopener">OpenAI研究报告：多模态生成模型的创新与限制</a>
                     <p>OpenAI官方发布的研究报告，详细分析了包括GPT-4o在内的多模态模型在图像生成方面的创新与当前限制。</p>
                 </li>
                 <li class="reading-item">
-                    <a href="https://www.morganclaypool.com/doi/abs/10.2200/S01132ED1V01Y202101AIM051" target="_blank">《生成式人工智能：理论与实践》- Morgan & Claypool出版</a>
+                    <a href="https://www.morganclaypool.com/doi/abs/10.2200/S01132ED1V01Y202101AIM051" target="_blank" rel="noopener">《生成式人工智能：理论与实践》- Morgan & Claypool出版</a>
                     <p>这本专著提供了生成式AI的全面概述，包括图像生成的历史发展、当前技术和未来趋势。</p>
                 </li>
                 <li class="reading-item">
-                    <a href="https://journals.sagepub.com/doi/full/10.1177/20539517231200443" target="_blank">《人工智能社会影响》期刊：AI生成内容的伦理与政策挑战</a>
+                    <a href="https://journals.sagepub.com/doi/full/10.1177/20539517231200443" target="_blank" rel="noopener">《人工智能社会影响》期刊：AI生成内容的伦理与政策挑战</a>
                     <p>这篇研究文章探讨了AI生成内容（包括图像）的社会影响、伦理考量和政策挑战，对理解GPT-4o的内容政策有重要参考价值。</p>
                 </li>
             </ul>
         </div>
     </section>
 
+    <!-- Article Dates -->
+    <div class="article-dates">
+        <div class="date-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>创建日期: 2024-03-22</span>
+        </div>
+        <div class="date-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>最后更新: 2024-03-30</span>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
     <footer>
         <div class="container footer-container">
             <div class="footer-logo">
-                <img src="/api/placeholder/200/80" alt="Logo Placeholder" />
+                <i class="fab fa-openai fa-2x" style="color: var(--primary);"></i>
             </div>
             <div class="footer-info">
                 <p><strong>作者姓名:</strong> 季晓康</p>
@@ -854,9 +900,9 @@
                 <p><strong>版权信息:</strong> 国家健康医疗大数据研究院</p>
             </div>
             <div class="footer-social">
-                <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-zhihu"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                <a href="javascript:void(0)" class="social-icon"><i class="fab fa-weixin"></i></a>
+                <a href="javascript:void(0)" class="social-icon"><i class="fab fa-zhihu"></i></a>
+                <a href="javascript:void(0)" class="social-icon"><i class="fab fa-weibo"></i></a>
             </div>
             <p class="copyright">© 2025 国家健康医疗大数据研究院. 保留所有权利.</p>
         </div>

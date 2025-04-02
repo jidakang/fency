@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI驱动的健康追踪工具分析 | 凿壁</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Define custom font families */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            @apply font-semibold;
+        }
+        /* Custom accent color */
+        .text-accent { @apply text-blue-600 dark:text-blue-400; }
+        .bg-accent { @apply bg-blue-600 dark:bg-blue-500; }
+        .border-accent { @apply border-blue-600 dark:border-blue-400; }
+        
+        /* Styling for Mermaid diagrams */
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        /* First letter drop cap style (optional enhancement) */
+        .first-letter-drop::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            @apply float-left text-5xl font-bold text-accent mr-2 leading-none mt-1;
+        }
+
+        /* Enhance readability */
+        p, li {
+           @apply leading-relaxed tracking-wide;
+        }
+
+        /* Smooth scroll polyfill if needed, but handled by `scroll-smooth` class on html */
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+</head>
+<body class="antialiased">
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex items-center">
+                <a href="../../index.html" class="flex items-center mr-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors" title="返回首页">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+            
+
+    <button id="theme-toggle" type="button" class="fixed top-4 right-4 z-50 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+        <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
+    </button>
+
+    <div class="container mx-auto px-4 py-8 md:py-16 max-w-5xl">
+
+        <section class="mb-16 text-center md:text-left">
+            <div class="bg-gradient-to-r from-blue-50 dark:from-blue-900 via-transparent to-transparent p-8 rounded-lg shadow-md dark:shadow-gray-800">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+                    <span class="text-accent"><i class="fas fa-robot mr-2"></i>AI 赋能</span>：一小时构建健康追踪分析应用
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-6">
+                    深入解析由 <code class="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm">@devv_ai</code> Coding Agent 快速构建的健康与锻炼追踪工具的技术架构、实现路径与未来潜力。
+                </p>
+                <span class="inline-block bg-blue-100 dark:bg-blue-800 text-accent text-sm font-medium px-3 py-1 rounded-full">
+                    <i class="far fa-clock mr-1"></i> 开发时间：约 1 小时
+                </span>
+                <span class="inline-block bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-300 text-sm font-medium px-3 py-1 rounded-full ml-2">
+                    <i class="fas fa-dollar-sign mr-1"></i> 成本：约 10 美元
+                </span>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">核心洞察</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-laptop-code mr-2"></i>技术栈推测</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li><span class="font-medium">前端:</span> 可能基于 React，集成日历与图表库。</li>
+                        <li><span class="font-medium">后端:</span> 或采用 Node.js (Express) + MongoDB 方案。</li>
+                        <li><span class="font-medium">数据源:</span> 通过 API 连接 Whoop、Garmin，并接入 Apple Health (方式待定)。</li>
+                        <li><span class="font-medium">AI 核心:</span> 利用 LLM (如 GPT) 生成建议，设计为模块化。</li>
+                    </ul>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-route mr-2"></i>实现路径</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>用户通过 <code class="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm">@devv_ai</code> 提出需求。</li>
+                        <li>AI 代理完成架构设计与代码生成。</li>
+                        <li>用户进行测试，利用 AI 自动修复 Bug。</li>
+                        <li>计划开源，并提供云托管版本。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-12">
+             <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">项目速览</h2>
+             <p class="text-gray-700 dark:text-gray-300 mb-4 first-letter-drop">
+                该项目是一个创新的健康与锻炼追踪分析应用，由用户 jiayuan (<code class="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm">@tisoga</code>) 借助 <code class="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm">@devv_ai</code> 的 Coding Agent 在极短时间内（一小时多）创建完成。其核心功能在于整合来自多个流行健康平台（Whoop, Apple Health, Garmin）的数据，通过直观的日历视图进行可视化展示，并运用人工智能技术提供个性化的锻炼建议。
+             </p>
+             <div class="flex items-center justify-center space-x-4 text-gray-600 dark:text-gray-400 mt-4">
+                <span title="Whoop"><i class="fas fa-link text-xl"></i> Whoop</span>
+                <span class="text-gray-300 dark:text-gray-600">+</span>
+                <span title="Apple Health"><i class="fab fa-apple text-xl"></i> Apple Health</span>
+                 <span class="text-gray-300 dark:text-gray-600">+</span>
+                <span title="Garmin"><i class="fas fa-satellite-dish text-xl"></i> Garmin</span>
+                <span class="text-gray-300 dark:text-gray-600">→</span>
+                <span title="AI Analysis"><i class="fas fa-brain text-xl text-accent"></i> AI 分析 & 建议</span>
+             </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">技术架构解析</h2>
+            <div class="space-y-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-desktop mr-2 text-accent"></i>前端 (Frontend)</h3>
+                    <p class="text-gray-700 dark:text-gray-300">推测使用 <span class="font-medium text-accent">React</span> 构建用户界面，包含日历（如 <code class="text-sm">react-big-calendar</code>）和图表（如 <code class="text-sm">Chart.js</code>）等组件，实现数据可视化。设计需具备响应式能力，适配桌面和移动设备。</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-server mr-2 text-accent"></i>后端 (Backend)</h3>
+                    <p class="text-gray-700 dark:text-gray-300">可能采用 <span class="font-medium text-accent">Node.js</span> 及 <span class="font-medium">Express</span> 框架处理 API 请求、用户认证和业务逻辑。数据存储方面，<span class="font-medium text-accent">MongoDB</span> 因其灵活性成为可能选项，用于存储用户数据和健康指标。</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-plug mr-2 text-accent"></i>数据集成 (Data Integration)</h3>
+                    <p class="text-gray-700 dark:text-gray-300">通过 <span class="font-medium">OAuth</span> 协议安全连接 Whoop 和 Garmin 的官方 API 以获取数据。Apple Health 的集成方式尚不明确，可能涉及 <span class="font-medium">HealthKit (iOS SDK)</span> 或用户手动<span class="font-medium">导出/导入数据</span>。</p>
+                </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-brain mr-2 text-accent"></i>人工智能组件 (AI Component)</h3>
+                    <p class="text-gray-700 dark:text-gray-300">核心的 AI 教练功能，可能通过调用 <span class="font-medium text-accent">大型语言模型 (LLM) API</span>（例如 OpenAI 的 GPT 系列）来实现。系统设计成模块化，允许用户未来接入<span class="font-medium">自定义的 LLM</span>，显示出高度的灵活性。</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 overflow-x-auto">
+                 <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100"><i class="fas fa-table mr-2"></i>技术组件概览</h3>
+                 <table class="min-w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="py-3 px-4 border-b dark:border-gray-600 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">组件</th>
+                            <th class="py-3 px-4 border-b dark:border-gray-600 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">可能技术</th>
+                            <th class="py-3 px-4 border-b dark:border-gray-600 text-left text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">前端</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">React, Chart.js, react-big-calendar</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">响应式设计，跨设备兼容</td>
+                        </tr>
+                         <tr>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">后端</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">Node.js, Express, MongoDB</td>
+                             <td class="py-3 px-4 text-gray-700 dark:text-gray-300">处理 API，存储数据</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">数据集成</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">OAuth (Whoop, Garmin), HealthKit 或数据导入 (Apple Health)</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300"><span class="text-yellow-600 dark:text-yellow-400">Apple Health 方式待确认</span></td>
+                        </tr>
+                         <tr>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">AI 组件</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">LLM API (如 OpenAI GPT)</td>
+                            <td class="py-3 px-4 text-gray-700 dark:text-gray-300">模块化设计，支持用户选择模型</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">实现路径与可视化</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                该工具的开发过程展示了 AI Coding Agent 的强大能力。用户仅需提供高层次的需求，AI 便能自主完成架构设计、代码生成，甚至具备初步的调试能力。这种模式极大地缩短了开发周期，降低了技术门槛。
+            </p>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8">
+                 <h3 class="text-xl font-semibold mb-4 text-center text-gray-800 dark:text-gray-100"><i class="fas fa-sitemap mr-2"></i>开发流程示意图</h3>
+                <div class="mermaid text-center text-sm md:text-base text-gray-800 dark:text-gray-200">
+graph LR
+    A[<i class='fas fa-user'></i> 用户 @tisoga] -- 1. 提供高层次需求 --> B(<i class='fas fa-robot'></i> AI Agent @devv_ai);
+    B -- 2. 设计系统架构 --> C{系统架构};
+    B -- 3. 生成代码 --> D[<i class='fas fa-code'></i> 前端代码 React];
+    B -- 3. 生成代码 --> E[<i class='fas fa-server'></i> 后端代码 Node.js];
+    B -- 3. 生成代码 --> F[<i class='fas fa-database'></i> 数据库 MongoDB];
+    B -- 3. 生成代码 --> G[<i class='fas fa-plug'></i> API 集成];
+    B -- 3. 生成代码 --> H[<i class='fas fa-brain'></i> AI 组件 LLM];
+    C --> D; C --> E; C --> F; C --> G; C --> H;
+    I[<i class='fas fa-tasks'></i> 健康追踪应用] --> J{<i class='fas fa-bug'></i> Bug?};
+    D & E & F & G & H --> I;
+    A -- 4. 测试应用 --> J;
+    J -- Yes --> K[<i class='fas fa-tools'></i> AI 自动修复];
+    K --> I;
+    J -- No --> L[<i class='fas fa-cloud-upload-alt'></i> 部署与开源];
+
+    %% Styling
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px, color:#333;
+    classDef agent fill:#e3f2fd,stroke:#2196f3,stroke-width:2px, color:#1e88e5;
+    classDef user fill:#e8f5e9,stroke:#4caf50,stroke-width:2px, color:#388e3c;
+    classDef code fill:#fff3e0,stroke:#ff9800,stroke-width:2px, color:#f57c00;
+    classDef deploy fill:#ede7f6,stroke:#673ab7,stroke-width:2px, color:#5e35b1;
+    
+    class A user;
+    class B agent;
+    class D,E,F,G,H code;
+    class L deploy;
+
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-dollar-sign mr-2 text-accent"></i>成本与维护</h3>
+                     <p class="text-gray-700 dark:text-gray-300">约 <span class="font-bold text-accent">10 美元</span> 的开发成本极具吸引力，远低于传统外包。然而，随着功能复杂化，长期维护成本是需要考虑的因素。AI 生成的模块化代码可能有助于降低维护难度。</p>
+                </div>
+                 <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center"><i class="fas fa-lightbulb mr-2 text-accent"></i>未来计划与讨论</h3>
+                    <p class="text-gray-700 dark:text-gray-300">计划<span class="font-medium">开源</span>项目并推出<span class="font-medium">云托管</span>版本，允许用户接入自有数据和 LLM。这展现了其开放性和可扩展性，但也需关注 Apple Health 集成细节、AI 性能瓶颈及开源社区维护等问题。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">结论</h2>
+            <blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-6 italic text-gray-700 dark:text-gray-400">
+                <p>这个由 <code class="bg-gray-200 dark:bg-gray-700 px-1 rounded text-sm">@devv_ai</code> AI Coding Agent 驱动开发的健康与锻炼追踪工具，不仅展示了 AI 在软件开发领域的惊人效率，也预示着个性化健康应用的新趋势。其技术选型（推测为 React/Node/Mongo）符合现代 Web 标准，而模块化的 AI 设计和开源计划则为其未来发展注入了巨大潜力。</p>
+                <i class="fas fa-quote-right text-xl text-gray-300 dark:text-gray-600 block text-right mt-2"></i>
+            </blockquote>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-accent pl-4 text-gray-800 dark:text-gray-100">进一步阅读</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                对 AI 辅助开发、大型语言模型应用或健康数据分析感兴趣？以下资源可供深入探索：
+            </p>
+            <ul class="space-y-4">
+                <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200">
+                    <i class="fas fa-book mr-2 text-accent"></i>
+                    <a href="https://arxiv.org/abs/2303.08774" target="_blank" rel="noopener" rel="noopener noreferrer" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                        Sparks of Artificial General Intelligence: Early experiments with GPT-4
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">探讨 GPT-4 在各种任务（包括编码）中展现出的早期通用人工智能迹象，有助于理解 LLM 的能力边界。</p>
+                </li>
+                <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200">
+                     <i class="fas fa-book mr-2 text-accent"></i>
+                    <a href="https://dl.acm.org/doi/10.1145/3491102.3501880" target="_blank" rel="noopener" rel="noopener noreferrer" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                        Human–AI Collaboration in Designing AI Systems
+                    </a>
+                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">研究人与 AI 如何在设计过程中协作，对于理解 <code class="text-xs">@devv_ai</code> 这类工具的工作模式很有启发。</p>
+                </li>
+                <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200">
+                    <i class="fas fa-file-alt mr-2 text-accent"></i>
+                    <a href="https://www.mongodb.com/basics/mongodb-vs-sql" target="_blank" rel="noopener" rel="noopener noreferrer" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                       MongoDB 与 SQL 数据库比较
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">了解 NoSQL 数据库（如 MongoDB）的特点，及其为何常用于需要灵活数据模型的现代 Web 应用。</p>
+                </li>
+                <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200">
+                    <i class="fas fa-file-alt mr-2 text-accent"></i>
+                     <a href="https://react.dev/" target="_blank" rel="noopener" rel="noopener noreferrer" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                       React 官方文档
+                    </a>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">深入学习 React 框架，理解其组件化、状态管理等核心概念，有助于把握现代前端开发。</p>
+                </li>
+                 <li class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200">
+                    <i class="fas fa-link mr-2 text-accent"></i>
+                    <a href="https://dev.fitbit.com/build/reference/web-api/" target="_blank" rel="noopener" rel="noopener noreferrer" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                       (示例) Fitbit Web API 文档
+                    </a>
+                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">通过查阅类似 Fitbit、Garmin 或 Whoop 的开发者 API 文档，了解健康数据如何通过 OAuth 和 API 进行集成。（注意：Whoop/Garmin API 可能需要开发者账户访问）</p>
+                </li>
+            </ul>
+        </section>
+
+        <footer class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-500 dark:text-gray-400">
+            <p>作者：季晓康</p>
+            <p>微信公众号：凿壁 (ID: zaobich)</p> 
+            <p class="mt-2">&copy; 2025 国家健康医疗大数据研究院. All Rights Reserved.</p>
+            <p class="mt-1">页面生成时间: <span id="generation-time"></span></p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Mermaid Initialization
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base', // Use 'base' and let CSS handle dark mode styling if needed
+            themeVariables: {
+                // Example: Adjust Mermaid theme variables based on dark mode if needed
+                // Needs more advanced setup to dynamically change based on CSS dark mode
+            },
+            flowchart: { // Ensure flowchart icons render correctly
+                htmlLabels: true 
+            },
+            fontFamily: '"Noto Sans SC", Tahoma, Arial, Roboto, sans-serif' // Apply consistent font
+         });
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Function to apply theme
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeToggleLightIcon.classList.remove('hidden');
+                themeToggleDarkIcon.classList.add('hidden');
+                // Optional: Tell Mermaid to use dark theme if it supports dynamic themes well
+                // mermaid.initialize({ theme: 'dark' }); // Re-init might be needed
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleDarkIcon.classList.remove('hidden');
+                themeToggleLightIcon.classList.add('hidden');
+                 // Optional: Tell Mermaid to use light theme
+                // mermaid.initialize({ theme: 'default' }); // Re-init might be needed
+            }
+             // Rerender mermaid diagrams after theme change if necessary
+             // This might cause a flash, better approach is styling via CSS if possible.
+             // try {
+             //   const mermaidDivs = document.querySelectorAll('.mermaid');
+             //   mermaidDivs.forEach((div, index) => {
+             //       const graphDefinition = div.textContent || div.getAttribute('data-mermaid');
+             //       div.removeAttribute('data-processed');
+             //       div.innerHTML = graphDefinition; 
+             //   });
+             //   mermaid.run({ nodes: mermaidDivs });
+             // } catch (e) {
+             //   console.error("Error rerendering Mermaid:", e);
+             // }
+        }
+
+        // Check initial theme preference
+        let isDarkMode;
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            isDarkMode = true;
+        } else {
+             isDarkMode = false;
+        }
+        applyTheme(isDarkMode);
+
+        // Add toggle button listener
+        themeToggleBtn.addEventListener('click', () => {
+            // Toggle the state
+            isDarkMode = !isDarkMode; 
+            // Update localStorage
+            localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light');
+            // Apply the new theme
+            applyTheme(isDarkMode);
+        });
+
+        // Display generation time (Client-side)
+         document.getElementById('generation-time').textContent = new Date().toLocaleString('zh-CN');
+
+    </script>
+
+</body>
+</html>
