@@ -1,1 +1,519 @@
- 
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凿壁 | 健康医疗行业的AI解决方案先锋</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #345995;
+            --primary-dark: #2a477a;
+            --secondary: #03cea4;
+            --accent: #fb4d3d;
+            --light-bg: #f8f9fa;
+            --dark-bg: #1a202c;
+            --light-text: #2d3748;
+            --dark-text: #e2e8f0;
+            --light-card: #ffffff;
+            --dark-card: #2d3748;
+        }
+        
+        .light {
+            --bg-color: var(--light-bg);
+            --text-color: var(--light-text);
+            --card-bg: var(--light-card);
+            --border-color: #e2e8f0;
+        }
+        
+        .dark {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --card-bg: var(--dark-card);
+            --border-color: #4a5568;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .first-letter::first-letter {
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--primary);
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        .hero-section {
+            background-color: var(--primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: #02b892;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            transition: all 0.3s ease;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .article-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .article-card .card-body {
+            flex: 1;
+        }
+        
+        .feature-icon {
+            background-color: rgba(3, 206, 164, 0.1);
+            color: var(--secondary);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dark .feature-icon {
+            background-color: rgba(3, 206, 164, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-dark-bg shadow-md dark:shadow-gray-800 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <span class="text-2xl font-bold text-primary dark:text-white">凿壁</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-secondary transition-colors duration-300">关于我们</a>
+                <a href="#articles" class="hover:text-secondary transition-colors duration-300">文章资源</a>
+                <a href="#solutions" class="hover:text-secondary transition-colors duration-300">AI解决方案</a>
+                <a href="#contact" class="hover:text-secondary transition-colors duration-300">联系我们</a>
+            </div>
+            
+            <div class="flex items-center">
+                <button id="themeToggle" class="theme-toggle p-2">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                </button>
+                
+                <button class="md:hidden ml-4" id="mobileMenuButton">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-dark-bg shadow-md">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#about" class="py-2 hover:text-secondary transition-colors duration-300">关于我们</a>
+                <a href="#articles" class="py-2 hover:text-secondary transition-colors duration-300">文章资源</a>
+                <a href="#solutions" class="py-2 hover:text-secondary transition-colors duration-300">AI解决方案</a>
+                <a href="#contact" class="py-2 hover:text-secondary transition-colors duration-300">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section py-20 md:py-32">
+        <div class="hero-pattern"></div>
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">凿壁</h1>
+                <p class="text-xl md:text-2xl mb-8 leading-relaxed">帮助健康医疗行业凿开AI乱象，帮AI行业凿开医疗行业壁垒</p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#solutions" class="btn-primary text-center">探索AI解决方案</a>
+                    <a href="#about" class="btn-outline text-center">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">关于<span class="gradient-text">凿壁</span></h2>
+                <div class="first-letter mb-8">
+                    <p class="mb-4">凿壁团队致力于为卫生健康行业提供前沿的AI解决方案。我们的使命是通过破除AI应用在医疗行业中的障碍，让先进技术真正服务于医疗健康事业，提高医疗效率和质量。</p>
+                    <p class="mb-4">我们深知医疗行业的特殊性与复杂性，团队汇集了医疗专家和AI技术人才，通过跨学科合作，打造适合中国医疗体系的智能化解决方案。我们不仅仅是技术提供者，更是医疗AI领域的思想者与探索者。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">破解AI乱象</h3>
+                        <p>帮助医疗机构识别并避开AI应用中的虚假宣传和不切实际承诺，找到真正有价值的应用方向。</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-hospital-user text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">打破行业壁垒</h3>
+                        <p>促进AI技术与医疗行业的深度融合，解决技术落地过程中的制度性、文化性障碍。</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">创新解决方案</h3>
+                        <p>基于对医疗流程的深刻理解，提供符合临床实际需求的AI赋能解决方案。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 文章资源 -->
+    <section id="articles" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">精选<span class="gradient-text">文章</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 文章1 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">年龄与认知技能：用进废退研究的重要价值分析</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">深入探讨年龄与认知能力的关系，以及如何通过持续学习保持大脑活力。</p>
+                        <a href="ages.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章2 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">健康医疗数据资产：中国数据要素市场化教育与实践</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">探索如何将健康医疗数据转化为有价值的资产，推动数据要素市场化进程。</p>
+                        <a href="dataasset.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章3 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">AI研究主题全景</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">全面梳理当前人工智能领域的研究热点和前沿方向，特别关注医疗AI的发展。</p>
+                        <a href="researchtopics.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章4 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">Gemini 2.5 Pro能力解析</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">深入分析Google最新大语言模型Gemini 2.5 Pro的技术特点与应用潜力。</p>
+                        <a href="gemini2.5pro.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章5 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">GPT-4o：超越文本的多模态智能</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">解析OpenAI最新多模态模型GPT-4o的技术突破与在医疗领域的应用前景。</p>
+                        <a href="gpt-4o.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章6 -->
+                <div class="card article-card">
+                    <div class="p-6 card-body">
+                        <h3 class="text-xl font-bold mb-3">Cursor项目规则详解</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">解读如何利用Cursor工具高效开发AI项目，实现医疗与AI技术的无缝集成。</p>
+                        <a href="cursor_project_rules.html" class="text-secondary hover:underline mt-auto inline-block">阅读全文 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#articles" class="btn-primary inline-block">查看更多文章</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI解决方案 -->
+    <section id="solutions" class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">AI<span class="gradient-text">解决方案</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- 解决方案1 -->
+                <div class="card p-6">
+                    <div class="mb-4">
+                        <i class="fas fa-file-medical-alt text-secondary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">医疗数据资产化</h3>
+                    <p class="mb-4">帮助医疗机构实现数据资产化，合规地挖掘和利用医疗数据价值，同时保障数据安全与患者隐私。</p>
+                    <ul class="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+                        <li>医疗数据价值评估</li>
+                        <li>合规数据治理方案</li>
+                        <li>数据安全与隐私保护</li>
+                    </ul>
+                </div>
+                
+                <!-- 解决方案2 -->
+                <div class="card p-6">
+                    <div class="mb-4">
+                        <i class="fas fa-robot text-secondary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">临床辅助决策系统</h3>
+                    <p class="mb-4">基于先进AI模型的临床辅助决策系统，帮助医生提高诊断准确率，减少漏诊错诊。</p>
+                    <ul class="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+                        <li>影像辅助诊断</li>
+                        <li>临床路径优化</li>
+                        <li>个性化治疗方案推荐</li>
+                    </ul>
+                </div>
+                
+                <!-- 解决方案3 -->
+                <div class="card p-6">
+                    <div class="mb-4">
+                        <i class="fas fa-heartbeat text-secondary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">智能健康管理</h3>
+                    <p class="mb-4">面向慢性病患者的AI赋能健康管理平台，提供个性化健康指导和干预方案。</p>
+                    <ul class="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+                        <li>慢性病风险预测</li>
+                        <li>个性化健康建议</li>
+                        <li>生活方式干预计划</li>
+                    </ul>
+                </div>
+                
+                <!-- 解决方案4 -->
+                <div class="card p-6">
+                    <div class="mb-4">
+                        <i class="fas fa-hospital text-secondary text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">医院智能化升级</h3>
+                    <p class="mb-4">为医疗机构提供全方位的智能化升级解决方案，提高运营效率和医疗服务质量。</p>
+                    <ul class="list-disc list-inside mb-4 text-gray-600 dark:text-gray-300">
+                        <li>医疗流程智能优化</li>
+                        <li>资源调配与预测</li>
+                        <li>智能化患者服务</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-8">联系<span class="gradient-text">我们</span></h2>
+                <p class="text-lg mb-10">无论您是医疗机构、科研单位还是技术企业，欢迎与我们交流合作</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                            <i class="fas fa-envelope text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">邮件咨询</h3>
+                        <p>contact@zaobi.com</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                            <i class="fas fa-map-marker-alt text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">办公地址</h3>
+                        <p>北京市海淀区中关村大街1号</p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                            <i class="fas fa-comments text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold mb-2">微信公众号</h3>
+                        <p>凿壁</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold mb-2">凿壁</h2>
+                    <p class="text-gray-400">帮助健康医疗行业凿开AI乱象，帮AI行业凿开医疗行业壁垒</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-zhihu text-xl"></i>
+                        </a>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm">© 2023 国家健康医疗大数据研究院. 版权所有</p>
+                    <p class="text-gray-400 text-sm">作者：季晓康</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({ startOnLoad: true });
+        
+        // 深色/浅色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // 根据系统偏好设置初始主题
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+        
+        // 移动端菜单
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 如果移动菜单打开，则关闭它
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
