@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>富足与创造力：一种新的理论框架</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #3B7EA1;
+            --secondary-color: #FF6B6B;
+            --accent-color: #FFD166;
+            --text-color: #2D3748;
+            --text-color-light: #718096;
+            --bg-color: #ffffff;
+            --bg-color-alt: #f7fafc;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-color: #E2E8F0;
+        }
+
+        .dark {
+            --primary-color: #4DA8DA;
+            --secondary-color: #FF8080;
+            --accent-color: #FFE066;
+            --text-color: #E2E8F0;
+            --text-color-light: #A0AEC0;
+            --bg-color: #1A202C;
+            --bg-color-alt: #2D3748;
+            --card-bg: #2D3748;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --border-color: #4A5568;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-color);
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .accent-text {
+            color: var(--secondary-color);
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,209,102,0.5) 50%);
+            padding: 0 0.25rem;
+        }
+
+        .dark .highlight {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(255,224,130,0.3) 50%);
+        }
+
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.5em;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            color: var(--primary-color);
+        }
+
+        .toggle-theme {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .toggle-theme:hover {
+            transform: rotate(15deg);
+        }
+
+        .formula {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--bg-color-alt);
+            border-left: 4px solid var(--primary-color);
+            font-family: "Times New Roman", serif;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th, table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+
+        table th {
+            background-color: var(--bg-color-alt);
+            font-weight: 600;
+        }
+
+        .mermaid {
+            background-color: var(--bg-color-alt);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-card {
+            display: flex;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .resource-card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .resource-card-content {
+            padding: 1rem;
+            flex: 1;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .flex-col-reverse-md {
+                flex-direction: column-reverse;
+            }
+            .md-full-width {
+                width: 100%;
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 0.25rem;
+            margin-right: 1.5rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .scroll-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            z-index: 100;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .back-to-top.visible {
+            opacity: 0.8;
+        }
+
+        .back-to-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .reference {
+            font-size: 0.8rem;
+            color: var(--text-color-light);
+            vertical-align: super;
+        }
+
+        .abundance-item {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .abundance-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 滚动进度条 -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollProgress"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <header class="sticky top-0 bg-opacity-90 backdrop-filter backdrop-blur-lg" style="background-color: var(--bg-color); z-index: 50;">
+        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-lightbulb text-2xl mr-2" style="color: var(--accent-color);"></i>
+                <h1 class="text-xl font-bold">创造力研究</h1>
+            </div>
+            <div class="hidden md:flex items-center">
+                <a href="#introduction" class="nav-link">引言</a>
+                <a href="#theory" class="nav-link">理论框架</a>
+                <a href="#model" class="nav-link">模型详解</a>
+                <a href="#application" class="nav-link">应用前景</a>
+                <a href="#resources" class="nav-link">延伸阅读</a>
+            </div>
+            <button id="themeToggle" class="toggle-theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero 区域 -->
+    <section class="py-20 relative overflow-hidden" style="background-color: var(--bg-color-alt);">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 hero-text">
+                <div class="text-sm uppercase tracking-widest mb-4" style="color: var(--primary-color);">创造力研究的新视角</div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    <span class="highlight">富足</span>是创造力的<br>根本源泉
+                </h1>
+                <p class="text-xl mb-8" style="color: var(--text-color-light);">
+                    一种全新的创造力理论模型，整合认知、情感、社会与物质维度
+                </p>
+                <div class="flex flex-wrap">
+                    <a href="#theory" class="primary-btn mb-4 mr-4 flex items-center">
+                        <i class="fas fa-book-open mr-2"></i> 探索理论
+                    </a>
+                    <a href="#model" class="mb-4 flex items-center px-6 py-3 border border-gray-300 rounded-md transition-all hover:border-gray-400" style="color: var(--text-color);">
+                        <i class="fas fa-chart-line mr-2"></i> 查看模型
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <svg class="w-full h-auto" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 大脑形状 -->
+                    <path d="M250,50 C350,50 400,150 400,250 C400,350 350,350 250,350 C150,350 100,350 100,250 C100,150 150,50 250,50 Z" fill="#f0f9ff" stroke="#3B7EA1" stroke-width="2"/>
+                    
+                    <!-- 物质富足 -->
+                    <circle cx="200" cy="150" r="40" fill="#FFD166" opacity="0.8"/>
+                    <text x="200" y="155" text-anchor="middle" fill="#2D3748" font-size="14" font-weight="bold">物质富足</text>
+                    
+                    <!-- 认知富足 -->
+                    <circle cx="300" cy="150" r="40" fill="#3B7EA1" opacity="0.8"/>
+                    <text x="300" y="155" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">认知富足</text>
+                    
+                    <!-- 情感富足 -->
+                    <circle cx="200" cy="250" r="40" fill="#FF6B6B" opacity="0.8"/>
+                    <text x="200" y="255" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">情感富足</text>
+                    
+                    <!-- 社会富足 -->
+                    <circle cx="300" cy="250" r="40" fill="#06D6A0" opacity="0.8"/>
+                    <text x="300" y="255" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">社会富足</text>
+                    
+                    <!-- 创造力 -->
+                    <circle cx="250" cy="200" r="50" fill="#ffffff" stroke="#2D3748" stroke-width="2"/>
+                    <text x="250" y="205" text-anchor="middle" fill="#2D3748" font-size="16" font-weight="bold">创造力</text>
+                    
+                    <!-- 连接线 -->
+                    <line x1="200" y1="150" x2="250" y2="200" stroke="#2D3748" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="300" y1="150" x2="250" y2="200" stroke="#2D3748" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="200" y1="250" x2="250" y2="200" stroke="#2D3748" stroke-width="2" stroke-dasharray="5,5"/>
+                    <line x1="300" y1="250" x2="250" y2="200" stroke="#2D3748" stroke-width="2" stroke-dasharray="5,5"/>
+                </svg>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="transform: rotate(180deg)">
+            <svg preserveAspectRatio="none" width="100%" height="50" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" style="fill: var(--bg-color);">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 引言部分 -->
+    <section id="introduction" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-sm uppercase tracking-widest mb-2" style="color: var(--primary-color);">引言</div>
+                <h2 class="text-3xl font-bold mb-8">从新视角理解创造力的本质</h2>
+                <div class="drop-cap mb-6 text-lg leading-relaxed">
+                    创造力是人类进步的核心推动力，然而，对创造力本质的理解仍存在广泛争议。传统观点往往强调特定人格特质、思维方式或教育环境对创造力的影响，但这些理论通常片面关注局部因素，缺乏系统性整合。本文提出一个全新视角：<span class="highlight">富足（Abundance）</span>——物质、精神、认知资源各方面的充足状态，是创造力产生的根本原因。
+                </div>
+                <p class="mb-6 text-lg">
+                    这种"富足"观点不仅仅指经济物质财富，而是包括多个维度的资源丰裕：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="card p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-coins text-3xl mr-4" style="color: var(--accent-color);"></i>
+                            <h3 class="text-xl font-semibold">物质富足</h3>
+                        </div>
+                        <p>经济资源充沛，基本生存保障无忧，减少生存压力，为创造性活动提供物质基础。</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-brain text-3xl mr-4" style="color: var(--primary-color);"></i>
+                            <h3 class="text-xl font-semibold">认知富足</h3>
+                        </div>
+                        <p>知识、信息、经验的丰富积累，为创造力提供必要的思维原料和知识基础。</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-heart text-3xl mr-4" style="color: var(--secondary-color);"></i>
+                            <h3 class="text-xl font-semibold">精神与情感富足</h3>
+                        </div>
+                        <p>良好的安全感、自信心、自我实现感，提供创造性尝试的心理基础与内在动力。</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-users text-3xl mr-4" style="color: #06D6A0;"></i>
+                            <h3 class="text-xl font-semibold">社会资本富足</h3>
+                        </div>
+                        <p>丰富的人际关系网络和社会支持系统，提供创造过程中的协作、反馈与资源共享。</p>
+                    </div>
+                </div>
+                <blockquote class="italic border-l-4 pl-4 py-2 mb-8" style="border-color: var(--primary-color);">
+                    "创造力不是凭空而来，而是建立在多维度资源富足的沃土之上，是富足状态下心灵的自然表达。"
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- 理论支撑部分 -->
+    <section id="theory" class="py-16" style="background-color: var(--bg-color-alt);">
+        <div class="container mx-auto px-4">
+            <div class="text-sm text-center uppercase tracking-widest mb-2" style="color: var(--primary-color);">理论基础</div>
+            <h2 class="text-3xl font-bold mb-10 text-center">理论支撑与合理性分析</h2>
+            <div class="flex flex-col md:flex-row flex-wrap">
+                <div class="md:w-1/2 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-mountain-sun text-2xl mr-3" style="color: var(--primary-color);"></i>
+                            马斯洛需求理论
+                        </h3>
+                        <p class="mb-4">
+                            亚伯拉罕·马斯洛的需求层次理论清晰表明，<strong>自我实现</strong>（包括创造力的表达）是需求金字塔的顶端，只有在生理需求、安全需求、归属与爱的需求、尊重需求等基本需求得到满足的情况下，才能真正追求自我实现。
+                        </p>
+                        <p>
+                            这与"富足"作为创造力基础的假设高度一致——各层次需求的满足正是不同维度的"富足"状态。
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-hand-holding-dollar text-2xl mr-3" style="color: var(--primary-color);"></i>
+                            资源富足理论
+                        </h3>
+                        <p class="mb-4">
+                            特蕾莎·阿玛拜尔（Teresa Amabile, 1996）的研究指出，充足的资源是创造力的关键组成要素之一。资源包括时间、资金、信息、物理空间等。
+                        </p>
+                        <p>
+                            资源充裕状态降低了个体的生存压力，使其能够进行创造性探索而不必过度担忧失败风险，这与"富足"理论中的物质富足维度完全吻合。
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-wifi text-2xl mr-3" style="color: var(--primary-color);"></i>
+                            带宽理论
+                        </h3>
+                        <p class="mb-4">
+                            穆莱纳森和沙菲尔（Mullainathan & Shafir, 2013）的带宽理论揭示，资源稀缺会占用人的认知带宽，导致短视决策和认知功能下降。
+                        </p>
+                        <p>
+                            相反，资源充足状态释放认知带宽，让人有能力进行长远规划和复杂思考，这正是创造性思维所必需的。"富足"视角完美解释了为何贫困环境往往难以产生高水平创造力。
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-shield-heart text-2xl mr-3" style="color: var(--primary-color);"></i>
+                            心理安全理论
+                        </h3>
+                        <p class="mb-4">
+                            艾米·埃德蒙森（Amy Edmondson）的心理安全理论强调，在人们感到安全、不担心因提出想法或犯错而受到惩罚的环境中，创新和创造力才能蓬勃发展。
+                        </p>
+                        <p>
+                            这与"富足"模型中的情感富足维度高度一致——心理安全感是情感富足的重要组成部分，是创造力释放的必要条件。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="max-w-3xl mx-auto mt-8">
+                <p class="text-lg text-center">
+                    因此，从心理学、社会学和经济学的视角来看，"富足"作为创造力基础的假设具有坚实的理论依据。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 富足模型部分 -->
+    <section id="model" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-sm text-center uppercase tracking-widest mb-2" style="color: var(--primary-color);">核心模型</div>
+            <h2 class="text-3xl font-bold mb-10 text-center">创造力的"富足模型"</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 px-4 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">创造力的数学模型</h3>
+                    <div class="formula mb-6 text-xl">
+                        Creativity = F(Abundance<sub>Material</sub>, Abundance<sub>Cognitive</sub>, Abundance<sub>Emotional</sub>, Abundance<sub>Social</sub>)
+                    </div>
+                    <p class="mb-6">
+                        这个模型表明，创造力是多维度富足状态的函数，各维度协同作用，共同塑造创造力的高度与广度。
+                    </p>
+                    <h4 class="text-xl font-semibold mb-4">理论细化与完善</h4>
+                    <div class="formula mb-6">
+                        Creativity = (αM + βC + γE + δS) × D(V)
+                    </div>
+                    <ul class="mb-6">
+                        <li class="mb-2">M：物质富足</li>
+                        <li class="mb-2">C：认知富足</li>
+                        <li class="mb-2">E：情感富足</li>
+                        <li class="mb-2">S：社会富足</li>
+                        <li class="mb-2">α, β, γ, δ：权重参数</li>
+                        <li>D(V)：价值取向调节因子</li>
+                    </ul>
+                    <p>
+                        价值取向调节因子D(V)决定了创造力的方向与社会意义，表明富足本身提供创造的可能性，而价值观决定创造的实际方向。
+                    </p>
+                </div>
+                <div class="md:w-1/2 px-4 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6">富足维度与创造力影响</h3>
+                    <div class="overflow-x-auto">
+                        <table class="mb-8">
+                            <thead>
+                                <tr>
+                                    <th>富足类型</th>
+                                    <th>含义</th>
+                                    <th>对创造力影响</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>物质富足</strong></td>
+                                    <td>经济条件好，生存压力小</td>
+                                    <td>降低风险，提升探索欲望</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>认知富足</strong></td>
+                                    <td>充足的知识储备，经验丰富</td>
+                                    <td>提供创造的基础与原料</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>情感富足</strong></td>
+                                    <td>自信、安全感、自我实现</td>
+                                    <td>激励内在创造动机</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>社会富足</strong></td>
+                                    <td>社会关系网丰富、社会支持充足</td>
+                                    <td>提供鼓励、资源共享与合作</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 可视化图 -->
+                    <div class="chart-container">
+                        <div class="mermaid">
+                          graph TD
+                            A[创造力] --> B[物质富足]
+                            A --> C[认知富足]
+                            A --> D[情感富足]
+                            A --> E[社会富足]
+                            
+                            B --> B1[经济条件]
+                            B --> B2[基本保障]
+                            B --> B3[物质资源]
+                            
+                            C --> C1[知识积累]
+                            C --> C2[多样经验]
+                            C --> C3[信息获取]
+                            
+                            D --> D1[自信心]
+                            D --> D2[安全感]
+                            D --> D3[自我实现]
+                            
+                            E --> E1[人际网络]
+                            E --> E2[社会支持]
+                            E --> E3[合作机会]
+                            
+                            style A fill:#f9f,stroke:#333,stroke-width:2px
+                            style B fill:#FFD166,stroke:#333,stroke-width:1px
+                            style C fill:#3B7EA1,stroke:#333,stroke-width:1px,color:white
+                            style D fill:#FF6B6B,stroke:#333,stroke-width:1px,color:white
+                            style E fill:#06D6A0,stroke:#333,stroke-width:1px,color:white
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优越性与贡献部分 -->
+    <section class="py-16" style="background-color: var(--bg-color-alt);">
+        <div class="container mx-auto px-4">
+            <div class="text-sm text-center uppercase tracking-widest mb-2" style="color: var(--primary-color);">理论优势</div>
+            <h2 class="text-3xl font-bold mb-10 text-center">"富足"理论的优越性与贡献</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-color);">
+                            <i class="fas fa-sitemap text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">更加全面系统</h3>
+                    </div>
+                    <p>
+                        "富足"理论不仅考虑了知识的积累，也考虑了心理状态和社会环境对创造力的影响，构建了一个完整的创造力生态系统理解框架。
+                    </p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-color);">
+                            <i class="fas fa-puzzle-piece text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">整合已有理论</h3>
+                    </div>
+                    <p>
+                        能有效整合马斯洛需求理论、心理带宽理论、资源丰富理论等多个经典理论体系，提供了一个更具包容性的理论框架。
+                    </p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-color);">
+                            <i class="fas fa-vial text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">实证易操作性</h3>
+                    </div>
+                    <p>
+                        各类富足维度相对容易量化，如物质富足可通过经济指标衡量，认知富足可通过知识测试评估，情感富足可通过心理量表测量，社会富足可通过社会网络分析等方法，为实证研究与理论检验提供了便利。
+                    </p>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: var(--primary-color);">
+                            <i class="fas fa-lightbulb text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">现实启示性更强</h3>
+                    </div>
+                    <p>
+                        强调为提高创造力提供充足资源支持，而不是单纯追求教育时长或知识堆积。这对教育政策、组织管理和社会制度设计都有直接的指导价值，使理论更具实践意义。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用前景部分 -->
+    <section id="application" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-sm text-center uppercase tracking-widest mb-2" style="color: var(--primary-color);">实践价值</div>
+            <h2 class="text-3xl font-bold mb-10 text-center">未来研究与应用前景</h2>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/3 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <div class="w-16 h-16 rounded-full mb-6 flex items-center justify-center mx-auto" style="background-color: var(--bg-color-alt);">
+                            <i class="fas fa-graduation-cap text-3xl" style="color: var(--primary-color);"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center">教育领域</h3>
+                        <ul>
+                            <li class="abundance-item mb-3">
+                                <strong>全方位资源支持</strong>：不仅关注知识传授，也关注学生的情感支持与社会关系培养
+                            </li>
+                            <li class="abundance-item mb-3">
+                                <strong>多维度评估</strong>：重新设计教育评估体系，将心理健康、社交能力等纳入评估范围
+                            </li>
+                            <li class="abundance-item">
+                                <strong>资源均衡</strong>：确保教育资源分配均衡，使每个学生都能获得基本的学习和发展资源
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/3 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <div class="w-16 h-16 rounded-full mb-6 flex items-center justify-center mx-auto" style="background-color: var(--bg-color-alt);">
+                            <i class="fas fa-building text-3xl" style="color: var(--primary-color);"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center">企业组织</h3>
+                        <ul>
+                            <li class="abundance-item mb-3">
+                                <strong>心理安全文化</strong>：构建支持冒险和容许失败的心理安全环境
+                            </li>
+                            <li class="abundance-item mb-3">
+                                <strong>资源支持系统</strong>：建立包括资金、设备、信息等在内的创新资源支持系统
+                            </li>
+                            <li class="abundance-item mb-3">
+                                <strong>知识管理平台</strong>：建设高效的知识管理和分享平台，促进认知富足
+                            </li>
+                            <li class="abundance-item">
+                                <strong>社交网络促进</strong>：鼓励跨部门、跨专业交流，增强社会资本富足
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/3 px-4 mb-8">
+                    <div class="card p-6 h-full">
+                        <div class="w-16 h-16 rounded-full mb-6 flex items-center justify-center mx-auto" style="background-color: var(--bg-color-alt);">
+                            <i class="fas fa-globe text-3xl" style="color: var(--primary-color);"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-center">社会政策</h3>
+                        <ul>
+                            <li class="abundance-item mb-3">
+                                <strong>基本保障体系</strong>：完善社会保障制度，减轻普通民众的生存压力
+                            </li>
+                            <li class="abundance-item mb-3">
+                                <strong>公共资源普惠</strong>：确保公共文化资源、信息资源的广泛可及性
+                            </li>
+                            <li class="abundance-item mb-3">
+                                <strong>心理健康服务</strong>：普及心理健康服务，增强社会整体的情感富足
+                            </li>
+                            <li class="abundance-item">
+                                <strong>社区网络建设</strong>：促进社区交流与互助，增强社会资本
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读部分 -->
+    <section id="resources" class="py-16" style="background-color: var(--bg-color-alt);">
+        <div class="container mx-auto px-4">
+            <div class="text-sm text-center uppercase tracking-widest mb-2" style="color: var(--primary-color);">延伸学习</div>
+            <h2 class="text-3xl font-bold mb-10 text-center">进一步阅读推荐</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="text-lg font-semibold mb-1">《稀缺：我们是如何陷入贫穷与忙碌的》</h4>
+                        <p class="text-sm mb-2" style="color: var(--text-color-light);">森迪尔·穆莱纳森, 埃尔德·沙菲尔 (2014)</p>
+                        <p class="mb-2">深入探讨稀缺心态如何影响决策与认知能力，与富足理论中关于资源充足释放创造力的观点高度相关。</p>
+                        <a href="https://book.douban.com/subject/26178426/" target="_blank" class="text-sm flex items-center" style="color: var(--primary-color);">
+                            <span>查看详情</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="text-lg font-semibold mb-1">《创造力：心流与创新心理学》</h4>
+                        <p class="text-sm mb-2" style="color: var(--text-color-light);">米哈里·契克森米哈赖 (2015)</p>
+                        <p class="mb-2">探讨"心流"状态与创造力的关系，可以与情感富足维度相互补充，共同解释最佳创造状态的心理机制。</p>
+                        <a href="https://book.douban.com/subject/26285299/" target="_blank" class="text-sm flex items-center" style="color: var(--primary-color);">
+                            <span>查看详情</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="text-lg font-semibold mb-1">《创造力的组成要素理论》</h4>
+                        <p class="text-sm mb-2" style="color: var(--text-color-light);">特蕾莎·阿玛拜尔 (1996). Creativity in Context</p>
+                        <p class="mb-2">提出创造力的三个核心组成部分：领域相关技能、创造力相关过程和内在任务动机，为富足理论提供了认知维度的理论基础。</p>
+                        <a href="https://psycnet.apa.org/record/1996-97619-000" target="_blank" class="text-sm flex items-center" style="color: var(--primary-color);">
+                            <span>查看原论文</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="text-lg font-semibold mb-1">《工作场所中的心理安全》</h4>
+                        <p class="text-sm mb-2" style="color: var(--text-color-light);">艾米·埃德蒙森 (2018). The Fearless Organization</p>
+                        <p class="mb-2">详细阐述心理安全对于组织创新的重要性，与情感富足维度紧密相关，为企业创造力培养提供实践框架。</p>
+                        <a href="https://hbr.org/2018/11/creating-psychological-safety-in-the-workplace" target="_blank" class="text-sm flex items-center" style="color: var(--primary-color);">
+                            <span>查看相关研究</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="resource-card-content">
+                        <h4 class="text-lg font-semibold mb-1">《成为：好社会如何塑造伟大创意》</h4>
+                        <p class="text-sm mb-2" style="color: var(--text-color-light);">史蒂文·约翰逊 (2010). Where Good Ideas Come From</p>
+                        <p class="mb-2">研究创新思想的产生环境，强调社会网络与信息流通对创新的关键作用，为社会富足维度提供了系统观察。</p>
+                        <a href="https://book.douban.com/subject/6414206/" target="_blank" class="text-sm flex items-center" style="color: var(--primary-color);">
+                            <span>查看详情</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结论部分 -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-sm uppercase tracking-widest mb-2" style="color: var(--primary-color);">总结与展望</div>
+                <h2 class="text-3xl font-bold mb-8">小结与评价</h2>
+                <p class="text-lg mb-6">
+                    "富足"作为创造力的核心驱动要素，提供了一个全新的理论视角，它超越了传统单一维度的解释，构建了一个多维度、全方位的创造力理解框架。这一理论不仅具有坚实的理论基础，还提供了清晰的实践指导，可以指导教育机构、企业组织和政策制定者如何通过营造多维度富足环境，激发个体和群体的创造潜能。
+                </p>
+                <p class="text-lg mb-6">
+                    这种"富足视角"的创造力理论，可视作对创造力研究领域的重要补充和完善，为后续研究提供了广阔的理论空间和实践指导方向。特别是它强调了在提升创造力时需要全面关注物质条件、知识经验、心理健康和社会关系等多个维度，而不是仅仅关注某一特定领域。
+                </p>
+                <p class="text-lg mb-10">
+                    未来研究可以进一步细化各维度富足的具体指标和测量方法，探索不同维度之间的相互作用机制，以及在不同文化和社会背景下富足与创造力关系的普适性和特殊性，从而进一步完善和验证这一理论框架。
+                </p>
+                
+                <div class="flex flex-wrap justify-center">
+                    <div class="tag">#创造力理论</div>
+                    <div class="tag">#富足模型</div>
+                    <div class="tag">#多维度分析</div>
+                    <div class="tag">#心理学研究</div>
+                    <div class="tag">#教育创新</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作者信息部分 -->
+    <footer class="py-12" style="background-color: var(--bg-color-alt);">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="mb-6 md:mb-0">
+                        <h3 class="text-xl font-bold mb-2">作者信息</h3>
+                        <p class="mb-1"><strong>作者：</strong>季晓康</p>
+                        <p class="mb-1"><strong>微信公众号：</strong>凿壁</p>
+                        <p><strong>版权信息：</strong>国家健康医疗大数据研究院</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center mr-4">
+                            <i class="fas fa-qrcode text-4xl" style="color: var(--text-color-light);"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">扫码关注</p>
+                            <p style="color: var(--text-color-light);">获取更多创造力研究内容</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t pt-6" style="border-color: var(--border-color);">
+                    <p class="text-center" style="color: var(--text-color-light);">
+                        © 2025 国家健康医疗大数据研究院. 保留所有权利.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default',
+            flowchart: { useMaxWidth: true }
+        });
+
+        // 深色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        // 主题切换事件
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    flowchart: { useMaxWidth: true }
+                });
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'dark',
+                    flowchart: { useMaxWidth: true }
+                });
+            }
+            
+            // 重新渲染图表
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+        
+        // 滚动进度条
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollProgress + '%';
+            
+            // 回到顶部按钮显示控制
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 600) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // 回到顶部功能
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 重新渲染Mermaid图表
+        document.addEventListener('DOMContentLoaded', () => {
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
+</body>
+</html>

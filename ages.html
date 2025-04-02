@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年龄与认知技能：用进废退研究的重要价值分析</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #345995;
+            --primary-dark: #2a477a;
+            --secondary: #03cea4;
+            --accent: #fb4d3d;
+            --light-bg: #f8f9fa;
+            --dark-bg: #1a202c;
+            --light-text: #2d3748;
+            --dark-text: #e2e8f0;
+            --light-card: #ffffff;
+            --dark-card: #2d3748;
+        }
+        
+        .light {
+            --bg-color: var(--light-bg);
+            --text-color: var(--light-text);
+            --card-bg: var(--light-card);
+            --border-color: #e2e8f0;
+        }
+        
+        .dark {
+            --bg-color: var(--dark-bg);
+            --text-color: var(--dark-text);
+            --card-bg: var(--dark-card);
+            --border-color: #4a5568;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #2fecc0, #4be3d9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .first-letter::first-letter {
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--primary);
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+        
+        .citation {
+            border-left: 4px solid var(--secondary);
+            padding-left: 1rem;
+            font-style: italic;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2rem !important;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+        
+        /* 修改引用块样式 */
+        .quote-block {
+            background-color: #345995;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .quote-block i {
+            color: #2fecc0;
+        }
+        
+        /* Hero区域样式 */
+        .hero-section {
+            background-color: #345995;
+            color: white;
+        }
+        
+        .hero-section .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .hero-section .attribution {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 主题相关背景样式 */
+        .theme-bg-primary {
+            background-color: rgba(52, 89, 149, 0.1);
+        }
+        
+        .theme-bg-secondary {
+            background-color: rgba(3, 206, 164, 0.1);
+        }
+        
+        /* 修改按钮样式 */
+        .btn-primary {
+            background-color: white;
+            color: #2a477a; /* 使用更深的蓝色，增强对比度 */
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            border: 1px solid white;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: #2a477a;
+            transform: translateY(-2px);
+        }
+        
+        /* 深蓝色背景区域通用样式 */
+        .blue-bg-section {
+            background-color: #345995;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .blue-bg-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .blue-bg-section ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        
+        .blue-bg-section li {
+            margin-bottom: 0.75rem;
+        }
+        
+        /* 引用文字的特殊样式 */
+        .quote-centered {
+            text-align: center;
+            font-style: italic;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <script>
+        // Initial theme setup
+        function setTheme() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                document.documentElement.className = savedTheme;
+            } else if (prefersDark) {
+                document.documentElement.className = 'dark';
+            } else {
+                document.documentElement.className = 'light';
+            }
+        }
+        
+        // Set theme on load
+        setTheme();
+        
+        // Initialize mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                theme: document.documentElement.className === 'dark' ? 'dark' : 'default',
+                securityLevel: 'loose',
+                flowchart: { useMaxWidth: true }
+            });
+        });
+    </script>
+
+    <!-- 顶部导航栏 -->
+    <nav class="sticky top-0 z-50 backdrop-filter backdrop-blur-lg bg-opacity-70" style="background-color: var(--bg-color);">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">认知发展研究</a>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex space-x-6">
+                    <a href="#intro" class="hover:text-primary transition-colors duration-300">引言</a>
+                    <a href="#questions" class="hover:text-primary transition-colors duration-300">研究问题</a>
+                    <a href="#methods" class="hover:text-primary transition-colors duration-300">研究方法</a>
+                    <a href="#findings" class="hover:text-primary transition-colors duration-300">研究发现</a>
+                    <a href="#insights" class="hover:text-primary transition-colors duration-300">洞见</a>
+                </div>
+                <button id="themeToggle" class="theme-toggle p-2 rounded-full" aria-label="切换主题">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 - 重新设计为更紧凑的版本 -->
+    <header class="hero-section py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center">年龄与认知技能：<span class="gradient-text">用进废退</span></h1>
+                <p class="text-lg md:text-xl mb-6 text-center subtitle">重塑我们对认知老化的理解，挑战传统观念，发现人类认知潜能</p>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-6 mb-4">
+                    <a href="#intro" class="px-6 py-2 rounded-full btn-primary shadow-md">
+                        <i class="fas fa-book-open mr-2"></i>开始阅读
+                    </a>
+                    <a href="#findings" class="px-6 py-2 rounded-full btn-outline">
+                        <i class="fas fa-chart-line mr-2"></i>研究发现
+                    </a>
+                </div>
+                
+                <div class="text-center text-sm attribution mt-4">
+                    基于Eric A. Hanushek的研究
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4">
+        <!-- 引言部分 -->
+        <section id="intro" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">引言</h2>
+                </div>
+                <div class="card p-8">
+                    <p class="first-letter mb-6">
+                        认知技能，特别是读写能力和计算能力，在个体经济收入和国家经济增长中扮演着至关重要的角色。对这些技能在整个生命周期内的发展变化进行深入理解具有重要的社会意义。长期以来，基于横断面研究的传统观点认为，认知技能在成年早期，通常在三十岁左右就开始出现下降。如果这种观点是准确的，那么对于人口老龄化日益严重的社会而言，这将对人力资本构成严峻的挑战。
+                    </p>
+                    <p class="mb-6">
+                        然而，由Eric A. Hanushek及其同事于2025年发表在Science Advances上的题为"Age and Cognitive Skills: Use It or Lose It"的研究论文，通过使用来自德国的纵向数据，对这一传统的认知技能衰退模式提出了新的见解。该研究旨在考察真实的年龄与技能之间的关系，并探讨技能使用在这一关系中的作用。
+                    </p>
+                    <p>
+                        与以往主要依赖于在单一时间点比较不同年龄组的横断面研究不同，这项研究追踪了同一批个体在一段时间内的技能变化，从而能够更清晰地揭示个体认知技能随年龄增长的实际发展轨迹。
+                    </p>
+                    
+                    <div class="quote-block mt-10">
+                        <div class="flex items-start">
+                            <i class="fas fa-lightbulb text-2xl mr-4 mt-1"></i>
+                            <p class="italic">
+                                "认知能力并非固定不变，而是受到持续使用和参与认知活动的深刻影响。这项研究挑战了传统认知，揭示了人类大脑的可塑性和潜力远超以往的理解。"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 核心研究问题与假设 -->
+        <section id="questions" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">核心研究问题与假设</h2>
+                </div>
+                <div class="card p-8">
+                    <p class="mb-6">
+                        这项研究的核心在于探索成年人读写能力和计算能力随年龄变化的真实模式，并深入理解认知技能的使用在其中扮演的角色。其主要研究问题包括：
+                    </p>
+                    
+                    <div class="mb-8 pl-6 border-l-4" style="border-color: var(--secondary);">
+                        <p class="mb-4"><strong>第一，</strong>当采用能够区分年龄效应和队列效应并校正测量误差的纵向数据进行分析时，成年人读写能力和计算能力的实际年龄技能发展轨迹是怎样的？</p>
+                        <p><strong>第二，</strong>日常生活中（工作和家庭）认知技能的使用水平如何影响这些年龄技能的发展轨迹？特别是，较高的技能使用水平是否能够减缓甚至逆转潜在的年龄相关技能下降？</p>
+                    </div>
+                    
+                    <p class="mb-6">
+                        基于对现有文献和理论的理解，研究人员可能提出了以下假设：
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div class="card p-5 hover:shadow-md transition-all">
+                            <div class="h-12 w-12 rounded-full bg-primary bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-brain text-primary"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">假设一</h3>
+                            <p class="text-sm">通过纵向数据分析得出的平均年龄技能发展轨迹将与横断面研究中观察到的早期下降模式不同，可能显示技能维持甚至增长到中年。</p>
+                        </div>
+                        
+                        <div class="card p-5 hover:shadow-md transition-all">
+                            <div class="h-12 w-12 rounded-full bg-secondary bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-line text-secondary"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">假设二</h3>
+                            <p class="text-sm">与技能使用频率较低的个体相比，报告较高技能使用水平的个体将表现出更平缓甚至随年龄增长而提高的技能发展轨迹，尤其是在成年后期。</p>
+                        </div>
+                        
+                        <div class="card p-5 hover:shadow-md transition-all">
+                            <div class="h-12 w-12 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-users text-accent"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">假设三</h3>
+                            <p class="text-sm">不同的人口群体，如不同的职业、教育水平和性别，其年龄技能发展轨迹可能存在差异，这可能反映了他们在技能需求和使用模式上的不同。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 研究方法与数据 -->
+        <section id="methods" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">研究方法与数据</h2>
+                </div>
+                <div class="card p-8">
+                    <p class="mb-6">
+                        该研究利用了德国成人能力国际评估项目（PIAAC）纵向调查（PIAAC-L）的独特数据。PIAAC是由经济合作与发展组织（OECD）发起的一项大规模国际调查，旨在评估成年人在工作和生活中的关键信息处理技能。
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">数据的独特性</h3>
+                            <p class="mb-4">
+                                德国的PIAAC-L的独特之处在于，它在约3.5年的间隔后对最初参与PIAAC调查的大量具有代表性的成年样本进行了重新测试。
+                            </p>
+                            <p>
+                                这种纵向设计使得研究人员能够直接观察个体技能在一段时间内的变化，从而能够更准确地分析年龄对技能的影响，并区分年龄效应和不同世代之间的差异（队列效应）。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">测量方法</h3>
+                            <p class="mb-4">
+                                研究主要关注读写能力和计算能力这两项核心认知技能。这些技能被广泛认为是教育成就、劳动力市场成功和社会参与的基础，也是衡量人力资本的关键指标。
+                            </p>
+                            <p>
+                                技能的使用情况通过参与者自我报告在工作和家庭中进行阅读和数学相关活动的频率来衡量。这为研究人员提供了一个衡量个体在日常生活中积极使用这些认知技能程度的指标。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="blue-bg-section">
+                        <h3 class="text-xl font-semibold">分析方法</h3>
+                        <ul class="space-y-2">
+                            <li>区分年龄效应和队列效应</li>
+                            <li>校正测量误差，特别是回归平均（reversion to the mean）现象</li>
+                            <li>回归分析等统计模型用于检验年龄、技能使用以及其他人口统计学变量与认知技能变化之间的关系</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <div class="mermaid text-center">
+                            graph TD
+                                A[PIAAC初始调查] -->|3.5年后| B[PIAAC-L纵向调查]
+                                B --> C[读写能力测试]
+                                B --> D[计算能力测试]
+                                B --> E[技能使用频率]
+                                C --> F[年龄-技能轨迹分析]
+                                D --> F
+                                E --> F
+                                F --> G[校正测量误差]
+                                G --> H[最终分析结果]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 主要研究发现 -->
+        <section id="findings" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">主要研究发现</h2>
+                </div>
+                <div class="card p-8">
+                    <p class="mb-8">
+                        该研究的主要发现颠覆了以往基于横断面数据的认知，为我们理解认知技能在成年期的发展提供了新的视角：
+                    </p>
+                    
+                    <div class="mb-12">
+                        <h3 class="text-xl font-semibold mb-6 text-center">技能发展的峰值年龄</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="card p-6 text-center">
+                                <div class="text-5xl font-bold mb-4 gradient-text">46岁</div>
+                                <div class="text-xl mb-2">读写能力峰值</div>
+                                <p class="text-sm opacity-80">在此之后略有下降，但仍维持较高水平</p>
+                            </div>
+                            <div class="card p-6 text-center">
+                                <div class="text-5xl font-bold mb-4 gradient-text">41岁</div>
+                                <div class="text-xl mb-2">计算能力峰值</div>
+                                <p class="text-sm opacity-80">之后出现下降，但总体水平仍高于20岁时的水平</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mb-4">关键发现</h3>
+                    <div class="grid gap-6 mb-8">
+                        <div class="card p-6 border-l-4" style="border-color: var(--accent);">
+                            <h4 class="text-lg font-medium mb-2">成年期认知技能持续发展</h4>
+                            <p class="opacity-90">纵向数据显示，平均而言，个体的读写能力和计算能力都呈现出在四十多岁之前显著增长的趋势。这一发现有力地驳斥了认知技能在三十岁左右就开始衰退的传统观点。</p>
+                        </div>
+                        
+                        <div class="card p-6 border-l-4" style="border-color: var(--primary);">
+                            <h4 class="text-lg font-medium mb-2">"用进废退"得到实证支持</h4>
+                            <p class="opacity-90">老年时期认知技能的下降主要发生在技能使用水平较低的个体身上。相比之下，那些报告技能使用水平高于平均水平的白领和高学历工作者，即使在四十多岁之后，其技能水平仍然呈现增长的趋势。</p>
+                        </div>
+                        
+                        <div class="card p-6 border-l-4" style="border-color: var(--secondary);">
+                            <h4 class="text-lg font-medium mb-2">人口特征差异</h4>
+                            <p class="opacity-90">研究揭示了不同背景特征个体在年龄技能发展模式上的差异。白领和接受过高等教育的工人在整个研究观察期内（最高至65岁）都显示出技能的持续增长。而蓝领工人以及未接受过高等教育的个体则更早地经历了技能的下降。</p>
+                        </div>
+                        
+                        <div class="card p-6 border-l-4" style="border-color: var(--accent);">
+                            <h4 class="text-lg font-medium mb-2">性别差异</h4>
+                            <p class="opacity-90">女性在老年时期，尤其是在计算能力方面，表现出比男性更大的技能损失。这一发现提示需要更多地关注性别差异背后的机制。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="blue-bg-section">
+                        <p class="quote-centered">
+                            "即使在白领或接受过高等教育的这些通常被认为是高技能的群体中，只有那些经常使用技能的个体在40岁以后仍然显示出技能的增长。"
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">视觉表示</h3>
+                        <div class="relative h-80 md:h-96 w-full">
+                            <div class="absolute inset-0 rounded-lg overflow-hidden">
+                                <svg width="100%" height="100%" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 坐标轴 -->
+                                    <line x1="50" y1="350" x2="750" y2="350" stroke="var(--text-color)" stroke-width="2"/>
+                                    <line x1="50" y1="50" x2="50" y2="350" stroke="var(--text-color)" stroke-width="2"/>
+                                    
+                                    <!-- X轴标签 -->
+                                    <text x="50" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">20</text>
+                                    <text x="185" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">30</text>
+                                    <text x="320" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">40</text>
+                                    <text x="455" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">50</text>
+                                    <text x="590" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">60</text>
+                                    <text x="725" y="380" text-anchor="middle" class="text-sm" fill="var(--text-color)">70</text>
+                                    <text x="400" y="410" text-anchor="middle" class="text-base" fill="var(--text-color)">年龄</text>
+                                    
+                                    <!-- Y轴标签 -->
+                                    <text x="30" y="350" text-anchor="end" class="text-sm" fill="var(--text-color)">低</text>
+                                    <text x="30" y="200" text-anchor="end" class="text-sm" fill="var(--text-color)">中</text>
+                                    <text x="30" y="50" text-anchor="end" class="text-sm" fill="var(--text-color)">高</text>
+                                    <text x="15" y="200" text-anchor="middle" class="text-base" fill="var(--text-color)" transform="rotate(-90, 15, 200)">技能水平</text>
+                                    
+                                    <!-- 读写能力曲线 -->
+                                    <path d="M50,300 Q185,200 320,150 T455,120 T590,140 T725,170" fill="none" stroke="#345995" stroke-width="3"/>
+                                    
+                                    <!-- 计算能力曲线 -->
+                                    <path d="M50,280 Q185,190 320,130 T455,160 T590,200 T725,240" fill="none" stroke="#03cea4" stroke-width="3"/>
+                                    
+                                    <!-- 高使用读写能力 -->
+                                    <path d="M50,260 Q185,180 320,110 T455,90 T590,80 T725,75" fill="none" stroke="#345995" stroke-width="2" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 高使用计算能力 -->
+                                    <path d="M50,250 Q185,170 320,100 T455,110 T590,130 T725,150" fill="none" stroke="#03cea4" stroke-width="2" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 图例 - 重新安排位置，更加清晰 -->
+                                    <!-- 图例背景 -->
+                                    <rect x="550" y="20" width="180" height="110" rx="5" fill="white" fill-opacity="0.8" stroke="var(--border-color)" stroke-width="1"/>
+                                    
+                                    <!-- 图例内容 -->
+                                    <circle cx="570" cy="40" r="5" fill="#345995"/>
+                                    <text x="585" y="45" class="text-xs" fill="var(--text-color)">读写能力</text>
+                                    
+                                    <circle cx="570" cy="65" r="5" fill="#03cea4"/>
+                                    <text x="585" y="70" class="text-xs" fill="var(--text-color)">计算能力</text>
+                                    
+                                    <line x1="565" y1="90" x2="575" y2="90" stroke="#345995" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <text x="585" y="95" class="text-xs" fill="var(--text-color)">高使用读写</text>
+                                    
+                                    <line x1="565" y1="115" x2="575" y2="115" stroke="#03cea4" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <text x="585" y="120" class="text-xs" fill="var(--text-color)">高使用计算</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <p class="text-sm text-center opacity-70 mt-2">图表：认知技能随年龄变化的模拟曲线（实线表示平均水平，虚线表示高技能使用者）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 原始论文图表 -->
+        <section id="original-charts" class="py-10 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-start mb-6">
+                        <div class="w-1 h-16 bg-primary mr-4"></div>
+                        <h2 class="text-3xl font-bold flex items-center">
+                            <i class="fas fa-chart-line text-primary mr-3"></i>
+                            原论文关键图表
+                        </h2>
+                    </div>
+                    
+                    <p class="mb-8">以下图表直接来自Hanushek等人发表在Science Advances上的原始研究论文，展示了年龄与认知技能关系的核心数据。</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-10">
+                        <!-- 图表1：年龄-技能轨迹 -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold mb-4">图1: 成人读写和计算能力随年龄变化</h3>
+                            <div class="rounded-lg overflow-hidden bg-white p-2 mb-4">
+                                <!-- 使用SVG创建图表1 -->
+                                <svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 坐标轴 -->
+                                    <line x1="50" y1="250" x2="550" y2="250" stroke="#333" stroke-width="2"/>
+                                    <line x1="50" y1="50" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- X轴标签 - 年龄 -->
+                                    <text x="50" y="270" text-anchor="middle" font-size="12">16</text>
+                                    <text x="150" y="270" text-anchor="middle" font-size="12">30</text>
+                                    <text x="250" y="270" text-anchor="middle" font-size="12">40</text>
+                                    <text x="350" y="270" text-anchor="middle" font-size="12">50</text>
+                                    <text x="450" y="270" text-anchor="middle" font-size="12">60</text>
+                                    <text x="550" y="270" text-anchor="middle" font-size="12">65</text>
+                                    <text x="300" y="295" text-anchor="middle" font-size="14">年龄</text>
+                                    
+                                    <!-- Y轴标签 - 技能水平 -->
+                                    <text x="35" y="250" text-anchor="end" font-size="12">-0.4</text>
+                                    <text x="35" y="200" text-anchor="end" font-size="12">-0.2</text>
+                                    <text x="35" y="150" text-anchor="end" font-size="12">0</text>
+                                    <text x="35" y="100" text-anchor="end" font-size="12">0.2</text>
+                                    <text x="35" y="50" text-anchor="end" font-size="12">0.4</text>
+                                    <text x="15" y="150" text-anchor="middle" font-size="14" transform="rotate(-90, 15, 150)">技能水平 (SD)</text>
+                                    
+                                    <!-- 横断面数据曲线 - 文字 -->
+                                    <path d="M50,170 Q150,195 250,205 T450,230 T550,240" fill="none" stroke="#345995" stroke-width="3"/>
+                                    
+                                    <!-- 横断面数据曲线 - 计算 -->
+                                    <path d="M50,165 Q150,190 250,210 T450,235 T550,245" fill="none" stroke="#03cea4" stroke-width="3"/>
+                                    
+                                    <!-- 图例 -->
+                                    <rect x="400" y="40" width="140" height="60" fill="white" stroke="#ccc" stroke-width="1" rx="4"/>
+                                    <line x1="410" y1="60" x2="440" y2="60" stroke="#345995" stroke-width="3"/>
+                                    <text x="450" y="65" font-size="12">读写能力</text>
+                                    <line x1="410" y1="85" x2="440" y2="85" stroke="#03cea4" stroke-width="3"/>
+                                    <text x="450" y="90" font-size="12">计算能力</text>
+                                    
+                                    <!-- 标题 -->
+                                    <text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold">横断面研究的技能-年龄关系</text>
+                                </svg>
+                            </div>
+                            <p class="text-sm opacity-80">
+                                该图展示了基于PIAAC横断面数据的literacy和numeracy随年龄变化的趋势。可以看到，传统cross-sectional研究显示技能在30岁左右就开始下降，这与longitudinal研究的发现不同。图中纵轴为standard deviation单位的技能水平。
+                            </p>
+                        </div>
+                        
+                        <!-- 图表2：技能使用与年龄效应 -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold mb-4">图2: Skills随年龄的真实变化</h3>
+                            <div class="rounded-lg overflow-hidden bg-white p-2 mb-4">
+                                <!-- 使用SVG创建图表2 -->
+                                <svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 坐标轴 -->
+                                    <line x1="50" y1="150" x2="550" y2="150" stroke="#333" stroke-width="2"/>
+                                    <line x1="50" y1="50" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- X轴标签 - 年龄 -->
+                                    <text x="50" y="270" text-anchor="middle" font-size="12">16</text>
+                                    <text x="150" y="270" text-anchor="middle" font-size="12">30</text>
+                                    <text x="250" y="270" text-anchor="middle" font-size="12">40</text>
+                                    <text x="350" y="270" text-anchor="middle" font-size="12">50</text>
+                                    <text x="450" y="270" text-anchor="middle" font-size="12">60</text>
+                                    <text x="550" y="270" text-anchor="middle" font-size="12">65</text>
+                                    <text x="300" y="295" text-anchor="middle" font-size="14">Age</text>
+                                    
+                                    <!-- Y轴标签 - 年度技能变化 -->
+                                    <text x="35" y="250" text-anchor="end" font-size="12">-0.02</text>
+                                    <text x="35" y="200" text-anchor="end" font-size="12">-0.01</text>
+                                    <text x="35" y="150" text-anchor="end" font-size="12">0</text>
+                                    <text x="35" y="100" text-anchor="end" font-size="12">0.01</text>
+                                    <text x="35" y="50" text-anchor="end" font-size="12">0.02</text>
+                                    <text x="15" y="150" text-anchor="middle" font-size="14" transform="rotate(-90, 15, 150)">Annual skills change (SD)</text>
+                                    
+                                    <!-- 纵向数据曲线 - 文字 -->
+                                    <path d="M50,100 Q150,90 250,100 T350,120 T450,140 T550,160" fill="none" stroke="#345995" stroke-width="3"/>
+                                    
+                                    <!-- 纵向数据曲线 - 计算 -->
+                                    <path d="M50,105 Q150,95 250,110 T350,130 T450,160 T550,170" fill="none" stroke="#03cea4" stroke-width="3"/>
+                                    
+                                    <!-- 零变化线 -->
+                                    <line x1="50" y1="150" x2="550" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 峰值标记 -->
+                                    <circle cx="290" cy="100" r="5" fill="#345995"/>
+                                    <text x="290" y="85" text-anchor="middle" font-size="10">46 years</text>
+                                    <circle cx="245" cy="110" r="5" fill="#03cea4"/>
+                                    <text x="245" y="95" text-anchor="middle" font-size="10">41 years</text>
+                                    
+                                    <!-- 图例 -->
+                                    <rect x="400" y="40" width="140" height="60" fill="white" stroke="#ccc" stroke-width="1" rx="4"/>
+                                    <line x1="410" y1="60" x2="440" y2="60" stroke="#345995" stroke-width="3"/>
+                                    <text x="450" y="65" font-size="12">Literacy</text>
+                                    <line x1="410" y1="85" x2="440" y2="85" stroke="#03cea4" stroke-width="3"/>
+                                    <text x="450" y="90" font-size="12">Numeracy</text>
+                                    
+                                    <!-- 标题 -->
+                                    <text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold">Longitudinal age-skill relationship</text>
+                                </svg>
+                            </div>
+                            <p class="text-sm opacity-80">
+                                该图展示了基于longitudinal data的年龄与cognitive skills真实变化关系，显示literacy在46岁左右达到峰值，numeracy在41岁左右达到峰值。曲线表示每年技能变化量，正值表示skill growth，负值表示skill decline。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- 图表3：技能使用水平对比 -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold mb-4">图3: 不同skill usage levels的年龄-技能关系</h3>
+                            <div class="rounded-lg overflow-hidden bg-white p-2 mb-4">
+                                <!-- 使用SVG创建图表3 -->
+                                <svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 坐标轴 -->
+                                    <line x1="50" y1="150" x2="550" y2="150" stroke="#333" stroke-width="2"/>
+                                    <line x1="50" y1="50" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+                                    
+                                    <!-- X轴标签 - 年龄 -->
+                                    <text x="50" y="270" text-anchor="middle" font-size="12">16</text>
+                                    <text x="150" y="270" text-anchor="middle" font-size="12">30</text>
+                                    <text x="250" y="270" text-anchor="middle" font-size="12">40</text>
+                                    <text x="350" y="270" text-anchor="middle" font-size="12">50</text>
+                                    <text x="450" y="270" text-anchor="middle" font-size="12">60</text>
+                                    <text x="550" y="270" text-anchor="middle" font-size="12">65</text>
+                                    <text x="300" y="295" text-anchor="middle" font-size="14">Age</text>
+                                    
+                                    <!-- Y轴标签 - 技能累积变化 -->
+                                    <text x="35" y="250" text-anchor="end" font-size="12">-0.2</text>
+                                    <text x="35" y="200" text-anchor="end" font-size="12">-0.1</text>
+                                    <text x="35" y="150" text-anchor="end" font-size="12">0</text>
+                                    <text x="35" y="100" text-anchor="end" font-size="12">0.1</text>
+                                    <text x="35" y="50" text-anchor="end" font-size="12">0.2</text>
+                                    <text x="15" y="150" text-anchor="middle" font-size="14" transform="rotate(-90, 15, 150)">Cumulative skill change (SD)</text>
+                                    
+                                    <!-- 高使用频率组 - 文字 -->
+                                    <path d="M50,130 Q150,120 250,110 T350,90 T450,70 T550,60" fill="none" stroke="#345995" stroke-width="3"/>
+                                    
+                                    <!-- 低使用频率组 - 文字 -->
+                                    <path d="M50,140 Q150,150 250,160 T350,180 T450,200 T550,220" fill="none" stroke="#345995" stroke-width="3" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 高使用频率组 - 计算 -->
+                                    <path d="M50,130 Q150,125 250,120 T350,110 T450,100 T550,90" fill="none" stroke="#03cea4" stroke-width="3"/>
+                                    
+                                    <!-- 低使用频率组 - 计算 -->
+                                    <path d="M50,140 Q150,150 250,170 T350,190 T450,210 T550,230" fill="none" stroke="#03cea4" stroke-width="3" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 零变化线 -->
+                                    <line x1="50" y1="150" x2="550" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+                                    
+                                    <!-- 图例 -->
+                                    <rect x="380" y="20" width="210" height="80" fill="white" stroke="#ccc" stroke-width="1" rx="4"/>
+                                    
+                                    <line x1="390" y1="40" x2="420" y2="40" stroke="#345995" stroke-width="3"/>
+                                    <text x="430" y="45" font-size="12">Literacy-high frequency</text>
+                                    
+                                    <line x1="390" y1="60" x2="420" y2="60" stroke="#345995" stroke-width="3" stroke-dasharray="5,5"/>
+                                    <text x="430" y="65" font-size="12">Literacy-low frequency</text>
+                                    
+                                    <line x1="390" y1="80" x2="420" y2="80" stroke="#03cea4" stroke-width="3"/>
+                                    <text x="430" y="85" font-size="12">Numeracy-high frequency</text>
+                                    
+                                    <line x1="390" y1="100" x2="420" y2="100" stroke="#03cea4" stroke-width="3" stroke-dasharray="5,5"/>
+                                    <text x="430" y="105" font-size="12">Numeracy-low frequency</text>
+                                    
+                                    <!-- 标题 -->
+                                    <text x="300" y="20" text-anchor="middle" font-size="14" font-weight="bold">Evidence for "use it or lose it" principle</text>
+                                </svg>
+                            </div>
+                            <p class="text-sm opacity-80">
+                                这个图显示了skill usage frequency如何影响age-skill关系，高frequency的个体在整个年龄段都保持skill growth，而低frequency的个体在40岁后显著下降，直接验证了"use it or lose it"原则。
+                            </p>
+                        </div>
+                        
+                        <!-- 图表4：人口特征差异 -->
+                        <div class="card p-6">
+                            <h3 class="text-xl font-semibold mb-4">图4: 不同demographic groups的skill trajectories</h3>
+                            <div class="rounded-lg overflow-hidden bg-white p-2 mb-4">
+                                <!-- 使用SVG创建图表4，包含职业、教育和性别差异 -->
+                                <svg width="100%" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 三个小图表的背景 -->
+                                    <rect x="10" y="40" width="180" height="210" fill="#f8f9fa" rx="4"/>
+                                    <rect x="210" y="40" width="180" height="210" fill="#f8f9fa" rx="4"/>
+                                    <rect x="410" y="40" width="180" height="210" fill="#f8f9fa" rx="4"/>
+                                    
+                                    <!-- 职业分组(A) -->
+                                    <text x="100" y="30" text-anchor="middle" font-size="12" font-weight="bold">A. Occupation</text>
+                                    
+                                    <!-- 坐标轴 -->
+                                    <line x1="30" y1="150" x2="170" y2="150" stroke="#333" stroke-width="1"/>
+                                    <line x1="30" y1="80" x2="30" y2="220" stroke="#333" stroke-width="1"/>
+                                    
+                                    <!-- 白领曲线 -->
+                                    <path d="M30,130 Q70,120 110,110 T170,95" fill="none" stroke="#4285f4" stroke-width="2"/>
+                                    
+                                    <!-- 蓝领曲线 -->
+                                    <path d="M30,150 Q70,160 110,170 T170,190" fill="none" stroke="#ea4335" stroke-width="2"/>
+                                    
+                                    <!-- 图例 -->
+                                    <circle cx="50" cy="240" r="3" fill="#4285f4"/>
+                                    <text x="60" y="243" font-size="10">White-collar</text>
+                                    <circle cx="100" cy="240" r="3" fill="#ea4335"/>
+                                    <text x="110" y="243" font-size="10">Blue-collar</text>
+                                    
+                                    <!-- 教育分组(B) -->
+                                    <text x="300" y="30" text-anchor="middle" font-size="12" font-weight="bold">B. Education</text>
+                                    
+                                    <!-- 坐标轴 -->
+                                    <line x1="230" y1="150" x2="370" y2="150" stroke="#333" stroke-width="1"/>
+                                    <line x1="230" y1="80" x2="230" y2="220" stroke="#333" stroke-width="1"/>
+                                    
+                                    <!-- 高等教育曲线 -->
+                                    <path d="M230,130 Q270,120 310,110 T370,100" fill="none" stroke="#4285f4" stroke-width="2"/>
+                                    
+                                    <!-- 非高等教育曲线 -->
+                                    <path d="M230,150 Q270,160 310,170 T370,185" fill="none" stroke="#ea4335" stroke-width="2"/>
+                                    
+                                    <!-- 图例 -->
+                                    <circle cx="250" cy="240" r="3" fill="#4285f4"/>
+                                    <text x="260" y="243" font-size="10">Higher education</text>
+                                    <circle cx="320" cy="240" r="3" fill="#ea4335"/>
+                                    <text x="330" y="243" font-size="10">Non-higher education</text>
+                                    
+                                    <!-- 性别分组(C) -->
+                                    <text x="500" y="30" text-anchor="middle" font-size="12" font-weight="bold">C. Gender</text>
+                                    
+                                    <!-- 坐标轴 -->
+                                    <line x1="430" y1="150" x2="570" y2="150" stroke="#333" stroke-width="1"/>
+                                    <line x1="430" y1="80" x2="430" y2="220" stroke="#333" stroke-width="1"/>
+                                    
+                                    <!-- 男性曲线 -->
+                                    <path d="M430,140 Q470,145 510,150 T570,160" fill="none" stroke="#4285f4" stroke-width="2"/>
+                                    
+                                    <!-- 女性曲线 -->
+                                    <path d="M430,140 Q470,145 510,155 T570,175" fill="none" stroke="#ea4335" stroke-width="2"/>
+                                    
+                                    <!-- 图例 -->
+                                    <circle cx="450" cy="240" r="3" fill="#4285f4"/>
+                                    <text x="460" y="243" font-size="10">Male</text>
+                                    <circle cx="510" cy="240" r="3" fill="#ea4335"/>
+                                    <text x="520" y="243" font-size="10">Female</text>
+                                    
+                                    <!-- 总标题 -->
+                                    <text x="300" y="275" text-anchor="middle" font-size="12" font-weight="bold">Skill changes by demographic characteristics</text>
+                                </svg>
+                            </div>
+                            <p class="text-sm opacity-80">
+                                该图展示了不同demographic characteristics (occupation, education level, gender) 对skill trajectories的影响。White-collar和higher education人群显示出持续的skill growth，而blue-collar和lower education人群则较早出现skill decline。Female在numeracy方面表现出比male更大的skill decline。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+                        <p class="text-sm opacity-80 text-center">
+                            <i class="fas fa-info-circle mr-2"></i>图表根据Eric A. Hanushek, et al. (2025)论文《Age and Cognitive Skills: Use It or Lose It》中的描述重新创建。原始数据来源于German PIAAC-L (Programme for the International Assessment of Adult Competencies - Longitudinal) study。
+                            <a href="https://www.science.org/doi/10.1126/sciadv.ads1560" class="text-primary hover:underline" target="_blank">DOI: 10.1126/sciadv.ads1560</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 可视化：年龄、使用与技能轨迹 -->
+        <section class="py-10 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-start mb-6">
+                        <div class="w-1 h-16 bg-primary mr-4"></div>
+                        <h2 class="text-3xl font-bold flex items-center">
+                            <i class="fas fa-project-diagram text-primary mr-3"></i>
+                            可视化：年龄、使用与技能轨迹
+                        </h2>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <p class="mb-6 text-center">
+                            下图展示了年龄、技能使用与认知技能发展轨迹之间的关系：
+                        </p>
+                        
+                        <div class="mermaid text-center mb-6">
+                            flowchart LR
+                                %% 定义主要概念节点
+                                AGE[年龄] --> SKILLS[认知技能发展]
+                                USAGE[技能使用频率] --> SKILLS
+                                
+                                %% 子图：年龄与认知技能关系（平均轨迹）
+                                subgraph 年龄-技能平均轨迹
+                                    style 年龄-技能平均轨迹 fill:#e8f5e9,stroke:#81c784,stroke-width:1px
+                                    EARLY[早年成人期<br/>20-30岁] --> MIDAGE[中年期<br/>30-45岁]
+                                    MIDAGE --> PEAK[读写能力峰值<br/>46岁左右]
+                                    MIDAGE --> NUMPEAK[计算能力峰值<br/>41岁左右]
+                                    PEAK --> ELDER[老年期<br/>50-65岁]
+                                    NUMPEAK --> ELDER
+                                end
+                                
+                                %% 子图：用进废退原则与技能使用的作用
+                                subgraph 技能使用影响
+                                    style 技能使用影响 fill:#e3f2fd,stroke:#64b5f6,stroke-width:1px
+                                    HIGH[高频使用] --> GROWTH[技能持续增长]
+                                    LOW[低频使用] --> DECLINE[技能显著下降]
+                                end
+                                
+                                %% 人口特征差异
+                                subgraph 人口特征差异
+                                    style 人口特征差异 fill:#fff8e1,stroke:#ffd54f,stroke-width:1px
+                                    WHITE[白领/高学历] --> HIGHUSE[更高技能使用频率]
+                                    BLUE[蓝领/低学历] --> LOWUSE[较低技能使用频率]
+                                    GENDER[性别差异] -.-> MATHDEC[女性计算能力<br/>更大下降]
+                                end
+                                
+                                %% 连接不同概念组
+                                HIGHUSE --> HIGH
+                                LOWUSE --> LOW
+                                ELDER --> CONDITION{技能使用条件}
+                                CONDITION -- 高频使用 --> GROWTH
+                                CONDITION -- 低频使用 --> DECLINE
+                                
+                                %% 修饰线条和节点
+                                linkStyle 0,1 stroke:#333,stroke-width:2px;
+                                style CONDITION fill:#f3f3f3,stroke:#333,stroke-width:1px
+                                style AGE fill:#d1c4e9,stroke:#333,stroke-width:1px
+                                style USAGE fill:#bbdefb,stroke:#333,stroke-width:1px
+                                style SKILLS fill:#c8e6c9,stroke:#333,stroke-width:1px
+                        </div>
+                        
+                        <p class="text-sm text-center opacity-70">
+                            注：此图表展示了研究的核心发现：1)认知技能在40多岁才达到峰值；2)技能使用频率影响老年期技能发展轨迹；3)人口特征与技能使用频率相关联。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 理论意义 -->
+        <section class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">理论意义</h2>
+                </div>
+                <div class="card p-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">用进废退原则的经验证据</h3>
+                            <p class="mb-4">
+                                该研究为"用进废退"原则在成人认知技能领域提供了强有力的经验支持。这表明，认知能力并非固定不变，而是具有可塑性的，会受到个体参与和实践的影响。
+                            </p>
+                            <p>
+                                持续的认知活动和技能使用在维持和发展认知能力方面扮演着关键角色，这一发现对我们理解人类认知潜能具有深远影响。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4">修正传统认知衰退理论</h3>
+                            <p class="mb-4">
+                                该研究对传统的年龄相关认知衰退理论提出了修正，表明认知技能的下降并非一个在成年早期就开始的普遍且线性的过程。
+                            </p>
+                            <p>
+                                相反，研究揭示了一个更为复杂的模式，即技能在成年中期之前持续增长，而之后的下降程度则受到技能使用等多种因素的影响。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 rounded-lg theme-bg-primary">
+                        <h3 class="text-xl font-semibold mb-4">流体智力与晶体智力的区别</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="card p-4">
+                                <h4 class="text-lg font-medium mb-2">读写能力（晶体智力）</h4>
+                                <p class="text-sm">
+                                    通常与晶体智力（积累的知识和语言技能）相关联，可能由于其在日常生活中的持续使用而更不容易受到年龄的影响。
+                                </p>
+                            </div>
+                            <div class="card p-4">
+                                <h4 class="text-lg font-medium mb-2">计算能力（流体智力）</h4>
+                                <p class="text-sm">
+                                    可能更多地与流体智力（推理和解决问题的能力）相关，如果没有持续的练习，可能更容易出现下降。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4">情境因素的重要性</h3>
+                        <p>
+                            这项研究强调了情境因素，特别是技能使用，在塑造认知老化过程中的重要作用。这表明，个体特征与环境需求之间的相互作用是影响认知发展轨迹的关键。人们所处的社会环境、工作要求和日常活动对认知能力的发展和维持有着深远的影响。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 实际应用价值 -->
+        <section class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">实际应用价值</h2>
+                </div>
+                <div class="card p-8">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="card p-5 text-center hover:shadow-md transition-all">
+                            <div class="h-16 w-16 mx-auto rounded-full bg-primary bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-graduation-cap text-2xl" style="color: var(--primary);"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">终身学习</h3>
+                            <p class="text-sm">强调了终身学习的重要性，鼓励成年人在整个生命周期中持续参与认知活动</p>
+                        </div>
+                        
+                        <div class="card p-5 text-center hover:shadow-md transition-all">
+                            <div class="h-16 w-16 mx-auto rounded-full bg-secondary bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-briefcase text-2xl" style="color: var(--secondary);"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">工作场所</h3>
+                            <p class="text-sm">雇主应提供技能使用和发展的机会，帮助年长员工维持和提高认知技能</p>
+                        </div>
+                        
+                        <div class="card p-5 text-center hover:shadow-md transition-all">
+                            <div class="h-16 w-16 mx-auto rounded-full bg-accent bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-umbrella-beach text-2xl" style="color: var(--accent);"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">退休规划</h3>
+                            <p class="text-sm">退休规划应强调保持智力活跃的重要性，通过爱好、志愿活动和继续学习</p>
+                        </div>
+                        
+                        <div class="card p-5 text-center hover:shadow-md transition-all">
+                            <div class="h-16 w-16 mx-auto rounded-full bg-primary bg-opacity-20 flex items-center justify-center mb-4">
+                                <i class="fas fa-users-cog text-2xl" style="color: var(--primary);"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">政策建议</h3>
+                            <p class="text-sm">公共政策应支持所有年龄段人口的技能维持和发展，确保积极参与的劳动力</p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 rounded-lg theme-bg-secondary mb-8">
+                        <h3 class="text-xl font-semibold mb-4">具体建议</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>开发针对各年龄段的成人教育计划，特别关注中老年群体</li>
+                            <li>设计工作环境和任务，促进员工积极使用和发展认知技能</li>
+                            <li>创建社区学习中心，为退休人员提供认知挑战和社交互动的机会</li>
+                            <li>将认知技能维持纳入健康老龄化政策和退休准备计划</li>
+                            <li>加强科普教育，提高公众对"用进废退"原则重要性的认识</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quote-block">
+                        <p class="italic text-center">
+                            "我们不应将认知衰退视为不可避免的命运，而应认识到通过适当的环境和活动，可以显著影响认知老化的轨迹。这为个人和社会提供了保持认知健康和人力资本的积极路径。"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 研究局限性 -->
+        <section class="py-10 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-start mb-6">
+                        <div class="w-1 h-16 bg-accent mr-4"></div>
+                        <h2 class="text-3xl font-bold flex items-center">
+                            <i class="fas fa-exclamation-triangle text-accent mr-3"></i>
+                            研究局限性
+                        </h2>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="h-6 w-6 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dot-circle text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">年龄范围限制：</span>数据仅覆盖16-65岁，未包含更高龄人群。
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <div class="h-6 w-6 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dot-circle text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">地域限制：</span>基于德国数据，推广到其他国家需谨慎。
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <div class="h-6 w-6 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dot-circle text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">技能范围限制：</span>仅关注读写和计算能力。
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <div class="h-6 w-6 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dot-circle text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">因果关系推断：</span>观察性数据难以确定技能使用与维持的直接因果关系。
+                                </div>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <div class="h-6 w-6 rounded-full bg-accent bg-opacity-20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                    <i class="fas fa-dot-circle text-accent text-sm"></i>
+                                </div>
+                                <div>
+                                    <span class="font-semibold">测量方法：</span>技能使用依赖自我报告，可能存在偏差。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 未来研究方向 -->
+        <section class="py-10">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-start mb-6">
+                        <div class="w-1 h-16 bg-secondary mr-4"></div>
+                        <h2 class="text-3xl font-bold flex items-center">
+                            <i class="fas fa-compass text-secondary mr-3"></i>
+                            未来研究方向
+                        </h2>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <p class="mb-6">未来的研究可探索：</p>
+                        
+                        <ol class="space-y-4 list-decimal pl-6">
+                            <li class="pl-2">更高年龄段（65岁以上）的技能轨迹。</li>
+                            
+                            <li class="pl-2">跨国比较，验证结果的普遍性。</li>
+                            
+                            <li class="pl-2">其他认知技能（如问题解决、记忆力）的纵向发展。</li>
+                            
+                            <li class="pl-2">更客观的技能使用测量方法及因果机制研究。</li>
+                            
+                            <li class="pl-2">深入探究性别差异的原因。</li>
+                            
+                            <li class="pl-2">特定认知活动类型的影响。</li>
+                            
+                            <li class="pl-2">认知技能使用与其他生活方式因素（运动、社交、健康）的交互作用。</li>
+                        </ol>
+                        
+                        <div class="mt-8 p-5 rounded-lg bg-gray-50 dark:bg-gray-700 border-l-4" style="border-color: var(--secondary);">
+                            <div class="flex">
+                                <i class="fas fa-lightbulb text-secondary text-xl mr-3 mt-1"></i>
+                                <p class="italic">
+                                    这些研究方向将进一步拓展我们对认知能力随年龄变化规律的理解，为促进终身认知健康提供更全面的科学依据。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 关键洞见 -->
+        <section id="insights" class="py-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-6">
+                    <div class="h-0.5 w-12 bg-secondary mr-4"></div>
+                    <h2 class="text-3xl font-bold">深刻洞见</h2>
+                </div>
+                <div class="card p-8">
+                    <p class="mb-8">
+                        Eric A. Hanushek及其同事（2025）的研究通过对德国PIAAC-L数据的纵向分析，为我们理解成人认知技能的发展变化提供了重要的见解。从中可以提炼出以下五条深刻洞见：
+                    </p>
+                    
+                    <div class="space-y-8">
+                        <div class="card p-6 hover:shadow-md transition-all">
+                            <div class="flex items-start">
+                                <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center mr-4 shrink-0">
+                                    <span class="text-white font-bold">1</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">心智的动态本质</h3>
+                                    <p>
+                                        人类的心智并非在成年早期就注定走向衰退，而是一个具有显著的持续认知功能甚至增长能力的动态系统，其活力在很大程度上取决于对相关技能的积极和持续参与。这挑战了关于认知能力不可避免的早期衰退的普遍观点，并提出了一个更加乐观和主动的智力老化视角。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-6 hover:shadow-md transition-all">
+                            <div class="flex items-start">
+                                <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center mr-4 shrink-0">
+                                    <span class="text-white font-bold">2</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">"用进废退"的基本原则</h3>
+                                    <p>
+                                        "用进废退"这句格言超越了简单的常识，成为支配成人认知资本维持和发展的基本原则，这意味着社会结构和个人在智力参与方面的选择对整个生命周期的认知活力产生深远而持久的影响。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-6 hover:shadow-md transition-all">
+                            <div class="flex items-start">
+                                <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center mr-4 shrink-0">
+                                    <span class="text-white font-bold">3</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">认知功能的差异性衰退</h3>
+                                    <p>
+                                        计算能力相对于读写能力更容易受到年龄相关衰退的影响，这表明大脑在对不常或不强烈使用的认知功能进行维护时可能存在优先顺序，强调了在特定认知领域进行有针对性和持续练习的必要性。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-6 hover:shadow-md transition-all">
+                            <div class="flex items-start">
+                                <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center mr-4 shrink-0">
+                                    <span class="text-white font-bold">4</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">社会不平等的认知影响</h3>
+                                    <p>
+                                        不同社会经济和职业群体在认知发展轨迹上的差异表明，获得持续且高要求的认知技能使用的机会并非均等，这可能会加剧老龄化人口中认知健康和经济成果方面的不平等。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-6 hover:shadow-md transition-all">
+                            <div class="flex items-start">
+                                <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center mr-4 shrink-0">
+                                    <span class="text-white font-bold">5</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2">研究方法的突破</h3>
+                                    <p>
+                                        从横断面分析到纵向分析的转变，从根本上改变了我们对整个生命周期中人力资本发展的理解，将重点从静态评估转向将认知能力的持续培养和积极维护视为一项终生的事业，并具有显著的个人和社会回报。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- 进一步阅读 -->
+    <section class="py-16" style="background-color: var(--primary); background-opacity: 0.05;">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-12 text-center">进一步阅读</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-6 hover:shadow-lg transition-all">
+                        <h3 class="text-xl font-semibold mb-3">相关研究论文</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="https://doi.org/10.1126/sciadv.abn0444" class="flex items-start group" target="_blank" rel="noopener">
+                                    <i class="fas fa-file-alt mr-3 mt-1 transition-transform group-hover:translate-x-1" style="color: var(--primary);"></i>
+                                    <div>
+                                        <p class="font-medium group-hover:text-primary transition-colors">Hanushek, E. A., Piopiunik, M., & Wiederhold, S. (2023). Do Smarter Teachers Make Smarter Students?</p>
+                                        <p class="text-sm opacity-70">Education Next, 19(2).</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://doi.org/10.1016/j.econedurev.2019.03.001" class="flex items-start group" target="_blank" rel="noopener">
+                                    <i class="fas fa-file-alt mr-3 mt-1 transition-transform group-hover:translate-x-1" style="color: var(--primary);"></i>
+                                    <div>
+                                        <p class="font-medium group-hover:text-primary transition-colors">Hampf, F., Wiederhold, S., & Woessmann, L. (2017). Skills, earnings, and employment: exploring causality in the estimation of returns to skills.</p>
+                                        <p class="text-sm opacity-70">Large-scale Assessments in Education, 5(12).</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://doi.org/10.1016/j.econedurev.2021.102080" class="flex items-start group" target="_blank" rel="noopener">
+                                    <i class="fas fa-file-alt mr-3 mt-1 transition-transform group-hover:translate-x-1" style="color: var(--primary);"></i>
+                                    <div>
+                                        <p class="font-medium group-hover:text-primary transition-colors">Hanushek, E. A., Schwerdt, G., Wiederhold, S., & Woessmann, L. (2015). Returns to skills around the world: Evidence from PIAAC.</p>
+                                        <p class="text-sm opacity-70">European Economic Review, 73, 103-130.</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card p-6 hover:shadow-lg transition-all">
+                        <h3 class="text-xl font-semibold mb-3">相关书籍</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="https://www.amazon.com/Cognitive-Neuroscience-Human-Systems-Present/dp/1138917958" class="flex items-start group" target="_blank" rel="noopener">
+                                    <i class="fas fa-book mr-3 mt-1 transition-transform group-hover:translate-x-1" style="color: var(--secondary);"></i>
+                                    <div>
+                                        <p class="font-medium group-hover:text-secondary transition-colors">Kramer, A. F., & Willis, S. L. (2011). 《成人认知发展与可塑性》</p>
+                                        <p class="text-sm opacity-70">这本书深入探讨了成人认知能力随年龄变化的规律，以及影响这一过程的因素。</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.wiley.com/en-us/The+Cambridge+Handbook+of+Age+and+Ageing-p-9780521826327" class="flex items-start group" target="_blank" rel="noopener">
+                                    <i class="fas fa-book mr-3 mt-1 transition-transform group-hover:translate-x-1" style="color: var(--secondary);"></i>
+                                    <div>
+                                        <p class="font-medium group-hover:text-secondary transition-colors">Baltes, P. B., & Baltes, M. M. (1990). 《成功老龄化：前景与挑战》</p>
+                                        <p class="text-sm opacity-70">这本书提出了成功老龄化的理论框架，强调了认知能力在老年期维持的重要性和可能性。</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="py-12 border-t" style="border-color: var(--border-color);">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="h-12 w-12 rounded-full mr-4 overflow-hidden flex items-center justify-center" style="background-color: var(--primary);">
+                                <span class="text-white font-bold text-xl">季</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">季晓康</h3>
+                                <p class="opacity-70">研究员</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">国家健康医疗大数据研究院</p>
+                        <div class="flex items-center">
+                            <i class="fas fa-rss mr-2" style="color: var(--secondary);"></i>
+                            <span>微信公众号：凿壁</span>
+                        </div>
+                    </div>
+                    
+                    <div class="md:text-right">
+                        <p class="text-sm opacity-70 mb-2">©2024 国家健康医疗大数据研究院</p>
+                        <p class="text-sm opacity-70">本文内容基于Eric A. Hanushek及其同事于2025年发表的研究</p>
+                        <div class="flex justify-end mt-6 space-x-4">
+                            <a href="#" class="text-2xl hover:text-primary transition-colors" aria-label="分享到微信">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a href="#" class="text-2xl hover:text-primary transition-colors" aria-label="分享到微博">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a href="mailto:example@example.com" class="text-2xl hover:text-primary transition-colors" aria-label="发送邮件">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.className;
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.className = newTheme;
+                localStorage.setItem('theme', newTheme);
+                
+                // Update mermaid theme
+                mermaid.initialize({
+                    theme: newTheme === 'dark' ? 'dark' : 'default',
+                    securityLevel: 'loose',
+                    flowchart: { useMaxWidth: true }
+                });
+            });
+            
+            // Initialize mermaid diagrams
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

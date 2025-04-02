@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康医疗数据资产：中国数据要素市场化教育与实践</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* 自定义样式 */
+        .prose img {
+            margin: 2rem auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.5);
+            border-radius: 20px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.8);
+        }
+        
+        /* 深色模式下的滚动条 */
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: rgba(75, 85, 99, 0.5);
+        }
+        
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(75, 85, 99, 0.8);
+        }
+        
+        /* 引用样式 */
+        blockquote {
+            border-left: 4px solid #0ea5e9;
+            padding-left: 1rem;
+            font-style: italic;
+            margin: 1.5rem 0;
+            color: #64748b;
+        }
+        
+        .dark blockquote {
+            color: #94a3b8;
+        }
+        
+        /* 卡片悬停效果 */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* 标题渐变效果 */
+        .gradient-text {
+            background: linear-gradient(90deg, #0ea5e9, #f43f5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 进度条动画 */
+        @keyframes progress {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+        
+        .animate-progress {
+            animation: progress 1.5s ease-out forwards;
+        }
+        
+        /* 进入动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .dark th {
+            background-color: #1e293b;
+            border-bottom: 2px solid #334155;
+        }
+        
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .dark td {
+            border-bottom: 1px solid #334155;
+        }
+        
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .dark tr:hover {
+            background-color: #0f172a;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-secondary-800 dark:bg-secondary-900 dark:text-secondary-100 transition-colors duration-300">
+    <!-- 顶部导航栏 -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-secondary-900/80 border-b border-secondary-200 dark:border-secondary-700 px-4 sm:px-6 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-primary-600 dark:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path>
+                </svg>
+                <span class="text-lg font-semibold">健康医疗数据资产</span>
+            </a>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#concepts" class="hidden sm:block text-secondary-600 dark:text-secondary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">核心概念</a>
+                <a href="#applications" class="hidden sm:block text-secondary-600 dark:text-secondary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">价值应用</a>
+                <a href="#policies" class="hidden sm:block text-secondary-600 dark:text-secondary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">政策环境</a>
+                <a href="#course" class="hidden sm:block text-secondary-600 dark:text-secondary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">课程设计</a>
+                
+                <button id="theme-toggle" class="p-2 rounded-full text-secondary-600 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 transition-colors focus:outline-none">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-900 dark:to-secondary-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 font-serif">
+                    健康医疗数据资产
+                </h1>
+                <p class="text-xl sm:text-2xl text-primary-100 max-w-3xl mx-auto">
+                    中国数据要素市场化背景下的深度解析与教育实践
+                </p>
+            </div>
+        </div>
+        
+        <!-- 装饰性背景图形 -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+            <svg class="absolute top-0 left-0 translate-y-[-10%]" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0 800 L 0 500 Q 300 350 600 500 T 1200 300 L 1200 800 Z" fill="white"></path>
+            </svg>
+            <svg class="absolute bottom-0 right-0 translate-y-[10%]" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 0 800 L 0 400 Q 300 550 600 400 T 1200 600 L 1200 800 Z" fill="white"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+        <!-- 简介部分 -->
+        <section class="mb-16 fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">引言</h2>
+                <div class="prose dark:prose-invert max-w-none text-lg">
+                    <p class="leading-relaxed">
+                        在数字经济时代，数据已成为一种新型的关键生产要素，其重要性日益凸显。在中国，政府已将数据提升至战略高度，并积极推动数据要素的市场化配置，旨在通过释放数据潜能，驱动数字转型、创新发展以及实体经济的升级。健康医疗数据作为数据要素的重要组成部分，在现代医疗健康领域扮演着越来越关键的角色。
+                    </p>
+                    
+                    <blockquote>
+                        中国国务院早在2016年就发布了关于促进和规范健康医疗大数据应用发展的指导意见，明确指出健康医疗大数据是国家重要的基础性战略资源。
+                    </blockquote>
+                    
+                    <p class="leading-relaxed">
+                        为了进一步激活数据要素的活力，中国政府正在积极构建数据要素市场化的体制机制。这一国家战略不仅为健康医疗数据的流通和利用提供了宏观政策背景，也预示着健康医疗数据将逐渐从传统的记录和管理工具转变为一种可交易、可增值的资产。到2025年底，中国希望建立一个高效的数据市场，促进企业和政府部门之间的数据共享和交易。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心概念与特征 -->
+        <section id="concepts" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">核心概念与特征</h2>
+                
+                <div class="mb-12">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-700 dark:text-primary-400">健康医疗数据资产的定义</h3>
+                    <p class="text-lg mb-6">
+                        广义而言，健康医疗数据资产是指在医疗健康领域产生、记录和积累的各类有价值的数据集合。这些数据涵盖了从个体到群体的健康信息，具体可以包括临床数据、基因组数据、医疗影像数据、实验室检测数据、患者的电子健康档案、医疗保险数据、公共卫生监测数据以及与健康相关的行为和环境数据等。
+                    </p>
+                    
+                    <!-- 数据资产类型图表 -->
+                    <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-lg overflow-hidden mb-8">
+                        <div class="p-5 border-b border-secondary-200 dark:border-secondary-700">
+                            <h4 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">健康医疗数据资产类型</h4>
+                        </div>
+                        <div class="p-5 overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th>数据类别</th>
+                                        <th>示例</th>
+                                        <th>潜在价值</th>
+                                        <th>敏感度</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>临床数据</td>
+                                        <td>诊断记录、治疗方案、用药情况、手术报告、检查检验结果</td>
+                                        <td>个性化治疗、临床决策支持、药物疗效评估、疾病进展研究</td>
+                                        <td class="text-accent-600">高</td>
+                                    </tr>
+                                    <tr>
+                                        <td>基因组数据</td>
+                                        <td>患者基因序列、基因变异信息</td>
+                                        <td>疾病风险预测、药物反应预测、遗传病研究、精准医疗</td>
+                                        <td class="text-accent-700">极高</td>
+                                    </tr>
+                                    <tr>
+                                        <td>医疗影像数据</td>
+                                        <td>X光片、CT、MRI、超声影像</td>
+                                        <td>疾病诊断、病情监测、治疗效果评估、AI辅助诊断算法开发</td>
+                                        <td class="text-accent-600">高</td>
+                                    </tr>
+                                    <tr>
+                                        <td>电子健康档案 (EHR)</td>
+                                        <td>患者基本信息、病史、过敏史、免疫接种记录、生活习惯</td>
+                                        <td>患者管理、健康监测、公共卫生研究、医疗服务质量评估</td>
+                                        <td class="text-accent-600">高</td>
+                                    </tr>
+                                    <tr>
+                                        <td>医疗保险数据</td>
+                                        <td>医疗费用记录、报销信息、处方信息</td>
+                                        <td>医疗费用控制、医疗服务利用分析、保险产品设计、欺诈检测</td>
+                                        <td class="text-accent-500">中</td>
+                                    </tr>
+                                    <tr>
+                                        <td>公共卫生数据</td>
+                                        <td>疾病发病率、死亡率、传染病监测数据、疫苗接种率</td>
+                                        <td>疫情监测与预警、公共卫生政策制定、健康趋势分析</td>
+                                        <td class="text-accent-500">中</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-primary-700 dark:text-primary-400">健康医疗数据的独特特征</h3>
+                    
+                    <!-- 特征卡片网格 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- 特征卡片 1 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">非竞争性</h4>
+                            </div>
+                            <p>同一份健康医疗数据可以被多个使用者同时使用，用于不同的目的，而不会被消耗殆尽。</p>
+                        </div>
+                        
+                        <!-- 特征卡片 2 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">可重复使用性</h4>
+                            </div>
+                            <p>只要符合相关的法律法规和伦理规范，同一份数据可以在不同的时间被用于解决不同的问题，从而最大化其价值。</p>
+                        </div>
+                        
+                        <!-- 特征卡片 3 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">高度敏感性</h4>
+                            </div>
+                            <p>涉及到个体的隐私和健康状况，在管理和使用上需要格外谨慎，需要严格的安全保障措施。</p>
+                        </div>
+                        
+                        <!-- 特征卡片 4 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">纵向性</h4>
+                            </div>
+                            <p>记录了个体在不同时间点的健康信息，这对于追踪疾病发展和评估治疗效果具有重要意义。</p>
+                        </div>
+                        
+                        <!-- 特征卡片 5 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">数据质量要求高</h4>
+                            </div>
+                            <p>高质量的数据需要具备完整性、准确性、一致性和及时性等特点，对数据治理提出了较高要求。</p>
+                        </div>
+                        
+                        <!-- 特征卡片 6 -->
+                        <div class="feature-card bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                    </svg>
+                                </div>
+                                <h4 class="text-lg font-semibold">价值多维性</h4>
+                            </div>
+                            <p>健康医疗数据的价值既包括经济价值，也包括科研价值、社会价值和公共卫生价值等多个维度。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 价值与应用 -->
+        <section id="applications" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">价值的释放：健康医疗数据资产的应用</h2>
+                
+                <!-- 价值应用图示 -->
+                <div class="bg-white dark:bg-secondary-800 rounded-xl shadow-lg overflow-hidden mb-12">
+                    <div class="p-6">
+                        <div class="flex flex-wrap -mx-4">
+                            <!-- 左侧图示 -->
+                            <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                                <svg class="w-full" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- 中心圆 - 健康医疗数据 -->
+                                    <circle cx="250" cy="200" r="80" fill="#0ea5e9" opacity="0.9" />
+                                    <text x="250" y="200" text-anchor="middle" fill="white" font-size="14" font-weight="bold">健康医疗数据资产</text>
+                                    
+                                    <!-- 连接线和外围圆 -->
+                                    <!-- 临床决策 -->
+                                    <line x1="250" y1="120" x2="250" y2="50" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="250" cy="30" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="250" y="30" text-anchor="middle" fill="white" font-size="10">临床决策支持</text>
+                                    
+                                    <!-- 药物研发 -->
+                                    <line x1="320" y1="150" x2="400" y2="100" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="420" cy="90" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="420" y="90" text-anchor="middle" fill="white" font-size="10">药物研发</text>
+                                    
+                                    <!-- 公共卫生 -->
+                                    <line x1="320" y1="250" x2="400" y2="300" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="420" cy="310" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="420" y="310" text-anchor="middle" fill="white" font-size="10">公共卫生监测</text>
+                                    
+                                    <!-- 医疗管理 -->
+                                    <line x1="250" y1="280" x2="250" y2="350" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="250" cy="370" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="250" y="370" text-anchor="middle" fill="white" font-size="10">医疗管理</text>
+                                    
+                                    <!-- 科研创新 -->
+                                    <line x1="180" y1="250" x2="100" y2="300" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="80" cy="310" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="80" y="310" text-anchor="middle" fill="white" font-size="10">科研创新</text>
+                                    
+                                    <!-- 数据分析 -->
+                                    <line x1="180" y1="150" x2="100" y2="100" stroke="#0ea5e9" stroke-width="2" />
+                                    <circle cx="80" cy="90" r="25" fill="#f43f5e" opacity="0.8" />
+                                    <text x="80" y="90" text-anchor="middle" fill="white" font-size="10">数据分析技术</text>
+                                </svg>
+                            </div>
+                            
+                            <!-- 右侧描述 -->
+                            <div class="w-full lg:w-1/2 px-4">
+                                <h3 class="text-xl font-semibold mb-4 text-primary-700 dark:text-primary-400">多维度的应用场景</h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start">
+                                        <span class="flex-shrink-0 rounded-full p-1 bg-accent-500 text-white mr-3 mt-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <p><span class="font-semibold">临床决策支持</span>：通过对患者历史数据、基因组信息以及实时监测数据的分析，为医生提供更精准的诊断建议和个性化治疗方案。</p>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="flex-shrink-0 rounded-full p-1 bg-accent-500 text-white mr-3 mt-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <p><span class="font-semibold">药物研发</span>：分析大量的临床试验数据、真实世界数据以及基因组数据，加速新药研发进程，提高研发效率，降低研发成本。</p>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="flex-shrink-0 rounded-full p-1 bg-accent-500 text-white mr-3 mt-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <p><span class="font-semibold">公共卫生监测</span>：通过对疾病发病率、传播途径、高风险人群等数据的分析，实现对疫情的早期预警和精准防控。</p>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="flex-shrink-0 rounded-full p-1 bg-accent-500 text-white mr-3 mt-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <p><span class="font-semibold">医疗管理与运营</span>：通过对医院运营数据的分析，优化资源配置，提高服务效率，降低运营成本。</p>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="flex-shrink-0 rounded-full p-1 bg-accent-500 text-white mr-3 mt-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                        <p><span class="font-semibold">科研与创新</span>：健康医疗数据是重要的科研资源，推动着医学研究和创新，如大规模的健康数据研究合作项目。</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 实际案例展示 -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700 dark:text-primary-400">创新案例与实践</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 案例 1 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                中国"百万人口项目"
+                            </h4>
+                            <p class="text-secondary-600 dark:text-secondary-300">
+                                与耶鲁大学合作开展的大规模项目，旨在收集中国四百万人的健康数据，以研究心血管疾病等慢性病，展示了健康数据在推动医学研究和创新方面的巨大潜力。
+                            </p>
+                        </div>
+                        
+                        <!-- 案例 2 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                AI药物研发进展
+                            </h4>
+                            <p class="text-secondary-600 dark:text-secondary-300">
+                                中国已有完全由人工智能生成的药物进入临床试验阶段，这一突破得益于大量健康医疗数据的分析与应用，显著提升了药物研发效率。
+                            </p>
+                        </div>
+                        
+                        <!-- 案例 3 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                中国健康与营养调查
+                            </h4>
+                            <p class="text-secondary-600 dark:text-secondary-300">
+                                长期收集和分析中国居民的健康和营养数据的项目，为公共卫生政策制定提供了科学依据，是数据驱动公共卫生决策的典型案例。
+                            </p>
+                        </div>
+                        
+                        <!-- 案例 4 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                医学影像AI诊断
+                            </h4>
+                            <p class="text-secondary-600 dark:text-secondary-300">
+                                基于大数据分析的AI工具辅助医生进行医学影像诊断，提高诊断效率和准确性，展示了健康数据在临床决策支持方面的应用价值。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 政策环境 -->
+        <section id="policies" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">中国的数据要素市场化政策</h2>
+                
+                <!-- 政策时间线 -->
+                <div class="relative pb-12">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200 dark:bg-primary-900"></div>
+                    
+                    <!-- 政策项 1 -->
+                    <div class="relative flex items-center justify-between mb-8 md:mb-12">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2016年</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">国务院发布《关于促进和规范健康医疗大数据应用发展的指导意见》</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">明确指出健康医疗大数据是国家重要的基础性战略资源，奠定了健康医疗数据战略地位。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 政策项 2 -->
+                    <div class="relative flex items-center justify-between mb-8 md:mb-12">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">首次将数据确立为继土地、劳动力、资本和技术之后的第五大生产要素，为数据市场化配置奠定基础。</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2020年3月</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">《关于构建更加完善的要素市场化配置体制机制的意见》</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 政策项 3 -->
+                    <div class="relative flex items-center justify-between mb-8 md:mb-12">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2021年11月</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">《中华人民共和国个人信息保护法》(PIPL) 正式生效</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">为个人信息的收集、使用、存储、传输和删除等环节设定了明确的法律规范，健康医疗数据被定义为敏感个人信息，受到更严格的保护。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 政策项 4 -->
+                    <div class="relative flex items-center justify-between mb-8 md:mb-12">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">围绕数据产权、流通交易、收益分配和安全治理四个方面，构建了数据要素市场的基础制度，被称为"数据二十条"。</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2022年12月</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">《关于构建数据基础制度更好发挥数据要素作用的意见》</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 政策项 5 -->
+                    <div class="relative flex items-center justify-between mb-8 md:mb-12">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2024年1月</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">《企业数据资源相关会计处理暂行规定》实施</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">允许企业将符合条件的数据资源确认为无形资产或存货，标志着数据正式被纳入企业资产负债表，为健康医疗数据资产的价值化提供了会计基础。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 政策项 6 -->
+                    <div class="relative flex items-center justify-between">
+                        <div class="w-5/12 pr-8 md:pr-12 text-right">
+                            <p class="mt-2 text-secondary-700 dark:text-secondary-200">推动数据要素在12个重点行业的应用，其中包括医疗健康领域，旨在通过数据应用提升资源配置效率，培育新产业新模式，激发新经济增长点。</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary-600 border-4 border-white dark:border-secondary-900 z-10"></div>
+                        <div class="w-5/12 pl-8 md:pl-12">
+                            <h3 class="text-lg font-semibold text-primary-700 dark:text-primary-400">2024年5月</h3>
+                            <p class="mt-2 text-secondary-600 dark:text-secondary-300">《"数据要素×"三年行动计划（2024—2026年）》</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PIPL对健康数据的要求 -->
+                <div class="mt-12">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700 dark:text-primary-400">《个人信息保护法》对健康数据的关键要求</h3>
+                    
+                    <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-6 border-b border-secondary-200 dark:border-secondary-700">
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                《个人信息保护法》(PIPL)于2021年11月1日正式生效，为个人信息的处理设定了明确的法律规范。健康医疗数据被PIPL明确定义为<span class="font-bold text-accent-600">敏感个人信息</span>，因此受到更为严格的保护。以下是PIPL中处理健康数据的关键要求：
+                            </p>
+                        </div>
+                        <div class="p-5 overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr>
+                                        <th>要求</th>
+                                        <th>具体内容</th>
+                                        <th>影响</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>明确同意和单独同意</td>
+                                        <td>收集健康数据必须获得个人的明确同意，处理敏感个人信息还需获得单独同意。</td>
+                                        <td>增加了数据收集的难度和成本，尤其是在大规模研究和市场化应用场景下。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>敏感个人信息保护</td>
+                                        <td>健康数据被定义为敏感个人信息，受到更高级别的保护。</td>
+                                        <td>对健康数据的处理提出了更高的安全要求和更严格的合规义务。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>数据本地化存储</td>
+                                        <td>关键信息基础设施运营者和处理大量个人信息的企业，原则上需要将健康数据存储在中国境内。</td>
+                                        <td>限制了数据的跨境流动，对跨国医疗合作和业务运营产生影响。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>跨境传输规则</td>
+                                        <td>健康数据的跨境传输需要满足特定的条件，例如通过安全评估、获得认证或订立标准合同。</td>
+                                        <td>增加了跨境数据传输的复杂性和合规成本。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>最小必要原则</td>
+                                        <td>收集的健康数据应限于实现处理目的的最小范围。</td>
+                                        <td>要求数据处理者审慎评估数据需求，避免过度收集。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>安全措施</td>
+                                        <td>必须采取必要的安全措施保护健康数据，防止未经授权的访问、泄露、篡改或丢失。</td>
+                                        <td>增加了数据安全技术和管理方面的投入需求。</td>
+                                    </tr>
+                                    <tr>
+                                        <td>个人权利保障</td>
+                                        <td>个人对其健康数据享有查询、复制、更正、补充、删除等权利。</td>
+                                        <td>要求数据处理者建立相应的机制来响应和处理数据主体的权利请求。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 全球视野：健康数据市场化的国际比较 -->
+        <section id="global-comparison" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">全球视野：健康数据市场化的国际比较</h2>
+                
+                <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-lg overflow-hidden mb-10">
+                    <div class="p-6 border-b border-secondary-200 dark:border-secondary-700">
+                        <p class="text-secondary-700 dark:text-secondary-200">
+                            为了更好地理解中国健康医疗数据市场化的发展方向，有必要将其与国际上的相关实践进行比较。在全球范围内，健康数据市场化正处于快速发展阶段，尤其是在北美和欧洲地区。
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+                        <!-- 法律框架比较 -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">法律框架比较</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">中国 PIPL</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        强调数据主体的同意权，对敏感信息有严格保护；要求重要数据本地化存储；跨境数据流动受严格限制；针对数据本地化处理有明确规定。
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">欧盟 GDPR</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        同样强调数据主体权利，但对科研有专门豁免条款；对数据跨境流通要求相对灵活，允许在满足适当保障措施情况下进行；明确规定数据主体的"被遗忘权"。
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">美国 HIPAA</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        专门针对健康信息的法规；采用行业自律与政府监管相结合的模式；允许在去标识化后进行健康数据的商业化应用；对健康数据的使用有"最小必要原则"要求。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 数据共享模式 -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">数据共享与市场化模式</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">美国模式</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        市场驱动为主，存在蓬勃发展的去标识化健康数据市场，如IQVIA等企业；以商业价值为导向；医疗支出高但医疗质量和健康结果表现不佳，提示市场化需关注系统整体效率。
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">英国模式</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        政府主导建立国家级健康数据平台，如NHS Digital；注重数据共享价值与公共卫生效益；建立了国家级健康数据治理框架；同时允许合规的商业化应用。
+                                    </p>
+                                </div>
+                                
+                                <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                    <h4 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">中国模式</h4>
+                                    <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                        国家战略与市场机制相结合；探索数据交易所模式；正在构建健康医疗大数据中心；注重数据安全与产业发展的平衡；较强的地方试点特色，如各省级健康医疗大数据试点。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 经验借鉴 -->
+                    <div class="p-6 border-t border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">对中国的借鉴意义</h3>
+                        
+                        <div class="space-y-2">
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">法规与科研平衡：</span>借鉴GDPR对科研活动的合理豁免，在保障隐私的同时促进医学研究发展。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">数据标准统一：</span>学习国际上在健康数据标准化方面的经验，促进不同系统间的互操作性。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">价值导向明确：</span>平衡商业价值与公共卫生价值，避免过度市场化导致的系统低效和不公平。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">治理模式创新：</span>结合中国国情，探索具有中国特色的健康医疗数据治理框架，兼顾安全与活力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 健康医疗数据治理框架 -->
+        <section id="governance" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">信任与安全保障：健康医疗数据治理框架</h2>
+                
+                <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-lg overflow-hidden mb-10">
+                    <div class="p-6 border-b border-secondary-200 dark:border-secondary-700">
+                        <p class="text-secondary-700 dark:text-secondary-200">
+                            为了构建对健康医疗数据资产的信任，并确保其负责任的使用，建立健全的数据治理框架至关重要。一个全面的健康数据治理框架需要平衡数据利用与安全保护，促进数据共享同时保障个人隐私。
+                        </p>
+                    </div>
+                    
+                    <!-- 数据治理关键要素 -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                        <div class="bg-secondary-50 dark:bg-secondary-850 p-5 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-3">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">数据安全措施与协议</h3>
+                            </div>
+                            <ul class="space-y-2 text-secondary-700 dark:text-secondary-200">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>先进的加密技术保护数据传输和存储</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>严格的访问控制机制确保权限管理</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>完善的安全审计制度记录数据使用</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>及时的安全漏洞响应机制防止泄露</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>数据本地化存储确保关键信息安全</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-secondary-50 dark:bg-secondary-850 p-5 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-3">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">数据质量与标准化</h3>
+                            </div>
+                            <ul class="space-y-2 text-secondary-700 dark:text-secondary-200">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>统一的数据标准规范化采集过程</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>数据完整性、准确性验证流程</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>元数据管理确保数据可发现性</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>数据一致性检查跨系统验证</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>数据清洗和标准化技术应用</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-secondary-50 dark:bg-secondary-850 p-5 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-primary-100 dark:bg-primary-900 rounded-full p-3 mr-3">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">责任和监督机制</h3>
+                            </div>
+                            <ul class="space-y-2 text-secondary-700 dark:text-secondary-200">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>明确数据处理者责任和义务</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>常规数据处理审计和合规评估</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>国家互联网信息办公室监管职责</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>数据泄露事件报告和响应机制</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>第三方独立评估和认证计划</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 隐私保护技术 -->
+                    <div class="p-6 border-t border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-xl font-semibold mb-6 text-primary-700 dark:text-primary-400">隐私保护技术方案</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- 匿名化 -->
+                            <div class="bg-white dark:bg-secondary-850 p-5 rounded-lg shadow">
+                                <h4 class="text-lg font-medium text-secondary-900 dark:text-secondary-100 mb-3">匿名化 (Anonymization)</h4>
+                                <p class="text-secondary-700 dark:text-secondary-200 mb-3">
+                                    将数据中的个人身份信息完全去除，使其无法关联到特定个体。
+                                </p>
+                                <div class="mt-4">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">适用场景</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>公共健康数据研究</li>
+                                        <li>疾病趋势分析</li>
+                                        <li>人口健康统计</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">技术手段</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>删除直接标识符</li>
+                                        <li>泛化处理（如年龄段替代具体年龄）</li>
+                                        <li>数据掩蔽（如邮编截断）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- 假名化 -->
+                            <div class="bg-white dark:bg-secondary-850 p-5 rounded-lg shadow">
+                                <h4 class="text-lg font-medium text-secondary-900 dark:text-secondary-100 mb-3">假名化 (Pseudonymization)</h4>
+                                <p class="text-secondary-700 dark:text-secondary-200 mb-3">
+                                    用代码或其他标识符替换个人身份信息，但仍然可能通过与其他数据结合的方式重新识别个体。
+                                </p>
+                                <div class="mt-4">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">适用场景</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>临床研究数据</li>
+                                        <li>纵向患者跟踪研究</li>
+                                        <li>多中心医疗协作</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">技术手段</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>加密标识符替换</li>
+                                        <li>哈希算法处理</li>
+                                        <li>随机ID生成与映射表</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- 差分隐私 -->
+                            <div class="bg-white dark:bg-secondary-850 p-5 rounded-lg shadow">
+                                <h4 class="text-lg font-medium text-secondary-900 dark:text-secondary-100 mb-3">差分隐私 (Differential Privacy)</h4>
+                                <p class="text-secondary-700 dark:text-secondary-200 mb-3">
+                                    一种在数据集中添加少量噪声的技术，可以在保护个体隐私的同时，保证对群体数据的分析结果的准确性。
+                                </p>
+                                <div class="mt-4">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">适用场景</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>医疗大数据分析</li>
+                                        <li>机器学习模型训练</li>
+                                        <li>公共卫生数据发布</li>
+                                    </ul>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="font-medium text-secondary-900 dark:text-secondary-100 mb-2">技术手段</h5>
+                                    <ul class="list-disc list-inside text-sm text-secondary-600 dark:text-secondary-300">
+                                        <li>拉普拉斯噪声添加</li>
+                                        <li>隐私预算控制</li>
+                                        <li>随机响应机制</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 挑战 -->
+                    <div class="p-6 border-t border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-xl font-semibold mb-4 text-primary-700 dark:text-primary-400">中国健康医疗数据治理面临的挑战</h3>
+                        
+                        <div class="space-y-3">
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">监管协调：</span>健康医疗数据涉及多个监管机构（互联网信息办公室、国家卫健委、医保局等），需要协调统一监管行动。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">技术复杂性：</span>隐私保护技术与数据价值挖掘之间的平衡需要高度专业化的技术能力，人才缺口明显。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">系统碎片化：</span>不同医疗机构使用不同的信息系统，数据标准不一致，互操作性差，阻碍了有效的数据集成和共享。
+                            </p>
+                            <p class="text-secondary-700 dark:text-secondary-200">
+                                <span class="font-medium">公众信任：</span>建立公众对健康数据使用的信任是关键，缺乏信任可能导致数据共享受阻，影响数据生态的发展。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 数据治理与课程设计 -->
+        <section id="course" class="mb-16 scroll-mt-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">健康医疗数据资产课程设计</h2>
+                
+                <!-- 课程理念与目标 -->
+                <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 mb-8 border border-secondary-200 dark:border-secondary-700">
+                    <h3 class="text-xl font-semibold mb-4 text-primary-700 dark:text-primary-400">教学本质与哲学基础</h3>
+                    <p class="mb-4 text-secondary-700 dark:text-secondary-200">
+                        本课程围绕"<strong>如何将健康医疗数据转化为有价值的资产</strong>"这一核心问题展开。随着医疗数字化和大数据时代的到来，医疗机构积累了海量数据，但许多数据仍处于碎片化、孤立状态，未能充分发挥价值。
+                    </p>
+                    <p class="mb-4 text-secondary-700 dark:text-secondary-200">
+                        课程融入<strong>信息经济学（Infonomics）思想</strong>、<strong>数据资产意识</strong>和<strong>信息公平</strong>等教育理念。信息经济学视角下，数据被视为一种经济资产，可以计量和管理其价值。这一理论强调通过量化信息资产价值并将其作为竞争优势来加以利用。
+                    </p>
+                </div>
+                
+                <!-- 课程阶段 -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700 dark:text-primary-400">教学阶段划分</h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                        <!-- 阶段 1 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-5 border-t-4 border-primary-400">
+                            <h4 class="font-semibold mb-2 text-secondary-900 dark:text-secondary-100">基础认知</h4>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                建立学生对健康医疗数据资产的初步认知，理解数据资产的基本概念、类型和价值意义，激发学习兴趣和数据资产意识。
+                            </p>
+                            <div class="mt-2 text-xs text-primary-600 dark:text-primary-400">约2学时</div>
+                        </div>
+                        
+                        <!-- 阶段 2 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-5 border-t-4 border-primary-500">
+                            <h4 class="font-semibold mb-2 text-secondary-900 dark:text-secondary-100">理论方法</h4>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                掌握数据资产相关的核心理论框架和方法论，包括信息经济学原理、数据治理与质量管理方法、数据价值评估模型等。
+                            </p>
+                            <div class="mt-2 text-xs text-primary-600 dark:text-primary-400">约5学时</div>
+                        </div>
+                        
+                        <!-- 阶段 3 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-5 border-t-4 border-primary-600">
+                            <h4 class="font-semibold mb-2 text-secondary-900 dark:text-secondary-100">工具实践</h4>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                培养学生运用数据工具和技术实践管理和分析健康数据资产的能力，掌握数据资产管理相关的软件工具。
+                            </p>
+                            <div class="mt-2 text-xs text-primary-600 dark:text-primary-400">约5学时</div>
+                        </div>
+                        
+                        <!-- 阶段 4 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-5 border-t-4 border-primary-700">
+                            <h4 class="font-semibold mb-2 text-secondary-900 dark:text-secondary-100">案例研讨</h4>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                通过真实案例分析，培养学生将理论与实践相结合的综合分析能力，理解行业中健康数据资产化的挑战与成功要素。
+                            </p>
+                            <div class="mt-2 text-xs text-primary-600 dark:text-primary-400">约2学时</div>
+                        </div>
+                        
+                        <!-- 阶段 5 -->
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-5 border-t-4 border-primary-800">
+                            <h4 class="font-semibold mb-2 text-secondary-900 dark:text-secondary-100">综合提升</h4>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                                巩固所学知识，提高综合运用能力，完成课程项目或总结性评价，实现对课程内容的融会贯通。
+                            </p>
+                            <div class="mt-2 text-xs text-primary-600 dark:text-primary-400">约4学时</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 教学模块概览 -->
+                <div class="bg-white dark:bg-secondary-800 rounded-xl shadow-lg overflow-hidden mb-10">
+                    <div class="p-6 border-b border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-xl font-semibold text-primary-700 dark:text-primary-400">教学模块与内容单元</h3>
+                        <p class="mt-2 text-secondary-600 dark:text-secondary-300">
+                            课程内容细分为12个教学模块，每个模块包含特定的教学内容、资源形式、案例支持和教学活动。
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="space-y-8">
+                            <!-- 模块组 1：基础认知阶段 -->
+                            <div>
+                                <h4 class="text-lg font-medium mb-4 flex items-center">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-primary-500 text-white rounded-full flex items-center justify-center mr-3">1</span>
+                                    基础认知阶段
+                                </h4>
+                                <div class="pl-11 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块1：健康医疗数据资产概论 <span class="text-xs">(1学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">介绍数据资产的基本概念，健康医疗数据的特殊性及其潜在价值，引入"数据是新型资产"理念。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>某医院通过分析历史病历数据改善诊疗流程的案例；新冠疫情期间健康数据共享对疫情防控的贡献。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块2：数据资产意识与信息伦理 <span class="text-xs">(1学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">强调数据资产意识和信息伦理观，探讨数据价值的多重表现形式，阐述信息公平与伦理问题。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>正反案例对比：某科研机构开放健康数据集供学术研究促进医学进步；某公司滥用健康数据遭遇伦理争议。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 模块组 2：理论方法阶段 -->
+                            <div>
+                                <h4 class="text-lg font-medium mb-4 flex items-center">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center mr-3">2</span>
+                                    理论方法阶段
+                                </h4>
+                                <div class="pl-11 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块3：信息经济学与数据资产价值 <span class="text-xs">(2学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">讲解信息经济学相关理论，介绍数据价值的分类和衡量维度，以及数据资产评估方法。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">教学活动：</span>教师讲授理论时穿插提问，组织小型练习：给出假设数据资产指标，请学生计算其估值，当堂讨论结果差异。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块4：健康医疗数据治理与质量管理 <span class="text-xs">(2学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">介绍数据治理框架、数据生命周期管理、元数据管理、数据标准与规范等内容。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>某大型医院推进数据治理的案例：如建设临床数据中心(CDR)提升数据质量，用统一标准整合全院数据，支持临床和运营决策。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块5：健康医疗数据法规政策 <span class="text-xs">(1学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">介绍与健康医疗数据资产相关的法律法规和政策环境，如个人信息保护法对医疗数据处理的要求。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">教学活动：</span>政策情景分析。分发法规摘要，请学生扮演医院管理者，讨论实施数据资产管理时如何符合这些法规要求。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 模块组 3：工具实践阶段 -->
+                            <div>
+                                <h4 class="text-lg font-medium mb-4 flex items-center">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-primary-700 text-white rounded-full flex items-center justify-center mr-3">3</span>
+                                    工具实践阶段
+                                </h4>
+                                <div class="pl-11 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块6：数据资产盘点与目录构建 <span class="text-xs">(2学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">教授如何对组织内部的健康医疗数据资产进行盘点和登记，构建数据资产清单和数据目录。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">教学活动：</span>上机实践。教师现场演示如何使用工具创建数据资产记录，学生实践对给定模拟数据源信息进行资产登记。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块7：健康数据分析与可视化实践 <span class="text-xs">(2学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">通过实际数据分析任务，培养学生发掘健康数据价值的技能，使用Python或BI工具进行数据分析和可视化。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>选取公开的健康数据集，如某地区疾病统计数据，学生分析近三年门急诊量与科室资源数据，提出提高医院运营效率的建议。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块8：数据资产价值评估实训 <span class="text-xs">(1学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">模拟真实场景，对特定健康医疗数据资产进行价值评估练习，应用不同的评估方法。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>假定某医疗集团打算将其多年积累的慢病管理数据资产对外融资或交易，需进行数据资产评估。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 模块组 4-5：案例研讨和综合提升 -->
+                            <div>
+                                <h4 class="text-lg font-medium mb-4 flex items-center">
+                                    <span class="flex-shrink-0 w-8 h-8 bg-primary-800 text-white rounded-full flex items-center justify-center mr-3">4-5</span>
+                                    案例研讨与综合提升阶段
+                                </h4>
+                                <div class="pl-11 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块9-10：医院数据资产管理与健康数据交易案例研讨 <span class="text-xs">(2学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">聚焦医疗机构内部数据资产化的案例和健康医疗数据在更广泛范围流通和变现的案例。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">案例支持：</span>X医院数据资产入表实践；Y数据交易所的医疗数据交易试点；Z医疗集团数据变现探索。
+                                        </div>
+                                    </div>
+                                    <div class="bg-secondary-50 dark:bg-secondary-850 p-4 rounded">
+                                        <h5 class="font-medium text-primary-700 dark:text-primary-400 mb-2">模块11-12：课程项目实践与成果展示 <span class="text-xs">(4学时)</span></h5>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mb-2">学生团队围绕健康医疗数据资产主题完成综合实践项目，并进行项目成果展示和课程总结。</p>
+                                        <div class="text-xs text-secondary-500 dark:text-secondary-400">
+                                            <span class="font-medium">项目示例：</span>制定某医院的数据资产管理方案；设计健康数据价值评估模型并应用于案例；开发健康数据资产目录并分析其价值提升点。
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 教学方法与评估 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">教学方法与工具</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-secondary-700 dark:text-secondary-200">结合在线学习平台（Canvas、雨课堂）进行课程资料发布和交流</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-secondary-700 dark:text-secondary-200">使用Python编程环境（Jupyter Notebook）进行数据处理练习</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-secondary-700 dark:text-secondary-200">采用案例教学法、项目式学习和任务驱动式教学</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-secondary-700 dark:text-secondary-200">实践环节中使用数据可视化工具（Matplotlib/Seaborn或BI软件）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-secondary-700 dark:text-secondary-200">结合真实案例进行分析，邀请业界专家分享经验</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                        <h3 class="text-lg font-semibold mb-4 text-primary-700 dark:text-primary-400">评估机制</h3>
+                        <div class="mb-4">
+                            <p class="text-secondary-700 dark:text-secondary-200 mb-2">成绩构成比例：</p>
+                            
+                            <!-- 成绩比例图表 -->
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">课堂参与度</span>
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">10%</span>
+                                    </div>
+                                    <div class="w-full bg-secondary-200 dark:bg-secondary-700 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 10%; transition: width 1.5s ease-out;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">平时作业</span>
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">20%</span>
+                                    </div>
+                                    <div class="w-full bg-secondary-200 dark:bg-secondary-700 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 20%; transition: width 1.5s ease-out;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">实践练习</span>
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">20%</span>
+                                    </div>
+                                    <div class="w-full bg-secondary-200 dark:bg-secondary-700 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 20%; transition: width 1.5s ease-out;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">课程项目</span>
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">30%</span>
+                                    </div>
+                                    <div class="w-full bg-secondary-200 dark:bg-secondary-700 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 30%; transition: width 1.5s ease-out;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">期末考试/论文</span>
+                                        <span class="text-sm text-secondary-600 dark:text-secondary-300">20%</span>
+                                    </div>
+                                    <div class="w-full bg-secondary-200 dark:bg-secondary-700 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 20%; transition: width 1.5s ease-out;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-secondary-600 dark:text-secondary-300">
+                            评估采用形成性评价与总结性评价相结合的方式，注重对学生全过程学习情况的综合评估。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 教学实施方案 -->
+                <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 border border-secondary-200 dark:border-secondary-700">
+                    <h3 class="text-xl font-semibold mb-6 text-primary-700 dark:text-primary-400">教学实施方案建议</h3>
+                    
+                    <div class="space-y-5">
+                        <div>
+                            <h4 class="text-lg font-medium mb-3 text-secondary-900 dark:text-secondary-100">平台与工具选择</h4>
+                            <p class="text-secondary-600 dark:text-secondary-300 mb-3">
+                                本课程需要结合理论讲授和实践操作，充分利用数字化教学平台与工具。主要使用：
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-secondary-600 dark:text-secondary-300 ml-4">
+                                <li>在线学习平台（Canvas、雨课堂）用于课程资料发布、讨论交流和作业提交</li>
+                                <li>Python编程环境（Jupyter Notebook）用于数据处理练习</li>
+                                <li>数据可视化工具（Matplotlib/Seaborn等编程库或Tableau）</li>
+                                <li>轻量化的数据资产管理工具，如开源的CKAN平台或Excel表格</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium mb-3 text-secondary-900 dark:text-secondary-100">异常应对策略</h4>
+                            <p class="text-secondary-600 dark:text-secondary-300 mb-3">
+                                在教学过程中可能遇到学习进度差异、技术问题等意外情况，应提前制定预案：
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-secondary-600 dark:text-secondary-300 ml-4">
+                                <li><span class="font-medium">学生学习进度差异：</span>课程开始时通过问卷了解学生背景，对数据技术基础薄弱的学生提供额外辅导资源，对进展较快的学生提供拓展任务</li>
+                                <li><span class="font-medium">平台或技术故障：</span>预先录制关键操作的演示视频，准备离线数据包，确保即使在网络中断情况下也能进行练习</li>
+                                <li><span class="font-medium">案例讨论冷场：</span>提前公布讨论主题让学生有准备，采取分组竞赛、奖励参与等办法活跃气氛</li>
+                                <li><span class="font-medium">学校停课应急：</span>准备线上教学备用方案，通过直播授课和远程协作工具维持教学进度</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium mb-3 text-secondary-900 dark:text-secondary-100">差异化教学策略</h4>
+                            <p class="text-secondary-600 dark:text-secondary-300 mb-3">
+                                针对学生的不同背景和能力水平，采用多层次教学策略：
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 text-secondary-600 dark:text-secondary-300 ml-4">
+                                <li>提供基础、进阶和挑战级别的实践任务，允许学生根据自身能力选择</li>
+                                <li>设置学习小组，混合不同背景的学生，促进互助学习</li>
+                                <li>提供额外的线上学习资源，满足不同学习节奏的需求</li>
+                                <li>安排助教答疑时间，为学习中遇到困难的学生提供个性化帮助</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 挑战与机遇 -->
+        <section class="mb-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">挑战与机遇</h2>
+                
+                <div class="flex flex-wrap -mx-4">
+                    <!-- 挑战 -->
+                    <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 h-full border border-secondary-200 dark:border-secondary-700">
+                            <h3 class="text-xl font-semibold mb-6 text-accent-600 dark:text-accent-500">面临的挑战</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-accent-600 dark:text-accent-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">数据安全和隐私风险</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            健康数据的敏感性使得数据泄露和滥用带来的风险更高，需要持续加强数据安全防护措施，保障个人隐私和医疗机构声誉。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-accent-600 dark:text-accent-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">缺乏标准化和互操作性</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            不同医疗机构之间的数据标准和格式不统一，阻碍了数据的有效整合和利用，降低了数据资产的整体价值。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-accent-600 dark:text-accent-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">公众信任度</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            公众对健康数据被收集和使用的信任程度直接影响到数据共享的意愿，而目前公众对医疗系统的信任度仍有提升空间。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-accent-600 dark:text-accent-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">数据估值和定价</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            如何科学合理地评估健康数据资产的价值，并建立有效的定价机制，仍然是一个需要探索的问题，缺乏成熟的评估模型。
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 机遇 -->
+                    <div class="w-full lg:w-1/2 px-4">
+                        <div class="bg-white dark:bg-secondary-800 rounded-lg shadow-md p-6 h-full border border-secondary-200 dark:border-secondary-700">
+                            <h3 class="text-xl font-semibold mb-6 text-primary-600 dark:text-primary-500">未来机遇</h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">提升医疗质量和健康结果</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            通过对大数据的分析，可以实现更精准的诊断和治疗，改善患者的健康状况，降低医疗成本，提高医疗资源配置效率。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">驱动医学和医疗技术创新</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            健康数据是新药研发、疾病预测和个性化医疗等领域创新的重要基础，将加速医疗科技的发展和突破。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">促进经济增长和新产业发展</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            健康数据市场化将催生新的商业模式和产业生态，为经济发展注入新的活力，创造就业机会和经济价值。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">加强公共卫生和疾病预防</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            利用大数据可以更好地监测疾病传播，预测疫情趋势，并制定有效的公共卫生干预措施，提高疾病预防和控制能力。
+                                        </p>
+                                    </div>
+                                </li>
+                                
+                                <li class="flex items-start">
+                                    <svg class="w-5 h-5 text-primary-600 dark:text-primary-400 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="font-medium text-secondary-900 dark:text-secondary-100">推动全球健康合作</h4>
+                                        <p class="text-sm text-secondary-600 dark:text-secondary-300 mt-1">
+                                            在合规和安全的前提下，健康医疗数据的流通可以促进全球健康研究和合作，共同应对全球性健康挑战。
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 进一步阅读 -->
+        <section class="mb-16 fade-in">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl font-serif font-bold mb-8 text-center text-secondary-900 dark:text-secondary-50">进一步阅读</h2>
+                
+                <div class="bg-white dark:bg-secondary-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <p class="text-secondary-700 dark:text-secondary-200 mb-6">
+                            以下是关于健康医疗数据资产化及相关领域的推荐阅读资源：
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <!-- 资源 1 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">
+                                        <a href="https://doi.org/10.1016/j.hlpt.2020.10.004" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors" target="_blank">
+                                            健康医疗大数据在中国：政策、实践与未来趋势
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-secondary-600 dark:text-secondary-300">
+                                        Wang Y, Kung L, Byrd TA. Big data analytics in healthcare: Investigating the application of data and analytics on healthcare in China. Health Policy and Technology. 2020.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 资源 2 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">
+                                        <a href="https://www.routledge.com/Infonomics-How-to-Monetize-Manage-and-Measure-Information-as-an-Asset/Laney/p/book/9781138090385" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors" target="_blank">
+                                            Infonomics: 如何将信息作为资产进行货币化、管理和衡量
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-secondary-600 dark:text-secondary-300">
+                                        Laney D. Infonomics: How to Monetize, Manage, and Measure Information as an Asset for Competitive Advantage. Routledge; 2017.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 资源 3 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">
+                                        <a href="http://www.cac.gov.cn/2021-10/29/c_1637102257998088.htm" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors" target="_blank">
+                                            中华人民共和国个人信息保护法
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-secondary-600 dark:text-secondary-300">
+                                        中国全国人民代表大会常务委员会. 中华人民共和国个人信息保护法. 2021年8月20日通过，2021年11月1日起施行.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 资源 4 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">
+                                        <a href="https://doi.org/10.1186/s12911-019-0910-0" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors" target="_blank">
+                                            健康数据治理：系统性文献综述
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-secondary-600 dark:text-secondary-300">
+                                        Hripcsak G, Bloomrosen M, FlatelyBrennan P, et al. Health data use, stewardship, and governance: ongoing gaps and challenges: a report from AMIA's 2012 Health Policy Meeting. BMC Medical Informatics and Decision Making. 2019.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- 资源 5 -->
+                            <div class="flex">
+                                <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-primary-100 dark:bg-primary-900 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-secondary-900 dark:text-secondary-100">
+                                        <a href="https://www.springer.com/gp/book/9783319983745" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors" target="_blank">
+                                            数据价值化：转化数据资产为商业价值
+                                        </a>
+                                    </h3>
+                                    <p class="mt-1 text-secondary-600 dark:text-secondary-300">
+                                        Neimat T, Weinberg M. Monetizing Data: A Practical Roadmap for Framing, Pricing & Selling Your B2B Digital Offers. Springer; 2019.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white dark:bg-secondary-900 border-t border-secondary-200 dark:border-secondary-700 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- 作者信息 -->
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-lg font-semibold text-secondary-900 dark:text-secondary-100 mb-2">作者信息</h3>
+                    <div class="flex items-center">
+                        <div class="mr-4">
+                            <div class="h-16 w-16 rounded-full bg-primary-600 flex items-center justify-center text-white text-2xl font-bold">
+                                季晓
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-medium text-secondary-900 dark:text-secondary-100">季晓康</p>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">微信公众号：凿壁</p>
+                            <p class="text-sm text-secondary-600 dark:text-secondary-300">国家健康医疗大数据研究院</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 版权 -->
+                <div class="text-center md:text-right">
+                    <p class="text-sm text-secondary-600 dark:text-secondary-300">© 2025 国家健康医疗大数据研究院</p>
+                    <p class="text-sm text-secondary-500 dark:text-secondary-400 mt-1">
+                        本网页由国家健康医疗大数据研究院授权发布，保留所有权利。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 p-2 rounded-full bg-primary-600 text-white shadow-lg transition-all duration-300 opacity-0 translate-y-10 hover:bg-primary-700 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 深色模式切换
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        // 检查本地存储中的颜色主题首选项或系统设置
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        // 监听主题切换点击事件
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            
+            // 如果当前为深色模式
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // 淡入效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+        
+        // 回到顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'translate-y-10');
+                backToTopButton.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'translate-y-10');
+                backToTopButton.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

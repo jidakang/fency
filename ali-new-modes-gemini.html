@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里AI新纪元：深入解析 Qwen 2.5 Omni、Chat 与 QVQ-Max</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        /* Base Font Stack */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300;
+            line-height: 1.75; /* Improved readability */
+        }
+
+        /* Serif Font for Headings */
+        h1, h2, h3, h4, h5, h6, .font-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Custom Accent Color */
+        :root {
+            --accent-color: #2563eb; /* Tailwind blue-600 */
+            --accent-color-dark: #3b82f6; /* Tailwind blue-500 */
+        }
+        .text-accent { color: var(--accent-color); }
+        .dark .text-accent { color: var(--accent-color-dark); }
+        .bg-accent { background-color: var(--accent-color); }
+        .dark .bg-accent { background-color: var(--accent-color-dark); }
+        .border-accent { border-color: var(--accent-color); }
+        .dark .border-accent { border-color: var(--accent-color-dark); }
+        .ring-accent { --tw-ring-color: var(--accent-color); }
+        .dark .ring-accent { --tw-ring-color: var(--accent-color-dark); }
+
+
+        /* Subtle Underline for Links */
+        main a:not(.btn) {
+            @apply text-accent hover:underline decoration-accent decoration-2 underline-offset-4 transition-all;
+        }
+
+        /* Card Styling */
+        .content-card {
+            @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl mb-8 md:mb-12;
+        }
+
+        /* Improved Blockquote */
+        blockquote {
+            @apply border-l-4 border-accent pl-4 italic text-gray-600 dark:text-gray-400 my-6;
+        }
+
+        /* Mermaid Diagram Styling */
+        .mermaid svg {
+            /* Ensure Mermaid diagram scales correctly */
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Custom Scrollbar (Optional, Webkit only) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #2d3748; /* gray-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a0aec0; /* gray-400 */
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #718096; /* gray-500 */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #718096; /* gray-500 */
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0; /* gray-400 */
+        }
+
+        /* Responsive Table Styling */
+        .table-container {
+            @apply overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700 my-6;
+        }
+        table {
+            @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+        }
+        thead {
+            @apply bg-gray-100 dark:bg-gray-700;
+        }
+        th {
+            @apply px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider;
+        }
+        tbody {
+            @apply bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700;
+        }
+        td {
+            @apply px-4 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300;
+            /* Consider adding 'text-center' or 'text-right' for numerical data if appropriate */
+        }
+        td code {
+             @apply px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-sm;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-brain text-accent text-2xl"></i>
+                <span class="font-semibold text-lg font-serif text-gray-900 dark:text-white">阿里AI新动向</span>
+            </div>
+            <button id="theme-toggle" aria-label="切换深色/浅色模式" class="p-2 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150">
+                <i class="fas fa-sun block dark:hidden"></i>
+                <i class="fas fa-moon hidden dark:block"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+        <section class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-serif mb-4 text-gray-900 dark:text-white leading-tight">
+                <span class="text-accent">阿里AI</span>新纪元
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-6 font-serif">
+                深入解析 Qwen 2.5 Omni、Chat 与 QVQ-Max 的技术革新与社区反响
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-500">发布日期：<time datetime="2025-03-28">2025年3月28日</time></p>
+        </section>
+
+        <section class="mb-12 md:mb-16 p-6 bg-blue-50 dark:bg-gray-800 rounded-lg shadow-md border-l-4 border-accent">
+            <h2 class="text-2xl font-semibold font-serif mb-4 text-gray-900 dark:text-white flex items-center">
+                <i class="fas fa-key mr-3 text-accent"></i>核心洞察
+            </h2>
+            <ul class="space-y-3 list-disc list-inside text-gray-700 dark:text-gray-300">
+                <li>阿里近期发布<strong class="font-medium">Qwen 2.5 Omni</strong>、<strong class="font-medium">Qwen-chat</strong>（含语音/视频）及<strong class="font-medium">Qwen-QVQ-Max</strong>三款AI产品，聚焦多模态交互与视觉推理。</li>
+                <li><strong class="font-medium">Qwen 2.5 Omni</strong>：旗舰多模态模型，处理文本、音视频，支持实时语音/文本输出，社区认可其多模态能力，但关注其文本基准表现。</li>
+                <li><strong class="font-medium">Qwen-chat</strong>：基于Omni的实时语音/视频互动平台，社区兴趣浓厚，具体用户体验反馈尚待积累。</li>
+                <li><strong class="font-medium">Qwen-QVQ-Max</strong>：视觉推理模型，提供图像/视频分析的逐步推理，初步反馈积极，但在特定领域准确性与扩展性方面仍有挑战。</li>
+                <li>社区反馈呈现<strong class="font-medium">混合态势</strong>：对创新功能表示兴奋，同时对性能细节、语言支持和实际应用效果保持关注。</li>
+            </ul>
+        </section>
+
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl font-semibold font-serif mb-6 text-gray-900 dark:text-white border-b pb-2 border-gray-200 dark:border-gray-700">
+                <i class="fas fa-file-alt mr-2 text-gray-400 dark:text-gray-500"></i>引言
+            </h2>
+            <p class="mb-4">阿里云的<strong class="font-medium">Qwen系列AI模型</strong>近年来在全球人工智能领域，特别是在<strong class="font-medium">多模态能力</strong>和<strong class="font-medium">视觉推理技术</strong>方面，已然成为一股不可忽视的力量。紧随行业发展前沿，阿里于2025年3月下旬，密集推出了三款引人注目的新产品：<code class="text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Qwen 2.5 Omni</code>, <code class="text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Qwen-chat</code> (集成了语音聊天与视频聊天功能), 以及 <code class="text-sm bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">Qwen-QVQ-Max</code>。</p>
+            <p>本报告旨在基于<time datetime="2025-03-28">2025年3月28日</time>可获取的最新公开信息，深入剖析这三款产品的功能特性，并结合GitHub、Reddit、X (前Twitter) 等技术社区的初步反馈与评价，为您呈现一份全面的分析概览。</p>
+        </section>
+
+         <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl font-semibold font-serif mb-6 text-gray-900 dark:text-white border-b pb-2 border-gray-200 dark:border-gray-700">
+                <i class="fas fa-project-diagram mr-2 text-gray-400 dark:text-gray-500"></i>产品关系概览
+            </h2>
+            <p class="mb-4 text-gray-600 dark:text-gray-400">下图展示了 Qwen 2.5 Omni、Qwen-chat 和 Qwen-QVQ-Max 之间的核心关系：Omni 作为底层多模态引擎，驱动着 Qwen-chat 的交互体验，而 QVQ-Max 则为 Qwen-chat 提供了强大的视觉推理能力。</p>
+            <div class="mermaid-container p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md flex justify-center">
+                <pre class="mermaid">
+mindmap
+  root((阿里 Qwen 新产品))
+    Qwen 2.5 Omni
+      ::icon(fa fa-brain)
+      多模态基础模型
+      处理: 文本, 音频, 图像, 视频
+      输出: 实时文本, 语音
+      "Thinker-Talker" 架构
+    Qwen-chat
+      ::icon(fa fa-comments)
+      互动平台
+      基于 Omni
+      实时语音聊天
+      实时视频聊天
+      集成 QVQ-Max
+    Qwen-QVQ-Max
+      ::icon(fa fa-eye)
+      视觉推理模型
+      分析: 图像, 视频
+      逐步推理 ("Thinking" 过程)
+      多图像识别
+      视觉数学推理
+      视频理解
+                </pre>
+            </div>
+             <p class="text-xs text-center mt-2 text-gray-500 dark:text-gray-400">注：这是一个交互式图表，您可以尝试缩放或拖动。</p>
+        </section>
+
+
+        <section class="content-card">
+            <div class="p-6 md:p-8">
+                <h3 class="text-2xl font-semibold font-serif mb-5 text-gray-900 dark:text-white flex items-center">
+                    <i class="fas fa-robot mr-3 text-accent"></i>Qwen 2.5 Omni
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-cogs mr-2 text-gray-500"></i>功能特性</h4>
+                        <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                            <li><strong class="font-medium">旗舰级多模态模型</strong>：端到端处理文本、音频、图像、视频输入。</li>
+                            <li><strong class="font-medium">实时交互</strong>：生成实时文本和自然语音回应（"Chelsie" & "Ethan" 两种音色）。</li>
+                            <li><strong class="font-medium">"Thinker-Talker" 架构</strong>：利用TMRoPE技术同步音视频时间戳。</li>
+                            <li><strong class="font-medium">优异性能</strong>：在多模态任务上表现突出，语音指令遵循能力媲美文本输入。</li>
+                            <li><strong class="font-medium">多种部署方式</strong>：支持 Transformers, ModelScope, vLLM。</li>
+                            <li><strong class="font-medium">参考资料</strong>：提供Cookbooks示例（音频理解、语音聊天等）。</li>
+                        </ul>
+                        <div class="mt-4 table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">GPU 显存需求 (BF16, flash_attention_2)</th>
+                                    </tr>
+                                    <tr>
+                                        <th>视频时长</th>
+                                        <th>显存 (GB)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>15秒视频</td><td>31.11 GB</td></tr>
+                                    <tr><td>30秒视频</td><td>41.85 GB</td></tr>
+                                    <tr><td>60秒视频</td><td>60.19 GB</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-comments mr-2 text-gray-500"></i>社区评价</h4>
+                        <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">社区反馈呈现多元化：</p>
+                        <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                            <li><strong class="font-medium text-green-600 dark:text-green-400">积极方面 <i class="fas fa-thumbs-up ml-1"></i></strong>：多模态基准测试结果令人兴奋，获得高关注度。</li>
+                            <li><strong class="font-medium text-yellow-600 dark:text-yellow-400">关注与担忧 <i class="fas fa-exclamation-triangle ml-1"></i></strong>：
+                                <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
+                                    <li>传统文本基准（如 MMLU）表现有所下降，引发讨论。</li>
+                                    <li>部分用户反馈模型参数量与预期不符（10.7B vs 7B）。</li>
+                                    <li>非英语（意、西、德语）音频输出质量有待提高。</li>
+                                    <li>系统指令遵循能力被指不足，"基本模式"表现欠佳。</li>
+                                </ul>
+                            </li>
+                           <li><strong class="font-medium text-blue-600 dark:text-blue-400">开发动态 <i class="fab fa-github ml-1"></i></strong>：GitHub 仓库活跃，但具体用户反馈相对较少。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+            <div class="p-6 md:p-8">
+                <h3 class="text-2xl font-semibold font-serif mb-5 text-gray-900 dark:text-white flex items-center">
+                     <i class="fas fa-headset mr-3 text-accent"></i>Qwen-chat (语音+视频)
+                </h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-cogs mr-2 text-gray-500"></i>功能特性</h4>
+                        <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                           <li><strong class="font-medium">实时互动平台</strong>：基于 Qwen 2.5 Omni 构建。</li>
+                           <li><strong class="font-medium">支持语音聊天</strong>：实现流畅的语音对话体验。</li>
+                           <li><strong class="font-medium">支持视频聊天</strong>：允许用户进行类似视频通话的AI互动。</li>
+                           <li><strong class="font-medium">多模态输入</strong>：可上传音频/视频文件获取即时回应。</li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-comments mr-2 text-gray-500"></i>社区评价</h4>
+                        <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                            <li><strong class="font-medium">用户反馈有限</strong>：由于发布时间较短，详细的用户体验报告稀缺。</li>
+                            <li><strong class="font-medium">社区兴趣浓厚 <i class="fas fa-fire ml-1 text-red-500"></i></strong>：在 X 等社交平台上的相关帖子互动率高，显示出显著关注度。</li>
+                            <li><strong class="font-medium">潜力被提及</strong>：部分用户看好其实时互动的应用潜力。</li>
+                            <li><strong class="font-medium">讨论不足</strong>：在 Reddit 和 GitHub 等技术社区尚未形成广泛深入的讨论。</li>
+                        </ul>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <section class="content-card">
+             <div class="p-6 md:p-8">
+                <h3 class="text-2xl font-semibold font-serif mb-5 text-gray-900 dark:text-white flex items-center">
+                    <i class="fas fa-lightbulb mr-3 text-accent"></i>Qwen-QVQ-Max
+                </h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-cogs mr-2 text-gray-500"></i>功能特性</h4>
+                        <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                           <li><strong class="font-medium">视觉推理模型</strong>：专注于图像和视频分析。</li>
+                           <li><strong class="font-medium">逐步推理</strong>：提供“Thinking”过程展示，增加透明度。</li>
+                           <li><strong class="font-medium">多图像识别</strong>：增强对复杂场景的分析能力。</li>
+                           <li><strong class="font-medium">视觉数学推理</strong>：结合视觉输入进行数学问题求解。</li>
+                           <li><strong class="font-medium">视频理解</strong>：处理和理解动态视频内容。</li>
+                           <li><strong class="font-medium">基于QVQ-72B-Preview改进</strong>：旨在提升准确性和扩展性。</li>
+                        </ul>
+                     </div>
+                     <div>
+                        <h4 class="text-lg font-semibold mb-3 flex items-center"><i class="fas fa-comments mr-2 text-gray-500"></i>社区评价</h4>
+                         <ul class="space-y-2 list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+                            <li><strong class="font-medium text-green-600 dark:text-green-400">早期反馈积极 <i class="fas fa-smile ml-1"></i></strong>：初步演示效果令人印象深刻，社区关注度高，可免费试用。</li>
+                            <li><strong class="font-medium text-yellow-600 dark:text-yellow-400">面临挑战 <i class="fas fa-wrench ml-1"></i></strong>：
+                                <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
+                                    <li>在特定领域（如手相解读，仅供娱乐参考）的准确性有待提高。</li>
+                                    <li>模型的可扩展性仍是需要关注的问题。</li>
+                                </ul>
+                            </li>
+                           <li><strong class="font-medium text-blue-600 dark:text-blue-400">未来展望 <i class="fas fa-arrow-up-right-dots ml-1"></i></strong>：计划根据用户反馈进行优化，增强对小众任务和更多语言的支持。</li>
+                            <li><strong class="font-medium">讨论较少</strong>：与 Qwen-chat 类似，在 Reddit 和 GitHub 上的深入讨论不多。</li>
+                        </ul>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl font-semibold font-serif mb-6 text-gray-900 dark:text-white border-b pb-2 border-gray-200 dark:border-gray-700">
+                <i class="fas fa-flag-checkered mr-2 text-gray-400 dark:text-gray-500"></i>结论
+            </h2>
+            <p class="mb-4">阿里近期密集发布的 Qwen 2.5 Omni、Qwen-chat 和 Qwen-QVQ-Max，清晰地展示了其在<strong class="font-medium">多模态 AI</strong> 与<strong class="font-medium">视觉推理</strong>领域持续深耕的决心与最新成果。Qwen 2.5 Omni 以其强大的多模态处理能力吸引了广泛关注，尽管其文本处理性能的权衡引发了一些讨论。Qwen-chat 所描绘的实时音视频交互图景令人期待，但其实际效果和用户体验仍需市场检验。Qwen-QVQ-Max 在视觉推理方面展现了初步成效，但准确性和扩展性仍是未来优化的关键方向。</p>
+            <p>综合社区的初步反馈来看，这些新产品无疑激发了开发者的兴趣和期待，但也指出了实际应用中可能存在的挑战和需要改进之处。未来，这些模型如何根据用户反馈进行迭代优化，以及如何在更广泛的场景中落地应用，将是衡量其最终价值的关键。阿里在 AI 领域的持续投入和快速迭代，无疑值得业界保持密切关注。</p>
+        </section>
+
+        <section class="mb-16 md:mb-20 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg">
+             <h2 class="text-2xl font-semibold font-serif mb-5 text-gray-900 dark:text-white flex items-center">
+                <i class="fas fa-book-open mr-3 text-accent"></i>进一步阅读 (关键信息源)
+            </h2>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">以下是本报告分析所依据的关键信息来源，可供您深入了解相关产品的技术细节和官方发布信息：</p>
+            <ul class="space-y-3">
+                <li class="flex items-start">
+                    <i class="fab fa-github fa-fw mr-3 mt-1 text-gray-500"></i>
+                    <div>
+                        <a href="https://github.com/QwenLM/Qwen2.5-Omni" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-700 dark:hover:text-blue-400">QwenLM/Qwen2.5-Omni GitHub 仓库</a>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">官方代码库，包含模型细节、部署指南和示例代码。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fab fa-reddit-alien fa-fw mr-3 mt-1 text-gray-500"></i>
+                     <div>
+                        <a href="https://www.reddit.com/r/LocalLLaMA/comments/1jkgvxn/qwen_25_omni_7b_is_out/" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-700 dark:hover:text-blue-400">Reddit r/LocalLLaMA 讨论帖</a>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">关于 Qwen 2.5 Omni 7B 发布的社区讨论，反映了早期用户观点。</p>
+                    </div>
+                </li>
+                 <li class="flex items-start">
+                    <i class="fab fa-xing fa-fw mr-3 mt-1 text-gray-500"></i>
+                     <div>
+                        <a href="https://x.com/Alibaba_Qwen/status/1904944923159445914" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-700 dark:hover:text-blue-400">Alibaba_Qwen on X: 语音与视频聊天发布</a>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Qwen 团队在 X 平台宣布 Qwen-chat 的语音和视频聊天功能。</p>
+                    </div>
+                </li>
+                 <li class="flex items-start">
+                     <i class="fas fa-blog fa-fw mr-3 mt-1 text-gray-500"></i>
+                     <div>
+                        <a href="https://apidog.com/blog/qvq-max-visual-reasoning/" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-700 dark:hover:text-blue-400">Apidog Blog: Qwen 发布 QVQ-Max 视觉推理</a>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">关于 QVQ-Max 视觉推理模型发布的博客文章分析。</p>
+                    </div>
+                </li>
+                 <li class="flex items-start">
+                    <i class="fab fa-xing fa-fw mr-3 mt-1 text-gray-500"></i>
+                    <div>
+                        <a href="https://x.com/Alibaba_Qwen/status/1905342260100956210" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-blue-700 dark:hover:text-blue-400">Alibaba_Qwen on X: QVQ-Max 视觉推理模型</a>
+                         <p class="text-xs text-gray-500 dark:text-gray-400">Qwen 团队在 X 平台介绍 QVQ-Max 模型。</p>
+                    </div>
+                </li>
+                </ul>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-sm text-gray-600 dark:text-gray-400">
+            <div class="mb-4">
+                 <p class="font-medium flex items-center justify-center space-x-2">
+                    <i class="fas fa-user fa-fw"></i><span>作者: 季晓康</span>
+                 </p>
+                 <p class="flex items-center justify-center space-x-2 mt-1">
+                    <i class="fab fa-weixin fa-fw"></i><span>微信公众号: 凿壁</span>
+                 </p>
+            </div>
+            <p class="flex items-center justify-center space-x-1">
+                <i class="fas fa-copyright fa-fw"></i><span>版权所有: 国家健康医疗大数据研究院</span>
+            </p>
+             <p class="text-xs mt-4 text-gray-500">页面设计与实现由 AI 辅助完成 | 基于用户提供内容生成</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mermaid Initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'default',
+             // Security level configuration if needed, adjust as necessary
+            securityLevel: 'loose', // 'strict', 'loose', 'antiscript', 'sandbox'
+             // Example: Custom configuration for mindmap if needed
+             mindmap: {
+                 padding: 15,
+                 maxLevels: 4 // Limit rendering depth if diagrams get too complex
+             }
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to apply theme
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                 // Update Mermaid theme if it's initialized
+                if (typeof mermaid !== 'undefined' && mermaid.mermaidAPI?.setConfig) {
+                     mermaid.mermaidAPI.setConfig({ theme: 'dark' });
+                     // Force re-render might be needed for complex diagrams
+                     // document.querySelectorAll('.mermaid').forEach(el => {
+                     //     const id = `mermaid-${Date.now()}-${Math.random().toString(16).substr(2, 8)}`;
+                     //     const graphDefinition = el.textContent;
+                     //     el.innerHTML = ''; // Clear previous render
+                     //     el.setAttribute('data-mermaid-id', id);
+                     //     mermaid.render(id, graphDefinition, (svgCode) => {
+                     //         el.innerHTML = svgCode;
+                     //     }, el);
+                     // });
+                 }
+            } else {
+                htmlElement.classList.remove('dark');
+                if (typeof mermaid !== 'undefined' && mermaid.mermaidAPI?.setConfig) {
+                     mermaid.mermaidAPI.setConfig({ theme: 'default' });
+                      // Same re-render logic might be needed here
+                 }
+            }
+            // Update button icon visibility handled by CSS (dark:hidden, dark:block)
+        };
+
+        // Check initial theme preference
+        const storedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (storedTheme) {
+            applyTheme(storedTheme);
+        } else {
+            applyTheme(systemPrefersDark ? 'dark' : 'light');
+        }
+
+        // Listen for toggle button click
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = htmlElement.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Optional: Listen for system theme changes (if user hasn't set a preference)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only apply if no user preference is stored
+                applyTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+         // Ensure Mermaid diagrams are re-rendered correctly after theme change, especially if complex updates needed
+         // This is a more robust way to handle Mermaid re-rendering if setConfig isn't enough
+         function reRenderMermaid() {
+             document.querySelectorAll('.mermaid').forEach((el, index) => {
+                 const graphDefinition = el.getAttribute('data-original-definition') || el.textContent; // Store original definition if not already
+                 if (!el.getAttribute('data-original-definition')) {
+                    el.setAttribute('data-original-definition', graphDefinition);
+                 }
+
+                 const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'default';
+                 mermaid.initialize({ startOnLoad: false, theme: currentTheme, securityLevel: 'loose' }); // Re-init with correct theme
+
+                 try {
+                    // Simple reparse might work for some diagrams
+                    // mermaid.contentLoaded();
+
+                    // Or, more forcefully:
+                     const container = el.parentNode;
+                     const id = `mermaid-rerender-${index}-${Date.now()}`;
+                     el.removeAttribute('data-processed'); // Important to allow re-processing
+                     el.innerHTML = graphDefinition; // Restore definition
+                     mermaid.init(undefined, el);
+
+
+                 } catch (e) {
+                     console.error("Error re-rendering Mermaid diagram:", e);
+                 }
+             });
+         }
+
+        // Re-render on theme toggle click
+        themeToggleBtn.addEventListener('click', () => {
+             // Add a slight delay to allow CSS transitions to start
+             setTimeout(reRenderMermaid, 50);
+         });
+
+        // Re-render if system theme changes and no preference is set
+         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+             if (!localStorage.getItem('theme')) {
+                 setTimeout(reRenderMermaid, 50);
+             }
+         });
+
+         // Initial setup: store original definitions
+         document.addEventListener('DOMContentLoaded', () => {
+             document.querySelectorAll('.mermaid').forEach(el => {
+                 if (!el.getAttribute('data-original-definition')) {
+                    el.setAttribute('data-original-definition', el.textContent);
+                 }
+             });
+         });
+
+
+    </script>
+
+</body>
+</html>

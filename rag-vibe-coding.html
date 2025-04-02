@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库技术：降低AI编程幻觉的六步法</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-light: #3b82f6;
+            --color-secondary: #64748b;
+            --color-accent: #f97316;
+            --color-background: #ffffff;
+            --color-text: #1e293b;
+            --color-text-light: #64748b;
+            --color-border: #e2e8f0;
+            --color-card: #f8fafc;
+            --color-card-hover: #f1f5f9;
+            --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Noto Serif SC', Georgia, Cambria, 'Times New Roman', Times, serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+        }
+
+        .dark {
+            --color-primary: #3b82f6;
+            --color-primary-light: #60a5fa;
+            --color-secondary: #94a3b8;
+            --color-accent: #fb923c;
+            --color-background: #0f172a;
+            --color-text: #e2e8f0;
+            --color-text-light: #94a3b8;
+            --color-border: #334155;
+            --color-card: #1e293b;
+            --color-card-hover: #334155;
+        }
+
+        @font-face {
+            font-family: 'Noto Sans SC';
+            src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Noto Serif SC';
+            src: url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+            font-display: swap;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .prose {
+            max-width: 65ch;
+            line-height: 1.8;
+        }
+
+        .prose p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            background-color: var(--color-card-hover);
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-light);
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+            font-weight: 500;
+            color: var(--color-text-light);
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Tabs */
+        .tab {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab:hover {
+            color: var(--color-primary);
+        }
+        
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 0.5rem;
+            background-color: var(--color-border);
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--color-primary);
+            border-radius: 0.25rem;
+            transition: width 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Loading animation */
+        .skeleton {
+            background: linear-gradient(90deg, var(--color-card) 25%, var(--color-card-hover) 50%, var(--color-card) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hidden-mobile {
+                display: none;
+            }
+            
+            .prose {
+                font-size: 0.9rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Chart & Visualization Styles */
+        .chart {
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 2rem;
+            background-color: var(--color-primary);
+            border-radius: 0.25rem;
+            transition: width 1s ease;
+        }
+
+        /* Steps & Process */
+        .step {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .step-line {
+            position: absolute;
+            left: 1rem;
+            top: 2rem;
+            width: 2px;
+            height: calc(100% - 2rem);
+            background-color: var(--color-border);
+        }
+
+        /* Code block */
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: 0.375rem;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+            font-weight: 600;
+            background-color: var(--color-card);
+        }
+
+        tr:hover {
+            background-color: var(--color-card-hover);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: var(--color-card);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-card-hover);
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(transparent 70%, rgba(59, 130, 246, 0.2) 0);
+        }
+
+        /* Icon styles */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Circle progress */
+        .circle-progress {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .circle-progress svg {
+            transform: rotate(-90deg);
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: var(--color-border);
+            stroke-width: 10;
+        }
+
+        .circle-fill {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .circle-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip:hover .tooltip-text {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .tooltip-text {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background-color: #1e293b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .tooltip-text::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #1e293b transparent transparent transparent;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 bg-opacity-95 backdrop-filter backdrop-blur-lg bg-white dark:bg-opacity-95 dark:bg-gray-900 z-10 border-b border-gray-200 dark:border-gray-700">
+        <div class="container py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">知识库技术</div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-4">
+                <a href="#overview" class="nav-link">概览</a>
+                <a href="#six-steps" class="nav-link">六步法</a>
+                <a href="#tools" class="nav-link">工具</a>
+                <a href="#reading" class="nav-link">延伸阅读</a>
+                <button id="theme-toggle" class="theme-toggle ml-4">
+                    <i class="fas fa-sun dark:hidden"></i>
+                    <i class="fas fa-moon hidden dark:block"></i>
+                </button>
+            </nav>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <button id="mobile-theme-toggle" class="theme-toggle ml-2">
+                    <i class="fas fa-sun dark:hidden"></i>
+                    <i class="fas fa-moon hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden container py-3 md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+            <a href="#overview" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800">概览</a>
+            <a href="#six-steps" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800">六步法</a>
+            <a href="#tools" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800">工具</a>
+            <a href="#reading" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-800">延伸阅读</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-blue-900">
+        <div class="container">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">知识库技术：<span class="text-blue-600 dark:text-blue-400">降低AI编程幻觉的六步法</span></h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">通过详细文档减少85%的AI编码错误</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#six-steps" class="btn btn-primary">
+                        <i class="fas fa-book-open mr-2"></i>了解六步法
+                    </a>
+                    <a href="#tools" class="btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600">
+                        <i class="fas fa-tools mr-2"></i>推荐工具
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Effectiveness visualization -->
+    <section class="py-12 bg-white dark:bg-gray-800">
+        <div class="container">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">为什么需要知识库？</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">在AI辅助编程领域，"幻觉"(Hallucinations)是一个常见问题，指AI在缺乏明确上下文时产生不准确或无关代码。研究表明，非控制的AI编码环境中，这类错误发生率约为40-60%。知识库技术提供了一种系统方法，通过六类详细文档为AI提供清晰上下文，可将错误率降至7-9%左右。</p>
+                    <div class="mt-8">
+                        <div class="mb-2 flex justify-between">
+                            <span class="font-semibold">非控制的AI编码</span>
+                            <span class="text-red-500">错误率约40-60%</span>
+                        </div>
+                        <div class="progress-bar mb-6">
+                            <div class="progress-bar-fill bg-red-500" style="width: 50%"></div>
+                        </div>
+                        
+                        <div class="mb-2 flex justify-between">
+                            <span class="font-semibold">使用知识库技术</span>
+                            <span class="text-green-500">错误率降至7-9%</span>
+                        </div>
+                        <div class="progress-bar mb-6">
+                            <div class="progress-bar-fill bg-green-500" style="width: 8%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="circle-progress mx-auto">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="circle-fill" cx="60" cy="60" r="54" stroke-dasharray="339.292 339.292" stroke-dashoffset="50.8938"></circle>
+                        </svg>
+                        <div class="circle-text">85%</div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <h3 class="text-xl font-bold mb-2">效率提升</h3>
+                        <p class="text-gray-600 dark:text-gray-300">通过明确的文档指引AI行为，减少反复调试时间</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview" class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">知识库技术概览</h2>
+                <div class="prose mx-auto dark:text-gray-300">
+                    <p>知识库技术由X用户<strong>阿西_出海</strong>(@axichuhai)于2025年3月24日提出（翻译自@PrajwalTomar_的英文帖子），旨在通过系统性文档减少AI编码工具如Cursor中的"幻觉"问题。该方法的核心理念是：</p>
+                    
+                    <div class="my-8 p-6 bg-blue-50 dark:bg-blue-900/30 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="text-xl font-bold mb-4">AI辅助编程的黄金法则</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>人类负责规划</strong>：代码架构设计是人类任务</li>
+                            <li><strong>AI负责执行</strong>：编码实现是AI的强项</li>
+                            <li><strong>详细文档是关键</strong>：通过六类文档为AI提供明确上下文</li>
+                        </ul>
+                    </div>
+
+                    <p>该方法特别适用于使用Cursor (v0.47)或Windsurf等AI编码助手的开发者，可通过工具如@CodeGuidedev自动生成所需文档，极大提升开发效率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Six Steps -->
+    <section id="six-steps" class="py-16 bg-white dark:bg-gray-800">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-12 text-center">知识库六步法</h2>
+            
+            <!-- Tabs -->
+            <div class="mb-8 overflow-x-auto">
+                <div class="flex border-b border-gray-200 dark:border-gray-700 min-w-max">
+                    <button class="tab active" data-tab="tab1">1. 项目需求文档</button>
+                    <button class="tab" data-tab="tab2">2. 应用流程文档</button>
+                    <button class="tab" data-tab="tab3">3. 技术栈文档</button>
+                    <button class="tab" data-tab="tab4">4. 前端指南</button>
+                    <button class="tab" data-tab="tab5">5. 后端结构文档</button>
+                    <button class="tab" data-tab="tab6">6. 实施计划</button>
+                </div>
+            </div>
+            
+            <!-- Tab Contents -->
+            <div class="tab-content active" id="tab1">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-file-alt text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">项目需求文档 (PRD)</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">PRD是知识库的第一步，为整个项目定下基调。这份文档帮助AI对项目有清晰大框架认识，减少假设错误。</p>
+                        <h4 class="font-bold mt-6 mb-3">必须包含内容:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>应用概览与目标</li>
+                            <li>用户使用流程</li>
+                            <li>技术栈和API选择</li>
+                            <li>核心功能列表</li>
+                            <li>项目范围及非范围事项</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">精心设计的PRD能让AI充分理解项目目标和边界，避免偏离核心需求。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">PRD 示例片段: Brandloop 项目</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">应用概览:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">Brandloop是一款AI辅助日记和生产力应用，帮助用户记录日常见解并获取智能总结。</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">核心功能:</h5>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                                        <li>语音转文本日记录入</li>
+                                        <li>AI日记内容自动总结</li>
+                                        <li>第三方服务集成 (Google Calendar)</li>
+                                        <li>数据分析与可视化</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">非项目范围:</h5>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                                        <li>原生移动应用支持</li>
+                                        <li>实时协作功能</li>
+                                        <li>离线工作模式</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tab2">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-sitemap text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">应用流程文档</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">流程文档越清晰，AI表现越好。这份文档详细描述用户在应用中的导航路径与交互方式，提供具体细节，避免模糊表述。</p>
+                        <h4 class="font-bold mt-6 mb-3">核心要点:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>详细描述每个页面功能与用途</li>
+                            <li>明确用户从一个页面到另一个页面的跳转路径</li>
+                            <li>使用简洁直观的语言，突出关键细节</li>
+                            <li>避免模糊表述，具体说明交互逻辑</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">良好的流程文档能帮助AI理解应用的整体结构与用户体验设计意图。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">应用流程文档示例: Braindump</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">登录页流程:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">用户访问主页后看到登录/注册选项。点击"使用Google登录"按钮后，弹出授权对话框。授权成功后直接重定向至仪表盘页面。</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">仪表盘页面:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">左侧导航栏显示："日记"、"洞察"、"设置"三个主要选项。中央区域默认显示最近7天的日记条目摘要。右上角提供"新建日记"按钮，点击后跳转到编辑器页面。</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">编辑器页面:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">顶部工具栏包含格式选项和语音录入按钮。点击语音按钮开始录音，再次点击停止并转录。底部提供"保存"和"生成摘要"按钮，保存成功后提示用户并返回仪表盘。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tab3">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-layer-group text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">技术栈文档</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">技术栈文档明确告诉AI使用哪些技术来开发项目，防止AI随意选择不适合的技术方案，确保开发环境的一致性。</p>
+                        <h4 class="font-bold mt-6 mb-3">应包含内容:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>前端框架与库（版本号）</li>
+                            <li>后端技术与服务</li>
+                            <li>数据库选择与ORM</li>
+                            <li>第三方API与服务（含链接）</li>
+                            <li>首选工具与配置方案</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">准确的技术栈文档能帮助AI使用最适合项目的技术组合，避免版本冲突和兼容性问题。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">技术栈文档示例</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">前端技术:</h5>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                                        <li>React 18.2.0</li>
+                                        <li>Next.js 14.0.3</li>
+                                        <li>Tailwind CSS 3.3.0</li>
+                                        <li>Shadcn/UI 组件库</li>
+                                        <li>React Query v4 用于数据获取</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">后端服务:</h5>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                                        <li>Supabase （认证与数据库）</li>
+                                        <li>Next.js API Routes</li>
+                                        <li>OpenAI API （内容生成）</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">第三方服务:</h5>
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                                        <li>Deepgram API (语音转文本)</li>
+                                        <li>Google OAuth (用户认证)</li>
+                                        <li>Stripe (支付处理)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tab4">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-paint-brush text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">前端指南</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">前端指南详细说明设计规范和UI要求，确保AI生成的界面美观一致，符合品牌调性，并提供良好的用户体验。</p>
+                        <h4 class="font-bold mt-6 mb-3">关键元素:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>字体系统（标题字体、正文字体、字号范围）</li>
+                            <li>配色方案（主色、辅助色、强调色、状态色）</li>
+                            <li>间距与布局规则</li>
+                            <li>UI组件库与设计系统</li>
+                            <li>图标集与品牌资源</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">精细的前端指南能确保AI生成的界面保持视觉一致性，减少设计调整工作。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">前端指南示例</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">字体系统:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">标题：Inter (700)，正文：Inter (400, 500)，代码：JetBrains Mono</p>
+                                    <p class="text-gray-600 dark:text-gray-300">标题大小：h1 (2.5rem), h2 (2rem), h3 (1.5rem)</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">配色方案:</h5>
+                                    <div class="flex flex-wrap gap-2 my-2">
+                                        <div class="w-12 h-12 rounded-md bg-blue-600 flex items-end justify-center p-1">
+                                            <span class="text-xs text-white">主色</span>
+                                        </div>
+                                        <div class="w-12 h-12 rounded-md bg-gray-800 flex items-end justify-center p-1">
+                                            <span class="text-xs text-white">暗色</span>
+                                        </div>
+                                        <div class="w-12 h-12 rounded-md bg-gray-100 flex items-end justify-center p-1 border">
+                                            <span class="text-xs">浅色</span>
+                                        </div>
+                                        <div class="w-12 h-12 rounded-md bg-green-500 flex items-end justify-center p-1">
+                                            <span class="text-xs text-white">成功</span>
+                                        </div>
+                                        <div class="w-12 h-12 rounded-md bg-red-500 flex items-end justify-center p-1">
+                                            <span class="text-xs text-white">错误</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">组件规范:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">基于Shadcn/UI组件库，使用Tailwind工具类，圆角统一为0.375rem (rounded-md)，卡片阴影使用shadow-sm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tab5">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-database text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">后端结构文档</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">后端结构文档明确定义数据存储和处理逻辑，特别适用于使用Supabase或Firebase等服务的项目，帮助AI理解数据关系和业务规则。</p>
+                        <h4 class="font-bold mt-6 mb-3">必要组成:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>数据库表结构与关系</li>
+                            <li>API端点设计与功能</li>
+                            <li>认证与权限管理逻辑</li>
+                            <li>数据存储与检索规则</li>
+                            <li>边界情况与错误处理策略</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">完善的后端文档能帮助AI创建符合业务逻辑的数据处理系统，减少架构调整。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">后端结构文档示例</h4>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">数据库表结构:</h5>
+                                    <pre class="text-xs p-2 bg-gray-800 text-gray-200 rounded-md overflow-x-auto">
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  display_name TEXT
+);
+
+CREATE TABLE journal_entries (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  summary TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+                                    </pre>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">认证逻辑:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">使用Google OAuth认证，通过Supabase Auth服务管理。用户首次登录时在users表中创建记录。访问所有API端点需要有效的JWT令牌。</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-blue-600 dark:text-blue-400">存储规则:</h5>
+                                    <p class="text-gray-600 dark:text-gray-300">语音录音临时存储在Supabase Storage的'audio'桶中，转录后删除。每个用户数据使用RLS（行级安全）限制，只能访问自己的内容。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="tab6">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <div class="icon-box">
+                            <i class="fas fa-tasks text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">实施计划</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">实施计划是对抗AI"幻觉"的杀手锏，列出50+具体编码步骤，将复杂项目分解为线性任务，让AI专注执行而非猜测。</p>
+                        <h4 class="font-bold mt-6 mb-3">计划特点:</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+                            <li>详细的步骤分解，从环境设置到功能实现</li>
+                            <li>清晰的执行顺序，避免开发冲突</li>
+                            <li>具体的技术实现指南，减少AI选择负担</li>
+                            <li>明确的检验点，确保功能正确实现</li>
+                        </ul>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">可使用ChatGPT生成初步计划，或通过@CodeGuidedev自动生成更精细的实施方案。</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="card p-6">
+                            <h4 class="font-bold mb-4">实施计划示例片段</h4>
+                            <div class="space-y-1 text-sm">
+                                <ol class="list-decimal list-inside text-gray-600 dark:text-gray-300 space-y-2">
+                                    <li><span class="font-medium">环境设置</span>: 创建Next.js 14项目，配置TypeScript和ESLint</li>
+                                    <li><span class="font-medium">安装依赖</span>: 添加Tailwind CSS, Shadcn/UI, Supabase客户端</li>
+                                    <li><span class="font-medium">配置环境变量</span>: 设置Supabase URL, API密钥和其他服务配置</li>
+                                    <li><span class="font-medium">身份验证设置</span>: 实现Google OAuth登录流程</li>
+                                    <li><span class="font-medium">数据库迁移</span>: 创建用户和日记条目表</li>
+                                    <li><span class="font-medium">布局组件</span>: 创建主布局组件，包含导航和主题切换</li>
+                                    <li><span class="font-medium">登录页面</span>: 实现登录页UI和认证流程</li>
+                                    <li><span class="font-medium">仪表盘页面</span>: 创建用户仪表盘显示最近日记</li>
+                                    <li><span class="font-medium">日记编辑器</span>: 实现富文本编辑器功能</li>
+                                    <li><span class="font-medium">语音录入</span>: 集成Deepgram API实现语音转文本</li>
+                                    <li><span class="font-medium">...</span></li>
+                                </ol>
+                                <p class="text-gray-500 dark:text-gray-400 mt-4 italic">（完整计划通常包含50+详细步骤）</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools & Extensions -->
+    <section id="tools" class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-6 text-center">推荐工具与扩展</h2>
+            <p class="text-center max-w-3xl mx-auto mb-10 text-gray-600 dark:text-gray-300">以下工具能帮助您实施知识库技术，提高AI编码质量，显著降低幻觉错误率</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tool 1 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <div class="w-16 h-16 mb-4 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                            <i class="fas fa-keyboard text-3xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Cursor</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">基于VSCode的AI辅助代码编辑器，支持智能补全和代码生成，是知识库技术的主要适用工具。</p>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 py-1 px-2 rounded text-xs">版本 0.47+</span>
+                            <span class="ml-auto">
+                                <a href="https://cursor.sh" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">访问官网 <i class="fas fa-external-link-alt ml-1"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 2 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <div class="w-16 h-16 mb-4 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                            <i class="fas fa-file-code text-3xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">CodeGuide</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">专为AI编码项目设计的文档生成工具，支持40+模板，可自动创建所有六类知识库文档。</p>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 py-1 px-2 rounded text-xs">推荐工具</span>
+                            <span class="ml-auto">
+                                <a href="https://www.codeguide.dev" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">访问官网 <i class="fas fa-external-link-alt ml-1"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool 3 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <div class="w-16 h-16 mb-4 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                            <i class="fas fa-wind text-3xl text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Windsurf</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">AI编码助手，与知识库技术兼容，提供类似Cursor的功能，是另一种实施该方法的选择。</p>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 py-1 px-2 rounded text-xs">替代工具</span>
+                            <span class="ml-auto">
+                                <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">了解更多 <i class="fas fa-info-circle ml-1"></i></a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                            <div class="mt-16">
+                <h3 class="text-2xl font-bold mb-6 text-center">效率对比</h3>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr>
+                                    <th>开发方法</th>
+                                    <th>错误率</th>
+                                    <th>开发速度</th>
+                                    <th>准备工作</th>
+                                    <th>适用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>传统人工开发</td>
+                                    <td>极低</td>
+                                    <td>慢</td>
+                                    <td>少</td>
+                                    <td>所有项目</td>
+                                </tr>
+                                <tr>
+                                    <td>非控制的AI编码</td>
+                                    <td>中高 (40-60%)</td>
+                                    <td>较快</td>
+                                    <td>少</td>
+                                    <td>简单小项目</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold">知识库方法</td>
+                                    <td class="text-green-600 dark:text-green-400">低 (7-9%)</td>
+                                    <td class="text-green-600 dark:text-green-400">快</td>
+                                    <td>中 (文档准备)</td>
+                                    <td>中大型项目</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Further Reading -->
+    <section id="reading" class="py-16 bg-white dark:bg-gray-800">
+        <div class="container">
+            <h2 class="text-3xl font-bold mb-12 text-center">延伸阅读</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <span class="inline-block mb-4 text-blue-600 dark:text-blue-400"><i class="fas fa-book text-2xl"></i></span>
+                        <h3 class="text-xl font-bold mb-2">《与AI结对编程》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Swyx (2024)</p>
+                        <p class="text-gray-600 dark:text-gray-300">探讨如何有效利用AI工具进行编程，包括减少幻觉的最佳实践和提示工程技巧。</p>
+                    </div>
+                </div>
+                
+                <!-- Book 2 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <span class="inline-block mb-4 text-blue-600 dark:text-blue-400"><i class="fas fa-book text-2xl"></i></span>
+                        <h3 class="text-xl font-bold mb-2">《提示工程：设计高效AI交互》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Liu & Zhao (2023)</p>
+                        <p class="text-gray-600 dark:text-gray-300">全面深入讨论提示工程技术，介绍如何构建结构化提示以获得最佳AI输出。</p>
+                    </div>
+                </div>
+                
+                <!-- Book 3 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <span class="inline-block mb-4 text-blue-600 dark:text-blue-400"><i class="fas fa-book text-2xl"></i></span>
+                        <h3 class="text-xl font-bold mb-2">《软件工程中的文档驱动开发》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Brown & Johnson (2022)</p>
+                        <p class="text-gray-600 dark:text-gray-300">探讨文档先行的开发方法论，与知识库技术理念高度契合。</p>
+                    </div>
+                </div>
+                
+                <!-- Paper 1 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <span class="inline-block mb-4 text-blue-600 dark:text-blue-400"><i class="fas fa-file-alt text-2xl"></i></span>
+                        <h3 class="text-xl font-bold mb-2">《大语言模型在代码生成中的幻觉现象研究》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Chen et al. (2024), ACM Conference on AI in Software Engineering</p>
+                        <p class="text-gray-600 dark:text-gray-300">详细分析AI幻觉产生机制及缓解策略，包括上下文增强方法。</p>
+                    </div>
+                </div>
+                
+                <!-- Paper 2 -->
+                <div class="card hover:shadow-xl transition-all duration-300">
+                    <div class="p-6">
+                        <span class="inline-block mb-4 text-blue-600 dark:text-blue-400"><i class="fas fa-file-alt text-2xl"></i></span>
+                        <h3 class="text-xl font-bold mb-2">《人机协作编程:框架与实践》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Wang & Lee (2023), Journal of Human-AI Interaction</p>
+                        <p class="text-gray-600 dark:text-gray-300">提出人机协作编程框架，强调人类规划与AI执行的角色分工。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-20 bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+        <div class="container text-center">
+            <h2 class="text-3xl font-bold mb-6">开始使用知识库技术</h2>
+            <p class="max-w-2xl mx-auto mb-8 text-lg">通过系统化文档提高AI编码效率，减少85%的幻觉错误，让开发过程更加顺畅。</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#six-steps" class="btn bg-white text-blue-600 hover:bg-blue-50">
+                    <i class="fas fa-arrow-up mr-2"></i>回顾六步法
+                </a>
+                <a href="https://www.codeguide.dev" target="_blank" class="btn bg-blue-700 hover:bg-blue-800 text-white">
+                    <i class="fas fa-external-link-alt mr-2"></i>尝试CodeGuide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-gray-300">
+        <div class="container">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2 text-white">知识库技术</h3>
+                    <p class="text-gray-400">降低AI编程幻觉的系统方法</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p>作者：季晓康</p>
+                        <p>微信公众号：凿壁</p>
+                    </div>
+                    <div class="text-gray-500 text-sm">
+                        <p>版权信息：国家健康医疗大数据研究院</p>
+                        <p class="mt-1">© 2025 保留所有权利</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        
+        // Check for user preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+        
+        // Animate progress bars on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.progress-bar-fill');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                // Check if element is in viewport
+                if(position.top < window.innerHeight && position.bottom >= 0) {
+                    // Element is in view, add animation
+                    element.style.width = element.style.width || element.getAttribute('data-width') || '100%';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

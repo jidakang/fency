@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 2.5 Pro：编码能力的飞跃展示</title>
+    <meta name="description" content="探索 Matthew Berman 展示 Gemini 2.5 Pro 惊人“一次生成”编码能力的 X 帖子串，涵盖从游戏到科学模拟的多个实例。">
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* 基本字体和样式 */
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300;
+        }
+
+        /* 自定义强调色 */
+        :root {
+            --accent-color-light: #4f46e5; /* Indigo 600 */
+            --accent-color-dark: #6366f1;  /* Indigo 500 */
+        }
+        .text-accent {
+            @apply text-[var(--accent-color-light)] dark:text-[var(--accent-color-dark)];
+        }
+        .bg-accent {
+            @apply bg-[var(--accent-color-light)] dark:bg-[var(--accent-color-dark)];
+        }
+        .ring-accent {
+             @apply ring-[var(--accent-color-light)] dark:ring-[var(--accent-color-dark)];
+        }
+        .border-accent {
+            @apply border-[var(--accent-color-light)] dark:border-[var(--accent-color-dark)];
+        }
+
+
+        /* 卡片悬停效果 */
+        .demo-card {
+            @apply transition-all duration-300 ease-in-out transform;
+        }
+        .demo-card:hover {
+            @apply shadow-xl dark:shadow-2xl dark:shadow-indigo-900/30 ring-1 ring-gray-200 dark:ring-gray-700 scale-[1.02];
+        }
+
+        /* 按钮悬停效果 */
+        .interactive-button {
+            @apply transition-all duration-200 ease-in-out;
+        }
+        .interactive-button:hover {
+            @apply scale-105 opacity-90;
+        }
+
+        /* 内容淡入动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        /* 为每个部分添加不同的延迟 */
+        .fade-in-delay-1 { animation-delay: 0.1s; }
+        .fade-in-delay-2 { animation-delay: 0.2s; }
+        .fade-in-delay-3 { animation-delay: 0.3s; }
+        .fade-in-delay-4 { animation-delay: 0.4s; }
+        .fade-in-delay-5 { animation-delay: 0.5s; }
+
+         /* 滚动条样式 (可选, 增加精致感) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            @apply bg-gray-100 dark:bg-gray-800;
+        }
+        ::-webkit-scrollbar-thumb {
+            @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            @apply bg-gray-400 dark:bg-gray-500;
+        }
+
+        /* Linear 风格渐变背景示例 */
+        .hero-gradient {
+             background: linear-gradient(120deg, #f3e8ff 0%, #e0f2fe 100%);
+        }
+        .dark .hero-gradient {
+             background: linear-gradient(120deg, #281d37 0%, #1e3a8a 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen flex flex-col">
+
+        <header class="sticky top-0 z-50 w-full backdrop-blur border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                         <i class="fa-solid fa-robot text-accent text-2xl mr-3"></i>
+                        <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Gemini 2.5 Pro 编码秀</h1>
+                    </div>
+                    <div class="flex items-center">
+                        <button id="theme-toggle" aria-label="切换深色/浅色模式" class="interactive-button p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent ring-offset-white dark:ring-offset-gray-900">
+                            <i class="fa-solid fa-sun theme-icon-light block"></i>
+                            <i class="fa-solid fa-moon theme-icon-dark hidden"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+
+            <section class="relative py-16 sm:py-24 overflow-hidden hero-gradient">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                     <div class="max-w-3xl mx-auto text-center fade-in">
+                        <span class="text-accent font-semibold uppercase tracking-wider text-sm">AI 编码新里程碑</span>
+                        <h2 class="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
+                            Gemini 2.5 Pro: “令人震惊”的编码实力
+                        </h2>
+                        <p class="mt-6 text-xl text-gray-600 dark:text-gray-300">
+                            Matthew Berman 在 X 平台通过一系列“一次生成”演示，揭示了 Gemini 2.5 Pro 在复杂编码任务上的卓越能力，其表现超越了市面上其他顶尖模型。
+                        </p>
+                        <div class="mt-10">
+                            <a href="https://x.com/MatthewBerman/status/1904714953095078004" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-accent hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent interactive-button">
+                                查看原始帖子串 <i class="fa-brands fa-x-twitter ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="absolute inset-0 opacity-10 dark:opacity-5" aria-hidden="true">
+                     <svg class="absolute left-[max(25rem,50%)] top-1/2 -translate-y-1/2 -translate-x-1/2" width="800" height="800" fill="none" viewBox="0 0 800 800">
+                         <defs><pattern id="pattern-a61f8023" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="4" height="4" class="text-gray-300 dark:text-gray-700" fill="currentColor"></rect></pattern></defs>
+                         <rect width="800" height="800" fill="url(#pattern-a61f8023)"></rect>
+                     </svg>
+                 </div>
+            </section>
+
+            <section class="py-16 sm:py-24 bg-gray-50 dark:bg-gray-800/50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12 fade-in">
+                        <h3 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                            “一次生成”的奇迹
+                        </h3>
+                        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                            Gemini 2.5 Pro 无需迭代，一次性生成了以下多样化的模拟与游戏：
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-1">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-indigo-100 dark:bg-indigo-900 text-accent rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-viruses fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">3D 血流病毒模拟 (初版)</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "Gemini 2.5 Pro is insane at coding. It's far better than anything else I've tested..."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 显示红细胞、白细胞和病毒交互的 3D 场景，带有调整初始病毒数、血流速度等参数的控制面板。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 1 | 02:00 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-2">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-cube fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">魔方生成器与求解器</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "A Rubik's cube generator AND solver. I've tried this with Claude 3.7 thinking, DeepSeek etc and never came close..."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 渲染的 3D 魔方，展示了白顶、红前、蓝右三个面。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 2 | 02:00 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-3">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-microscope fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">病毒模拟器 (详细版)</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "Virus simulator with lots of settings. White blood cells, red blood cells, and virus battle it out."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                     <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 模拟界面显示细胞计数，并提供滑块调整白细胞、红细胞和病毒设置。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 3 | 02:01 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-4">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                     <span class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-gamepad fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">增强版贪吃蛇</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "...snake game. But this one has power ups, AI opponents, different food types, and a moving camera."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 2D 游戏截图，暗色背景上有绿点（蛇）、红方块（障碍/敌人?）、黄圆圈（食物?）。
+                                </p>
+                               <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 4 | 02:01 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-5">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-bug fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">蚂蚁农场模拟</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "And an ant farm simulation. Pretty simple, but easy to add on to."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 沙地背景和黑点（蚂蚁）的模拟截图，带有控制面板。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 5 | 02:02 UTC</span>
+                            </div>
+                        </div>
+
+                         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-1">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-sky-100 dark:bg-sky-900 text-sky-600 dark:text-sky-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-plane fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">简易飞行模拟器</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "And a dead-simple flight simulator."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 显示草地、蓝天和方块建筑的飞行模拟截图。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 6 | 02:03 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-2">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                     <span class="bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-cubes fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">乐高积木搭建模拟</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "...here's a lego building sim. I couldn't get this working with any other model."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 显示地形的 3D 网格，带有颜色图例代表不同表面。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 7 | 02:04 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-3">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-city fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">城市破坏模拟</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "Here's a city sim where you can blow up buildings. The explosion physics didn't work super well..."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 无图像描述提供，仅文本。
+                                </p>
+                               <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 8 | 02:05 UTC</span>
+                            </div>
+                        </div>
+
+                         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-4">
+                            <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-pink-100 dark:bg-pink-900 text-pink-600 dark:text-pink-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-infinity fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">宁静环面结模拟</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "And a nice calming torus knot simulation with plenty of settings..."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                     <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 无图像描述提供，仅文本。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 9 | 02:05 UTC</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden demo-card fade-in fade-in-delay-5 md:col-span-1 lg:col-span-1">
+                           <div class="p-6">
+                                <div class="flex items-center mb-4">
+                                    <span class="bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-400 rounded-full p-2 mr-3">
+                                        <i class="fa-solid fa-stethoscope fa-fw"></i>
+                                    </span>
+                                    <h4 class="text-lg font-semibold text-gray-900 dark:text-white">复古手术模拟</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 italic">
+                                    "And finally, a surgery sim. Reminds me of an old school game."
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-300">
+                                    <span class="font-medium text-gray-700 dark:text-gray-200">视觉描述:</span> 模拟截图显示稳定性进度条和手术刀、缝合针等工具按钮。
+                                </p>
+                                <span class="mt-4 inline-block text-xs text-gray-400 dark:text-gray-500">帖子 10 | 02:06 UTC</span>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="lg:grid lg:grid-cols-3 lg:gap-8 items-center">
+                        <div class="lg:col-span-1 fade-in">
+                             <span class="text-accent font-semibold uppercase tracking-wider text-sm">洞察与意义</span>
+                             <h3 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                                解读 Gemini 2.5 Pro 的潜力
+                            </h3>
+                        </div>
+                        <div class="mt-8 lg:mt-0 lg:col-span-2">
+                            <div class="space-y-8">
+                                <div class="flex fade-in fade-in-delay-1">
+                                    <div class="flex-shrink-0">
+                                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-accent text-white">
+                                            <i class="fa-solid fa-bolt fa-lg"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">卓越的编码效率</h4>
+                                        <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
+                                            "一次生成" (One-Shot) 能力是核心亮点，意味着模型能直接产生高质量、可运行的代码，无需或只需少量修改，这在复杂任务中尤为难得。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex fade-in fade-in-delay-2">
+                                    <div class="flex-shrink-0">
+                                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-accent text-white">
+                                            <i class="fa-solid fa-graduation-cap fa-lg"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">潜在的教育价值</h4>
+                                        <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
+                                            病毒模拟器、蚂蚁农场等互动演示展示了 AI 在创建教育工具方面的潜力，可用于生物学、生态学等领域的教学与研究。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex fade-in fade-in-delay-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-accent text-white">
+                                            <i class="fa-solid fa-arrow-trend-up fa-lg"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">超越竞争对手</h4>
+                                        <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
+                                            Matthew Berman 特别提到，在尝试魔方生成器和乐高模拟等任务时，Gemini 2.5 Pro 的表现优于他测试过的 Claude 3.7 和 DeepSeek 等其他模型。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in fade-in-delay-4">
+                     <i class="fa-solid fa-quote-left text-4xl text-accent mb-4"></i>
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white sm:text-3xl">
+                        结论：AI 编码的新篇章
+                    </h3>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                        Matthew Berman 的 X 帖子串有力地证明了 Gemini 2.5 Pro 在代码生成领域的重大进步。其创建复杂、多样化应用的能力，特别是“一次生成”的效率，预示着 AI 将在软件开发、创意编程乃至科学教育等领域扮演越来越重要的角色。
+                    </p>
+                     <div class="mt-8">
+                        <a href="https://x.com/MatthewBerman/status/1904714953095078004" target="_blank" rel="noopener noreferrer" class="text-base font-medium text-accent hover:text-indigo-700 dark:hover:text-indigo-400">
+                            再次访问原始帖子串 <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                     <div class="max-w-3xl mx-auto text-center mb-12 fade-in">
+                         <h3 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+                             进一步阅读
+                         </h3>
+                         <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                             深入了解 AI、代码生成和相关技术：
+                         </p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
+                        <div class="flex items-start fade-in fade-in-delay-1">
+                            <div class="flex-shrink-0 mr-4 mt-1">
+                                <i class="fa-solid fa-book text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">《人工智能：一种现代方法》(Artificial Intelligence: A Modern Approach)</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">作者: Stuart Russell & Peter Norvig</p>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">AI 领域的经典教材，全面介绍了人工智能的基础理论和技术。</p>
+                                <a href="http://aima.cs.berkeley.edu/" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm text-accent hover:underline">访问网站 <i class="fa-solid fa-external-link-alt text-xs ml-1"></i></a>
+                            </div>
+                        </div>
+                         <div class="flex items-start fade-in fade-in-delay-2">
+                            <div class="flex-shrink-0 mr-4 mt-1">
+                                <i class="fa-solid fa-file-alt text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">大型语言模型综述 (Survey of Large Language Models)</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">来源: arXiv (持续更新)</p>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">查找关于 LLMs 最新进展的学术论文，了解其架构、训练和应用，包括代码生成。</p>
+                                <a href="https://arxiv.org/list/cs.CL/recent" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm text-accent hover:underline">搜索 arXiv (cs.CL) <i class="fa-solid fa-external-link-alt text-xs ml-1"></i></a>
+                            </div>
+                        </div>
+                        <div class="flex items-start fade-in fade-in-delay-3">
+                            <div class="flex-shrink-0 mr-4 mt-1">
+                                <i class="fa-solid fa-code text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">GitHub Copilot / AI 代码生成工具文档</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">来源: GitHub, Google 等</p>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">研究现有 AI 代码辅助工具的工作原理和最佳实践，了解它们如何改变开发流程。</p>
+                                <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm text-accent hover:underline">了解 GitHub Copilot <i class="fa-solid fa-external-link-alt text-xs ml-1"></i></a>
+                            </div>
+                        </div>
+                        <div class="flex items-start fade-in fade-in-delay-4">
+                            <div class="flex-shrink-0 mr-4 mt-1">
+                                <i class="fa-solid fa-flask text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">《模拟与建模基础》(Introduction to Simulation and Modeling)</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">作者: Averill M. Law</p>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">理解模拟技术的基本概念和方法，对评估和创建类似演示中的模拟器有帮助。</p>
+                                <a href="https://www.amazon.com/Simulation-Modeling-Analysis-Averill-Law/dp/0073401323" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm text-accent hover:underline">查看书籍 (示例链接) <i class="fa-solid fa-external-link-alt text-xs ml-1"></i></a>
+                            </div>
+                        </div>
+                         <div class="flex items-start fade-in fade-in-delay-5">
+                            <div class="flex-shrink-0 mr-4 mt-1">
+                                <i class="fa-brands fa-google text-accent text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-white">Google AI Blog / DeepMind Blog</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">来源: Google / DeepMind</p>
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">关注 Google 官方发布的关于 Gemini 模型系列的技术细节、研究进展和应用案例。</p>
+                                <a href="https://ai.googleblog.com/" target="_blank" rel="noopener noreferrer" class="mt-2 inline-block text-sm text-accent hover:underline">访问 Google AI Blog <i class="fa-solid fa-external-link-alt text-xs ml-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+            <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-gray-500 dark:text-gray-400 text-sm">
+                <div class="mb-2">
+                    <p>作者: <span class="font-medium text-gray-700 dark:text-gray-300">季晓康</span></p>
+                    <p>微信公众号: <span class="font-medium text-gray-700 dark:text-gray-300">凿壁</span></p>
+                </div>
+                 <p>&copy; 2025 国家健康医疗大数据研究院. 保留所有权利.</p>
+                 <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">
+                    页面灵感来源于 Matthew Berman 的 X 帖子串及 Linear App 设计风格。
+                 </p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.querySelector('.theme-icon-light');
+        const darkIcon = document.querySelector('.theme-icon-dark');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        const setTheme = (theme) => {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'light');
+            }
+        };
+
+        // Check for saved theme in localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Listen for system theme changes (optional)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            // Only change if no theme is explicitly set in localStorage
+             if (!localStorage.getItem('theme')) {
+                 setTheme(event.matches ? 'dark' : 'light');
+             }
+        });
+
+        // Trigger fade-in animations when elements are potentially visible (simple approach)
+        // For better performance on long pages, use Intersection Observer API
+        document.addEventListener('DOMContentLoaded', () => {
+             // Example: Just ensuring the classes are there for the initial load animation
+             // More complex logic could check visibility before adding the class if needed.
+        });
+
+    </script>
+
+</body>
+</html>

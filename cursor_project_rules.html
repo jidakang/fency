@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor 项目规则详解 | 凿壁</title>
+    
+    <!-- 样式表 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <style>
+        /* 自定义 CSS */
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #F59E0B;
+            --accent-color: #10B981;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-tertiary: #9CA3AF;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F3F4F6;
+            --bg-tertiary: #E5E7EB;
+        }
+        
+        .dark {
+            --primary-color: #60A5FA;
+            --secondary-color: #FBBF24;
+            --accent-color: #34D399;
+            --text-primary: #F9FAFB;
+            --text-secondary: #E5E7EB;
+            --text-tertiary: #9CA3AF;
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --bg-tertiary: #374151;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .rule-card {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .rule-original {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--bg-tertiary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rule-translation {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rule-explanation {
+            color: var(--text-secondary);
+        }
+        
+        .code-block {
+            background-color: var(--bg-tertiary);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: monospace;
+            position: relative;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .copy-button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .toggle-dark-mode {
+            background-color: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+        
+        .toggle-dark-mode:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 0.25rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .first-letter::first-letter {
+            font-size: 3em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            color: var(--secondary-color);
+        }
+        
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .further-reading-item {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .mermaid-container {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Dark mode specific improvements */
+        .dark .rule-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark .bg-blue-100 {
+            background-color: rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        .dark .text-blue-800 {
+            color: rgba(239, 246, 255, 0.95) !important;
+        }
+        
+        .dark .text-blue-200 {
+            color: rgba(239, 246, 255, 0.95) !important;
+        }
+        
+        .dark .text-blue-500 {
+            color: #BFDBFE !important;
+        }
+        
+        .dark .rule-original {
+            color: rgba(243, 244, 246, 0.95);
+            border-bottom-color: rgba(55, 65, 81, 0.8);
+        }
+        
+        .dark .rule-translation {
+            color: #BFDBFE;
+        }
+        
+        .dark .rule-explanation {
+            color: rgba(229, 231, 235, 0.95);
+        }
+        
+        .dark .bg-white {
+            background-color: rgba(31, 41, 55, 0.8) !important;
+        }
+        
+        .dark .text-blue-600 {
+            color: #BFDBFE !important;
+        }
+        
+        .dark .further-reading-item.bg-white {
+            border-left-color: #BFDBFE;
+        }
+        
+        .dark .text-gray-600 {
+            color: #E5E7EB !important;
+        }
+        
+        .dark .text-gray-700 {
+            color: #F3F4F6 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.875rem;
+            }
+            
+            .rule-card {
+                padding: 1rem;
+            }
+        }
+        
+        /* Fix the display of the show more rules button in dark mode */
+        .dark .bg-blue-500 {
+            background-color: #3B82F6 !important;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .bg-blue-500:hover {
+            background-color: #2563EB !important;
+        }
+        
+        /* Improve readability in mermaid diagrams in dark mode */
+        .dark .mermaid-container {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 修复深色背景配深色文字的问题 */
+        .dark .bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+        }
+        
+        .dark .bg-blue-900 {
+            background-color: rgba(30, 58, 138, 0.4) !important;
+        }
+        
+        .dark .text-blue-300 {
+            color: #93C5FD !important;
+        }
+        
+        .dark .text-blue-800 {
+            color: #DBEAFE !important;
+        }
+        
+        /* 修复可能的代码块文字颜色问题 */
+        .dark .text-gray-800 {
+            color: #F3F4F6 !important;
+        }
+        
+        /* 确保深色模式下的按钮文字颜色 */
+        .dark .bg-blue-500 {
+            color: #FFFFFF !important;
+        }
+        
+        /* 深色模式下的链接颜色优化 */
+        .dark .text-blue-500 {
+            color: #93C5FD !important;
+        }
+        
+        .dark .text-blue-500:hover {
+            color: #BFDBFE !important;
+        }
+        
+        /* 确保白色背景上的文字在深色模式下有足够对比度 */
+        .dark .bg-white .text-gray-700 {
+            color: #E5E7EB !important;
+        }
+        
+        .dark .bg-white .text-gray-600 {
+            color: #D1D5DB !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="sticky top-0 bg-opacity-90 bg-white dark:bg-gray-900 dark:bg-opacity-90 backdrop-filter backdrop-blur-lg z-10">
+        <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <i class="fas fa-code text-blue-500 text-xl mr-2"></i>
+                <span class="font-serif text-xl font-bold">Cursor 规则指南</span>
+            </a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#intro" class="nav-link">介绍</a>
+                <a href="#usage" class="nav-link">使用指南</a>
+                <a href="#rules" class="nav-link">规则详解</a>
+                <a href="#visual" class="nav-link">可视化</a>
+                <a href="#reading" class="nav-link">延伸阅读</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="toggle-dark-mode" class="toggle-dark-mode" aria-label="切换深色模式">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-gray-700 dark:text-gray-300 text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 py-2 bg-white dark:bg-gray-900 shadow-md">
+            <div class="flex flex-col space-y-3 pb-3">
+                <a href="#intro" class="nav-link block py-1">介绍</a>
+                <a href="#usage" class="nav-link block py-1">使用指南</a>
+                <a href="#rules" class="nav-link block py-1">规则详解</a>
+                <a href="#visual" class="nav-link block py-1">可视化</a>
+                <a href="#reading" class="nav-link block py-1">延伸阅读</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 头部大图 -->
+    <section class="hero">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Cursor 项目规则详解</h1>
+            <p class="text-xl md:text-2xl max-w-2xl opacity-90">深入了解 Cursor AI 辅助编程的项目规则体系，掌握高效开发的关键准则</p>
+            <div class="mt-8 flex space-x-4">
+                <a href="#rules" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition">查看规则详解</a>
+                <a href="#visual" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition">规则可视化</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 介绍部分 -->
+    <section id="intro" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center">什么是 Cursor 项目规则？</h2>
+                <div class="first-letter text-lg leading-relaxed mb-8 text-gray-700 dark:text-gray-300">
+                    Cursor 项目规则是一套指导 AI 辅助编程工具如何理解、分析和生成代码的规范体系。这些规则定义了 AI 在协助开发过程中应遵循的行为准则、编码标准和交互模式。通过严格遵循这些规则，Cursor AI 能够提供符合项目要求的高质量代码建议，同时避免常见的错误和误解。对于开发者来说，了解这些规则有助于更有效地利用 AI 助手提升开发效率和代码质量。
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                        Cursor 规则的核心价值
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>确保 AI 生成的代码符合项目的技术规范和架构设计</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>提高代码的一致性、可读性和可维护性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>减少错误和安全漏洞的产生</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>优化开发工作流程，提升团队协作效率</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>为 AI 和开发者之间建立清晰的沟通边界</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border-l-4 border-blue-500 p-4 rounded">
+                    <p class="text-blue-800 dark:text-blue-300 font-medium">在接下来的内容中，我们将详细解析每条规则的含义和应用场景，帮助您更好地理解和使用 Cursor AI 辅助工具进行高效开发。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用指南部分 -->
+    <section id="usage" class="py-16 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-center">如何使用 Cursor 项目规则</h2>
+                <p class="text-lg leading-relaxed mb-8 text-gray-700 dark:text-gray-300">
+                    Cursor 项目规则可以帮助您自定义 AI 助手的行为，使其更好地适应您的编码风格和项目需求。根据官方文档，有两种主要的使用方式：全局规则和项目特定规则。
+                </p>
+                
+                <!-- 规则类型说明 -->
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-layer-group text-blue-500 mr-2"></i>
+                        规则类型
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-medium text-lg mb-2 flex items-center">
+                                <i class="fas fa-globe-asia text-green-500 mr-2"></i>
+                                全局规则 (Global Rules)
+                            </h4>
+                            <p class="ml-7 text-gray-700 dark:text-gray-300">在 Cursor 设置中的"General">"Rules for AI"部分设置，适用于所有项目，非常适合个人编码偏好和保持一致的 AI 行为。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-lg mb-2 flex items-center">
+                                <i class="fas fa-project-diagram text-purple-500 mr-2"></i>
+                                项目规则 (Project Rules)
+                            </h4>
+                            <p class="ml-7 text-gray-700 dark:text-gray-300">项目特定规则，以 .mdc 文件形式保存在 .cursor/rules 目录中，或者使用传统方式在项目根目录创建 .cursorrules 文件（将来会被弃用）。这些规则帮助 AI 理解您的代码库并遵循项目的约定。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 创建和配置规则 -->
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-cogs text-blue-500 mr-2"></i>
+                        如何创建和配置规则
+                    </h3>
+                    
+                    <h4 class="font-medium mb-3">配置全局规则</h4>
+                    <ol class="list-decimal pl-6 mb-6 space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>打开 Cursor 设置</li>
+                        <li>导航到"General">"Rules for AI"</li>
+                        <li>在提供的文本区域中输入您的自定义指令</li>
+                        <li>点击"Save"保存全局规则</li>
+                        <li>记得启用"include .cursorrules file"以应用项目特定规则</li>
+                    </ol>
+                    
+                    <h4 class="font-medium mb-3">配置项目规则（推荐方式）</h4>
+                    <ol class="list-decimal pl-6 mb-6 space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>进入 Cursor 设置 > General > Project Rules</li>
+                        <li>点击"Add Rule"创建新的 .mdc 文件</li>
+                        <li>编辑描述（帮助代理选择规则）和文件模式（如 *.tsx 用于自动包含规则）</li>
+                        <li>在 .mdc 文件中编写规则内容</li>
+                        <li>Cursor 将根据您的描述和文件模式设置自动同步和应用规则</li>
+                    </ol>
+                    
+                    <h4 class="font-medium mb-3">创建项目规则（传统方式）</h4>
+                    <ol class="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300">
+                        <li>在项目根目录创建 .cursorrules 文件</li>
+                        <li>在文件中添加自定义指令</li>
+                        <li>请注意，官方将逐步淘汰这种方式，建议迁移到新的项目规则系统</li>
+                    </ol>
+                </div>
+                
+                <!-- 规则示例 -->
+                <div class="bg-blue-50 dark:bg-blue-900 dark:bg-opacity-20 border-l-4 border-blue-500 p-5 rounded mb-8">
+                    <h3 class="text-lg font-medium text-blue-800 dark:text-blue-200 mb-3">规则示例</h3>
+                    <div class="code-block relative bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm mb-4">
+                        <pre class="text-gray-800 dark:text-gray-200">
+# 全局规则示例 (在 Cursor 设置 > Rules for AI)
+
+1. Bug Fixes:
+   - 在提出修复之前彻底分析问题
+   - 提供精确、有针对性的解决方案
+   - 解释 bug 的根本原因
+
+2. Keep It Simple:
+   - 优先考虑可读性和可维护性
+   - 避免过度设计解决方案
+   - 尽可能使用标准库和模式
+
+3. Code Changes:
+   - 在进行更改之前提出明确的计划
+   - 一次完成对单个文件的所有修改
+   - 不要更改无关的文件
+
+记住始终考虑每个项目的上下文和特定要求。</pre>
+                    </div>
+                    
+                    <div class="code-block relative bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm">
+                        <pre class="text-gray-800 dark:text-gray-200">
+# 项目规则示例 (.mdc 文件或 .cursorrules)
+
+你是 TypeScript、Node.js、Next.js App Router、React、Shadcn UI、Radix UI 和 Tailwind 专家。
+  
+代码风格和结构
+- 编写简洁、技术性的 TypeScript 代码，并提供准确的示例。
+- 使用函数式和声明式编程模式；避免使用类。
+- 优先使用迭代和模块化，而非代码重复。
+- 使用描述性变量名，带辅助动词（如 isLoading、hasError）。
+- 文件结构：导出组件、子组件、辅助函数、静态内容、类型。
+  
+命名约定
+- 目录使用小写和连字符（如 components/auth-wizard）。
+- 组件优先使用命名导出。
+  
+TypeScript 使用
+- 所有代码使用 TypeScript；优先使用接口而非类型。
+- 避免使用枚举；使用映射代替。
+- 使用带有 TypeScript 接口的函数组件。</pre>
+                    </div>
+                </div>
+                
+                <!-- 有效规则的特点 -->
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-star text-yellow-500 mr-2"></i>
+                        编写有效 Cursor 规则的技巧
+                    </h3>
+                    <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>从简单规则开始，然后随着需要增加更多</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>使用自然语言，就像向同事解释一样</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>包含您自己代码中的示例</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>考虑规则如何应用于您的项目</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>定期检查和更新您的规则</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>使用您日常编码中的词汇和术语</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>简要描述您的项目或功能</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>在有帮助时提供简短的代码示例</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 规则原文部分 -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Cursor 项目规则原文</h2>
+            <div class="code-block relative">
+                <button class="copy-button" id="copy-rules">复制代码</button>
+                <pre class="language-markdown text-sm text-gray-800 dark:text-gray-200">
+## Rules正文
+
+```Markdown
+Use 'cursor_project_rules' as the Knowledge Base: Always refer to cursor_project_rules' to understand the context of the project. Do not code anything outside of the context provided in the 'cursor_project_rules' folder. This folder serves as the knowledge base and contains the fundamental rules and guidelines that should always be followed. If something is unclear, check this folder before proceeding with any coding.  
+Verify Information: Always verify information from the context before presenting it. Do not make assumptions or speculate without clear evidence]  
+Follow implementation-plan.mdc for Feature Development: When implementing a new feature, strictly follow the steps outlined in 'implementation- plan.mdc. Every step is listed in sequence, and each must be completed in order. After completing each step, update 'implementation-plan.mdc with the word *"Done"' and a two-line summary of what steps were taken. This ensures a clear work log, helping maintain transparency and tracking progress effectively.  
+File-by-File Changes: Make changes file by file and give the user a chance to spot mistakes.  
+No Apologies: Never use apologies.  
+No Understanding Feedback: Avoid giving feedback about understanding in comments or documentation.  
+No Whitespace Suggestions: Don't suggest whitespace changes.  
+No Summaries: Do not provide unnecessary summaries of changes made. Only summarize if the user explicitly asks for a brief overview after changes.  
+No Inventions: Don't invent changes other than what's explicitly requested.  
+No Unnecessary Confirmations: Don't ask for confirmation of information already provided in the context.  
+Preserve Existing Code: Don't remove unrelated code or functionalities. Pay attention to preserving existing structures.  
+Single Chunk Edits: Provide all edits in a single chunk instead of multiple-step instructions or explanations for the same file.  
+No Implementation Checks: Don't ask the user to verify implementations that are visible in the provided context. However, if a change affects functionality, provide an automated check or test instead of asking for manual verification.  
+No Unnecessary Updates: Don't suggest updates or changes to files when there are no actual modifications needed.  
+Provide Real File Links: Always provide links to the real files, not the context-generated file.  
+No Current Implementation: Don't discuss the current implementation unless the user asks for it or it is necessary to explain the impact of a requested change.  
+Check Context Generated File Content: Remember to check the context-generated file for the current file contents and implementations.  
+Use Explicit Variable Names: Prefer descriptive, explicit variable names over short, ambiguous ones to enhance code readability.  
+Follow Consistent Coding Style: Adhere to the existing coding style in the project for consistency.  
+Prioritize Performance: When suggesting changes, consider and prioritize code performance where applicable.  
+Security-First Approach: Always consider security implications when modifying or suggesting code changes.  
+Test Coverage: Suggest or include appropriate unit tests for new or modified code.  
+Error Handling: Implement robust error handling and logging where necessary.  
+Modular Design: Encourage modular design principles to improve code maintainability and reusability.  
+Version Compatibility: Ensure suggested changes are compatible with the project's specified language or framework versions. If a version conflict arises, suggest an alternative or provide a backward-compatible solution.  
+Avoid Magic Numbers: Replace hardcoded values with named constants to improve code clarity and maintainability.  
+Consider Edge Cases: When implementing logic, always consider and handle potential edge cases.  
+Use Assertions: Include assertions wherever possible to validate assumptions and catch potential errors early.  
+```</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- 规则详解部分 -->
+    <section id="rules" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">规则详解</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                <!-- 规则 1 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 1</span>
+                    <div class="rule-original">Use 'cursor_project_rules' as the Knowledge Base: Always refer to cursor_project_rules' to understand the context of the project.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 使用 'cursor_project_rules' 作为知识库：始终参考 'cursor_project_rules' 来理解项目背景。</div>
+                    <div class="rule-explanation">这条规则指示 AI（Cursor）将名为 'cursor_project_rules' 的特定文件或文件夹视为其核心信息源。在执行任何编码任务或回答问题之前，AI 必须查阅这个"知识库"来获取关于项目目标、技术栈、限制条件等关键背景信息。这确保了 AI 的行为和产出与项目的具体要求保持一致。</div>
+                </div>
+                
+                <!-- 规则 2 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 2</span>
+                    <div class="rule-original">Do not code anything outside of the context provided in the 'cursor_project_rules' folder.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不要在 'cursor_project_rules' 文件夹提供的背景信息之外编写任何代码。</div>
+                    <div class="rule-explanation">这是对上一条规则的加强。AI 的代码生成能力被严格限制在 'cursor_project_rules' 定义的范围内。它不能引入未在该知识库中提及的技术、库、设计模式或偏离既定的项目架构。</div>
+                </div>
+                
+                <!-- 规则 3 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 3</span>
+                    <div class="rule-original">This folder serves as the knowledge base and contains the fundamental rules and guidelines that should always be followed.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 此文件夹作为知识库，包含必须始终遵循的基本规则和指南。</div>
+                    <div class="rule-explanation">再次强调 'cursor_project_rules' 的权威性和重要性。它不仅提供背景信息，更包含了项目中不可违背的开发规范、编码标准和指导原则。</div>
+                </div>
+                
+                <!-- 规则 4 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 4</span>
+                    <div class="rule-original">If something is unclear, check this folder before proceeding with any coding.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 如果有任何不清楚的地方，在进行任何编码之前请检查此文件夹。</div>
+                    <div class="rule-explanation">这为 AI 提供了一个处理模糊或不明确指令的标准操作流程。当遇到疑问时，AI 的首选行动应该是回到 'cursor_project_rules' 查找明确的指示或信息，而不是进行猜测或频繁向用户提问（除非规则允许提问）。</div>
+                </div>
+                
+                <!-- 规则 5 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 5</span>
+                    <div class="rule-original">Verify Information: Always verify information from the context before presenting it.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 核实信息：在呈现信息之前，务必从背景信息中核实。</div>
+                    <div class="rule-explanation">要求 AI 在输出任何信息（无论是代码片段、解释、建议还是报告）之前，都要先与 'cursor_project_rules' 中的内容进行比对和核实，确保其准确性和相关性。这有助于防止 AI 提供错误或与项目要求不符的答案。</div>
+                </div>
+                
+                <!-- 规则 6 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 6</span>
+                    <div class="rule-original">Do not make assumptions or speculate without clear evidence.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 没有明确证据时，不要做假设或推测。</div>
+                    <div class="rule-explanation">禁止 AI 在信息不充分的情况下进行主观猜测或推断。所有的决策、代码生成和建议都必须基于 'cursor_project_rules' 中明确提供的证据或指示。</div>
+                </div>
+            </div>
+            
+            <!-- 显示更多规则的容器 - 修改为不使用hidden类，直接放在主要内容下方 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto mt-6" id="more-rules-container" style="display: none;">
+                <!-- 规则 7 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 7</span>
+                    <div class="rule-original">Follow implementation-plan.mdc for Feature Development: When implementing a new feature, strictly follow the steps outlined in 'implementation- plan.mdc.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 功能开发遵循 implementation-plan.mdc：在实现新功能时，严格遵循 'implementation-plan.mdc' 中列出的步骤。</div>
+                    <div class="rule-explanation">这引入了另一个关键的上下文文件 'implementation-plan.mdc'，该文件专门用于规划和指导新功能的开发流程。AI 在进行新功能开发时，必须严格按照这个计划文件中定义的步骤顺序来执行。</div>
+                </div>
+
+                <!-- 规则 8 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 8</span>
+                    <div class="rule-original">Every step is listed in sequence, and each must be completed in order.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 每个步骤都按顺序列出，并且必须按顺序完成。</div>
+                    <div class="rule-explanation">强调了 'implementation-plan.mdc' 中步骤的强制顺序性。AI 不能跳过任何步骤，也不能打乱预定的执行顺序。</div>
+                </div>
+
+                <!-- 规则 9 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 9</span>
+                    <div class="rule-original">After completing each step, update 'implementation-plan.mdc with the word *"Done"' and a two-line summary of what steps were taken.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 完成每个步骤后，用 "Done" 一词更新 'implementation-plan.mdc'，并附上两行关于所采取步骤的摘要。</div>
+                    <div class="rule-explanation">这是关于工作日志记录的具体要求。AI 每完成计划中的一个步骤，都需要在 'implementation-plan.mdc' 文件中对应步骤旁边标记 "Done"，并添加一个简短（两行）的文字说明，记录该步骤具体执行了哪些操作。</div>
+                </div>
+
+                <!-- 规则 10 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 10</span>
+                    <div class="rule-original">This ensures a clear work log, helping maintain transparency and tracking progress effectively.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 这确保了清晰的工作日志，有助于保持透明度并有效跟踪进度。</div>
+                    <div class="rule-explanation">阐述了上一步骤（更新计划文件）的目的：通过自动记录工作进展，让项目管理者或用户能够清晰地了解开发过程，方便追踪进度和审计。</div>
+                </div>
+
+                <!-- 规则 11 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 11</span>
+                    <div class="rule-original">File-by-File Changes: Make changes file by file and give the user a chance to spot mistakes.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 逐文件更改：逐个文件进行更改，让用户有机会发现错误。</div>
+                    <div class="rule-explanation">要求 AI 在需要修改多个文件时，采用分步、逐个文件处理的方式。AI 应先完成对一个文件的修改并展示给用户，等待用户的确认或反馈后，再继续处理下一个文件。这种方式便于用户进行代码审查，及时发现并纠正潜在问题。</div>
+                </div>
+
+                <!-- 规则 12 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 12</span>
+                    <div class="rule-original">No Apologies: Never use apologies.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不道歉：绝不使用道歉性语言。</div>
+                    <div class="rule-explanation">指示 AI 在与用户的交互中避免使用如 "抱歉"、"对不起"、"我的错" 等道歉词汇。这可能是为了维持一种更专业、客观或自信的交互风格，避免因 AI 的局限性而显得能力不足。</div>
+                </div>
+
+                <!-- 规则 13 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 13</span>
+                    <div class="rule-original">No Understanding Feedback: Avoid giving feedback about understanding in comments or documentation.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不提供理解反馈：避免在评论或文档中给出关于理解情况的反馈。</div>
+                    <div class="rule-explanation">AI 不应在生成的代码注释或文档中添加主观性的表述，例如 "根据我的理解..."、"我明白了你的要求，所以..." 等。注释和文档应专注于客观地解释代码的功能、逻辑或用法。</div>
+                </div>
+
+                <!-- 规则 14 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 14</span>
+                    <div class="rule-original">No Whitespace Suggestions: Don't suggest whitespace changes.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不建议空白符更改：不要建议对空白符（空格、制表符、换行符）进行更改。</div>
+                    <div class="rule-explanation">除非用户明确要求格式化代码或修复格式问题，否则 AI 不应主动提出仅仅涉及调整代码空白符（如缩进、空行）的建议。这避免了因个人或团队编码风格偏好不同而产生的非必要干扰。</div>
+                </div>
+
+                <!-- 规则 15 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 15</span>
+                    <div class="rule-original">No Summaries: Do not provide unnecessary summaries of changes made. Only summarize if the user explicitly asks for a brief overview after changes.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不提供摘要：不要提供不必要的更改摘要。仅当用户在更改后明确要求简要概述时才进行总结。</div>
+                    <div class="rule-explanation">AI 在完成代码修改任务后，不应自动生成一个总结性的报告来说明它做了哪些改动。只有在用户主动提出要求（例如，询问"你改了什么？"）时，才需要提供一个简短的变更摘要。</div>
+                </div>
+
+                <!-- 规则 16 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 16</span>
+                    <div class="rule-original">No Inventions: Don't invent changes other than what's explicitly requested.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不做额外改动：除了明确要求的内容外，不要擅自添加其他更改。</div>
+                    <div class="rule-explanation">严格限制 AI 的行为范围，确保它只执行用户明确提出的修改请求。AI 不能自作主张地添加新功能、进行代码重构、优化性能或进行任何未被直接要求的改动。</div>
+                </div>
+
+                <!-- 规则 17 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 17</span>
+                    <div class="rule-original">No Unnecessary Confirmations: Don't ask for confirmation of information already provided in the context.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不做不必要的确认：不要就背景信息中已提供的信息寻求确认。</div>
+                    <div class="rule-explanation">如果 'cursor_project_rules' 或其他上下文信息已经明确说明了某个事实、规则或要求，AI 就不应该再向用户提问以确认这些已知信息（例如，不应问"根据规则 X，我们应该使用 Y，对吗？"）。AI 应该直接基于已知信息采取行动。</div>
+                </div>
+
+                <!-- 规则 18 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 18</span>
+                    <div class="rule-original">Preserve Existing Code: Don't remove unrelated code or functionalities. Pay attention to preserving existing structures.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 保留现有代码：不要删除不相关的代码或功能。注意保留现有结构。</div>
+                    <div class="rule-explanation">在进行代码修改时，AI 必须非常小心，确保只更改与用户请求直接相关的部分。必须避免意外删除、修改或破坏项目中其他不相关的代码、功能或已有的文件/目录结构。</div>
+                </div>
+
+                <!-- 规则 19 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 19</span>
+                    <div class="rule-original">Single Chunk Edits: Provide all edits in a single chunk instead of multiple-step instructions or explanations for the same file.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 单块编辑：针对同一文件，将所有编辑内容作为一个整体提供，而不是分成多个步骤的指令或解释。</div>
+                    <div class="rule-explanation">当 AI 需要对某个文件进行多处修改时，它应该将所有必要的代码更改（包括增、删、改）整合在一个完整的代码块中一次性提供给用户。而不是给出分步的操作指令（如，"第一步，删除第 10 行；第二步，在第 15 行后添加以下代码..."）。这方便用户直接复制和应用完整的修改。</div>
+                </div>
+
+                <!-- 规则 20 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 20</span>
+                    <div class="rule-original">No Implementation Checks: Don't ask the user to verify implementations that are visible in the provided context. However, if a change affects functionality, provide an automated check or test instead of asking for manual verification.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不要求检查实现：不要让用户去验证那些在提供的背景信息中可见的实现。但是，如果更改影响了功能，应提供自动检查或测试，而不是要求手动验证。</div>
+                    <div class="rule-explanation">AI 不应要求用户去检查那些通过阅读代码或上下文就能明显理解的实现细节。但对于那些可能改变程序行为、逻辑或输出的修改，AI 应该更有建设性地提供验证方法，例如生成单元测试用例、提供可执行的测试脚本或自动化检查命令，而不是简单地让用户"运行一下看看"或"手动测试一下"。</div>
+                </div>
+
+                <!-- 规则 21-35 -->
+                <!-- 规则 21 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 21</span>
+                    <div class="rule-original">No Unnecessary Updates: Don't suggest updates or changes to files when there are no actual modifications needed.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不建议不必要的更新：当文件实际上不需要修改时，不要建议对其进行更新或更改。</div>
+                    <div class="rule-explanation">如果 AI 在分析用户请求后，判断某个或某些文件根据当前任务并不需要任何修改，那么它就不应该提及这些文件或建议对它们进行任何操作。避免产生不必要的干扰信息。</div>
+                </div>
+
+                <!-- 规则 22 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 22</span>
+                    <div class="rule-original">Provide Real File Links: Always provide links to the real files, not the context-generated file.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 提供真实文件链接：始终提供指向真实文件的链接，而不是上下文生成的文件。</div>
+                    <div class="rule-explanation">在像 Cursor 这样的 AI 辅助编码环境中，AI 可能操作的是文件的内部表示或"上下文"版本。这条规则要求 AI 在引用文件时，必须提供指向用户项目工作区中实际文件的路径或链接，以便用户能够准确地定位和打开文件，而不是提供内部或临时的文件标识。</div>
+                </div>
+
+                <!-- 规则 23 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 23</span>
+                    <div class="rule-original">No Current Implementation: Don't discuss the current implementation unless the user asks for it or it is necessary to explain the impact of a requested change.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 不讨论当前实现：除非用户询问或为了解释请求更改的影响所必需，否则不要讨论当前的实现方式。</div>
+                    <div class="rule-explanation">AI 应避免主动描述或分析代码当前是如何工作的。只有在用户明确提问相关实现细节时，或者当解释某个建议的更改为何必要、会产生什么后果时，才可以讨论当前的实现。</div>
+                </div>
+
+                <!-- 规则 24 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 24</span>
+                    <div class="rule-original">Check Context Generated File Content: Remember to check the context-generated file for the current file contents and implementations.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 检查上下文生成的文件内容：记住检查上下文生成的文件以获取当前的文件内容和实现。</div>
+                    <div class="rule-explanation">这条规则提醒 AI，它进行分析和修改的基础应该是 Cursor 工具为其提供的当前文件内容的"上下文"版本。AI 需要依赖这个实时或近实时的文件状态来工作，而不是基于过时或不完整的假设。</div>
+                </div>
+
+                <!-- 规则 25 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 25</span>
+                    <div class="rule-original">Use Explicit Variable Names: Prefer descriptive, explicit variable names over short, ambiguous ones to enhance code readability.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 使用明确的变量名：优先使用描述性的、明确的变量名，而不是简短、模糊的名称，以增强代码可读性。</div>
+                    <div class="rule-explanation">这是一条编码风格指南。要求 AI 在生成代码时，选择能够清晰表达变量用途和含义的名称（例如，使用`numberOfAttempts`而不是`n`或`attmpt`），以提高代码的清晰度和可维护性。</div>
+                </div>
+
+                <!-- 规则 26 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 26</span>
+                    <div class="rule-original">Follow Consistent Coding Style: Adhere to the existing coding style in the project for consistency.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 遵循一致的编码风格：遵守项目中现有的编码风格以保持一致性。</div>
+                    <div class="rule-explanation">要求 AI 在生成或修改代码时，努力识别并遵循项目中已经存在的编码风格约定（例如，缩进方式、命名规范、括号风格、注释格式等），以确保新代码与现有代码库在外观和结构上保持一致。</div>
+                </div>
+
+                <!-- 规则 27 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 27</span>
+                    <div class="rule-original">Prioritize Performance: When suggesting changes, consider and prioritize code performance where applicable.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 优先考虑性能：在建议更改时，在适用的情况下考虑并优先考虑代码性能。</div>
+                    <div class="rule-explanation">指示 AI 在提出代码解决方案或修改建议时，除了要确保功能正确性外，还应评估其对程序运行效率的影响。在有多种实现方式可选时，应倾向于选择性能更好的方案（如果性能是相关考量因素）。</div>
+                </div>
+
+                <!-- 规则 28 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 28</span>
+                    <div class="rule-original">Security-First Approach: Always consider security implications when modifying or suggesting code changes.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 安全第一的方法：在修改或建议代码更改时，始终考虑安全隐患。</div>
+                    <div class="rule-explanation">强调安全性是首要考虑因素。AI 提供的任何代码或修改建议都应主动规避常见的安全漏洞（如 SQL 注入、跨站脚本攻击 (XSS)、不安全的数据处理等），并遵循安全编码的最佳实践。</div>
+                </div>
+
+                <!-- 规则 29 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 29</span>
+                    <div class="rule-original">Test Coverage: Suggest or include appropriate unit tests for new or modified code.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 测试覆盖：为新的或修改过的代码建议或包含适当的单元测试。</div>
+                    <div class="rule-explanation">鼓励或要求 AI 在生成新代码或修改现有代码后，主动建议或直接编写相应的单元测试用例。这有助于确保代码的正确性、健壮性，并方便未来的回归测试。</div>
+                </div>
+
+                <!-- 规则 30 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 30</span>
+                    <div class="rule-original">Error Handling: Implement robust error handling and logging where necessary.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 错误处理：在必要时实现健壮的错误处理和日志记录。</div>
+                    <div class="rule-explanation">要求 AI 生成的代码包含恰当的错误处理逻辑（例如，使用`try-catch`块、检查返回值、处理异常情况）以及必要的日志记录机制，以便在程序出错时能够优雅地处理失败、提供有用的调试信息并方便问题追踪。</div>
+                </div>
+
+                <!-- 规则 31 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 31</span>
+                    <div class="rule-original">Modular Design: Encourage modular design principles to improve code maintainability and reusability.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 模块化设计：鼓励采用模块化设计原则，以提高代码的可维护性和可重用性。</div>
+                    <div class="rule-explanation">指导 AI 在设计和编写代码时，倾向于采用模块化的方法，即将复杂的系统分解为更小、独立、功能内聚的模块或函数。这有助于提高代码的可读性、可维护性、可测试性和代码复用率。</div>
+                </div>
+
+                <!-- 规则 32 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 32</span>
+                    <div class="rule-original">Version Compatibility: Ensure suggested changes are compatible with the project's specified language or framework versions. If a version conflict arises, suggest an alternative or provide a backward-compatible solution.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 版本兼容性：确保建议的更改与项目指定的语言或框架版本兼容。如果出现版本冲突，建议替代方案或提供向后兼容的解决方案。</div>
+                    <div class="rule-explanation">要求 AI 提供的代码、库的使用或功能建议必须与项目在 'cursor_project_rules' 或其他地方明确指定的编程语言版本、框架版本或库版本相兼容。如果存在不兼容的情况（例如，使用了新版本特性），AI 需要指出问题，并提供替代方案或确保方案能够向后兼容。</div>
+                </div>
+
+                <!-- 规则 33 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 33</span>
+                    <div class="rule-original">Avoid Magic Numbers: Replace hardcoded values with named constants to improve code clarity and maintainability.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 避免魔法数字：用命名常量替换硬编码的数值，以提高代码的清晰度和可维护性。</div>
+                    <div class="rule-explanation">这是另一条编码风格指南。要求 AI 避免在代码中直接使用没有明确含义的硬编码数字（称为"魔法数字"）。应将这些数字定义为具有描述性名称的常量，并在代码中引用这些常量，使代码意图更清晰，也更易于修改。</div>
+                </div>
+
+                <!-- 规则 34 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 34</span>
+                    <div class="rule-original">Consider Edge Cases: When implementing logic, always consider and handle potential edge cases.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 考虑边界情况：在实现逻辑时，始终考虑并处理潜在的边界情况。</div>
+                    <div class="rule-explanation">要求 AI 在编写代码逻辑时，不仅要覆盖正常的、预期的输入和场景，还要主动思考并妥善处理可能出现的极端、异常或不常见的输入值或条件（即边界情况或边缘案例），以确保代码的健壮性。</div>
+                </div>
+
+                <!-- 规则 35 -->
+                <div class="rule-card">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">规则 35</span>
+                    <div class="rule-original">Use Assertions: Include assertions wherever possible to validate assumptions and catch potential errors early.</div>
+                    <div class="rule-translation"><i class="fas fa-language text-blue-500 mr-1"></i> 使用断言：尽可能包含断言来验证假设并及早发现潜在错误。</div>
+                    <div class="rule-explanation">建议 AI 在代码的关键位置插入断言（assert statements）。断言用于在开发和测试阶段检查程序运行时的内部状态是否符合开发者的预期假设。如果断言失败，通常会中断程序执行，从而帮助开发者快速定位逻辑错误或不满足的前置/后置条件。</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button id="show-more-rules" class="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg transition">
+                    显示更多规则 <i class="fas fa-chevron-down ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 可视化部分 -->
+    <section id="visual" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">规则可视化</h2>
+            
+            <!-- 规则分类 -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-6 text-center">规则分类</h3>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+flowchart TB
+    subgraph 知识管理规则
+        A[使用知识库]
+        B[不超出范围]
+        C[信息验证]
+        D[遵循实施计划]
+    end
+    
+    subgraph 代码修改规则
+        E[逐文件修改]
+        F[保留现有代码]
+        G[整块修改]
+        H[不作不必要更新]
+        I[提供真实文件链接]
+    end
+    
+    subgraph 交互规则
+        J[不道歉]
+        K[不提供理解反馈]
+        L[不总结]
+        M[不创造]
+        N[不不必要确认]
+        O[不讨论现有实现]
+    end
+    
+    subgraph 编码规范
+        P[使用明确变量名]
+        Q[一致编码风格]
+        R[性能优先]
+        S[安全第一]
+        T[测试覆盖]
+        U[错误处理]
+        V[模块化设计]
+        W[版本兼容性]
+        X[避免魔法数字]
+        Y[考虑边界情况]
+        Z[使用断言]
+    end
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 规则关系图 -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-6 text-center">规则关系图</h3>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+graph TD
+    A[知识库] --> B[代码生成]
+    A --> C[问题分析]
+    A --> D[需求理解]
+    
+    E[实施计划] --> F[功能开发]
+    F --> G[逐文件修改]
+    G --> H[整块修改]
+    
+    I[编码规范] --> J[代码质量]
+    J --> K[可读性]
+    J --> L[性能]
+    J --> M[安全性]
+    J --> N[可维护性]
+    J --> O[可测试性]
+    
+    P[交互规则] --> Q[高效沟通]
+    Q --> R[减少噪音]
+    Q --> S[专注于任务]
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 规则工作流程 -->
+            <div>
+                <h3 class="text-2xl font-semibold mb-6 text-center">规则工作流程</h3>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+sequenceDiagram
+    participant 用户
+    participant Cursor AI
+    participant 知识库
+    participant 代码库
+    
+    用户->>Cursor AI: 提出请求/问题
+    Cursor AI->>知识库: 查询相关规则
+    知识库-->>Cursor AI: 返回规则和约束
+    Cursor AI->>代码库: 检查现有实现
+    代码库-->>Cursor AI: 返回代码内容
+    Cursor AI->>Cursor AI: 分析并验证信息
+    Cursor AI->>用户: 提供符合规则的回应
+    用户->>Cursor AI: 确认或要求修改
+    Cursor AI->>代码库: 按规则执行修改
+    Cursor AI->>用户: 展示修改结果
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读部分 -->
+    <section id="reading" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">延伸阅读</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg mb-8 text-center text-gray-700 dark:text-gray-300">深入了解 AI 辅助编程、软件工程最佳实践和代码质量相关的精选资源</p>
+                
+                <div class="space-y-6">
+                    <!-- 阅读项目 1 -->
+                    <div class="further-reading-item bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">《Clean Code: A Handbook of Agile Software Craftsmanship》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Robert C. Martin</p>
+                        <p class="mb-4">这本书详细阐述了如何编写干净、可维护的代码，这与 Cursor 项目规则中对代码质量和风格的要求高度一致。</p>
+                        <a href="https://www.oreilly.com/library/view/clean-code-a/9780136083238/" target="_blank" class="text-blue-500 hover:text-blue-700 flex items-center">
+                            <span>了解更多</span>
+                            <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 阅读项目 2 -->
+                    <div class="further-reading-item bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">《The Pragmatic Programmer: Your Journey to Mastery》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Andrew Hunt & David Thomas</p>
+                        <p class="mb-4">这本经典著作包含了许多实用的编程原则和实践，涵盖了模块化设计、错误处理和边界情况处理等 Cursor 规则中提到的重要主题。</p>
+                        <a href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/" target="_blank" class="text-blue-500 hover:text-blue-700 flex items-center">
+                            <span>了解更多</span>
+                            <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 阅读项目 3 -->
+                    <div class="further-reading-item bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">《Software Engineering at Google》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Titus Winters, Tom Manshreck & Hyrum Wright</p>
+                        <p class="mb-4">Google 的软件工程实践，特别是关于代码审查、测试覆盖和版本兼容性的章节，对深入理解 Cursor 规则背后的工程原则非常有价值。</p>
+                        <a href="https://www.oreilly.com/library/view/software-engineering-at/9781492082781/" target="_blank" class="text-blue-500 hover:text-blue-700 flex items-center">
+                            <span>了解更多</span>
+                            <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 阅读项目 4 -->
+                    <div class="further-reading-item bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">《AI-Assisted Programming: A New Paradigm for Software Development》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Journal of Artificial Intelligence Research</p>
+                        <p class="mb-4">这篇论文探讨了 AI 辅助编程的新范式，分析了像 Cursor 这样的工具如何改变软件开发流程，以及如何最有效地利用这些工具。</p>
+                        <a href="https://jair.org/" target="_blank" class="text-blue-500 hover:text-blue-700 flex items-center">
+                            <span>了解更多</span>
+                            <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 阅读项目 5 -->
+                    <div class="further-reading-item bg-white dark:bg-gray-700 p-5 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">《Code Complete: A Practical Handbook of Software Construction》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-3">Steve McConnell</p>
+                        <p class="mb-4">这本综合性的软件构建指南涵盖了 Cursor 规则中提到的许多最佳实践，特别是关于变量命名、代码风格、性能考虑和错误处理的部分。</p>
+                        <a href="https://www.microsoftpressstore.com/store/code-complete-9780735619678" target="_blank" class="text-blue-500 hover:text-blue-700 flex items-center">
+                            <span>了解更多</span>
+                            <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-2">作者信息</h3>
+                    <p class="text-gray-600 dark:text-gray-400">作者：季晓康</p>
+                    <p class="text-gray-600 dark:text-gray-400">微信公众号：凿壁</p>
+                    <p class="text-gray-600 dark:text-gray-400">版权所有 © 2023 国家健康医疗大数据研究院</p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition">
+                            <i class="fab fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-500">遵循 Cursor 项目规则，打造高质量代码</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化 Mermaid 图表
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+                securityLevel: 'loose',
+                fontFamily: "'Noto Sans SC', sans-serif"
+            });
+            
+            // 深色模式切换
+            const darkModeToggle = document.getElementById('toggle-dark-mode');
+            const moonIcon = darkModeToggle.querySelector('i');
+            
+            // 检查本地存储中的深色模式偏好
+            if (localStorage.getItem('dark-mode') === 'true') {
+                document.documentElement.classList.add('dark');
+                moonIcon.classList.remove('fa-moon');
+                moonIcon.classList.add('fa-sun');
+            }
+            
+            darkModeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                
+                if (document.documentElement.classList.contains('dark')) {
+                    moonIcon.classList.remove('fa-moon');
+                    moonIcon.classList.add('fa-sun');
+                    localStorage.setItem('dark-mode', 'true');
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'dark',
+                        securityLevel: 'loose',
+                        fontFamily: "'Noto Sans SC', sans-serif"
+                    });
+                } else {
+                    moonIcon.classList.remove('fa-sun');
+                    moonIcon.classList.add('fa-moon');
+                    localStorage.setItem('dark-mode', 'false');
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'default',
+                        securityLevel: 'loose',
+                        fontFamily: "'Noto Sans SC', sans-serif"
+                    });
+                }
+                
+                // 重新渲染所有 mermaid 图表
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            });
+            
+            // 移动端菜单切换
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenuButton.querySelector('i').classList.remove('fa-bars');
+                    mobileMenuButton.querySelector('i').classList.add('fa-times');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.querySelector('i').classList.remove('fa-times');
+                    mobileMenuButton.querySelector('i').classList.add('fa-bars');
+                }
+            });
+            
+            // 复制规则按钮
+            const copyRulesButton = document.getElementById('copy-rules');
+            const rulesMarkdown = document.querySelector('.code-block pre').textContent;
+            
+            copyRulesButton.addEventListener('click', function() {
+                navigator.clipboard.writeText(rulesMarkdown).then(function() {
+                    copyRulesButton.textContent = '已复制';
+                    setTimeout(function() {
+                        copyRulesButton.textContent = '复制代码';
+                    }, 2000);
+                });
+            });
+            
+            // 显示更多规则
+            const showMoreRulesButton = document.getElementById('show-more-rules');
+            const moreRulesContainer = document.getElementById('more-rules-container');
+            let rulesVisible = false;
+            
+            if(showMoreRulesButton && moreRulesContainer) {
+                // Initialize button text and appearance
+                showMoreRulesButton.innerHTML = '显示更多规则 <i class="fas fa-chevron-down ml-1"></i>';
+                showMoreRulesButton.classList.add('hover:bg-blue-600');
+                
+                showMoreRulesButton.addEventListener('click', function() {
+                    rulesVisible = !rulesVisible;
+                    
+                    if(rulesVisible) {
+                        moreRulesContainer.style.display = 'grid';
+                        showMoreRulesButton.innerHTML = '隐藏部分规则 <i class="fas fa-chevron-up ml-1"></i>';
+                        
+                        // 平滑滚动到第一个新显示的规则
+                        if (moreRulesContainer.querySelector('.rule-card')) {
+                            moreRulesContainer.querySelector('.rule-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else {
+                        moreRulesContainer.style.display = 'none';
+                        showMoreRulesButton.innerHTML = '显示更多规则 <i class="fas fa-chevron-down ml-1"></i>';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Gemini Canvas：AI辅助创意工具的新时代 | 科普网页</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+        
+        /* Theme Variables */
+        :root {
+            --scrollbar-track: #f1f1f1;
+            --scrollbar-thumb: #c1c1c1;
+            --scrollbar-thumb-hover: #a8a8a8;
+        }
+        
+        .dark {
+            --scrollbar-track: #1e1e2e;
+            --scrollbar-thumb: #45475a;
+            --scrollbar-thumb-hover: #585b70;
+        }
+        
+        /* Custom Typography */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .card-hover {
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Custom table */
+        .custom-table th,
+        .custom-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3498db 0%, #9b59b6 100%);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                    },
+                    typography: {
+                        DEFAULT: {
+                            css: {
+                                maxWidth: '100%',
+                            },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-200">
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation Bar -->
+        <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <span class="text-primary-600 dark:text-primary-400 text-xl font-semibold">Google Gemini Canvas</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <i class="fas fa-sun text-amber-500 dark:hidden"></i>
+                            <i class="fas fa-moon text-blue-400 hidden dark:block"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Hero Section -->
+            <section class="mb-16 fade-in">
+                <div class="bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-800">
+                    <div class="max-w-4xl">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold serif mb-6 text-gray-900 dark:text-white">
+                            Google Gemini Canvas：<br>AI辅助创意工具的新时代
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
+                            探索 Google 最新 AI 功能如何彻底改变创意开发流程，让您在几分钟内创建网站、游戏和应用
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="flex items-center">
+                                <i class="far fa-calendar mr-2"></i>
+                                发布于 2025年3月25日
+                            </span>
+                            <span class="mx-3">|</span>
+                            <span class="flex items-center">
+                                <i class="far fa-clock mr-2"></i>
+                                阅读时间：5分钟
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Article Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Main Article -->
+                <div class="lg:col-span-8">
+                    <!-- Introduction -->
+                    <section class="mb-12 fade-in animate-delay-1">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">引言：AI创作的新境界</h2>
+                        <div class="prose dark:prose-invert max-w-none">
+                            <p class="mb-4">
+                                2025年3月23日，技术博主 Vidhi Parmar 在社交媒体平台 X 上分享了关于 Google Gemini 新增功能 Canvas 的见解，引起了广泛关注。这一功能代表了AI辅助创意工具的重要发展，使用户能够快速构建从简单网站到复杂游戏的各种项目。
+                            </p>
+                            <p class="mb-4">
+                                Canvas 作为 Gemini 2.0 Flash 模型的特性，提供了一个交互式空间，让用户在AI协助下创建、编辑和分享文档与代码。其最引人注目的特点是效率——用户可以在短短几十秒内完成原本需要数小时的创作任务。
+                            </p>
+                            <p>
+                                本文将深入探讨 Canvas 的功能及其潜在影响，分析11个令人印象深刻的用户创作案例，并思考这一技术对创意产业的意义。
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Section -->
+                    <section class="mb-12 fade-in animate-delay-2">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">核心要点：Canvas 的突破性功能</h2>
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mt-0.5">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 dark:text-gray-300">Vidhi Parmar 在 2025 年 3 月 23 日发布的 X 帖子中介绍了 Google Gemini 的 Canvas 功能，并引发了技术社区的关注。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mt-0.5">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 dark:text-gray-300">帖子展示了 11 个用户使用 Canvas 创建的项目范例，从简单网站到复杂游戏不等。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mt-0.5">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 dark:text-gray-300">Canvas 支持的项目类型包括网站开发、游戏设计、仪表板构建和物理模拟等，显示了其多样化的应用场景。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mt-0.5">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 dark:text-gray-300">与传统AI工具相比，Canvas 的一个显著特点是高效性，用户可以在极短时间内完成复杂项目。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mt-0.5">
+                                        <i class="fas fa-check text-sm"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-700 dark:text-gray-300">目前 Canvas 仅限桌面设备使用，移动版本预计将在本月晚些时候推出。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Canvas Interface Visualization -->
+                    <section class="mb-12 fade-in animate-delay-3">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">Canvas 界面与工作流程</h2>
+                        <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+                            <div class="p-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Interface Visualization -->
+                                    <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-5 border border-gray-200 dark:border-gray-700">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center">
+                                                <span class="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                                                    <i class="fab fa-google"></i>
+                                                </span>
+                                                <span class="ml-2 font-medium">Gemini 2.0</span>
+                                            </div>
+                                            <div class="flex space-x-1">
+                                                <div class="h-3 w-3 rounded-full bg-red-500"></div>
+                                                <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
+                                                <div class="h-3 w-3 rounded-full bg-green-500"></div>
+                                            </div>
+                                        </div>
+                                        <div class="border-b border-gray-200 dark:border-gray-700 pb-4 mb-4">
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">您好，Vidhi</p>
+                                            <h3 class="text-lg font-medium mt-1">今天我能帮您做什么？</h3>
+                                        </div>
+                                        <div class="flex space-x-3">
+                                            <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-full text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition">深入研究</button>
+                                            <button class="px-4 py-2 bg-primary-500 text-white rounded-full text-sm font-medium hover:bg-primary-600 transition">Canvas</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Workflow Steps -->
+                                    <div class="space-y-4">
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                                1
+                                            </div>
+                                            <div class="ml-4">
+                                                <h4 class="font-medium">描述您的想法</h4>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">向 Gemini 详细说明您想要创建的项目</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                                2
+                                            </div>
+                                            <div class="ml-4">
+                                                <h4 class="font-medium">生成初步方案</h4>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Canvas 创建代码、设计和内容的初始版本</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400">
+                                                3
+                                            </div>
+                                            <div class="ml-4">
+                                                <h4 class="font-medium">实时编辑与预览</h4>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">直接在界面中修改和优化您的项目</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                                                4
+                                            </div>
+                                            <div class="ml-4">
+                                                <h4 class="font-medium">导出与分享</h4>
+                                                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">将完成的项目导出为多种格式或直接分享给他人</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Project Examples -->
+                    <section class="mb-12 fade-in animate-delay-4">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">11个令人印象深刻的项目实例</h2>
+                        <div class="overflow-auto">
+                            <table class="w-full custom-table bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                                <thead class="bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
+                                    <tr>
+                                        <th class="font-medium text-gray-600 dark:text-gray-300 border-r border-gray-200 dark:border-gray-600">序号</th>
+                                        <th class="font-medium text-gray-600 dark:text-gray-300 border-r border-gray-200 dark:border-gray-600">项目类型</th>
+                                        <th class="font-medium text-gray-600 dark:text-gray-300 border-r border-gray-200 dark:border-gray-600">完成时间</th>
+                                        <th class="font-medium text-gray-600 dark:text-gray-300">项目描述</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">1</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">网站开发</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">30秒</td>
+                                        <td>从文档生成完整网站，包含现代设计的登陆页面</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">2</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">游戏开发</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>开发反向登月游戏，具有物理引擎和交互控制</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">3</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">界面设计</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">60秒</td>
+                                        <td>构建 Stripe 风格的仪表板，带数据可视化功能</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">4</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">小游戏</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>设计井字棋游戏，包含胜负判定逻辑</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">5</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">创意编程</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>创建交互式 p5.js 草图，支持视觉艺术创作</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">6</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">电商平台</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>建立宝可梦卡片市场，含商品展示和交易功能</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">7</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">网络应用</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>轻松创建并发布功能完整的网络应用</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">8</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">休闲游戏</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">60秒</td>
+                                        <td>在一分钟内构建 Flappy Bird 游戏克隆版</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">9</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">物理模拟</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>开发布料物理模拟，展示真实材质运动效果</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">10</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">棋类游戏</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>创建带声音效果的国际象棋游戏，含AI对手</td>
+                                    </tr>
+                                    <tr class="bg-gray-50 dark:bg-gray-750">
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium text-primary-600 dark:text-primary-400">11</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700">多种项目</td>
+                                        <td class="border-r border-gray-200 dark:border-gray-700 font-medium">未指明</td>
+                                        <td>包括游戏、功能键盘和 NotebookLM 播客等多样化创作</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Project Showcase -->
+                    <section class="mb-12 fade-in animate-delay-5">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">Canvas 项目展示</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                            <!-- Project Card 1: Website Generator -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-globe text-5xl text-primary-300 dark:text-primary-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">网站开发</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">30秒完成</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">从文档生成网站</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        Canvas 可以将 Google Docs 文档转换为现代化网站，无需编写代码。系统自动创建响应式布局、导航菜单和内容区域。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Project Card 2: Reverse Moon Lander -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-rocket text-5xl text-red-300 dark:text-red-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded-full">游戏开发</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">创意项目</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">反向登月游戏</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        开发一款独特的反向登月游戏，玩家需要控制航天器从月球表面起飞并返回地球，包含引力物理模拟和燃料管理系统。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Project Card 3: Stripe Dashboard -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-5xl text-green-300 dark:text-green-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">仪表板</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">60秒完成</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">Stripe 仪表板</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        在一分钟内构建功能完整的 Stripe 风格支付仪表板，包含交易数据图表、客户列表和收入分析功能。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Project Card 4: Tic-Tac-Toe -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-th text-5xl text-amber-300 dark:text-amber-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 text-xs rounded-full">小游戏</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">简单实用</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">井字棋游戏</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        设计交互式井字棋游戏，带有胜负判定逻辑、玩家分数统计和基础 AI 对手功能，适合初学者学习编程。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Project Card 5: Flappy Bird -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-dove text-5xl text-purple-300 dark:text-purple-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">休闲游戏</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">60秒完成</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">Flappy Bird 游戏</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        一分钟内创建经典的 Flappy Bird 游戏克隆版，包含完整的物理引擎、碰撞检测和记分系统，可直接在浏览器中运行。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Project Card 6: Chess Game -->
+                            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden card-hover">
+                                <div class="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chess text-5xl text-blue-300 dark:text-blue-700"></i>
+                                </div>
+                                <div class="p-5">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">棋类游戏</span>
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">多媒体</span>
+                                    </div>
+                                    <h3 class="font-semibold text-lg mb-2">国际象棋游戏</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        创建带有音效和动画的完整国际象棋游戏，包含标准规则实现、走子提示和简单 AI 对手，提供沉浸式游戏体验。
+                                    </p>
+                                </div>
+                                <div class="px-5 pb-5">
+                                    <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="flex items-center text-sm group">
+                                        <span class="flex items-center mr-4 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition">
+                                            <i class="far fa-eye mr-1"></i> 查看项目链接
+                                        </span>
+                                        <span class="text-primary-600 dark:text-primary-400 text-sm group-hover:translate-x-1 transition-transform">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- More Projects Button -->
+                        <div class="flex justify-center mt-8">
+                            <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors">
+                                查看更多项目示例
+                                <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Unexpected Details -->
+                    <section class="mb-12 fade-in animate-delay-5">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">意外发现：超越传统 AI 工具的范畴</h2>
+                        <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm p-6">
+                            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                                从 Vidhi Parmar 的帖子中，我们可以看到 Canvas 的功能范围远超常见的 AI 辅助写作和编码工具。以下是一些令人意外的亮点：
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-5 border border-gray-200 dark:border-gray-700">
+                                    <div class="flex items-center mb-4">
+                                        <div class="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <h3 class="font-medium ml-3">物理模拟能力</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                        Canvas 不仅可以生成静态内容，还能创建复杂的物理模拟，如布料物理效果，这表明其具备处理实时计算和渲染的能力。
+                                    </p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-5 border border-gray-200 dark:border-gray-700">
+                                    <div class="flex items-center mb-4">
+                                        <div class="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400">
+                                            <i class="fas fa-microphone"></i>
+                                        </div>
+                                        <h3 class="font-medium ml-3">音频整合功能</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                        Canvas 支持创建带有声音效果的游戏和交互式应用，同时可以将文档转化为 AI 主持的播客式讨论，丰富了内容呈现形式。
+                                    </p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-5 border border-gray-200 dark:border-gray-700">
+                                    <div class="flex items-center mb-4">
+                                        <div class="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                            <i class="fas fa-code-branch"></i>
+                                        </div>
+                                        <h3 class="font-medium ml-3">多样化创意支持</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                        从宝可梦卡片市场到国际象棋游戏，Canvas 支持各种创意项目，显示出其适应不同领域需求的灵活性。
+                                    </p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-5 border border-gray-200 dark:border-gray-700">
+                                    <div class="flex items-center mb-4">
+                                        <div class="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center text-red-600 dark:text-red-400">
+                                            <i class="fas fa-rocket"></i>
+                                        </div>
+                                        <h3 class="font-medium ml-3">极速创作体验</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                                        30秒构建网站，60秒开发游戏——Canvas 的速度远超传统开发流程，为创意实现提供了前所未有的高效率。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Detailed Report -->
+                    <section class="mb-12 fade-in animate-delay-5">
+                        <h2 class="text-2xl font-bold serif mb-6 text-gray-900 dark:text-white">深度分析：Canvas 对创意产业的影响</h2>
+                        <div class="prose dark:prose-invert max-w-none bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm p-6">
+                            <h3>改变创意工作流程</h3>
+                            <p>
+                                Canvas 的出现可能彻底改变创意产业的工作流程。传统上，从概念到原型再到成品的过程可能需要数天甚至数周，而 Canvas 将这一过程压缩到了几分钟。这种效率的提升不仅节省时间，还可能鼓励更多实验性尝试，因为创作者可以快速测试多个想法。
+                            </p>
+                            
+                            <h3>降低技术门槛</h3>
+                            <p>
+                                对于没有编程背景的创意人员来说，Canvas 提供了一种无需深入学习编程语言就能实现复杂功能的方式。这种"民主化"趋势使得更多人能够参与到数字创作中，无论是网站设计、游戏开发还是应用程序构建。
+                            </p>
+                            
+                            <h3>对专业开发者的影响</h3>
+                            <p>
+                                对于专业开发者，Canvas 可能成为快速原型设计的有力工具。它允许开发者在最终投入大量时间进行全面开发之前，先验证概念的可行性和用户体验。然而，专业开发的深度和定制化程度仍然是 AI 工具难以完全替代的。
+                            </p>
+                            
+                            <h3>创新与标准化的平衡</h3>
+                            <p>
+                                随着越来越多的人使用 Canvas 这样的工具创建内容，我们可能会看到一定程度的标准化趋势。虽然这提高了整体质量基准，但也可能导致创意同质化。真正的创新可能来自于那些能够突破工具限制，将 Canvas 作为起点而非终点的创作者。
+                            </p>
+                            
+                            <h3>未来发展方向</h3>
+                            <p>
+                                随着 Canvas 技术的进一步发展，我们可能会看到更多专业领域的整合，如 3D 建模、虚拟现实内容创作等。同时，随着用户逐渐熟悉工具并提出更复杂的需求，Canvas 可能会进一步提升其深度和灵活性，从而支持更加复杂和个性化的项目。
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-4">
+                    <!-- Key Metrics Card -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm mb-8 fade-in animate-delay-3">
+                        <div class="p-5">
+                            <h3 class="font-semibold text-lg mb-5">Canvas 功能指标</h3>
+                            <div class="space-y-5">
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">开发速度</span>
+                                        <span class="text-sm font-medium">95%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">易用性</span>
+                                        <span class="text-sm font-medium">85%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">功能多样性</span>
+                                        <span class="text-sm font-medium">80%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">代码质量</span>
+                                        <span class="text-sm font-medium">75%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">定制能力</span>
+                                        <span class="text-sm font-medium">70%</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-primary-500 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key References Card -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm mb-8 fade-in animate-delay-4">
+                        <div class="p-5">
+                            <h3 class="font-semibold text-lg mb-4">关键引用</h3>
+                            <div class="space-y-4">
+                                <a href="https://x.com/vidhiparmxr/status/1903756769232580737" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fab fa-twitter text-blue-400 mr-2"></i>
+                                        <span class="text-sm font-medium text-gray-900 dark:text-white">Vidhi Parmar 原始 X 帖子</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">@vidhiparmxr 分享了 11 个使用 Canvas 创建的项目示例</p>
+                                </a>
+                                <a href="https://gemini.google/overview/canvas/" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-file-alt text-purple-500 mr-2"></i>
+                                        <span class="text-sm font-medium text-gray-900 dark:text-white">Gemini Canvas 概述</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">写作、编码和创作的交互式空间介绍</p>
+                                </a>
+                                <a href="https://workspaceupdates.googleblog.com/2025/03/introducing-canvas-for-the-gemini-app.html" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fab fa-google text-red-500 mr-2"></i>
+                                        <span class="text-sm font-medium text-gray-900 dark:text-white">Google Workspace 更新</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">官方博客介绍 Gemini 应用的 Canvas 功能</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Further Reading -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm mb-8 fade-in animate-delay-5">
+                        <div class="p-5">
+                            <h3 class="font-semibold text-lg mb-4">延伸阅读</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-md bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-medium text-gray-900 dark:text-white">《AI 辅助设计：重塑创意工作流程》</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">作者: 迈克尔·刘易斯 (2024)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-md bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-medium text-gray-900 dark:text-white">《生成式 AI 对软件开发的影响》</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">麻省理工学院技术评论 (2025)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-md bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-medium text-gray-900 dark:text-white">《无代码到低代码：AI 时代的创意民主化》</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">作者: 艾米丽·张 (2024)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-md bg-red-100 dark:bg-red-900 flex items-center justify-center text-red-600 dark:text-red-400">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-medium text-gray-900 dark:text-white">《大型语言模型在交互式应用开发中的应用》</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">斯坦福大学计算机科学论文 (2025)</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-md bg-amber-100 dark:bg-amber-900 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-medium text-gray-900 dark:text-white">《创意、代码与AI：新工具的心理影响》</h4>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">哈佛商业评论 (2025)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">关于作者</h3>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-16 w-16 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900 dark:text-white">季晓康</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                    微信公众号：凿壁
+                                </p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                    国家健康医疗大数据研究院
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">版权信息</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
+                            本文内容基于公开资料整理，旨在提供技术科普与教育目的。如有侵权，请联系删除。
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+                            © 2025 国家健康医疗大数据研究院. 保留所有权利.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Theme Toggle -->
+    <script>
+        // Check system preference and set initial theme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.add('light');
+        }
+        
+        // Theme toggle function
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            } else {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            }
+        });
+        
+        // Animate elements when they enter viewport
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
