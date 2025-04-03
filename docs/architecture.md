@@ -1,7 +1,7 @@
 # 架构设计文档: 凿壁
 
 ## 1. 引言
-本文档基于 `docs/prd.md` 中定义的产品需求，为“凿壁”项目设计系统架构，并提供技术选型和实施建议。目标是构建一个高性能、可维护、易于内容管理的静态网站。
+本文档基于 `docs/prd.md` (版本 1.2+) 中定义的产品需求，为“凿壁”项目设计系统架构，并提供技术选型和实施建议。目标是构建一个高性能、可维护、**以 Markdown 内容为核心** 的静态网站。
 
 ## 2. 架构目标
 *   **高性能:** 快速的页面加载速度，优秀的 Core Web Vitals 指标。
@@ -39,7 +39,7 @@
 ```mermaid
 graph LR
     subgraph "开发环境 (本地/CI)"
-        A[Markdown 内容 (.md)] --> B{SSG 引擎 (Astro)};
+        A[Markdown 内容 (.md) <br> + YAML Frontmatter] --> B{SSG 引擎 (Astro)};
         C[布局/组件 (.astro)] --> B;
         D[样式 (Tailwind CSS)] --> B;
         E[客户端 JS (.js)] --> B;
@@ -59,17 +59,17 @@ graph LR
 ```
 
 **说明:**
-1.  开发者在本地编写Markdown内容文件和Astro组件/布局。
-2.  使用Astro引擎（通过`npm run build`）将内容和模板结合，生成最终的纯静态网站文件。
-3.  静态文件部署到GitHub Pages或其他静态托管平台。
+1.  开发者在本地或使用工具（如LLM）编写/生成 **带有 YAML Frontmatter 的 Markdown 内容文件**，并与 Astro 组件/布局一起存储在项目中。
+2.  使用 Astro 引擎（通过`npm run build`）读取 Markdown 内容集合，结合模板，生成最终的纯静态网站文件。
+3.  静态文件部署到 GitHub Pages 或其他静态托管平台。
 4.  用户浏览器直接访问托管平台上的静态文件。
-5.  浏览器按需从CDN加载外部库（Tailwind, FontAwesome, Mermaid等）。
+5.  浏览器按需从 CDN 加载外部库（Tailwind, FontAwesome, Mermaid 等）。
 
 ## 5. 技术选型
 *   **静态网站生成器 (SSG):** **Astro**
     *   *理由:* 现代、性能卓越（默认零JS）、组件模型灵活（支持多种UI框架或自带组件）、与Tailwind集成良好、社区活跃。相比Eleventy更面向未来组件化趋势。
-*   **内容格式:** **Markdown (.md)** + **YAML Frontmatter**
-    *   *理由:* 简单易学、专注于内容编写、易于版本控制、被广泛的SSG支持。Frontmatter用于存储元数据（标题、日期、分类等）。
+*   **内容格式:** **Markdown (.md)** + **YAML Frontmatter** + **Astro Content Collections**
+    *   *理由:* 简单易学、专注于内容编写、易于版本控制、被广泛的SSG支持。Frontmatter 用于存储元数据。**Astro Content Collections 提供类型安全和 Schema 验证，确保元数据一致性。**
 *   **样式:** **Tailwind CSS**
     *   *理由:* 项目规则要求，现代化的Utility-First CSS框架，开发效率高，易于维护一致性。
 *   **客户端交互:** **Vanilla JavaScript**
@@ -81,9 +81,9 @@ graph LR
 
 ## 6. 核心组件职责
 *   **内容集合 (`src/content/`):**
-    *   存放所有Markdown格式的文章和页面内容。
-    *   使用Astro的内容集合API进行类型安全的内容管理和查询。
-    *   Markdown文件包含YAML Frontmatter定义元数据。
+    *   存放所有 Markdown 格式的文章和页面内容。
+    *   **使用 Astro Content Collections (`src/content/config.ts`) 定义 Schema 并进行类型安全的内容管理和查询。**
+    *   Markdown 文件包含符合预定义 Schema 的 YAML Frontmatter 元数据。
 *   **布局 (`src/layouts/`):**
     *   `Layout.astro`: 基础HTML骨架，包含`<head>`（引入CSS、JS、字体、元数据）、header、footer、以及内容插入槽 (`<slot/>`)。
     *   `ArticleLayout.astro`: 文章页面的特定布局，可能包含标题、日期显示、作者信息等结构。
@@ -97,7 +97,7 @@ graph LR
 *   **页面 (`src/pages/`):**
     *   `index.astro`: 网站首页，负责获取并展示各分类的文章列表（使用`Card`组件），包含Hero、关于我们等静态区域。实现分类切换逻辑。
     *   `articles/[...slug].astro`: 动态路由页面，用于根据slug渲染单个文章Markdown内容，使用`ArticleLayout`。
-    *   (可能需要的其他静态页面，如独立的“关于我们”页等)
+    *   (可能需要的其他静态页面，如独立的"关于我们"页等)
 *   **样式 (`src/styles/`):**
     *   `global.css`: 全局样式，Tailwind CSS的引入和基础配置，自定义CSS变量（颜色、字体等）。
 *   **工具配置:**
@@ -106,7 +106,8 @@ graph LR
     *   `package.json`: 项目依赖管理。
 
 ## 7. 数据管理
-*   内容数据存储在项目仓库内的Markdown文件中。
+*   **核心内容数据以 Markdown 文件形式存储在 `src/content/` 目录，并通过 Git 进行版本控制。**
+*   **Astro Content Collections API (`getCollection`, `getEntryBySlug` 等) 在构建时读取和处理这些内容文件。**
 *   无传统数据库。
 *   用户偏好（如主题选择）存储在客户端浏览器的`localStorage`中。
 
@@ -128,7 +129,9 @@ graph LR
 *   **托管平台:** **GitHub Pages**。
 
 ## 10. 风险与缓解
-*   **风险:** 从现有 `index.html` 迁移内容到Markdown耗时且易错。
+*   **风险:** **确保 LLM 生成的 Markdown 和 Frontmatter 符合预定义的 Schema。**
+    *   **缓解:** **提供清晰的 Schema 定义 (`src/content/config.ts`)，在内容创建流程中加入校验步骤（或依赖 Astro 构建时的错误提示），对 LLM 输出进行必要的后处理。**
+*   **风险:** 从现有 `index.html` 迁移内容到 Markdown 耗时且易错。
     *   **缓解:** 分阶段迁移，编写简单脚本辅助，仔细校对。
 *   **风险:** Astro 或 Tailwind CSS 的学习曲线。
     *   **缓解:** 参考官方文档，从小功能开始实践，预留学习时间。
