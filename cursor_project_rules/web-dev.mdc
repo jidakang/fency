@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # 凿壁项目 - LLM 单页生成规则
 
 ## A. 核心原则
