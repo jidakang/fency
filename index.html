@@ -256,6 +256,7 @@
 
         .category-btn:hover::after {
             width: 80%;
+            left: 10%;
         }
         
         /* 增强按钮文字可见性 */
@@ -267,18 +268,13 @@
             font-weight: 500;
         }
         
-        /* 内容过渡动画 */
+        /* 内容过渡动画 - 简化为直接显示/隐藏 */
         .category-content {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.5s ease;
+            display: block;
         }
         
         .category-content.hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            position: absolute;
-            visibility: hidden;
+            display: none;
         }
         
         .category-contents {
@@ -322,18 +318,16 @@
             flex: 1;
         }
         
-        /* 分类内容过渡效果 */
+        /* 分类内容过渡效果 - 简化为直接显示/隐藏 */
         .category-content {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: block;
         }
         
         .category-content.hidden {
             display: none;
         }
         
-        /* 分类按钮样式 */
+        /* 分类标签样式 */
         .category-tabs {
             transition: all 0.3s ease;
         }
@@ -451,7 +445,7 @@
                     <button class="flex justify-between items-center w-full hover:text-secondary transition-colors duration-300 category-nav-link" data-category="research" onclick="navToCategory('research')">
                         科研辅助 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
-                    <div id="research" class="hidden pl-4 mt-2 space-y-2">
+                    <div id="mobileResearch" class="hidden pl-4 mt-2 space-y-2">
                         <a href="pages/knowledge/cognitive-aging-research.html" class="block py-2 hover:text-secondary">年龄与认知能力研究</a>
                         <a href="#clinical" class="block py-2 hover:text-secondary">临床辅助决策</a>
                     </div>
@@ -474,7 +468,7 @@
                     <button class="flex justify-between items-center w-full hover:text-secondary transition-colors duration-300 category-nav-link" data-category="knowledge" onclick="navToCategory('knowledge')">
                         知识报告 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
-                    <div id="knowledge" class="hidden pl-4 mt-2 space-y-2">
+                    <div id="mobileKnowledge" class="hidden pl-4 mt-2 space-y-2">
                         <a href="pages/info-upgrade/dataasset.html" class="block py-2 hover:text-secondary">健康医疗数据资产</a>
                         <a href="pages/knowledge/researchtopics.html" class="block py-2 hover:text-secondary">AI研究主题全景</a>
                         <a href="pages/knowledge/autoregressive.html" class="block py-2 hover:text-secondary">自回归模型研究</a>
@@ -635,7 +629,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 医疗数据资产价值评估模型 (2024-03-25) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-recent">近期</span>
@@ -657,8 +651,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 医院智能化升级解决方案 (2024-03-15) -->
+                        
+                        <!-- 医院信息化升级团队能力模型与培训计划 -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
@@ -666,21 +660,21 @@
                                     <span class="text-xs py-1 px-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">信息化升级</span>
                                     <i class="fas fa-file-medical-alt text-blue-500"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医院智能化升级解决方案</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">为医疗机构提供全方位的智能化升级方案，提高运营效率和医疗服务质量。</p>
+                                <h3 class="text-xl font-bold mb-3">医院信息化升级团队能力模型与培训计划</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">详细介绍医院信息化团队的能力模型构建与系统化培训方案，助力医院打造高水平信息化专业队伍。</p>
                                 <div class="flex items-center justify-between">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2024-03-15</span>
                                     </div>
-                                    <a href="javascript:void(0)" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 mt-auto inline-flex items-center">
-                                        了解更多 <i class="fas fa-arrow-right ml-1"></i>
+                                    <a href="pages/info-upgrade/hospital-it-team-training.html" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- 医保系统页面内问答 (2024-03-10) -->
+                        <!-- 中国医院信息化升级第三方服务商业模式报告 -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
@@ -688,16 +682,37 @@
                                     <span class="text-xs py-1 px-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">信息化升级</span>
                                     <i class="fas fa-file-medical-alt text-blue-500"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医保系统页面内问答功能快速上线实施方案</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">探索如何将AI驱动的问答功能集成到现有医保系统中，提升用户体验和服务效率。</p>
+                                <h3 class="text-xl font-bold mb-3">中国医院信息化升级第三方服务商业模式报告</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">分析中国医院信息化升级过程中第三方服务提供商的商业模式、市场机遇与挑战。</p>
                                 <div class="flex items-center justify-between">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2024-03-10</span>
-                                        <span class="updated-badge">更新于 2024-04-01</span>
                                     </div>
-                                    <a href="pages/info-upgrade/medical-insurance-qa.html" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 mt-auto inline-flex items-center">
-                                        阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
+                                    <a href="pages/info-upgrade/hospital-it-upgrade-service-model.html" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 利用大模型技术全面提升医院医疗纠纷预防能力报告 -->
+                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                            <span class="period-label period-recent">近期</span>
+                            <div class="p-6 card-body">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs py-1 px-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-full">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-blue-500"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">利用大模型技术全面提升医院医疗纠纷预防能力报告</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">探讨大模型技术在医疗纠纷预防中的应用潜力，提供医院构建和谐医患关系的AI赋能解决方案。</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="article-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>2024-03-08</span>
+                                    </div>
+                                    <a href="pages/info-upgrade/medical-dispute-prevention.html" class="text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
                             </div>
@@ -764,6 +779,50 @@
                     
                     <!-- 内容卡片区域 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- 临床研究选题工作流程 -->
+                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                            <span class="period-label period-recent">近期</span>
+                            <div class="p-6 card-body">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs py-1 px-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full">科研辅助</span>
+                                    <i class="fas fa-microscope text-green-500"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">临床研究选题工作流程</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">系统介绍临床研究选题的科学方法和工作流程，帮助研究者确定有价值且可行的研究方向。</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="article-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>2024-03-25</span>
+                                    </div>
+                                    <a href="pages/research/clinical-research-topic-selection.html" class="text-green-500 hover:text-green-700 dark:hover:text-green-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 大模型辅助医学科研工作流程 -->
+                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                            <span class="period-label period-recent">近期</span>
+                            <div class="p-6 card-body">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs py-1 px-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full">科研辅助</span>
+                                    <i class="fas fa-microscope text-green-500"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">大模型辅助医学科研工作流程</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">详细展示大模型如何在医学科研全流程中提供智能辅助，提升研究效率与质量。</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="article-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>2024-03-22</span>
+                                    </div>
+                                    <a href="pages/research/llm-medical-research-workflow.html" class="text-green-500 hover:text-green-700 dark:hover:text-green-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- 人工智能学习必读论文书单 (2024-03-20) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-recent">近期</span>
@@ -782,50 +841,6 @@
                                     </div>
                                     <a href="pages/research/ai-essential-papers.html" class="text-green-500 hover:text-green-700 dark:hover:text-green-300 mt-auto inline-flex items-center">
                                         阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 医学影像辅助诊断系统 (2024-03-05) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-recent">近期</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full">科研辅助</span>
-                                    <i class="fas fa-microscope text-green-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">医学影像辅助诊断系统</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">利用深度学习技术实现医学影像的智能分析与辅助诊断，提高诊断效率。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2024-03-05</span>
-                                    </div>
-                                    <a href="javascript:void(0)" class="text-green-500 hover:text-green-700 dark:hover:text-green-300 mt-auto inline-flex items-center">
-                                        了解更多 <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 临床辅助决策系统研究进展 (2024-02-15) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 rounded-full">科研辅助</span>
-                                    <i class="fas fa-microscope text-green-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">临床辅助决策系统研究进展</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">基于AI模型的临床辅助决策系统，帮助医生提高诊断准确率，减少漏诊错诊。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2024-02-15</span>
-                                    </div>
-                                    <a href="javascript:void(0)" class="text-green-500 hover:text-green-700 dark:hover:text-green-300 mt-auto inline-flex items-center">
-                                        了解更多 <i class="fas fa-arrow-right ml-1"></i>
                                     </a>
                                 </div>
                             </div>
@@ -870,6 +885,28 @@
                     
                     <!-- 内容卡片区域 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- 医疗数据与AI认知共同体的五大洞见 -->
+                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                            <span class="period-label period-recent">近期</span>
+                            <div class="p-6 card-body">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
+                                    <i class="fas fa-brain text-purple-500"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-3">医疗数据与AI认知的五大洞见</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">深入探讨医疗数据与AI认知的核心洞见，揭示二者建立共同体的关键要素与挑战。</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="article-date">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span>2024-03-28</span>
+                                    </div>
+                                    <a href="pages/ai-tech/medical-ai-insights.html" class="text-purple-500 hover:text-purple-700 dark:hover:text-purple-300 mt-auto inline-flex items-center">
+                                        阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Gemini 2.5 Pro能力解析 (2024-03-26) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-recent">近期</span>
@@ -1004,7 +1041,7 @@
                         
                         <!-- N8N深度评测 (2024-02-28) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
@@ -1025,94 +1062,6 @@
                         </div>
                         
                         <!-- Zapier MCP: AI 助手的'App Store'时刻 (2025-04-01) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
-                                    <i class="fas fa-robot text-purple-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">Zapier MCP: AI 助手的'App Store'时刻</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">探索Zapier Multi-App Connector平台如何为AI助手带来"App Store时刻"，以及其在医疗信息集成中的应用价值。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2025-04-01</span><span class="updated-badge">更新于 2025-04-02</span>
-                                    </div>
-                                    <a href="pages/ai-tech/zapier-mcp.html" class="text-purple-500 hover:text-purple-700 dark:hover:text-purple-300 mt-auto inline-flex items-center">
-                                        阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- AI驱动的健康追踪工具分析 (2024-02-18) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
-                                    <i class="fas fa-robot text-purple-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">AI驱动的健康追踪工具分析</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">深度分析AI驱动的健康追踪工具的现状与未来发展趋势，探讨其在医疗健康领域的应用前景。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2024-02-18</span>
-                                    </div>
-                                    <a href="pages/ai-tech/gemini25pro-coding.html" class="text-purple-500 hover:text-purple-700 dark:hover:text-purple-300 mt-auto inline-flex items-center">
-                                        阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vibe Coding风格编程实践 (2024-02-16) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
-                                    <i class="fas fa-robot text-purple-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">Vibe Coding风格编程实践</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">探索Vibe Coding的编程理念与实践方法，及其在医疗软件开发中的应用价值与实现路径。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2024-02-16</span>
-                                    </div>
-                                    <a href="pages/ai-tech/rag-vibe-coding.html" class="text-purple-500 hover:text-purple-700 dark:hover:text-purple-300 mt-auto inline-flex items-center">
-                                        阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- AI模型能力分析 (2024-03-05) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-recent">近期</span>
-                            <div class="p-6 card-body">
-                                <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-full">AI技术与生态</span>
-                                    <i class="fas fa-microchip text-purple-500"></i>
-                                </div>
-                                <h3 class="text-xl font-bold mb-3">人工智能模型能力分析与评测框架</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">深入研究各类AI模型的核心能力，建立客观评估框架，助力模型选型与应用。</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="article-date">
-                                        <i class="far fa-calendar-alt"></i>
-                                        <span>2024-03-05</span>
-                                    </div>
-                                    <a href="pages/ai-tech/ai-model-capability-analysis.html" class="text-purple-500 hover:text-purple-700 dark:hover:text-purple-300 mt-auto inline-flex items-center">
-                                        阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Vibe Coding深度研究报告 (2024-04-02) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
                             <span class="period-label period-new">新</span>
                             <div class="p-6 card-body">
@@ -1268,7 +1217,7 @@
                         
                         <!-- 创意思维研究 (2024-02-28) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1290,7 +1239,7 @@
                         
                         <!-- Claude AI模型新模式解析 (2024-02-22) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1312,7 +1261,7 @@
                         
                         <!-- DeepSeek V3 模型能力分析 (2024-02-20) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1334,7 +1283,7 @@
                         
                         <!-- Gemini模型新功能评测 (2024-02-18) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1356,7 +1305,7 @@
                         
                         <!-- GPT-O3 Mini High模型解析 (2024-02-15) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1378,7 +1327,7 @@
                         
                         <!-- 通义千问新功能体验报告 (2024-02-12) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1400,7 +1349,7 @@
                         
                         <!-- LeCun批评自回归大型语言模型 (2024-02-10) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1422,7 +1371,7 @@
                         
                         <!-- 潘通2025年度流行色：摩卡慕斯 (2024-02-08) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1444,7 +1393,7 @@
                         
                         <!-- 医疗数据与AI认知共同体的五大洞见 (2024-02-05) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1466,7 +1415,7 @@
                         
                         <!-- AI研究主题全景图谱 (2024-02-10) -->
                         <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
-                            <span class="period-label period-new">新</span>
+                            <span class="period-label period-earlier">早期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="text-xs py-1 px-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full">知识报告</span>
@@ -1630,9 +1579,22 @@
         });
         
         // 移动端子菜单展开/收起
-        function toggleMobileSubmenu(id) {
-            const submenu = document.getElementById(id);
-            submenu.classList.toggle('hidden');
+        function toggleMobileSubmenu(category) {
+            // 根据分类获取对应的移动端子菜单ID
+            const mobileSubmenuIds = {
+                'info-upgrade': 'infoUpgrade',
+                'research': 'mobileResearch',
+                'ai-tech': 'aiTech',
+                'knowledge': 'mobileKnowledge'
+            };
+            
+            const submenuId = mobileSubmenuIds[category];
+            if (submenuId) {
+                const submenu = document.getElementById(submenuId);
+                if (submenu) {
+                    submenu.classList.toggle('hidden');
+                }
+            }
         }
         
         // 分类内容切换 - 改进版
@@ -1668,26 +1630,12 @@
                     button.classList.add(colors[category].bg, 'text-white', 'font-medium');
                     button.classList.remove('hover:bg-gray-100', 'dark:hover:bg-gray-700');
                     
-                    // 使用淡入淡出效果显示内容
+                    // 显示对应的内容区域，隐藏其他区域
                     categoryContents.forEach(content => {
                         if (content.id === category) {
-                            // 首先将内容设置为不可见但保留在DOM中
                             content.classList.remove('hidden');
-                            
-                            // 使用setTimeout来确保过渡动画生效
-                            setTimeout(() => {
-                                content.style.opacity = '1';
-                                content.style.transform = 'translateY(0)';
-                            }, 50);
                         } else {
-                            // 首先开始淡出动画
-                            content.style.opacity = '0';
-                            content.style.transform = 'translateY(20px)';
-                            
-                            // 等待过渡完成后隐藏元素
-                            setTimeout(() => {
-                                content.classList.add('hidden');
-                            }, 500);
+                            content.classList.add('hidden');
                         }
                     });
                 });
@@ -1716,6 +1664,9 @@
 
         // 导航到指定分类的函数
         function navToCategory(category) {
+            // 获取移动菜单元素
+            const mobileMenuEl = document.getElementById('mobileMenu');
+            
             // 首先导航到内容分类部分
             const articlesSection = document.getElementById('articles');
             if (articlesSection) {
@@ -1737,7 +1688,9 @@
             toggleMobileSubmenu(category);
             
             // 如果移动菜单打开，则关闭它
-            mobileMenu.classList.add('hidden');
+            if (mobileMenuEl) {
+                mobileMenuEl.classList.add('hidden');
+            }
         }
         
         // 处理导航链接点击
@@ -1810,89 +1763,26 @@
                 localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
             });
             
-            // 分类标签切换 - 使用第一套实现的事件处理
-            // 无需重复定义分类切换逻辑
+            // 分类标签切换逻辑已在上面定义，无需重复
             
-            // 移动菜单
+            // 处理移动菜单
             const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileMenu = document.createElement('div');
-            mobileMenu.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden';
-            mobileMenu.id = 'mobileMenu';
-            
-            const menuContent = document.createElement('div');
-            menuContent.className = 'absolute right-0 top-0 h-full w-64 bg-white dark:bg-gray-800 p-4 shadow-lg transform transition-transform duration-300 translate-x-full';
-            mobileMenu.appendChild(menuContent);
-            
-            document.body.appendChild(mobileMenu);
+            const mobileMenu = document.getElementById('mobileMenu');
             
             mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.remove('hidden');
-                setTimeout(() => {
-                    menuContent.classList.remove('translate-x-full');
-                }, 10);
+                mobileMenu.classList.toggle('hidden');
             });
             
-            mobileMenu.addEventListener('click', function(e) {
-                if (e.target === mobileMenu) {
-                    menuContent.classList.add('translate-x-full');
-                    setTimeout(() => {
-                        mobileMenu.classList.add('hidden');
-                    }, 300);
-                }
-            });
-            
+            // 添加关闭按钮
             const closeButton = document.createElement('button');
             closeButton.className = 'absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100';
             closeButton.innerHTML = '<i class="fas fa-times text-xl"></i>';
-            menuContent.appendChild(closeButton);
+            mobileMenu.querySelector('.container').appendChild(closeButton);
             
             closeButton.addEventListener('click', function() {
-                menuContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                }, 300);
+                mobileMenu.classList.add('hidden');
             });
             
-            const mobileMenuLinks = document.querySelector('.md\\:flex').cloneNode(true);
-            mobileMenuLinks.className = 'flex flex-col space-y-4 mt-8';
-            
-            const mobileMenuLinkItems = mobileMenuLinks.querySelectorAll('a, .relative');
-            mobileMenuLinkItems.forEach(item => {
-                if (item.classList.contains('relative')) {
-                    const link = item.querySelector('a');
-                    const dropdown = item.querySelector('.absolute');
-                    
-                    if (link && dropdown) {
-                        dropdown.classList.remove('absolute', 'left-0', 'mt-2', 'w-48', 'bg-white', 'dark:bg-gray-800', 'rounded-md', 'shadow-lg', 'py-2', 'z-10', 'hidden', 'group-hover:block');
-                        dropdown.classList.add('ml-4', 'mt-2', 'space-y-2', 'hidden');
-                        
-                        const newItem = document.createElement('div');
-                        newItem.className = 'flex flex-col';
-                        
-                        const newLink = link.cloneNode(true);
-                        newLink.classList.remove('flex');
-                        newLink.classList.add('flex', 'justify-between', 'items-center');
-                        
-                        const toggleIcon = document.createElement('i');
-                        toggleIcon.className = 'fas fa-chevron-down ml-2 transform transition-transform duration-200';
-                        newLink.appendChild(toggleIcon);
-                        
-                        newItem.appendChild(newLink);
-                        newItem.appendChild(dropdown);
-                        
-                        newLink.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            dropdown.classList.toggle('hidden');
-                            toggleIcon.classList.toggle('rotate-180');
-                        });
-                        
-                        menuContent.appendChild(newItem);
-                    }
-                } else {
-                    menuContent.appendChild(item);
-                }
-            });
-
             // 动态计算文章标签分类
             // 使用相对时间来设置文章的时期标签
             function updateArticlePeriodLabels() {
