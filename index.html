@@ -739,6 +739,285 @@
         .dark .card::after {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15);
         }
+
+        /* 为分类内容区域添加特定的主题色彩 */
+        /* 信息化升级 - 使用主色调(teal) */
+        #info-upgrade .card:hover {
+            border-color: rgba(var(--light-primary-rgb), 0.5);
+        }
+
+        .dark #info-upgrade .card:hover {
+            border-color: rgba(var(--dark-primary-rgb), 0.5);
+            background-color: color-mix(in srgb, var(--dark-bg-surface) 92%, var(--dark-primary) 8%);
+        }
+
+        #info-upgrade .card-body a {
+            color: var(--clr-primary);
+        }
+
+        #info-upgrade .card-body a:hover {
+            color: color-mix(in srgb, var(--clr-primary) 80%, black);
+        }
+
+        .dark #info-upgrade .card-body a {
+            color: color-mix(in srgb, var(--dark-primary) 90%, white) !important;
+        }
+
+        .dark #info-upgrade .card-body a:hover {
+            color: color-mix(in srgb, var(--dark-primary) 70%, white) !important;
+        }
+
+        /* 科研辅助 - 使用灰蓝色系(slate) */
+        #research .card:hover {
+            border-color: rgba(100, 116, 139, 0.5); /* slate-500 */
+        }
+
+        .dark #research .card:hover {
+            border-color: rgba(71, 85, 105, 0.5); /* slate-600 */
+            background-color: color-mix(in srgb, var(--dark-bg-surface) 92%, rgb(71, 85, 105) 8%);
+        }
+
+        #research .card-body a {
+            color: #64748b; /* slate-500 */
+        }
+
+        #research .card-body a:hover {
+            color: #475569; /* slate-600 */
+        }
+
+        .dark #research .card-body a {
+            color: #94a3b8 !important; /* slate-400 */
+        }
+
+        .dark #research .card-body a:hover {
+            color: #cbd5e1 !important; /* slate-300 */
+        }
+
+        /* AI技术与生态 - 使用强调色(橙色) */
+        #ai-tech .card:hover {
+            border-color: rgba(var(--light-accent-rgb), 0.5);
+        }
+
+        .dark #ai-tech .card:hover {
+            border-color: rgba(var(--dark-accent-rgb), 0.5);
+            background-color: color-mix(in srgb, var(--dark-bg-surface) 92%, var(--dark-accent) 8%);
+        }
+
+        #ai-tech .card-body a {
+            color: var(--clr-accent);
+        }
+
+        #ai-tech .card-body a:hover {
+            color: color-mix(in srgb, var(--clr-accent) 80%, black);
+        }
+
+        .dark #ai-tech .card-body a {
+            color: color-mix(in srgb, var(--dark-accent) 90%, white) !important;
+        }
+
+        .dark #ai-tech .card-body a:hover {
+            color: color-mix(in srgb, var(--dark-accent) 70%, white) !important;
+        }
+
+        /* 知识报告 - 使用青色主题(teal，但不同于信息化升级) */
+        #knowledge .card:hover {
+            border-color: rgba(20, 184, 166, 0.5); /* teal-500 */
+        }
+
+        .dark #knowledge .card:hover {
+            border-color: rgba(13, 148, 136, 0.5); /* teal-600 */
+            background-color: color-mix(in srgb, var(--dark-bg-surface) 92%, rgb(13, 148, 136) 8%);
+        }
+
+        #knowledge .card-body a {
+            color: #14b8a6; /* teal-500 */
+        }
+
+        #knowledge .card-body a:hover {
+            color: #0d9488; /* teal-600 */
+        }
+
+        .dark #knowledge .card-body a {
+            color: #2dd4bf !important; /* teal-400 */
+        }
+
+        .dark #knowledge .card-body a:hover {
+            color: #5eead4 !important; /* teal-300 */
+        }
+
+        /* 增强解决方案摘要卡片的分类视觉识别 */
+        /* 信息化升级摘要卡片 */
+        #info-upgrade .bg-gradient-to-r {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--clr-primary) 8%, white) 0%, color-mix(in srgb, var(--clr-primary) 15%, white) 100%);
+            border: 1px solid color-mix(in srgb, var(--clr-primary) 30%, white);
+            border-left: 3px solid var(--clr-primary);
+        }
+
+        .dark #info-upgrade .bg-gradient-to-r {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--clr-primary) 15%, black) 0%, color-mix(in srgb, var(--clr-primary) 10%, black) 100%);
+            border: 1px solid color-mix(in srgb, var(--clr-primary) 40%, black);
+            border-left: 3px solid var(--clr-primary);
+        }
+
+        /* 科研辅助摘要卡片 */
+        #research .bg-gradient-to-r {
+            background: linear-gradient(90deg, rgba(226, 232, 240, 0.6) 0%, rgba(226, 232, 240, 0.9) 100%); /* slate-200 */
+            border: 1px solid rgba(203, 213, 225, 0.8); /* slate-300 */
+            border-left: 3px solid #64748b; /* slate-500 */
+        }
+
+        .dark #research .bg-gradient-to-r {
+            background: linear-gradient(90deg, rgba(51, 65, 85, 0.3) 0%, rgba(51, 65, 85, 0.2) 100%); /* slate-800 */
+            border: 1px solid rgba(71, 85, 105, 0.5); /* slate-600 */
+            border-left: 3px solid #64748b; /* slate-500 */
+        }
+
+        /* AI技术与生态摘要卡片 */
+        #ai-tech .bg-gradient-to-r {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--clr-accent) 8%, white) 0%, color-mix(in srgb, var(--clr-accent) 15%, white) 100%);
+            border: 1px solid color-mix(in srgb, var(--clr-accent) 30%, white);
+            border-left: 3px solid var(--clr-accent);
+        }
+
+        .dark #ai-tech .bg-gradient-to-r {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--clr-accent) 15%, black) 0%, color-mix(in srgb, var(--clr-accent) 10%, black) 100%);
+            border: 1px solid color-mix(in srgb, var(--clr-accent) 40%, black);
+            border-left: 3px solid var(--clr-accent);
+        }
+
+        /* 知识报告摘要卡片 */
+        #knowledge .bg-gradient-to-r {
+            background: linear-gradient(90deg, rgba(204, 251, 241, 0.6) 0%, rgba(204, 251, 241, 0.9) 100%); /* teal-100 */
+            border: 1px solid rgba(153, 246, 228, 0.8); /* teal-200 */
+            border-left: 3px solid #14b8a6; /* teal-500 */
+        }
+
+        .dark #knowledge .bg-gradient-to-r {
+            background: linear-gradient(90deg, rgba(17, 94, 89, 0.3) 0%, rgba(17, 94, 89, 0.2) 100%); /* teal-900 */
+            border: 1px solid rgba(20, 184, 166, 0.5); /* teal-500 */
+            border-left: 3px solid #2dd4bf; /* teal-400 */
+        }
+
+        /* 改进所有摘要卡片中图标的颜色 */
+        #info-upgrade .bg-gradient-to-r .checklist-item i {
+            color: var(--clr-primary);
+        }
+
+        #research .bg-gradient-to-r .checklist-item i {
+            color: #64748b; /* slate-500 */
+        }
+
+        .dark #research .bg-gradient-to-r .checklist-item i {
+            color: #94a3b8; /* slate-400 */
+        }
+
+        #ai-tech .bg-gradient-to-r .checklist-item i {
+            color: var(--clr-accent);
+        }
+
+        #knowledge .bg-gradient-to-r .checklist-item i {
+            color: #14b8a6; /* teal-500 */
+        }
+
+        .dark #knowledge .bg-gradient-to-r .checklist-item i {
+            color: #2dd4bf; /* teal-400 */
+        }
+
+        /* 增强分类内卡片元素的颜色一致性 */
+
+        /* 信息化升级卡片元素样式 */
+        #info-upgrade .card .fas,
+        #info-upgrade .card .far {
+            color: var(--clr-primary);
+        }
+
+        #info-upgrade .card .text-xs {
+            background-color: color-mix(in srgb, var(--clr-primary) 15%, white);
+            color: color-mix(in srgb, var(--clr-primary) 85%, black);
+        }
+
+        .dark #info-upgrade .card .text-xs {
+            background-color: color-mix(in srgb, var(--dark-primary) 25%, black);
+            color: color-mix(in srgb, var(--dark-primary) 90%, white);
+        }
+
+        /* 科研辅助卡片元素样式 */
+        #research .card .fas,
+        #research .card .far {
+            color: #64748b; /* slate-500 */
+        }
+
+        .dark #research .card .fas,
+        .dark #research .card .far {
+            color: #94a3b8; /* slate-400 */
+        }
+
+        #research .card .text-xs {
+            background-color: #e2e8f0; /* slate-200 */
+            color: #475569; /* slate-600 */
+        }
+
+        .dark #research .card .text-xs {
+            background-color: rgba(51, 65, 85, 0.3); /* slate-800 at 30% */
+            color: #cbd5e1; /* slate-300 */
+        }
+
+        /* AI技术与生态卡片元素样式 */
+        #ai-tech .card .fas,
+        #ai-tech .card .far {
+            color: var(--clr-accent);
+        }
+
+        #ai-tech .card .text-xs {
+            background-color: color-mix(in srgb, var(--clr-accent) 15%, white);
+            color: color-mix(in srgb, var(--clr-accent) 85%, black);
+        }
+
+        .dark #ai-tech .card .text-xs {
+            background-color: color-mix(in srgb, var(--dark-accent) 25%, black);
+            color: color-mix(in srgb, var(--dark-accent) 90%, white);
+        }
+
+        /* 知识报告卡片元素样式 */
+        #knowledge .card .fas,
+        #knowledge .card .far {
+            color: #14b8a6; /* teal-500 */
+        }
+
+        .dark #knowledge .card .fas,
+        .dark #knowledge .card .far {
+            color: #2dd4bf; /* teal-400 */
+        }
+
+        #knowledge .card .text-xs {
+            background-color: rgba(204, 251, 241, 0.8); /* teal-100 */
+            color: #0f766e; /* teal-700 */
+        }
+
+        .dark #knowledge .card .text-xs {
+            background-color: rgba(17, 94, 89, 0.3); /* teal-900 at 30% */
+            color: #2dd4bf; /* teal-400 */
+        }
+
+        /* 增强卡片标题和日期的对比度 */
+        .card-body h3 {
+            color: var(--clr-text-primary);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .dark .card-body h3 {
+            color: var(--dark-text-primary);
+        }
+
+        .article-date {
+            opacity: 0.85;
+            font-size: 0.8rem;
+        }
+
+        .dark .article-date {
+            opacity: 0.75;
+        }
     </style>
 </head>
 <body>
