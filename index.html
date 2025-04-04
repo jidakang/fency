@@ -47,6 +47,12 @@
             --dark-text-on-primary: #FFFFFF; /* Or #0D0D0D if contrast needed */
             --dark-text-on-accent: #0D0D0D; /* Or #FFFFFF if contrast needed */
 
+            /* 添加 RGB 格式的颜色变量，用于 rgba 颜色混合 */
+            --light-primary-rgb: 0, 122, 122; /* #007A7A 的 RGB 值 */
+            --light-accent-rgb: 242, 100, 25; /* #F26419 的 RGB 值 */
+            --dark-primary-rgb: 0, 160, 160; /* #00A0A0 的 RGB 值 */
+            --dark-accent-rgb: 255, 138, 77; /* #FF8A4D 的 RGB 值 */
+
             /* Default to Light Mode Variables */
             --clr-primary: var(--light-primary);
             --clr-accent: var(--light-accent);
@@ -58,6 +64,8 @@
             --clr-border: var(--light-border);
             --clr-text-on-primary: var(--light-text-on-primary);
             --clr-text-on-accent: var(--light-text-on-accent);
+            --clr-primary-rgb: var(--light-primary-rgb);
+            --clr-accent-rgb: var(--light-accent-rgb);
         }
         
         .light {
@@ -84,6 +92,8 @@
             --clr-border: var(--dark-border);
             --clr-text-on-primary: var(--dark-text-on-primary);
             --clr-text-on-accent: var(--dark-text-on-accent);
+            --clr-primary-rgb: var(--dark-primary-rgb);
+            --clr-accent-rgb: var(--dark-accent-rgb);
         }
         
         body {
@@ -107,35 +117,45 @@
         .card {
             background-color: var(--clr-bg-surface);
             border: 1px solid var(--clr-border);
-            border-radius: 0.5rem; /* 8px */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Light mode shadow */
-            transition: all 0.3s ease;
-            overflow: hidden; /* Added for consistency */
-            height: 100%; /* Added for consistency */
-            display: flex; /* Added for consistency */
-            flex-direction: column; /* Added for consistency */
+            border-radius: 0.75rem; /* 增加圆角 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* 更微妙的阴影 */
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* 缓动函数增强平滑感 */
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* 为伪元素定位 */
+            z-index: 1;
         }
         
         .dark .card {
-            box-shadow: none; /* Remove shadow in dark mode, use border */
-            border: 1px solid var(--clr-border); 
+            background-color: var(--clr-bg-surface);
+            border: 1px solid var(--clr-border);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 暗模式中更微妙的阴影 */
         }
         
         .card:hover {
-            transform: translateY(-4px); /* Subtle lift */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+            transform: translateY(-6px); /* 稍微更明显的抬升效果 */
+            border-color: rgba(var(--light-primary-rgb, 0, 122, 122), 0.3); /* 基于主色的淡边框 */
+        }
+        
+        .card:hover::after {
+            opacity: 1; /* 悬停时显示更强的阴影 */
         }
         
         .dark .card:hover {
-            border-color: var(--dark-primary); /* Highlight border on hover */
-            background-color: #2a2a2a; /* Slightly lighter surface on hover */
-            box-shadow: none;
+            border-color: rgba(var(--dark-primary-rgb, 0, 160, 160), 0.4); /* 暗模式下基于主色的边框 */
+            background-color: color-mix(in srgb, var(--dark-bg-surface) 95%, var(--dark-primary) 5%); /* 微妙的色彩注入 */
+            transform: translateY(-6px);
         }
-
+        
+        /* 为卡片内部添加更好的排版间距 */
         .card-body {
             display: flex;
             flex-direction: column;
             flex: 1;
+            gap: 0.75rem; /* 增加内部元素间距 */
+            padding: 1.5rem; /* 增加内边距 */
         }
         
         .first-letter::first-letter {
@@ -417,6 +437,84 @@
              background-color: rgba(255,255,255,0.05);
         }
 
+        /* 修改为以下增强版样式 */
+        /* --- 高级分类选项卡设计 --- */
+        .category-tabs {
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn {
+            position: relative;
+            overflow: hidden;
+            color: var(--clr-text-secondary);
+            background-color: transparent;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-btn i {
+            margin-right: 0.5rem;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-btn:hover i {
+            transform: translateY(-2px);
+        }
+
+        .category-btn:hover {
+            color: var(--clr-text-primary);
+            background-color: rgba(0,0,0,0.05);
+            transform: translateY(-1px);
+        }
+        
+        .dark .category-btn:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--clr-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+        
+        .category-btn:hover::after {
+            width: 30%;
+            opacity: 0.7;
+        }
+        
+        /* 当按钮激活时，底部指示条更明显 */
+        .category-btn.category-btn-active-primary::after,
+        .category-btn.category-btn-active-secondary::after,
+        .category-btn.category-btn-active-accent::after {
+            width: 50%;
+            opacity: 1;
+        }
+        
+        .category-btn.category-btn-active-secondary::after {
+            background-color: #64748b; /* slate-500 */
+        }
+        
+        .dark .category-btn.category-btn-active-secondary::after {
+            background-color: #475569; /* slate-600 */
+        }
+        
+        .category-btn.category-btn-active-accent::after {
+            background-color: var(--clr-accent);
+        }
+        
         /* Active state for category buttons - simplified, using primary color */
         .category-btn.category-btn-active {
             background-color: var(--clr-primary);
@@ -432,6 +530,43 @@
         .category-btn.category-btn-active-secondary, 
         .category-btn.category-btn-active-accent {
             /* These classes are no longer used for background/color */
+        }
+        
+        /* 替换为以下代码 */
+        /* Active state for category buttons - now using specific colors for each category */
+        .category-btn.category-btn-active-primary {
+            background-color: var(--clr-primary);
+            color: var(--clr-text-on-primary);
+            font-weight: 500;
+        }
+        .dark .category-btn.category-btn-active-primary {
+            background-color: var(--clr-primary);
+            color: var(--clr-text-on-primary);
+        }
+        
+        .category-btn.category-btn-active-secondary {
+            background-color: #64748b; /* slate-500 */
+            color: white;
+            font-weight: 500;
+        }
+        .dark .category-btn.category-btn-active-secondary {
+            background-color: #475569; /* slate-600 */
+            color: white;
+        }
+        
+        .category-btn.category-btn-active-accent {
+            background-color: var(--clr-accent);
+            color: var(--clr-text-on-accent);
+            font-weight: 500;
+        }
+        .dark .category-btn.category-btn-active-accent {
+            background-color: var(--clr-accent);
+            color: var(--clr-text-on-accent);
+        }
+        
+        /* 一般性激活状态 - 为向后兼容保留 */
+        .category-btn.category-btn-active {
+            font-weight: 500;
         }
         
         /* Content display */
@@ -567,6 +702,42 @@
         
         .dark a:hover {
             color: #bfdbfe !important; /* 更亮的浅蓝色 */
+        }
+
+        /* 为卡片添加更精致的内阴影效果 */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+        }
+
+        /* 修改为 */
+        /* 为卡片添加更精致的阴影效果 */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+            pointer-events: none; /* 确保不会影响卡片内部元素的交互 */
+        }
+        
+        .dark .card::after {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -1889,12 +2060,16 @@
             
         // 根据分类添加新的通用活动类
         if (activeBtn) {
-            if (category === 'info-upgrade' || category === 'knowledge') {
+            if (category === 'info-upgrade') {
                 activeBtn.classList.add('category-btn-active-primary');
             } else if (category === 'research') {
                 activeBtn.classList.add('category-btn-active-secondary');
             } else if (category === 'ai-tech') {
                 activeBtn.classList.add('category-btn-active-accent');
+            } else if (category === 'knowledge') {
+                // 为知识报告添加不同的颜色，使用teal作为基础
+                activeBtn.classList.add('category-btn-active-primary');
+                // 注意：我们仍然使用primary主色，也可以创建一个新的颜色类如knowledge-color
             }
         }
             
