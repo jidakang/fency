@@ -7,57 +7,89 @@
           content="default-src 'self'; 
                    script-src 'self' https://cdn.jsdelivr.net https://cdn.staticfile.org 'unsafe-inline'; 
                    style-src 'self' https://cdn.staticfile.org https://fonts.googleapis.com 'unsafe-inline';
-                   font-src 'self' https://fonts.gstatic.com;
+                   font-src 'self' https://fonts.gstatic.com https://cdn.staticfile.org;
                    img-src 'self' data:;
                    object-src 'none';
                    base-uri 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <title>凿壁 | 健康医疗行业的AI解决方案先锋</title>
     <link rel="stylesheet" 
-          href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css"
-          integrity="sha384-[Insert Hash Here]" 
-          crossorigin="anonymous">
+          href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" 
-          href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha384-[Insert Hash Here]" 
-          crossorigin="anonymous">
+          href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" 
           href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"
-            integrity="sha384-[Insert Hash Here]" 
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
     <style>
+        /* --- Updated Color Palette Variables --- */
         :root {
-            --primary: #1D8A99;
-            --primary-dark: #166c7a;
-            --secondary: #4A5568;
-            --accent: #DD6B20;
-            --light-bg: #F7FAFC;
-            --dark-bg: #1A202C;
-            --light-text: #2D3748;
-            --dark-text: #E2E8F0;
-            --light-card: #FFFFFF;
-            --dark-card: #2D3748;
+            /* Light Mode Palette */
+            --light-primary: #007A7A; /* Optimized Teal/Blue */
+            --light-accent: #F26419;  /* Vibrant Orange */
+            --light-bg-page: #F5F7FA; /* Very Light Gray */
+            --light-bg-surface: #FFFFFF; /* White */
+            --light-text-primary: #333333; /* Dark Gray */
+            --light-text-secondary: #666666; /* Medium Gray */
+            --light-text-tertiary: #AAAAAA; /* Light Gray */
+            --light-border: #E0E0E0; /* Light Gray Border */
+            --light-text-on-primary: #FFFFFF;
+            --light-text-on-accent: #FFFFFF;
+
+            /* Dark Mode Palette */
+            --dark-primary: #00A0A0; /* Brighter Teal/Blue */
+            --dark-accent: #FF8A4D;  /* Brighter/Less Saturated Orange */
+            --dark-bg-page: #121212; /* Very Dark Gray */
+            --dark-bg-surface: #1E1E1E; /* Slightly Lighter Dark Gray */
+            --dark-text-primary: #E0E0E0; /* Light Gray (Not Pure White) */
+            --dark-text-secondary: #A0A0A0; /* Medium Light Gray */
+            --dark-text-tertiary: #757575; /* Medium Dark Gray */
+            --dark-border: #424242; /* Dark Gray Border */
+            --dark-text-on-primary: #FFFFFF; /* Or #0D0D0D if contrast needed */
+            --dark-text-on-accent: #0D0D0D; /* Or #FFFFFF if contrast needed */
+
+            /* Default to Light Mode Variables */
+            --clr-primary: var(--light-primary);
+            --clr-accent: var(--light-accent);
+            --clr-bg-page: var(--light-bg-page);
+            --clr-bg-surface: var(--light-bg-surface);
+            --clr-text-primary: var(--light-text-primary);
+            --clr-text-secondary: var(--light-text-secondary);
+            --clr-text-tertiary: var(--light-text-tertiary);
+            --clr-border: var(--light-border);
+            --clr-text-on-primary: var(--light-text-on-primary);
+            --clr-text-on-accent: var(--light-text-on-accent);
         }
         
         .light {
-            --bg-color: var(--light-bg);
-            --text-color: var(--light-text);
-            --card-bg: var(--light-card);
-            --border-color: #e2e8f0;
+            --clr-primary: var(--light-primary);
+            --clr-accent: var(--light-accent);
+            --clr-bg-page: var(--light-bg-page);
+            --clr-bg-surface: var(--light-bg-surface);
+            --clr-text-primary: var(--light-text-primary);
+            --clr-text-secondary: var(--light-text-secondary);
+            --clr-text-tertiary: var(--light-text-tertiary);
+            --clr-border: var(--light-border);
+            --clr-text-on-primary: var(--light-text-on-primary);
+            --clr-text-on-accent: var(--light-text-on-accent);
         }
         
         .dark {
-            --bg-color: var(--dark-bg);
-            --text-color: var(--dark-text);
-            --card-bg: var(--dark-card);
-            --border-color: #4a5568;
+            --clr-primary: var(--dark-primary);
+            --clr-accent: var(--dark-accent);
+            --clr-bg-page: var(--dark-bg-page);
+            --clr-bg-surface: var(--dark-bg-surface);
+            --clr-text-primary: var(--dark-text-primary);
+            --clr-text-secondary: var(--dark-text-secondary);
+            --clr-text-tertiary: var(--dark-text-tertiary);
+            --clr-border: var(--dark-border);
+            --clr-text-on-primary: var(--dark-text-on-primary);
+            --clr-text-on-accent: var(--dark-text-on-accent);
         }
         
         body {
             font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--clr-bg-page);
+            color: var(--clr-text-primary);
             transition: background-color 0.3s, color 0.3s;
             line-height: 1.7;
         }
@@ -65,26 +97,45 @@
         h1, h2, h3, h4, h5 {
             font-family: 'Noto Serif SC', serif;
             font-weight: 600;
+            color: var(--clr-text-primary); /* Ensure headings use primary text color */
+        }
+
+        p {
+             color: var(--clr-text-secondary); /* Default paragraph to secondary text color */
         }
         
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: var(--clr-bg-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Light mode shadow */
             transition: all 0.3s ease;
+            overflow: hidden; /* Added for consistency */
+            height: 100%; /* Added for consistency */
+            display: flex; /* Added for consistency */
+            flex-direction: column; /* Added for consistency */
+        }
+        
+        .dark .card {
+            box-shadow: none; /* Remove shadow in dark mode, use border */
+            border: 1px solid var(--clr-border); 
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px); /* Subtle lift */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
         }
         
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .dark .card:hover {
+            border-color: var(--dark-primary); /* Highlight border on hover */
+            background-color: #2a2a2a; /* Slightly lighter surface on hover */
+            box-shadow: none;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
         
         .first-letter::first-letter {
@@ -92,30 +143,79 @@
             float: left;
             line-height: 0.8;
             margin-right: 0.1em;
-            color: var(--primary);
+            color: var(--clr-primary);
             font-family: 'Noto Serif SC', serif;
             font-weight: 700;
         }
         
         .theme-toggle {
             cursor: pointer;
+            position: relative;
+            overflow: visible;
         }
         
+        /* 添加主题切换图标颜色 */
+        .light-icon {
+            color: #f59e0b; /* 黄色/琥珀色 */
+            font-size: 1.25rem;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .dark-icon {
+            color: #0ea5e9; /* 蓝色 */
+            font-size: 1.25rem;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: scale(0);
+        }
+        
+        .dark .light-icon {
+            color: #fcd34d; /* 浅黄色，暗模式下更亮 */
+            opacity: 0;
+            transform: scale(0);
+        }
+        
+        .dark .dark-icon {
+            color: #38bdf8; /* 浅蓝色，暗模式下更亮 */
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* 覆盖Font Awesome隐藏类的行为，使用不透明度和缩放来隐藏而不是display:none */
+        /* .theme-toggle .hidden {
+            opacity: 0;
+            transform: scale(0);
+            position: absolute;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        
+        /* 确保非隐藏图标可见 */
+        /* .theme-toggle i:not(.hidden) {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.2s, transform 0.2s;
+        } */
+        
         .hero-section {
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--clr-primary);
+            color: var(--clr-text-on-primary);
             position: relative;
             overflow: hidden;
         }
         
-        .hero-pattern {
+        .hero-pattern { /* Keep pattern subtle */
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5; /* Slightly more visible pattern */
+        }
+        .dark .hero-pattern {
+             opacity: 0.2;
         }
         
         /* Smooth scrolling */
@@ -129,77 +229,121 @@
         }
         
         ::-webkit-scrollbar-track {
-            background: var(--bg-color);
+            background: var(--clr-bg-page);
         }
         
         ::-webkit-scrollbar-thumb {
-            background: var(--primary);
+            background: var(--clr-primary);
             border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary);
+            background: var(--clr-accent);
         }
-        
-        .btn-primary {
-            background-color: var(--secondary);
-            color: white;
-            transition: all 0.3s ease;
-            border-radius: 0.25rem;
+
+        /* --- Updated Button Styles --- */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem; /* Slightly larger padding */
+            border-radius: 0.375rem; /* 6px */
             font-weight: 500;
-            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--clr-accent);
+            color: var(--clr-text-on-accent);
+            border: 2px solid transparent;
         }
         
         .btn-primary:hover {
-            background-color: #02b892;
+            background-color: color-mix(in srgb, var(--clr-accent) 90%, black);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
-        
-        .btn-outline {
-            border: 2px solid white;
-            color: white;
-            transition: all 0.3s ease;
-            border-radius: 0.25rem;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
+        .dark .btn-primary {
+             color: var(--dark-text-on-accent);
+             background-color: var(--dark-accent);
         }
+         .dark .btn-primary:hover {
+            background-color: color-mix(in srgb, var(--dark-accent) 90%, white);
+         }
+
+        .btn-secondary {
+             color: var(--clr-primary);
+             border: 2px solid var(--clr-primary);
+             background-color: transparent;
+        }
+        .btn-secondary:hover {
+             background-color: color-mix(in srgb, var(--clr-primary) 15%, transparent);
+             transform: translateY(-2px);
+        }
+         .dark .btn-secondary {
+             color: var(--dark-primary);
+             border-color: var(--dark-primary);
+         }
+          .dark .btn-secondary:hover {
+             background-color: color-mix(in srgb, var(--dark-primary) 20%, transparent);
+          }
         
-        .btn-outline:hover {
-            background-color: white;
-            color: var(--primary);
+        /* Specific Button in Hero */
+        .btn-hero-primary {
+             background-color: var(--light-bg-surface); /* White in light mode */
+             color: var(--light-primary);
+             border: 2px solid transparent;
+        }
+         .btn-hero-primary:hover {
+             background-color: #f0f0f0;
+         }
+         .dark .btn-hero-primary {
+             background-color: var(--dark-accent);
+             color: var(--dark-text-on-accent);
+         }
+          .dark .btn-hero-primary:hover {
+             background-color: color-mix(in srgb, var(--dark-accent) 90%, white);
+          }
+        
+        .btn-hero-outline {
+            border: 2px solid var(--clr-text-on-primary);
+            color: var(--clr-text-on-primary);
+            background-color: transparent;
+        }
+        .btn-hero-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
         }
-        
-        .article-card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .article-card .card-body {
-            flex: 1;
-        }
+         .dark .btn-hero-outline {
+             border-color: var(--dark-text-primary);
+             color: var(--dark-text-primary);
+         }
+          .dark .btn-hero-outline:hover {
+             background-color: rgba(224, 224, 224, 0.1);
+          }
         
         /* Article date styles */
         .article-date {
             display: flex;
             align-items: center;
             font-size: 0.85rem;
-            color: #666;
+            color: var(--clr-text-secondary);
             gap: 5px;
         }
         .dark .article-date {
-            color: #aaa;
+            color: var(--dark-text-secondary);
         }
         .updated-badge {
             margin-left: 8px;
             font-size: 0.75rem;
-            color: #888;
+            color: var(--clr-text-tertiary);
             font-style: italic;
         }
+        .dark .updated-badge {
+             color: var(--dark-text-tertiary);
+        }
 
-        /* Period labels for articles */
+        /* --- Updated Period labels for articles --- */
         .period-label {
             position: absolute;
             top: 10px;
@@ -210,34 +354,35 @@
             border-radius: 4px;
             z-index: 1;
         }
-        .period-new {
-            background-color: #ffedd5;
-            color: #c2410c;
+        .period-new { /* Orange based */
+            background-color: color-mix(in srgb, var(--light-accent) 20%, white);
+            color: color-mix(in srgb, var(--light-accent) 80%, black);
         }
         .dark .period-new {
-            background-color: #9a3412;
-            color: #ffedd5;
+            background-color: color-mix(in srgb, var(--dark-accent) 30%, black);
+            color: color-mix(in srgb, var(--dark-accent) 90%, white); /* 增加对比度 */
         }
-        .period-recent {
-            background-color: #dcfce7;
-            color: #15803d;
+        .period-recent { /* Primary color based */
+            background-color: color-mix(in srgb, var(--light-primary) 15%, white);
+            color: color-mix(in srgb, var(--light-primary) 85%, black);
         }
         .dark .period-recent {
-            background-color: #166534;
-            color: #dcfce7;
+            background-color: color-mix(in srgb, var(--dark-primary) 25%, black);
+            color: color-mix(in srgb, var(--dark-primary) 90%, white); /* 增加对比度 */
         }
-        .period-earlier {
-            background-color: #e0f2fe;
-            color: #0369a1;
+        .period-earlier { /* Secondary text color based */
+            background-color: #e0e0e0; /* Light gray background */
+            color: #666666;
         }
         .dark .period-earlier {
-            background-color: #075985;
-            color: #e0f2fe;
+            background-color: #333333;
+            color: #e0e0e0; /* 增加对比度 */
         }
         
+        /* --- Updated Feature icon --- */
         .feature-icon {
-            background-color: rgba(3, 206, 164, 0.1);
-            color: var(--secondary);
+            background-color: color-mix(in srgb, var(--clr-primary) 15%, transparent);
+            color: var(--clr-primary);
             width: 3rem;
             height: 3rem;
             border-radius: 9999px;
@@ -248,10 +393,11 @@
         }
         
         .dark .feature-icon {
-            background-color: rgba(3, 206, 164, 0.2);
+             background-color: color-mix(in srgb, var(--clr-primary) 25%, transparent);
+             color: var(--clr-primary);
         }
         
-        /* 分类标签动画 */
+        /* --- Updated Category Tabs --- */
         .category-tabs {
             overflow: hidden;
         }
@@ -259,257 +405,290 @@
         .category-btn {
             position: relative;
             overflow: hidden;
+            color: var(--clr-text-secondary);
+            background-color: transparent;
         }
 
-        .category-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: all 0.3s ease;
+        .category-btn:hover {
+            color: var(--clr-text-primary);
+            background-color: rgba(0,0,0,0.05);
+        }
+        .dark .category-btn:hover {
+             background-color: rgba(255,255,255,0.05);
         }
 
-        .category-btn:hover::after {
-            width: 80%;
-            left: 10%;
-        }
-        
-        /* 增强按钮文字可见性 */
-        .category-btn.bg-primary,
-        .category-btn.bg-green-500,
-        .category-btn.bg-purple-500,
-        .category-btn.bg-yellow-500 {
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        /* Active state for category buttons - simplified, using primary color */
+        .category-btn.category-btn-active {
+            background-color: var(--clr-primary);
+            color: var(--clr-text-on-primary);
             font-weight: 500;
         }
-        
-        /* 内容过渡动画 - 简化为直接显示/隐藏 */
-        .category-content {
-            display: block;
+        .dark .category-btn.category-btn-active {
+             background-color: var(--clr-primary);
+             color: var(--clr-text-on-primary);
         }
-        
-        .category-content.hidden {
-            display: none;
-        }
-        
-        .category-contents {
-            min-height: 600px;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-        }
-        
-        .dark .card {
-            background-color: #1f2937;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        
-        .card:hover {
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .dark .card:hover {
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        
-        /* 分类内容过渡效果 - 简化为直接显示/隐藏 */
-        .category-content {
-            display: block;
-        }
-        
-        .category-content.hidden {
-            display: none;
-        }
-        
-        /* 分类标签样式 */
-        .category-tabs {
-            transition: all 0.3s ease;
-        }
-        
-        .category-btn {
-            transition: all 0.3s ease;
-        }
-        
-        .category-btn:not(.bg-primary):not(.bg-teal-600):not(.bg-slate-500):not(.bg-orange-500):hover {
-            background-color: rgba(229, 231, 235, 0.5);
-        }
-        
-        .dark .category-btn:not(.bg-primary):not(.bg-teal-600):not(.bg-slate-500):not(.bg-orange-500):hover {
-            background-color: rgba(55, 65, 81, 0.5);
-        }
-        
-        /* 文章卡片动画效果 */
-        .article-card {
-            transition: all 0.3s ease;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            .dark\:bg-gray-900 {
-                background-color: #111827;
-            }
-            .dark\:text-white {
-                color: #fff;
-            }
-        }
-        
-        /* 新增：分类激活按钮样式 */
-        .category-btn.category-btn-active-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        .category-btn.category-btn-active-secondary {
-            background-color: var(--secondary);
-            color: white;
-        }
+        /* Remove old specific active classes if they exist */
+        .category-btn.category-btn-active-primary, 
+        .category-btn.category-btn-active-secondary, 
         .category-btn.category-btn-active-accent {
-            background-color: var(--accent);
-            color: white;
+            /* These classes are no longer used for background/color */
+        }
+        
+        /* Content display */
+        .category-content {
+            display: block;
+        }
+        .category-content.hidden {
+            display: none;
+        }
+        .category-contents {
+            min-height: 600px; /* Keep for layout stability */
+        }
+        
+        /* --- Updated Card Category Tags --- */
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem; /* 12px */
+            padding: 0.125rem 0.5rem; /* 2px 8px */
+            border-radius: 0.25rem; /* 4px */
+            font-weight: 500;
+        }
+        .card-tag-teal {
+             background-color: color-mix(in srgb, var(--light-primary) 15%, white);
+             color: color-mix(in srgb, var(--light-primary) 85%, black);
+        }
+        .dark .card-tag-teal {
+            background-color: color-mix(in srgb, var(--dark-primary) 25%, black);
+            color: color-mix(in srgb, var(--dark-primary) 80%, white);
+        }
+        .card-tag-slate {
+             background-color: #e2e8f0; /* slate-200 */
+             color: #475569; /* slate-600 */
+        }
+         .dark .card-tag-slate {
+             background-color: #334155; /* slate-700 */
+             color: #cbd5e1; /* slate-300 */
+         }
+        .card-tag-orange {
+             background-color: color-mix(in srgb, var(--light-accent) 20%, white);
+             color: color-mix(in srgb, var(--light-accent) 80%, black);
+        }
+         .dark .card-tag-orange {
+             background-color: color-mix(in srgb, var(--dark-accent) 30%, black);
+             color: color-mix(in srgb, var(--dark-accent) 80%, white);
+         }
+
+        /* --- Updated Links inside cards --- */
+        .card-link {
+             color: var(--clr-primary);
+             transition: color 0.2s ease;
+        }
+        .card-link:hover {
+             color: var(--clr-accent);
+             text-decoration: underline;
+        }
+        .dark .card-link {
+             color: var(--dark-primary);
+        }
+         .dark .card-link:hover {
+             color: var(--dark-accent);
+         }
+
+        /* --- Solutions Summary Card Specific Styles --- */
+        .solution-summary-card {
+             background: linear-gradient(90deg, color-mix(in srgb, var(--clr-primary) 5%, white) 0%, color-mix(in srgb, var(--clr-primary) 15%, white) 100%);
+             border: 1px solid color-mix(in srgb, var(--clr-primary) 30%, white);
+        }
+        .dark .solution-summary-card {
+            background: linear-gradient(90deg, color-mix(in srgb, var(--clr-primary) 10%, black) 0%, color-mix(in srgb, var(--clr-primary) 20%, black) 100%);
+             border: 1px solid color-mix(in srgb, var(--clr-primary) 40%, black);
+        }
+        .solution-summary-card p {
+            color: var(--clr-text-secondary);
+        }
+        .dark .solution-summary-card p {
+             color: var(--dark-text-secondary);
+        }
+        .solution-summary-card .solution-icon-bg {
+             background-color: var(--clr-bg-surface);
+             padding: 0.75rem; /* 12px */
+             border-radius: 9999px;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+         .dark .solution-summary-card .solution-icon-bg {
+             background-color: var(--dark-bg-surface);
+              box-shadow: none;
+         }
+        .solution-summary-card .solution-icon {
+             background-color: var(--clr-primary);
+             color: var(--clr-text-on-primary);
+             padding: 1rem; /* 16px */
+             border-radius: 9999px;
+        }
+         .dark .solution-summary-card .solution-icon {
+             background-color: var(--clr-primary);
+             color: var(--clr-text-on-primary);
+         }
+        .solution-summary-card .checklist-item i {
+             color: var(--clr-primary);
+        }
+        .dark .solution-summary-card .checklist-item i {
+             color: var(--clr-primary);
+        }
+         .solution-summary-card .checklist-item span {
+              color: var(--clr-text-secondary);
+         }
+          .dark .solution-summary-card .checklist-item span {
+              color: var(--dark-text-secondary);
+          }
+
+        /* Remove direct contrast override rules */
+        /* .dark .dark\:text-teal-100 { color: #99f6e4 !important; } */
+        /* .dark .dark\:text-slate-100 { color: #f1f5f9 !important; } */
+        /* .dark .dark\:text-orange-100 { color: #ffedd5 !important; } */
+        
+        /* 增强暗模式下标签对比度 */
+        .dark .dark\:text-teal-200 {
+            color: #5eead4 !important; /* 更亮的teal-100 */
+        }
+        
+        .dark .dark\:text-slate-200 {
+            color: #e2e8f0 !important; /* 更亮的slate-100 */
+        }
+        
+        .dark .dark\:text-orange-200 {
+            color: #fed7aa !important; /* 更亮的orange-100 */
+        }
+        
+        /* 增强暗模式下链接对比度 */
+        .dark a {
+            color: #93c5fd !important; /* 浅蓝色，提高对比度 */
+        }
+        
+        .dark a:hover {
+            color: #bfdbfe !important; /* 更亮的浅蓝色 */
         }
     </style>
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="sticky top-0 z-50 bg-white dark:bg-dark-bg shadow-md dark:shadow-gray-800 transition-all duration-300">
+    <nav class="sticky top-0 z-50 shadow-md transition-all duration-300" style="background-color: var(--clr-bg-surface); border-bottom: 1px solid var(--clr-border);">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="index.html" class="flex items-center">
-                <span class="text-2xl font-bold text-teal-600">凿壁</span>
+                <span class="text-2xl font-bold" style="color: var(--clr-primary);">凿壁</span> <!-- Use Primary Color -->
             </a>
             
             <div class="hidden md:flex space-x-6">
-                <a href="#about" class="hover:text-teal-600 transition-colors duration-300">关于我们</a>
+                <a href="#about" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300" style="color: var(--clr-text-primary);">关于我们</a>
                 <div class="relative group">
-                    <a href="#articles" class="hover:text-teal-600 transition-colors duration-300 flex items-center category-nav-link" data-category="info-upgrade">
+                    <a href="#articles" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300 flex items-center category-nav-link" data-category="info-upgrade" style="color: var(--clr-text-primary);">
                         信息化升级 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </a>
-                    <div class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
-                        <a href="#medical-data" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">医疗数据资产化</a>
-                        <a href="#hospital-upgrade" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">医院智能化升级</a>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-2 z-10 hidden group-hover:block" style="background-color: var(--clr-bg-surface); border: 1px solid var(--clr-border);">
+                        <a href="#medical-data" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">医疗数据资产化</a>
+                        <a href="#hospital-upgrade" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">医院智能化升级</a>
                     </div>
                 </div>
-                <div class="relative group">
-                    <a href="#articles" class="hover:text-teal-600 transition-colors duration-300 flex items-center category-nav-link" data-category="research">
+                 <div class="relative group">
+                    <a href="#articles" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300 flex items-center category-nav-link" data-category="research" style="color: var(--clr-text-primary);">
                         科研辅助 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </a>
-                    <div class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
-                        <a href="pages/research/researchtopics.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">AI研究主题全景</a>
-                        <a href="#clinical" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">临床辅助决策</a>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-2 z-10 hidden group-hover:block" style="background-color: var(--clr-bg-surface); border: 1px solid var(--clr-border);">
+                        <a href="pages/research/researchtopics.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">AI研究主题全景</a>
+                        <a href="#clinical" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">临床辅助决策</a>
                     </div>
                 </div>
                 <div class="relative group">
-                    <a href="#articles" class="hover:text-teal-600 transition-colors duration-300 flex items-center category-nav-link" data-category="ai-tech">
+                    <a href="#articles" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300 flex items-center category-nav-link" data-category="ai-tech" style="color: var(--clr-text-primary);">
                         AI技术与生态 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </a>
-                    <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
-                        <a href="pages/ai-tech/gemini2.5pro.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Gemini 2.5 Pro能力解析</a>
-                        <a href="pages/ai-tech/gemini-canvas.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Gemini Canvas</a>
-                        <a href="pages/ai-tech/gpt-4o.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">GPT-4o多模态智能</a>
-                        <a href="pages/ai-tech/cursor_project_rules.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Cursor项目规则</a>
-                        <a href="pages/ai-tech/rag-vibe-coding.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">RAG架构开发</a>
+                     <div class="absolute left-0 mt-2 w-56 rounded-md shadow-lg py-2 z-10 hidden group-hover:block" style="background-color: var(--clr-bg-surface); border: 1px solid var(--clr-border);">
+                        <a href="pages/ai-tech/gemini2.5pro.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">Gemini 2.5 Pro能力解析</a>
+                        <a href="pages/ai-tech/gemini-canvas.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">Gemini Canvas</a>
+                        <a href="pages/ai-tech/gpt-4o.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">GPT-4o多模态智能</a>
+                        <a href="pages/ai-tech/cursor_project_rules.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">Cursor项目规则</a>
+                        <a href="pages/ai-tech/rag-vibe-coding.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">RAG架构开发</a>
                     </div>
                 </div>
-                <div class="relative group">
-                    <a href="#articles" class="hover:text-teal-600 transition-colors duration-300 flex items-center category-nav-link" data-category="knowledge">
+                 <div class="relative group">
+                    <a href="#articles" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300 flex items-center category-nav-link" data-category="knowledge" style="color: var(--clr-text-primary);">
                         知识报告 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                     </a>
-                    <div class="absolute left-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
-                        <a href="pages/knowledge/anthropic-tracing-thoughts.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Anthropic追踪模型思想</a>
-                        <a href="pages/knowledge/lecun-autoregressive.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">LeCun批评自回归模型</a>
-                        <a href="pages/ai-tech/autoregressive.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">自回归模型研究</a>
-                        <a href="pages/knowledge/meaning.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">语言模型与意义</a>
-                        <a href="pages/knowledge/creative.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">创意思维研究</a>
+                     <div class="absolute left-0 mt-2 w-56 rounded-md shadow-lg py-2 z-10 hidden group-hover:block" style="background-color: var(--clr-bg-surface); border: 1px solid var(--clr-border);">
+                        <a href="pages/knowledge/anthropic-tracing-thoughts.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">Anthropic追踪模型思想</a>
+                        <a href="pages/knowledge/lecun-autoregressive.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">LeCun批评自回归模型</a>
+                        <a href="pages/ai-tech/autoregressive.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">自回归模型研究</a>
+                        <a href="pages/knowledge/meaning.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">语言模型与意义</a>
+                        <a href="pages/knowledge/creative.html" class="block px-4 py-2 hover:bg-[color:var(--clr-bg-page)]" style="color: var(--clr-text-secondary);">创意思维研究</a>
                     </div>
                 </div>
-                <a href="#contact" class="hover:text-teal-600 transition-colors duration-300">联系我们</a>
+                <a href="#contact" class="hover:text-[color:var(--clr-primary)] transition-colors duration-300" style="color: var(--clr-text-primary);">联系我们</a>
             </div>
             
             <div class="flex items-center">
-                <button id="themeToggle" class="theme-toggle p-2">
-                    <i class="fas fa-sun text-orange-500 dark:hidden"></i>
-                    <i class="fas fa-moon text-teal-300 hidden dark:block"></i>
+                <button id="themeToggle" class="theme-toggle p-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full shadow-sm hover:shadow-md text-[color:var(--clr-text-primary)] hover:text-[color:var(--clr-primary)] relative w-10 h-10 flex items-center justify-center">
+                    <i class="fas fa-sun light-icon absolute"></i>
+                    <i class="fas fa-moon dark-icon absolute"></i>
                 </button>
                 
-                <button class="md:hidden ml-4" id="mobileMenuButton">
+                <button class="md:hidden ml-4" id="mobileMenuButton" style="color: var(--clr-text-primary);">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
         
         <!-- 移动端菜单 -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-dark-bg shadow-md">
+         <div id="mobileMenu" class="hidden md:hidden shadow-md" style="background-color: var(--clr-bg-surface);">
             <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
-                <a href="#about" class="py-2 hover:text-teal-600 transition-colors duration-300">关于我们</a>
+                <a href="#about" class="py-2 hover:text-[color:var(--clr-primary)] transition-colors duration-300" style="color: var(--clr-text-primary);">关于我们</a>
                 
                 <div class="py-2">
-                    <button class="flex justify-between items-center w-full hover:text-teal-600 transition-colors duration-300 category-nav-link" data-category="info-upgrade" onclick="navToCategory('info-upgrade')">
+                    <button class="flex justify-between items-center w-full hover:text-[color:var(--clr-primary)] transition-colors duration-300 category-nav-link" data-category="info-upgrade" onclick="navToCategory('info-upgrade')" style="color: var(--clr-text-primary);">
                         信息化升级 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <div id="infoUpgrade" class="hidden pl-4 mt-2 space-y-2">
-                        <a href="#medical-data" class="block py-2 hover:text-secondary">医疗数据资产化</a>
-                        <a href="#hospital-upgrade" class="block py-2 hover:text-secondary">医院智能化升级</a>
+                        <a href="#medical-data" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">医疗数据资产化</a>
+                        <a href="#hospital-upgrade" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">医院智能化升级</a>
                     </div>
                 </div>
                 
-                <div class="py-2">
-                    <button class="flex justify-between items-center w-full hover:text-teal-600 transition-colors duration-300 category-nav-link" data-category="research" onclick="navToCategory('research')">
+                 <div class="py-2">
+                    <button class="flex justify-between items-center w-full hover:text-[color:var(--clr-primary)] transition-colors duration-300 category-nav-link" data-category="research" onclick="navToCategory('research')" style="color: var(--clr-text-primary);">
                         科研辅助 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <div id="mobileResearch" class="hidden pl-4 mt-2 space-y-2">
-                        <a href="pages/research/researchtopics.html" class="block py-2 hover:text-secondary">AI研究主题全景</a>
-                        <a href="#clinical" class="block py-2 hover:text-secondary">临床辅助决策</a>
+                        <a href="pages/research/researchtopics.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">AI研究主题全景</a>
+                        <a href="#clinical" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">临床辅助决策</a>
                     </div>
                 </div>
                 
-                <div class="py-2">
-                    <button class="flex justify-between items-center w-full hover:text-teal-600 transition-colors duration-300 category-nav-link" data-category="ai-tech" onclick="navToCategory('ai-tech')">
+                 <div class="py-2">
+                    <button class="flex justify-between items-center w-full hover:text-[color:var(--clr-primary)] transition-colors duration-300 category-nav-link" data-category="ai-tech" onclick="navToCategory('ai-tech')" style="color: var(--clr-text-primary);">
                         AI技术与生态 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <div id="aiTech" class="hidden pl-4 mt-2 space-y-2">
-                        <a href="pages/ai-tech/gemini2.5pro.html" class="block py-2 hover:text-secondary">Gemini 2.5 Pro能力解析</a>
-                        <a href="pages/ai-tech/gemini-canvas.html" class="block py-2 hover:text-secondary">Gemini Canvas</a>
-                        <a href="pages/ai-tech/gpt-4o.html" class="block py-2 hover:text-secondary">GPT-4o多模态智能</a>
-                        <a href="pages/ai-tech/cursor_project_rules.html" class="block py-2 hover:text-secondary">Cursor项目规则</a>
-                        <a href="pages/ai-tech/rag-vibe-coding.html" class="block py-2 hover:text-secondary">RAG架构开发</a>
+                        <a href="pages/ai-tech/gemini2.5pro.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">Gemini 2.5 Pro能力解析</a>
+                        <a href="pages/ai-tech/gemini-canvas.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">Gemini Canvas</a>
+                        <a href="pages/ai-tech/gpt-4o.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">GPT-4o多模态智能</a>
+                        <a href="pages/ai-tech/cursor_project_rules.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">Cursor项目规则</a>
+                        <a href="pages/ai-tech/rag-vibe-coding.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">RAG架构开发</a>
                     </div>
                 </div>
                 
-                <div class="py-2">
-                    <button class="flex justify-between items-center w-full hover:text-teal-600 transition-colors duration-300 category-nav-link" data-category="knowledge" onclick="navToCategory('knowledge')">
+                 <div class="py-2">
+                    <button class="flex justify-between items-center w-full hover:text-[color:var(--clr-primary)] transition-colors duration-300 category-nav-link" data-category="knowledge" onclick="navToCategory('knowledge')" style="color: var(--clr-text-primary);">
                         知识报告 <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <div id="mobileKnowledge" class="hidden pl-4 mt-2 space-y-2">
-                        <a href="pages/knowledge/anthropic-tracing-thoughts.html" class="block py-2 hover:text-secondary">Anthropic追踪模型思想</a>
-                        <a href="pages/knowledge/lecun-autoregressive.html" class="block py-2 hover:text-secondary">LeCun批评自回归模型</a>
-                        <a href="pages/ai-tech/autoregressive.html" class="block py-2 hover:text-secondary">自回归模型研究</a>
-                        <a href="pages/knowledge/meaning.html" class="block py-2 hover:text-secondary">语言模型与意义</a>
-                        <a href="pages/knowledge/creative.html" class="block py-2 hover:text-secondary">创意思维研究</a>
+                        <a href="pages/knowledge/anthropic-tracing-thoughts.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">Anthropic追踪模型思想</a>
+                        <a href="pages/knowledge/lecun-autoregressive.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">LeCun批评自回归模型</a>
+                        <a href="pages/ai-tech/autoregressive.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">自回归模型研究</a>
+                        <a href="pages/knowledge/meaning.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">语言模型与意义</a>
+                        <a href="pages/knowledge/creative.html" class="block py-2 hover:text-[color:var(--clr-primary)]" style="color: var(--clr-text-secondary);">创意思维研究</a>
                     </div>
                 </div>
                 
-                <a href="#contact" class="py-2 hover:text-teal-600 transition-colors duration-300">联系我们</a>
+                <a href="#contact" class="py-2 hover:text-[color:var(--clr-primary)] transition-colors duration-300" style="color: var(--clr-text-primary);">联系我们</a>
             </div>
         </div>
     </nav>
@@ -519,49 +698,49 @@
         <div class="hero-pattern"></div>
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">凿壁</h1>
-                <p class="text-xl md:text-2xl mb-6 leading-relaxed max-w-2xl mx-auto">帮助健康医疗行业凿开AI乱象，帮AI行业凿开医疗行业壁垒</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4" style="color: var(--clr-text-on-primary);">凿壁</h1>
+                <p class="text-xl md:text-2xl mb-6 leading-relaxed max-w-2xl mx-auto" style="color: var(--clr-text-on-primary); opacity: 0.9;">帮助健康医疗行业凿开AI乱象，帮AI行业凿开医疗行业壁垒</p>
                 <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
-                    <a href="#articles" class="btn-primary text-center">探索内容分类</a>
-                    <a href="#about" class="btn-outline text-center">了解更多</a>
+                    <a href="#articles" class="btn btn-hero-primary">探索内容分类</a>
+                    <a href="#about" class="btn btn-hero-outline">了解更多</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 关于我们 -->
-    <section id="about" class="py-16 bg-gray-50 dark:bg-gray-900">
+    <section id="about" class="py-16" style="background-color: var(--clr-bg-page);">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold mb-8 text-center">关于<span class="text-teal-600">凿壁</span></h2>
+                <h2 class="text-3xl font-bold mb-8 text-center">关于<span style="color: var(--clr-primary);">凿壁</span></h2>
                 <div class="first-letter mb-8">
-                    <p class="mb-4">凿壁团队致力于为卫生健康行业提供前沿的AI解决方案。我们的使命是通过破除AI应用在医疗行业中的障碍，让先进技术真正服务于医疗健康事业，提高医疗效率和质量。</p>
-                    <p class="mb-4">我们深知医疗行业的特殊性与复杂性，团队汇集了医疗专家和AI技术人才，通过跨学科合作，打造适合中国医疗体系的智能化解决方案。我们不仅仅是技术提供者，更是医疗AI领域的思想者与探索者。</p>
+                    <p class="mb-4" style="color: var(--clr-text-secondary);">凿壁团队致力于为卫生健康行业提供前沿的AI解决方案。我们的使命是通过破除AI应用在医疗行业中的障碍，让先进技术真正服务于医疗健康事业，提高医疗效率和质量。</p>
+                    <p class="mb-4" style="color: var(--clr-text-secondary);">我们深知医疗行业的特殊性与复杂性，团队汇集了医疗专家和AI技术人才，通过跨学科合作，打造适合中国医疗体系的智能化解决方案。我们不仅仅是技术提供者，更是医疗AI领域的思想者与探索者。</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-brain text-xl"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="feature-icon text-xl">
+                            <i class="fas fa-brain"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">破解AI乱象</h3>
-                        <p>帮助医疗机构识别并避开AI应用中的虚假宣传和不切实际承诺，找到真正有价值的应用方向。</p>
+                        <h3 class="text-xl font-semibold mb-2" style="color: var(--clr-text-primary);">破解AI乱象</h3>
+                        <p style="color: var(--clr-text-secondary);">帮助医疗机构识别并避开AI应用中的虚假宣传和不切实际承诺，找到真正有价值的应用方向。</p>
                     </div>
                     
-                    <div class="flex flex-col items-center text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-hospital-user text-xl"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="feature-icon text-xl">
+                            <i class="fas fa-hospital-user"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">打破行业壁垒</h3>
-                        <p>促进AI技术与医疗行业的深度融合，解决技术落地过程中的制度性、文化性障碍。</p>
+                        <h3 class="text-xl font-semibold mb-2" style="color: var(--clr-text-primary);">打破行业壁垒</h3>
+                        <p style="color: var(--clr-text-secondary);">促进AI技术与医疗行业的深度融合，解决技术落地过程中的制度性、文化性障碍。</p>
                     </div>
                     
-                    <div class="flex flex-col items-center text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-lightbulb text-xl"></i>
+                    <div class="flex flex-col items-center text-center p-4">
+                        <div class="feature-icon text-xl">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">创新解决方案</h3>
-                        <p>基于对医疗流程的深刻理解，提供符合临床实际需求的AI赋能解决方案。</p>
+                        <h3 class="text-xl font-semibold mb-2" style="color: var(--clr-text-primary);">创新解决方案</h3>
+                        <p style="color: var(--clr-text-secondary);">基于对医疗流程的深刻理解，提供符合临床实际需求的AI赋能解决方案。</p>
                     </div>
                 </div>
             </div>
@@ -569,19 +748,19 @@
     </section>
 
     <!-- 文章资源 -->
-    <section id="articles" class="py-16">
+    <section id="articles" class="py-16" style="background-color: var(--clr-bg-page);">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">内容<span class="text-teal-600">分类</span></h2>
+            <h2 class="text-3xl font-bold mb-12 text-center">内容<span style="color: var(--clr-primary);">分类</span></h2>
             
             <!-- 分类导航标签 - 现代化设计 -->
             <div class="relative mb-16">
                 <!-- 背景装饰 -->
-                <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-1 bg-gray-200 dark:bg-gray-700"></div>
+                <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-px" style="background-color: var(--clr-border);"></div>
                 
                 <!-- 分类选项卡 -->
                 <div class="flex justify-center">
-                    <div class="bg-white dark:bg-gray-800 flex rounded-full shadow-lg p-1 relative z-10 category-tabs">
-                        <button class="category-btn flex items-center justify-center space-x-2 px-5 py-2 rounded-full bg-teal-600 text-white font-medium transition-all duration-300" data-category="info-upgrade">
+                     <div class="flex rounded-full shadow-md p-1 relative z-10 category-tabs" style="background-color: var(--clr-bg-surface); border: 1px solid var(--clr-border);">
+                        <button class="category-btn flex items-center justify-center space-x-2 px-5 py-2 rounded-full font-medium transition-all duration-300" data-category="info-upgrade">
                             <i class="fas fa-file-medical-alt"></i>
                             <span>信息化升级</span>
                         </button>
@@ -606,31 +785,31 @@
                 <!-- 信息化升级 -->
                 <div id="info-upgrade" class="category-content">
                     <!-- 解决方案摘要卡片 -->
-                    <div class="bg-gradient-to-r from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/20 p-6 rounded-xl mb-10 transform transition-all duration-500 hover:scale-[1.01] shadow-md">
+                    <div class="solution-summary-card p-6 rounded-xl mb-10 transform transition-all duration-500 hover:scale-[1.01]">
                         <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-                            <div class="bg-white dark:bg-gray-800 p-3 rounded-full shadow-inner">
-                                <div class="bg-teal-500 text-white p-4 rounded-full">
+                            <div class="solution-icon-bg">
+                                <div class="solution-icon">
                                     <i class="fas fa-file-medical-alt text-2xl"></i>
                                 </div>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-xl font-bold mb-2">信息化升级解决方案</h3>
+                                <h3 class="text-xl font-bold mb-2" style="color: var(--clr-text-primary);">信息化升级解决方案</h3>
                                 <p class="mb-4">帮助医疗机构进行数字化转型，实现医疗数据的高效管理和医院流程的智能优化。</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check-circle text-teal-500"></i>
+                                    <div class="flex items-center space-x-2 checklist-item">
+                                        <i class="fas fa-check-circle"></i>
                                         <span>医疗数据资产价值评估</span>
                                     </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check-circle text-teal-500"></i>
+                                    <div class="flex items-center space-x-2 checklist-item">
+                                        <i class="fas fa-check-circle"></i>
                                         <span>合规数据治理方案</span>
                                     </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check-circle text-teal-500"></i>
+                                    <div class="flex items-center space-x-2 checklist-item">
+                                        <i class="fas fa-check-circle"></i>
                                         <span>医院智能化管理系统</span>
                                     </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check-circle text-teal-500"></i>
+                                    <div class="flex items-center space-x-2 checklist-item">
+                                        <i class="fas fa-check-circle"></i>
                                         <span>医疗流程优化方案</span>
                                     </div>
                                 </div>
@@ -641,21 +820,21 @@
                     <!-- 内容卡片区域 -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- 健康医疗数据资产 (2025-03-30) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                        <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-file-medical-alt text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">健康医疗数据资产：中国数据要素市场化教育与实践</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">探索如何将健康医疗数据转化为有价值的资产，推动数据要素市场化进程。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">健康医疗数据资产：中国数据要素市场化教育与实践</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">探索如何将健康医疗数据转化为有价值的资产，推动数据要素市场化进程。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-30</span>
                                     </div>
-                                    <a href="pages/info-upgrade/dataasset.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/dataasset.html" class="card-link inline-flex items-center">
                                         阅读全文 <i class="fas fa-arrow-right ml-1 text-sm"></i>
                                     </a>
                                 </div>
@@ -663,21 +842,21 @@
                         </div>
                         
                         <!-- 医保智能问答系统 (2025-03-28) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                        <div class="card article-card">
                             <span class="period-label period-new">新</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-headset text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-headset text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医保智能问答系统建设指南</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">关于利用AI技术提升医保咨询服务效率和准确性的系统建设与实践指南。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">医保智能问答系统建设指南</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">关于利用AI技术提升医保咨询服务效率和准确性的系统建设与实践指南。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-28</span>
                                     </div>
-                                    <a href="pages/info-upgrade/medical-insurance-qa.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/medical-insurance-qa.html" class="card-link inline-flex items-center">
                                         阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
@@ -685,21 +864,21 @@
                         </div>
 
                         <!-- 医疗数据资产价值评估模型 (2025-03-25) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                         <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-file-medical-alt text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医疗数据资产价值评估模型</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">讨论如何科学评估医疗数据资产的价值，建立合理的定价机制。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">医疗数据资产价值评估模型</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">讨论如何科学评估医疗数据资产的价值，建立合理的定价机制。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-25</span>
                                     </div>
-                                    <a href="pages/info-upgrade/dataasset.html#value-model" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/dataasset.html#value-model" class="card-link inline-flex items-center">
                                         了解更多 <i class="fas fa-arrow-right ml-1"></i>
                                     </a>
                                 </div>
@@ -707,21 +886,21 @@
                         </div>
                         
                         <!-- 医院信息化升级团队能力模型与培训计划 (2025-03-15) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                         <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-file-medical-alt text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医院信息化升级团队能力模型与培训计划</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">详细介绍医院信息化团队的能力模型构建与系统化培训方案，助力医院打造高水平信息化专业队伍。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">医院信息化升级团队能力模型与培训计划</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">详细介绍医院信息化团队的能力模型构建与系统化培训方案，助力医院打造高水平信息化专业队伍。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-15</span>
                                     </div>
-                                    <a href="pages/info-upgrade/hospital-it-team-training.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/hospital-it-team-training.html" class="card-link inline-flex items-center">
                                         阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
@@ -729,21 +908,21 @@
                         </div>
 
                         <!-- 医疗数据与AI认知共同体的五大洞见 (2025-03-10) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                         <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-brain text-teal-500"></i>
+                                     <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-brain text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">医疗数据与AI认知的五大洞见</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">深入探讨医疗数据与AI认知的核心洞见，揭示二者建立共同体的关键要素与挑战。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">医疗数据与AI认知的五大洞见</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">深入探讨医疗数据与AI认知的核心洞见，揭示二者建立共同体的关键要素与挑战。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-10</span>
                                     </div>
-                                    <a href="pages/info-upgrade/medical-ai-insights.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/medical-ai-insights.html" class="card-link inline-flex items-center">
                                         阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
@@ -751,21 +930,21 @@
                         </div>
                         
                         <!-- 中国医院信息化升级第三方服务商业模式报告 (2025-03-10) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                         <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-file-medical-alt text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">中国医院信息化升级第三方服务商业模式报告</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">分析中国医院信息化升级过程中第三方服务提供商的商业模式、市场机遇与挑战。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">中国医院信息化升级第三方服务商业模式报告</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">分析中国医院信息化升级过程中第三方服务提供商的商业模式、市场机遇与挑战。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-10</span>
                                     </div>
-                                    <a href="pages/info-upgrade/hospital-it-upgrade-service-model.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/hospital-it-upgrade-service-model.html" class="card-link inline-flex items-center">
                                         阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
@@ -773,21 +952,21 @@
                         </div>
                         
                         <!-- 利用大模型技术全面提升医院医疗纠纷预防能力报告 (2025-03-08) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                         <div class="card article-card">
                             <span class="period-label period-recent">近期</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-file-medical-alt text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-file-medical-alt text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">利用大模型技术全面提升医院医疗纠纷预防能力报告</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">探讨大模型技术在医疗纠纷预防中的应用潜力，提供医院构建和谐医患关系的AI赋能解决方案。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">利用大模型技术全面提升医院医疗纠纷预防能力报告</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">探讨大模型技术在医疗纠纷预防中的应用潜力，提供医院构建和谐医患关系的AI赋能解决方案。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-03-08</span>
                                     </div>
-                                    <a href="pages/info-upgrade/medical-dispute-prevention.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/medical-dispute-prevention.html" class="card-link inline-flex items-center">
                                         阅读详情 <i class="fas fa-arrow-right ml-1 text-xs"></i>
                                     </a>
                                 </div>
@@ -795,21 +974,21 @@
                         </div>
                         
                         <!-- 医院信息科工作流知识图谱 (2025-02-20) -->
-                        <div class="card article-card transform transition-all duration-500 hover:scale-[1.03]">
+                        <div class="card article-card">
                             <span class="period-label period-new">新</span>
                             <div class="p-6 card-body">
                                 <div class="flex items-center justify-between mb-3">
-                                    <span class="text-xs py-1 px-2 bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-200 rounded-full">信息化升级</span>
-                                    <i class="fas fa-project-diagram text-teal-500"></i>
+                                    <span class="card-tag card-tag-teal">信息化升级</span>
+                                    <i class="fas fa-project-diagram text-[color:var(--clr-primary)]"></i>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3">公立医院信息科工作流知识图谱</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">交互式可视化知识图谱，系统梳理医院信息科工作流程与职责，提高信息科管理效率。</p>
-                                <div class="flex items-center justify-between">
+                                <h3 class="text-xl font-bold mb-3" style="color: var(--clr-text-primary);">公立医院信息科工作流知识图谱</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-4" style="color: var(--clr-text-secondary);">交互式可视化知识图谱，系统梳理医院信息科工作流程与职责，提高信息科管理效率。</p>
+                                <div class="flex items-center justify-between mt-auto">
                                     <div class="article-date">
                                         <i class="far fa-calendar-alt"></i>
                                         <span>2025-02-20</span>
                                     </div>
-                                    <a href="pages/info-upgrade/hospital-it-workflow.html" class="text-teal-500 hover:text-teal-700 dark:hover:text-teal-300 mt-auto inline-flex items-center">
+                                    <a href="pages/info-upgrade/hospital-it-workflow.html" class="card-link inline-flex items-center">
                                         查看图谱 <i class="fas fa-arrow-right ml-1 text-sm"></i>
                                     </a>
                                 </div>
@@ -1592,23 +1771,52 @@
         if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && prefersDarkScheme.matches)) {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');
+            // 不再需要这些代码，由CSS控制
+            // document.querySelector('.light-icon').classList.add('hidden');
+            // document.querySelector('.dark-icon').classList.remove('hidden');
         } else {
             document.documentElement.classList.add('light');
             document.documentElement.classList.remove('dark');
+            // 不再需要这些代码，由CSS控制
+            // document.querySelector('.light-icon').classList.remove('hidden');
+            // document.querySelector('.dark-icon').classList.add('hidden');
         }
 
         // 主题切换点击事件
         themeToggle.addEventListener('click', function() {
+            // 不再需要手动控制图标显示
+            // const lightIcon = document.querySelector('.light-icon');
+            // const darkIcon = document.querySelector('.dark-icon');
+            
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 document.documentElement.classList.add('light');
                 localStorage.setItem('theme', 'light');
+                
+                // 不再需要这些代码，由CSS控制
+                // lightIcon.classList.remove('hidden');
+                // darkIcon.classList.add('hidden');
             } else {
                 document.documentElement.classList.remove('light');
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
+                
+                // 不再需要这些代码，由CSS控制
+                // darkIcon.classList.remove('hidden');
+                // lightIcon.classList.add('hidden');
             }
         });
+
+        // 移除重复的图标初始化代码，因为我们已经通过CSS处理了
+        // const lightIcon = document.querySelector('.light-icon');
+        // const darkIcon = document.querySelector('.dark-icon');
+        // if (document.documentElement.classList.contains('dark')) {
+        //     lightIcon.classList.add('hidden');
+        //     darkIcon.classList.remove('hidden');
+        // } else {
+        //     lightIcon.classList.remove('hidden');
+        //     darkIcon.classList.add('hidden');
+        // }
 
         // 分类标签切换功能
         const categoryBtns = document.querySelectorAll('.category-btn');
@@ -1651,6 +1859,10 @@
                 document.getElementById(submenuId).classList.toggle('hidden');
             });
         });
+
+        // --- 新增：设置默认选中的分类 ---
+        switchCategory('info-upgrade'); 
+        // ------------------------------
     });
 
     // 切换分类函数
@@ -1660,8 +1872,8 @@
             
         // 移除所有按钮的活动状态 (颜色类和通用活动类)
         categoryBtns.forEach(btn => {
-            // 移除旧的特定颜色类 (如果还存在)
-            btn.classList.remove('bg-teal-600', 'bg-slate-500', 'bg-orange-500', 'text-white');
+            // 移除旧的特定颜色类 (如果还存在) - 已在HTML中移除，这里是保险
+            btn.classList.remove('bg-teal-600', 'bg-slate-500', 'bg-orange-500', 'text-white'); 
             // 移除新的通用活动类
             btn.classList.remove('category-btn-active-primary', 'category-btn-active-secondary', 'category-btn-active-accent');
         });
